@@ -1,6 +1,8 @@
 const LandingPage = () => {
     return (
-        <p>Landing Page works!</p>
+        <div className="container">
+            <p>Landing Page works!</p>
+        </div>
     )
 }
 

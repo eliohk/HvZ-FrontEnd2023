@@ -1,0 +1,24 @@
+.alignMiniProfile {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    text-decoration: none;
+    outline: 0;
+}
+
+.fancyName {
+    border: solid white;
+    border-radius: 16px;
+    border-width: 2px;
+    padding: 0.25em 2em 0.25em 2em;
+    font-size: 16px;
+    margin-top: 1em;
+}
+
+.fancyProfilePic {
+    border: solid white;
+    border-width: 2px;
+    border-radius: 64px;
+    width: 50px;
+    margin-left: -12px;
+}

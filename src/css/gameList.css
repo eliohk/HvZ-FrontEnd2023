@@ -1,0 +1,77 @@
+.innerMapContainer {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.innerTitleContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 2em;
+    margin-right: 10em;
+    height: 100%;
+}
+
+.innerStatisticsContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 10em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    padding-bottom: 1.25em;
+}
+
+.mainGameContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: solid black;
+    width: fit-content;
+    margin: 2em;
+    padding: 2em;
+    height: 250px;
+    width: 100%;
+}
+
+.mapImgList {
+    border: solid black;
+}
+
+.statusComponent {
+    background-color: greenyellow;
+    outline-color: transparent;
+    outline-style:solid;
+    box-shadow: 0 0 0 1px black;
+    transition: 0.7s;
+    text-align: center;
+}
+
+.playerCounter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.playerCountText {
+    padding-left: 1em;
+    width: 200px;
+    margin: 0;
+}
+
+#title {
+    width: 200px;
+}
+
+#status {
+    width: 200px;
+}
+
+#gameMode {
+    width: 200px;
+}

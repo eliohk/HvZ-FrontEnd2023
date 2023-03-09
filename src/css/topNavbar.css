@@ -15,6 +15,7 @@
     text-decoration: none;
     font-family: 'Sanchez', serif;
     color: white;
+    cursor: pointer;
 }
 
 a:hover {

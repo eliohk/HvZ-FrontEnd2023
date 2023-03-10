@@ -132,15 +132,11 @@ button {
 }
 
 .msg {
-    padding: 8px;
-    border: solid black;
     margin-left: 0px;
     text-align: left;
 }
 
 .selfMsg {
-    padding: 8px;
-    border: solid black;
     margin-right: 0px;
     text-align: right;
 }

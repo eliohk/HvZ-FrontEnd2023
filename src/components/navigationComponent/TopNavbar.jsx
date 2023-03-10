@@ -41,7 +41,7 @@ const TopNavbar = () => {
                         </div>
                     </NavLink>
 
-                    <NavLink to="/Home" className="element">
+                    <NavLink to="/" className="element">
                         <div className="innerContainerNavbar">
                             <span>Home</span>
                         </div>

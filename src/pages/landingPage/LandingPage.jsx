@@ -3,6 +3,7 @@ import GameListComponent from "../../components/gameListComponent/GameListCompon
 import { useState, useEffect } from 'react';
 import "../../css/landingPage.css";
 import SplitButton from 'react-bootstrap/SplitButton';
+import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 
 const LandingPage = () => {
 
@@ -11,6 +12,10 @@ const LandingPage = () => {
     const handleSortVariable = (event) => {
         let retval = event.target.innerHTML;
         setSortVariable(retval);
+    }
+
+    const handleGameClick = (i) => (event) => {
+        console.log(i);
     }
 
     let gameArray = [
@@ -33,7 +38,13 @@ const LandingPage = () => {
     ]
 
     const games = gameArray.map((gameData, i) => {
-        return <GameListComponent game={gameData} key={i}></GameListComponent>
+        return (
+            <NavLink to="/game" className="removeUnderline">
+                <div className='widthConstraint' onClick={handleGameClick(i)} key={i}>
+                    <GameListComponent game={gameData} key={i}></GameListComponent>
+                </div>
+            </NavLink>
+        );
     });
 
     return (
@@ -50,7 +61,7 @@ const LandingPage = () => {
                         </div>
                     </SplitButton>
                 </div>
-                <div className="widthConstraint">
+                <div className='widthConstraint'>
                     {games}
                 </div>
             </div>

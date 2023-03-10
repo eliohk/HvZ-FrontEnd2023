@@ -104,6 +104,9 @@
     cursor: pointer;
 }
 
+.elm {
+    width: 150px;
+}
 .alignStats {
     display: flex;
     align-items: center;

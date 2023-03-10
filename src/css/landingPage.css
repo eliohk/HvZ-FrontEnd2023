@@ -67,3 +67,7 @@ button.btn.btn-primary {
 .items {
     border-radius: 16px;
 }
+
+.removeUnderline {
+    text-decoration: none;
+}

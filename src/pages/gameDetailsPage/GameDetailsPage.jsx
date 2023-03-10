@@ -8,7 +8,13 @@ import L from 'leaflet';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 
-const GameDetailsPage = ( props ) => {
+
+// TODO: USE REDUX TO POPULATE :))))
+
+const GameDetailsPage = ( ) => {
+
+    console.log(props)
+
     var dead = L.icon({
         iconUrl: deadIcon,
         iconSize:     [40, 40], // size of the icon
@@ -81,13 +87,11 @@ const GameDetailsPage = ( props ) => {
                         {/* chatbox + buttons here */}
                         <div>
                             <div className="chatbox">
-                                <p className="msg">First message</p>
-                                <p className="msg">Second message</p>
-                                <p className="selfMsg">My message</p>
-                                <p className="msg">Fourth message</p>
-                                <p className="msg">Fifth message</p>
-                                <p className="selfMsg">My message</p>
-                                <p className="selfMsg">My message</p>
+                                <p className="msg">Adam: I can see 3 zombies at location X. Be careful!</p>
+                                <p className="msg">Fatima: Thanks, Adam! Me and Khoi will hide.</p>
+                                <p className="selfMsg">Naughty boy: Come at me brah</p>
+                                <p className="msg">You: Thanks Adam, need backup?</p>
+                                <p className="msg">Khoi: Let's do this!</p>
                             </div>
                         </div>
                         <div className="buttonContainer">

@@ -1,5 +1,4 @@
 import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 import GameListComponent from "../../components/gameListComponent/GameListComponent"
 import { useState, useEffect } from 'react';
 import "../../css/landingPage.css";

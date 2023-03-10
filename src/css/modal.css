@@ -15,9 +15,51 @@
     width: 100%;
 }
 
+.mapContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: solid black;
+    border-width: 4px;
+    border-radius: 32px;
+    width: 60%;
+    margin-left: 1em;
+}
+
+.listContainer {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: 600px;
+    min-height: 100%;
+    border: black solid;
+    border-radius: 32px;
+    margin-right: 4em;
+}
+
+#listTitle {
+    margin: 1em;
+}
+
+ul {
+    margin: 1em;
+}
+
+li {
+
+}
+
 button {
     background-color: transparent;
-    border: none;
+}
+
+.btns {
+    background-color: transparent;
+    border: black solid;
+    width: 345px;
+    height: 40px;
+    border-radius: 32px;
+    margin-bottom: 0.25em;
 }
 
 .header {
@@ -43,23 +85,113 @@ button {
     font-size: 15px;
 }
 
-.popup-content {
-margin: auto;
-background: rgb(255, 255, 255);
-width: 50%;
-padding: 5px;
-}
-.popup-arrow {
-color: rgb(255, 255, 255);
-}
-[role='tooltip'].popup-content {
-width: 200px;
-box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 3px;
+.interactiveStuffContainer{
+    width: 1150px;
+    display: flex;
+    justify-content: space-between;
+    margin: 1em;
 }
 
-.popup-overlay {
-background: rgba(0, 0, 0, 0.5);
+.chatContainer {
+    width: 1150px;
+    display: flex;
+    justify-content: space-between;
+    margin: 1em;
 }
-[data-popup='tooltip'].popup-overlay {
-background: transparent;
+
+.buttonContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-right: 4em;
+}
+
+.chatbox {
+    margin-left: 1em;
+    border: solid black;
+    border-radius: 16px;
+    width: 690px;
+    height: 200px;
+    overflow: scroll;
+    /* hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* hide scrollbar for chrome, safari and opera */
+.chatbox::-webkit-scrollbar {
+    display: none;
+}
+
+.chatbox p {
+    margin-top: 1em;
+    margin-left: 1em;
+    margin-right: 1em;
+    border-width: 0.1px;
+    border-radius: 16px;
+}
+
+.msg {
+    padding: 8px;
+    border: solid black;
+    margin-left: 0px;
+    text-align: left;
+}
+
+.selfMsg {
+    padding: 8px;
+    border: solid black;
+    margin-right: 0px;
+    text-align: right;
+}
+
+.chatInputContainer {
+    margin-left: 2em;
+}
+
+.chatInput {
+    display: flex;
+    
+}
+
+.squadBtn {
+    border-radius: 16px;
+}
+
+.actualInput {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+form {
+    margin-left: 4px;
+}
+
+#input {
+    width: 485px;
+    border-radius: 16px;
+    height: 35px;
+    border-width: 0.1px;
+    margin-right: 4px;
+    padding-right: 200px;
+}
+
+#enterBtn {
+    border-radius: 16px;
+    border-width: 0.1px;
+    height: 35px;
+    width: 80px;
+}
+
+.editDiv {
+    display: flex;
+    justify-content: right;
+}
+
+#editBtn {
+    border-radius: 16px;
+    height: 30px;
+    width: 100px;
+    margin-right: 5em;
 }

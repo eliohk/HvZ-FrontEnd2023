@@ -11,9 +11,14 @@ import GameDetails from "../gameDetailsComponent/GameDetails";
 
 import logo from "../../resources/tempIcon.png";
 
+import { fetchGameById } from "../../states/dataSlice";
+import { useSelector } from "react-redux";
+
 import "../../css/topNavbar.css";
 
 const TopNavbar = () => {
+    const state = useSelector((data) => data);
+
     const CustomToggle = forwardRef(({ children, onClick }, ref) => (
         <a
         ref={ref}
@@ -70,7 +75,7 @@ const TopNavbar = () => {
 
             <Routes>
                 <Route path="/" element={<LandingPage />}/>
-                <Route path="/game" element={<GameDetailsPage />}/>
+                <Route path="/game/:gameId" element={<GameDetailsPage games={state.data.gamesArray}/>}/>
                 <Route path="/admin" element={<AdminPage />}/>
             </Routes>
         </BrowserRouter>

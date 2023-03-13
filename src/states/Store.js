@@ -1,10 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import userReducer from './users/UserSlice';
-import gamesReducer from "./games/GamesSlice"
+import dataReducer from './dataSlice';
 
 export default configureStore({
 	reducer: {
-		user: userReducer,
-		games: gamesReducer,
+		data: dataReducer,
 	},
 });

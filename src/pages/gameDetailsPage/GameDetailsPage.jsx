@@ -8,12 +8,11 @@ import L from 'leaflet';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 
+import { useEffect, useRef } from 'react'
 
 // TODO: USE REDUX TO POPULATE :))))
 
 const GameDetailsPage = ( ) => {
-
-    console.log(props)
 
     var dead = L.icon({
         iconUrl: deadIcon,
@@ -24,12 +23,25 @@ const GameDetailsPage = ( ) => {
         popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
 
+    const messageRef = useRef();
+
+    useEffect(() => {
+        const chat = messageRef.current;
+        if (chat) {
+            chat.scrollTop = chat.scrollHeight - chat.clientHeight;
+        }
+    })
+
+    const handleMessage = () => {        
+        console.log("Handling message!")
+    }
+
     return (
         <div className="mostMainContainer">
             <div className='mainContainer'>
                 <div className="header">
                     <h5 id="removeMargin">Administrator</h5>
-                    <button>X</button>
+                    <button id="retBtn">X</button>
                 </div>
                 <div className="liftToHeader">
                     <h2 id="removeMargin">Kids @ Noroff</h2>
@@ -86,10 +98,16 @@ const GameDetailsPage = ( ) => {
                     <div className="chatContainer">
                         {/* chatbox + buttons here */}
                         <div>
-                            <div className="chatbox">
+                            <div className="chatbox" ref={messageRef}>
                                 <p className="msg">Adam: I can see 3 zombies at location X. Be careful!</p>
                                 <p className="msg">Fatima: Thanks, Adam! Me and Khoi will hide.</p>
                                 <p className="selfMsg">Naughty boy: Come at me brah</p>
+                                <p className="msg">You: Thanks Adam, need backup?</p>
+                                <p className="msg">Khoi: Let's do this!</p>
+                                <p className="msg">You: Thanks Adam, need backup?</p>
+                                <p className="msg">You: Thanks Adam, need backup?</p>
+                                <p className="msg">You: Thanks Adam, need backup?</p>
+                                <p className="msg">You: Thanks Adam, need backup?</p>
                                 <p className="msg">You: Thanks Adam, need backup?</p>
                                 <p className="msg">Khoi: Let's do this!</p>
                             </div>
@@ -112,7 +130,7 @@ const GameDetailsPage = ( ) => {
                             <div className="actualInput">
                                 <form>
                                     <input id="input" type="text" name="name" />
-                                    <input id="enterBtn" type="submit" value=">" />
+                                    <button id="enterBtn" onClick={handleMessage} type="button">&gt;</button>
                                 </form>
                             </div>
                         </div>

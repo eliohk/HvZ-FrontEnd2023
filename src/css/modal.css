@@ -1,17 +1,17 @@
 .mainContainer {
-    background-color: white;    
+    background-color: #D3D3D3;    
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    width: 75%;
+    width: 80%;
+    padding: 1em;
 }
 
 .mostMainContainer {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 1em;
     width: 100%;
 }
 
@@ -49,17 +49,27 @@ li {
 
 }
 
-button {
-    background-color: transparent;
-}
-
 .btns {
-    background-color: transparent;
     border: black solid;
     width: 345px;
     height: 40px;
     border-radius: 32px;
     margin-bottom: 0.25em;
+}
+
+.btns:hover {
+    outline-color: transparent;
+    outline-style:solid;
+    box-shadow: 0 0 0 1px black;
+    transition: 0.7s;
+}
+
+.btns:focus {
+    outline-color: transparent;
+    outline-style:solid;
+    box-shadow: 0 0 0 1px black;
+    transition: 0.7s;
+    background-color: grey;
 }
 
 .header {
@@ -190,4 +200,52 @@ form {
     height: 30px;
     width: 100px;
     margin-right: 5em;
+}
+
+#editBtn:hover {
+    outline-color: transparent;
+    outline-style:solid;
+    box-shadow: 0 0 0 1px black;
+    transition: 0.7s;
+    background-color: grey;
+}
+
+#editBtn:focus {
+    outline-color: transparent;
+    outline-style:solid;
+    box-shadow: 0 0 0 1px black;
+    transition: 0.7s;
+    background-color: grey;
+}
+
+#retBtn {
+    border-radius: 64px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+#retBtn:hover {
+    box-shadow: 0 0 0 1px black;
+    transition: 0.7s;
+}
+
+#retBtn:focus {
+    box-shadow: 0 0 0 1px black;
+    transition: 0.7s;
+    background-color: grey;
+}
+
+#enterBtn {
+    border-radius: 64px;
+    outline: black;
+    background-color: white;
+}
+
+#enterBtn:hover {
+    outline-color: transparent;
+    outline-style:solid;
+    box-shadow: 0 0 0 1px black;
+    transition: 0.4s;
+    background-color: grey;
 }

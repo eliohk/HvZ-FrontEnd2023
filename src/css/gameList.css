@@ -29,7 +29,6 @@
     flex-direction: row;
     align-items: center;
     width: fit-content;
-    margin: 2em;
     margin-bottom: 0em;
     height: 175px;
     width: 100%;
@@ -50,6 +49,7 @@
     transition: 0.7s;
     text-align: center;
     border-radius: 16px;
+    z-index: 999999;
 }
 
 .playerCounter {

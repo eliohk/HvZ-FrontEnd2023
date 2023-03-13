@@ -8,11 +8,9 @@
 
 .sortByContainer {
     margin-top: 1em;
-    margin-bottom: -1em;
     display: flex;
     align-items: center;
     justify-content: left;
-    margin-left: -120px;
 }
 
 #label {
@@ -24,13 +22,15 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    width: 1000px;
-    margin-left: -130px;
+    width: 100%;
+    margin-top: 1em;
 }
 
 .secondaryLandingContainer {
     display: flex;
     flex-direction: column;
+    background-color: #D3D3D3;
+    padding: 1em;
 }
 
 .endBtn {
@@ -46,7 +46,6 @@ button.btn.btn-primary {
     border-width: 0.1px;
     border-radius: 32px;
 }
-
 
 .endBtn.dropend.btn-group {
     background-color: white;
@@ -71,3 +70,4 @@ button.btn.btn-primary {
 .removeUnderline {
     text-decoration: none;
 }
+

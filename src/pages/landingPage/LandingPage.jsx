@@ -42,7 +42,7 @@ const LandingPage = () => {
             <NavLink to="/game" className="removeUnderline">
                 <div className='widthConstraint' onClick={handleGameClick(i)} key={i}>
                     <GameListComponent game={gameData} key={i}></GameListComponent>
-                </div>
+                </div>                
             </NavLink>
         );
     });
@@ -61,9 +61,7 @@ const LandingPage = () => {
                         </div>
                     </SplitButton>
                 </div>
-                <div className='widthConstraint'>
-                    {games}
-                </div>
+                {games}
             </div>
         </div>
     )

@@ -15,6 +15,7 @@ import { fetchGameById } from "../../states/dataSlice";
 import { useSelector } from "react-redux";
 
 import "../../css/topNavbar.css";
+import Register from "../registerComponent/Register";
 
 const TopNavbar = () => {
     const state = useSelector((data) => data);
@@ -67,6 +68,8 @@ const TopNavbar = () => {
                     <Dropdown>
                         <Dropdown.Toggle as={CustomToggle} variant="success" id="dropdown-basic"/>
                         <Dropdown.Menu>
+                        <Dropdown.Item href="/register">register</Dropdown.Item>
+ 
                             <Dropdown.Item href="#/action-1">Sign out</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
@@ -77,6 +80,8 @@ const TopNavbar = () => {
                 <Route path="/" element={<LandingPage />}/>
                 <Route path="/game/:gameId" element={<GameDetailsPage games={state.data.gamesArray}/>}/>
                 <Route path="/admin" element={<AdminPage />}/>
+                <Route path="/register" element={<Register />}/>
+
             </Routes>
         </BrowserRouter>
       

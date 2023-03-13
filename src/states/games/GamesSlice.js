@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { useSelector } from 'react-redux'
+import { userSlice } from "../users/UserSlice";
 
 export const gamesSlice = createSlice({
   name: "games",

@@ -15,6 +15,7 @@
     text-decoration: none;
     font-family: 'Sanchez', serif;
     color: white;
+    cursor: pointer;
 }
 
 a:hover {
@@ -37,9 +38,7 @@ a:hover {
     display: flex;
     width: 100%;
     align-items: center;
-    justify-content: space-between;
-    margin-left: 24px;
-    margin-right: 24px;
+    justify-content: space-evenly;
 }
 
 .alignLogo {

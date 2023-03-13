@@ -3,12 +3,18 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: solid black;
     width: 100%;
 }
 
 .sortByContainer {
-    margin: 1em;
+    margin-top: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+#label {
+    margin-right: 8px;
 }
 
 .widthConstraint {
@@ -16,5 +22,52 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    width: 1000px;
+    width: 100%;
+    margin-top: 1em;
 }
+
+.secondaryLandingContainer {
+    display: flex;
+    flex-direction: column;
+    background-color: #D3D3D3;
+    padding: 1em;
+}
+
+.endBtn {
+    width: 100px;
+    background-color: black;
+}
+
+button.btn.btn-primary {
+    background-color: transparent;
+    outline: black;
+    color: black;
+    border: solid black;
+    border-width: 0.1px;
+    border-radius: 32px;
+}
+
+.endBtn.dropend.btn-group {
+    background-color: white;
+}
+
+
+.horizontalItems {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+    margin: 0px;
+    border-radius: 16px;
+    height: 20px;
+}
+
+.items {
+    border-radius: 16px;
+}
+
+.removeUnderline {
+    text-decoration: none;
+}
+

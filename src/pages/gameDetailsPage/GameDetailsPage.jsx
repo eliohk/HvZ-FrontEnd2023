@@ -89,7 +89,7 @@ const GameDetailsPage = ( props ) => {
                         </div>
                         
                         <div className="listContainer">
-                        <GameListPlayerComponent/>
+                            <GameListPlayerComponent/>
                         </div>
                     </div>
                     <div className="chatContainer">

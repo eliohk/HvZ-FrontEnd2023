@@ -26,7 +26,6 @@
     align-items: center;
     justify-content: center;
     border: solid black;
-    border-width: 4px;
     border-radius: 32px;
     width: 60%;
     margin-left: 1em;
@@ -111,7 +110,7 @@ li {
 .chatContainer {
     max-width:inherit;
     display: flex;
-    justify-content: space-between;
+    justify-content: left;
     margin: 1em;
 }
 
@@ -120,14 +119,14 @@ li {
     flex-direction: column;
     justify-content: space-between;
     margin-right: 1em;
-    margin-left: 1em;
+    margin-left: 3em;
 }
 
 .chatbox {
     margin-left: 1em;
     border: solid black;
-    border-radius: 16px;
-    width: 100%;
+    border-radius: 32px;
+    width: 60%;
     height: 200px;
     overflow: scroll;
     /* hide scrollbar for IE, Edge and Firefox */

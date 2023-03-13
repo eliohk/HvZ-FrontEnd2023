@@ -5,7 +5,7 @@ import Register from './components/registerComponent/Register';
 function App() {
   return (
     <div>
-      <Register/>
+      <TopNavbar/>
     </div>
   );
 }

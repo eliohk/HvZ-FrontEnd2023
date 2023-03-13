@@ -4,17 +4,34 @@ import GameListPlayerComponent from "../../components/gameListPlayerComponent/Ga
 
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-
+import { useSearchParams  } from "react-router-dom";
 import { useEffect, useRef } from 'react'
 import ChatViewComponent from "../../components/chatViewComponent/ChatViewComponent";
 import MapComponent from "../../components/mapComponent/MapComponent";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchGames } from "../../states/dataSlice";
 
 // TODO: USE REDUX TO POPULATE :))))
 
-const GameDetailsPage = () => {
+const GameDetailsPage = ( props ) => {
+    const allGames = useSelector((state) => state.data.gamesArray);
+    const dispatch = useDispatch();
 
     const handleMessage = () => {
         console.log("Handling message!")
+    }
+
+    const params = window.location.pathname;
+    const id = params.split("/")[2];
+
+    const game = props.games[id];
+
+    if (!game) {
+        return (
+            <div className="container">
+                <p> Error occured. fuck ya mum</p>
+            </div>
+        )
     }
 
     return (
@@ -25,11 +42,11 @@ const GameDetailsPage = () => {
                     <button id="retBtn">X</button>
                 </div>
                 <div className="liftToHeader">
-                    <h2 id="removeMargin">Kids @ Noroff</h2>
-                    <h4 id="removeMargin">"Hide & Seek"</h4>
+                    <h2 id="removeMargin">{game.title}</h2>
+                    <h4 id="removeMargin">"{game.gameType}"</h4>
                 </div>
 
-                <p id="removeMargin" className="desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                <p id="removeMargin" className="desc">{game.description}</p>
                 <div className="secondaryContainer">
                     <div className="interactiveStuffContainer">
                         {/* map + squad list here */}
@@ -37,7 +54,7 @@ const GameDetailsPage = () => {
                             <MapComponent></MapComponent>
                         </div>                        
                         <div className="listContainer">
-                        <GameListPlayerComponent/>
+                            <GameListPlayerComponent/>
                         </div>
                     </div>
                     <div className="chatContainer">

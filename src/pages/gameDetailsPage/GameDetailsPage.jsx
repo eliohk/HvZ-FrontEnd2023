@@ -14,7 +14,8 @@ import SquadListComponent from "../../components/playerListComponent/squadListCo
 import SquadMemberListComponent from "../../components/playerListComponent/squadMemberListComponent";
 import KillsListComponent from "../../components/playerListComponent/killsListComponent";
 import BiteCodeComponent from "../../components/playerListComponent/biteCodeComponent";
-
+import retIcon from "../../resources/retIcon.svg";
+import { Navigate } from "react-router-dom";
 
 // TODO: USE REDUX TO POPULATE :))))
 
@@ -63,7 +64,7 @@ const GameDetailsPage = ( props ) => {
             <div className='mainContainer'>
                 <div className="header">
                     <h5 id="removeMargin">Administrator</h5>
-                    <button id="retBtn">X</button>
+                    <a href="/" id="retBtn" class="button"><img id="exitIcon" src={retIcon} alt="Return button"/></a>
                 </div>
                 <div className="liftToHeader">
                     <h2 id="removeMargin">{game.title}</h2>

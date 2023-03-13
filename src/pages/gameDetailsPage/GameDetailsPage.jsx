@@ -97,7 +97,6 @@ const GameDetailsPage = ( ) => {
                     </div>
                     <div className="chatContainer">
                         {/* chatbox + buttons here */}
-                        <div>
                             <div className="chatbox" ref={messageRef}>
                                 <p className="msg">Adam: I can see 3 zombies at location X. Be careful!</p>
                                 <p className="msg">Fatima: Thanks, Adam! Me and Khoi will hide.</p>
@@ -111,7 +110,6 @@ const GameDetailsPage = ( ) => {
                                 <p className="msg">You: Thanks Adam, need backup?</p>
                                 <p className="msg">Khoi: Let's do this!</p>
                             </div>
-                        </div>
                         <div className="buttonContainer">
                             <button className="btns">List of players</button>
                             <button className="btns">Squad list</button>

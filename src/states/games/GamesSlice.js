@@ -16,6 +16,6 @@ export const gamesSlice = createSlice({
 });
 
 export const { loggedOut, loggedIn, setTranslation} =
-userSlice.actions;
+gamesSlice.actions;
 
-export default userSlice.reducer;
+export default gamesSlice.reducer;

@@ -1,10 +1,26 @@
+import axios from 'axios';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import GameListComponent from "../../components/gameListComponent/GameListComponent"
 
 import "../../css/landingPage.css";
 
-const LandingPage = () => {
+ const  LandingPage = () => {
+
+    
+    async function getuser() {
+        try {
+             const response  = await axios.get('http://localhost:8080/api/v1/users/getAllUser');
+            console.log(response.data);
+        }
+        catch (error) {
+            console.log(error);
+        }
+
+    }
+
+    getuser();
+       
 
     let gameArray = [
         {

@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import "../../css/modal.css";
 
 const ChatViewComponent = (props) => {
 

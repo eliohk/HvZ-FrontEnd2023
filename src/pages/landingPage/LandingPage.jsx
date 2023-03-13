@@ -24,8 +24,8 @@ import { fetchGames } from '../../states/dataSlice';
 
     const games = allGames.data.gamesArray.map((gameData, i) => {
         return (
-            <NavLink to={`/game/${i}`} className="removeUnderline">
-                <div className='widthConstraint' onClick={handleGameClick(i)} key={i}>
+            <NavLink to={`/game/${i}`} className="removeUnderline" key={i}>
+                <div className='widthConstraint' onClick={handleGameClick(i)}>
                     <GameListComponent game={gameData} key={i}></GameListComponent>
                 </div>                
             </NavLink>

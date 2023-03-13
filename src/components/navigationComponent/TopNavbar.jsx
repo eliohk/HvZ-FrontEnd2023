@@ -12,6 +12,7 @@ import GameDetails from "../gameDetailsComponent/GameDetails";
 import logo from "../../resources/tempIcon.png";
 
 import "../../css/topNavbar.css";
+import Register from "../registerComponent/Register";
 
 const TopNavbar = () => {
     const CustomToggle = forwardRef(({ children, onClick }, ref) => (
@@ -62,6 +63,8 @@ const TopNavbar = () => {
                     <Dropdown>
                         <Dropdown.Toggle as={CustomToggle} variant="success" id="dropdown-basic"/>
                         <Dropdown.Menu>
+                        <Dropdown.Item href="/register">register</Dropdown.Item>
+ 
                             <Dropdown.Item href="#/action-1">Sign out</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
@@ -72,6 +75,8 @@ const TopNavbar = () => {
                 <Route path="/" element={<LandingPage />}/>
                 <Route path="/game" element={<GameDetailsPage />}/>
                 <Route path="/admin" element={<AdminPage />}/>
+                <Route path="/register" element={<Register />}/>
+
             </Routes>
         </BrowserRouter>
       

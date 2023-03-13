@@ -5,15 +5,19 @@ import '../../css/register.css';
 
 const Register = () => {
   return (
-    <>
-    <form className='register-component-container'>
+    <div className='register-container'>
+    <form className=''>
+      <div className='form-floating mb-3'>
+        <input type="fornavn" className='form-control'></input>
         <label className='label-container'>Fornavn</label>
-        <input type="text" placeholder='Fornavn ...' className='input-container'></input>
-
+        </div>
+        <div className='form-floating mb-3'>
+        <input type="text" className='form-control'></input>
         <label className='label-container'>Etternavn</label>
-        <input type="text" placeholder="Etternavnet ..." className='input-container'></input>
+        </div>
+        <button className='btn btn-danger'> Register</button>
     </form>
-    </>
+    </div>
   )
 }
 

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Dropdown from 'react-bootstrap/Dropdown';
 import GameListComponent from "../../components/gameListComponent/GameListComponent"
 import { useState, useEffect } from 'react';
@@ -5,7 +6,22 @@ import "../../css/landingPage.css";
 import SplitButton from 'react-bootstrap/SplitButton';
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 
-const LandingPage = () => {
+ const  LandingPage = () => {
+
+    
+    async function getuser() {
+        try {
+             const response  = await axios.get('http://localhost:8080/api/v1/users/getAllUser');
+            console.log(response.data);
+        }
+        catch (error) {
+            console.log(error);
+        }
+
+    }
+
+    getuser();
+       
 
     const [ sortVariable, setSortVariable ] = useState("Title");
 

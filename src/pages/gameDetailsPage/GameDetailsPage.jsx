@@ -64,6 +64,10 @@ const GameDetailsPage = ( props ) => {
         }
     }
 
+    function handleNewPlayer() {
+        console.log("clickeroooo")
+    }
+
     return (
         <div className="mostMainContainer">
             <div className='mainContainer'>
@@ -117,6 +121,7 @@ const GameDetailsPage = ( props ) => {
                         <button id="editBtn">Edit game</button>
                     </div>
                 </div>
+                <button onClick={handleNewPlayer}>Hei koie</button>
             </div>
         </div>
 

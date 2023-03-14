@@ -31,6 +31,11 @@ const MapComponent = (props) => {
         console.log(currentClickPosition)
     }
 
+    const playerMarkers = players.map((item, i) => {
+        console.log(item, i)
+        return <PlayerMarker key={i} lat={item.lat} lng={item.lng}></PlayerMarker>
+    })
+
     return (
             <MapContainer style={{
             height: "600px",
@@ -43,9 +48,7 @@ const MapComponent = (props) => {
                 url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             />
-            {players.map(function(item, i){
-                return <PlayerMarker key={i} lat={item.lat} lng={item.lng}></PlayerMarker>
-            })}
+            {playerMarkers}
             <DeadMarker lat={59.8} lng={10.8}></DeadMarker>
             <LocationMarker></LocationMarker>
             <button className='mapBtn' onClick={handleButtonClick}>Hei koie</button>

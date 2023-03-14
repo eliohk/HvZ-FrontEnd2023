@@ -116,8 +116,8 @@ const GameDetailsPage = ( props ) => {
                             <button id="editBtn">Edit game</button>
                         </div>
                     </div>
+                    <button onClick={handleNewPlayer}>Hei koie</button>
                 </div>
-                <button onClick={handleNewPlayer}>Hei koie</button>
             </div>
         )
     } else {

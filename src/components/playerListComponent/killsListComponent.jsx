@@ -1,17 +1,25 @@
 import React from 'react'
-import squadIcon from "../../resources/squadIcon.svg";
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchGameById } from '../../states/dataSlice';
-import addIcon from "../../resources/addIcon.svg";
 import "../../css/playerListComponent.css";
+import squadIcon from "../../resources/squadIcon.svg";
+import addIcon from "../../resources/addIcon.svg";
+
+import retIcon from "../../resources/retIcon.svg";
+import editIcon from "../../resources/editIcon.svg";
 
 const KillsListComponent = ( props ) => {
-    const kills = props.data.kills.map((kill, i) => {
+    const handleDelete = (event) => {
+        console.log("Test handleDelete");
+    }
+    const kills = props.data.map((kill, i) => {
         return (
             <div className="playerItem" key={i}>
-                <p>Player {kill}</p>
-                <p>Squad 1</p>
-                <p>69420</p>
+                <a onClick={handleDelete} id="smallBtn" className="button"><img id="smallBtnImg" src={editIcon} alt="Edit user button"/></a>
+                <p>Player {kill.id}</p>
+                <p>{kill.time_of_death}</p>
+                <p>{kill.lat} - {kill.lng}</p>
+                <a id="smallBtn" className="button"><img id="smallBtnImg" src={retIcon} alt="Remove user button"/></a>
             </div>
         )
     });

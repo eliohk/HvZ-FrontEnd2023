@@ -6,14 +6,15 @@ import addIcon from "../../resources/addIcon.svg";
 import "../../css/playerListComponent.css";
 
 const SquadListComponent = ( props ) => {
-    const squads = props.data.squads.map((squad, i) => {
+    
+    const squads = props.data.map((squad, i) => {
         return (
             <div className="squadItem" key={i}>
-                <p>Squad {squad}</p>
+                <p>{squad.name}</p>
             </div>
         );
     });
-
+    
     return (
         <div className='listViewContainer'>
             <h3 id="listTitle"><img src={squadIcon} style={{ width: "40px" }} alt="Squad icon" /> Squad list</h3>

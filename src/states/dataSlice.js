@@ -61,6 +61,7 @@ export const dataSlice = createSlice({
     [fetchGameById.fulfilled]:(state,action)=>{
         console.log(`Game with id: ${action.payload.id} has been fetched!`);
         state.currGame = action.payload;
+        localStorage.setItem("currGame", JSON.stringify(action.payload));
     },
   },
 });

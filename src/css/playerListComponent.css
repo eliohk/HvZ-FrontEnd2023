@@ -1,0 +1,119 @@
+.listViewContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.headerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-top: 0;
+    margin-bottom: -1em;
+}
+
+.playerContainer {
+
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 3em;
+}
+
+.playerItem {
+    display: flex;
+}
+
+.playerItem p {
+    /* 12px for normal members */
+    margin-left: 12px;
+    margin-right: 12px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.squadItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.squadItem p {
+    margin: 0;
+    border: black solid;
+    padding: 0.01em 2em 0.01em 2em;
+    border-width: 0.1px;
+}
+
+.squadItem p:hover {
+    box-shadow: 0 0 0 1px black;
+}
+
+#crtBtn {
+    border-radius: 32px;
+    background-color: transparent;
+    margin: 0em 1em 1em 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#addBtn {
+    width: 15px;
+    height: 15px;
+    border: black solid;
+    border-width: 2px;
+    border-radius: 128px;
+    margin-right: 6px;
+}
+
+#bcInput {
+    width: 75%;
+    margin-left: 10%;
+}
+
+#bcGenerator {
+    border-radius: 32px;
+    border: solid black;
+    margin-top: 8px;
+    margin-left: 30%;
+    background-color: transparent;
+    border-width: 1px;
+}
+
+.killContainer {
+    display: flex;
+    flex-direction: column;
+    align-items:start;
+}
+
+.biteMarker {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-top: 3em;
+    margin-left: 2em;
+}
+
+#coordinates {
+    white-space: nowrap;
+    font-size: 12px;
+}
+
+#markerLocation {
+    font-weight: 700;
+}
+
+.biteMarker p {
+    margin: 0;
+}

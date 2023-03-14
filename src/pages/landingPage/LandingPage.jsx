@@ -13,13 +13,15 @@ import { fetchGames } from '../../states/dataSlice';
     const [ sortVariable, setSortVariable ] = useState("Title");
     const allGames = useSelector((state) => state);
     const dispatch = useDispatch();
+
     const handleSortVariable = (event) => {
         let retval = event.target.innerHTML;
         setSortVariable(retval);
     };
 
     const handleGameClick = (i) => (event) => {
-        
+        console.log(i);
+        console.log(event);
     };
 
     const games = allGames.data.gamesArray.map((gameData, i) => {
@@ -33,7 +35,9 @@ import { fetchGames } from '../../states/dataSlice';
     });
 
     useEffect(() => {
-        dispatch(fetchGames());
+        if (!allGames.data.gamesArray) {
+            dispatch(fetchGames());
+        }
     }, []);
 
     return (

@@ -3,7 +3,6 @@ import { useState, forwardRef } from "react";
 import { slide as Menu } from 'react-burger-menu'
 import Dropdown from 'react-bootstrap/Dropdown';
 
-import AdminPage from "../../pages/adminPage/AdminPage";
 import LandingPage from "../../pages/landingPage/LandingPage";
 import GameDetailsPage from "../../pages/gameDetailsPage/GameDetailsPage";
 import MiniProfile from "../miniProfileComponent/MiniProfile";
@@ -79,7 +78,6 @@ const TopNavbar = () => {
             <Routes>
                 <Route path="/" element={<LandingPage />}/>
                 <Route path="/game/:gameId" element={<GameDetailsPage games={state.data.gamesArray}/>}/>
-                <Route path="/admin" element={<AdminPage />}/>
                 <Route path="/register" element={<Register />}/>
 
             </Routes>

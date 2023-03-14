@@ -23,7 +23,6 @@
     justify-content: center;
     flex-direction: column;
     width: 100%;
-    margin-top: 1em;
 }
 
 .secondaryLandingContainer {
@@ -48,7 +47,8 @@ button.btn.btn-primary {
 }
 
 .endBtn.dropend.btn-group {
-    background-color: white;
+    background-color: transparent;
+    border-radius: 32px;
 }
 
 
@@ -69,5 +69,6 @@ button.btn.btn-primary {
 
 .removeUnderline {
     text-decoration: none;
+    transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
+    cursor: default;
 }
-

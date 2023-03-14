@@ -9,9 +9,17 @@ import "../../css/modal.css";
 import GameDetails from "../gameDetailsComponent/GameDetails";
 import GameDetailsPage from "../../pages/gameDetailsPage/GameDetailsPage";
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { fetchGameById } from "../../states/dataSlice";
 
 
 const GameList = ( props ) => {
+    const dispatch = useDispatch();
+
+    const handleGameClick = (i) => (event) => {
+        dispatch(fetchGameById(i))
+    };
+
     return (
         <div className="mainGameContainer">
             <div className="innerMapContainer">
@@ -24,7 +32,7 @@ const GameList = ( props ) => {
                         <p id="gameMode">{props.game.gameMode}</p>
                     </div>
                     <p id="loremIpsum">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                    <button id="gamedtBtn" href={`game/${props.game.id-1}`}>Game details</button>
+                    <button id="gamedtBtn" onClick={handleGameClick} href={`game/${props.game.id-1}`}>Game details</button>
                 </div>
                 <div className="innerStatisticsContainer">
                     <p id="status" className="statusComponent">{props.game.status}</p>

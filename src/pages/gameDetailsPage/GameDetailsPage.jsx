@@ -23,7 +23,14 @@ const GameDetailsPage = ( props ) => {
 
     const [ listView, setListView ] = useState("players");
 
-    const allGames = useSelector((state) => state.data.gamesArray);
+    const allGames = useSelector((state) => state);
+
+
+    const currentGame = allGames.data.currGame;
+
+    // CONTAINS ALL DATA FOR GAME
+    console.log(currentGame);
+
     const dispatch = useDispatch();
 
     const handleMessage = () => {

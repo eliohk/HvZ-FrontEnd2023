@@ -7,7 +7,7 @@ import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from "react-router-dom";
 
-import { fetchGames } from '../../states/dataSlice';
+import { fetchGames, fetchGameById } from '../../states/dataSlice';
 
  const  LandingPage = () => {
     const [ sortVariable, setSortVariable ] = useState("Title");
@@ -20,8 +20,7 @@ import { fetchGames } from '../../states/dataSlice';
     };
 
     const handleGameClick = (i) => (event) => {
-        console.log(i);
-        console.log(event);
+        dispatch(fetchGameById(i))
     };
 
     const games = allGames.data.gamesArray.map((gameData, i) => {

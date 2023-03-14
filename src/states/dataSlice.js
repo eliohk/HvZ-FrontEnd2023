@@ -22,7 +22,7 @@ export const fetchGames = createAsyncThunk(
     'games/fetchGameById',
     async (gameId) => {
       const response = await fetch(
-        `${baseUrl}games/${gameId}`
+        `${baseUrl}games/${gameId + 1}`
       )
     
       let result = await response.json()
@@ -39,7 +39,8 @@ export const dataSlice = createSlice({
     id: null,
     firstName: null,
     lastName: null,
-    gamesArray: []
+    gamesArray: [],
+    currGame: {}
   },
   reducers: {
     setFirstName: (state, payload) => {
@@ -58,7 +59,8 @@ export const dataSlice = createSlice({
         state.gamesArray = action.payload;
     },
     [fetchGameById.fulfilled]:(state,action)=>{
-      console.log("yo this is a test of fetching a game!");
+        console.log(`Game with id: ${action.payload.id} has been fetched!`);
+        state.currGame = action.payload;
     },
   },
 });

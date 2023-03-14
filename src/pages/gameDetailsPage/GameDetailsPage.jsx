@@ -59,6 +59,10 @@ const GameDetailsPage = ( props ) => {
         }
     }
 
+    function handleNewPlayer() {
+        console.log("clickeroooo")
+    }
+    
     if (currentGame) {
         return (
             <div className="mostMainContainer">
@@ -71,7 +75,6 @@ const GameDetailsPage = ( props ) => {
                         <h2 id="removeMargin">{currentGame.title}</h2>
                         <h4 id="removeMargin">"{currentGame.gameType}"</h4>
                     </div>
-
                     <p id="removeMargin" className="desc">{currentGame.description}</p>
                     <div className="secondaryContainer">
                         <div className="interactiveStuffContainer">
@@ -114,6 +117,7 @@ const GameDetailsPage = ( props ) => {
                         </div>
                     </div>
                 </div>
+                <button onClick={handleNewPlayer}>Hei koie</button>
             </div>
         )
     } else {

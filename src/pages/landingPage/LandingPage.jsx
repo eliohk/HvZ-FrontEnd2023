@@ -5,7 +5,7 @@ import "../../css/landingPage.css";
 import SplitButton from 'react-bootstrap/SplitButton';
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { fetchGames, fetchGameById } from '../../states/dataSlice';
 
@@ -13,6 +13,7 @@ import { fetchGames, fetchGameById } from '../../states/dataSlice';
     const [ sortVariable, setSortVariable ] = useState("Title");
     const allGames = useSelector((state) => state);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleSortVariable = (event) => {
         let retval = event.target.innerHTML;
@@ -20,12 +21,12 @@ import { fetchGames, fetchGameById } from '../../states/dataSlice';
     };
 
     const handleGameClick = (i) => (event) => {
-        dispatch(fetchGameById(i))
+        dispatch(fetchGameById(i)).unwrap().then(() => navigate(`/game/${i}`))
     };
 
     const games = allGames.data.gamesArray.map((gameData, i) => {
         return (
-            <NavLink to={`/game/${i}`} className="removeUnderline" key={i}>
+            <NavLink className="removeUnderline" key={i}>
                 <div className='widthConstraint' onClick={handleGameClick(i)}>
                     <GameListComponent game={gameData} key={i}></GameListComponent>
                 </div>                

@@ -8,28 +8,25 @@ import editIcon from "../../resources/editIcon.svg";
 import "../../css/playerListComponent.css";
 
 const PlayerListComponent = ( props ) => {
-
-    console.log(props.data.players);
-
     const handleDelete = (event) => {
         console.log("Test handleDelete");
     }
 
-    const players = props.data.players.map((player, i) => {
+    const players = props.data.map((player, i) => {
         //<button id="smallBtn"><img id="smallBtnImg" src={editIcon} alt="Edit button"/></button>
         //<button id="smallBtn"><img id="smallBtnImg" src={retIcon} alt="Delete user button"/></button>
 
         return (
             <div className="playerItem" key={i}>
                 <a onClick={handleDelete} id="smallBtn" className="button"><img id="smallBtnImg" src={editIcon} alt="Edit user button"/></a>
-                <p>Player {player}</p>
-                <p>Human</p>
-                <p>Squad 1</p>
+                <p>Player {player.id}</p>
+                <p>{player.human ? "Human" : "Zombie"}</p>
+                <p>{player.squadMember ? player.squadMember : "N/A"}</p>
                 <a id="smallBtn" className="button"><img id="smallBtnImg" src={retIcon} alt="Remove user button"/></a>
             </div>
         )
     });
-
+    
     return (
         <div className='listViewContainer'>
             {/*<h3 id="listTitle"><img src={squadIcon} style={{ width: "40px" }} alt="Squad icon" /> Player list</h3>*/}

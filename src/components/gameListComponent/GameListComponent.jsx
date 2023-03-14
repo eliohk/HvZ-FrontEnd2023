@@ -8,16 +8,16 @@ import 'reactjs-popup/dist/index.css';
 import "../../css/modal.css";
 import GameDetails from "../gameDetailsComponent/GameDetails";
 import GameDetailsPage from "../../pages/gameDetailsPage/GameDetailsPage";
-import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
+import { BrowserRouter, NavLink, Route, Routes, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { fetchGameById } from "../../states/dataSlice";
 
-
 const GameList = ( props ) => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleGameClick = (i) => (event) => {
-        dispatch(fetchGameById(i))
+        dispatch(fetchGameById(i)).unwrap().then(() => navigate(`/game/${i}`))
     };
 
     return (

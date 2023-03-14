@@ -4,7 +4,7 @@ import PlayerListComponent from "../../components/playerListComponent/playerList
 
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import { useSearchParams  } from "react-router-dom";
+import { useSearchParams, useNavigate  } from "react-router-dom";
 import { useEffect, useRef, useState } from 'react'
 import ChatViewComponent from "../../components/chatViewComponent/ChatViewComponent";
 import MapComponent from "../../components/mapComponent/MapComponent";
@@ -15,7 +15,6 @@ import SquadMemberListComponent from "../../components/playerListComponent/squad
 import KillsListComponent from "../../components/playerListComponent/killsListComponent";
 import BiteCodeComponent from "../../components/playerListComponent/biteCodeComponent";
 import retIcon from "../../resources/retIcon.svg";
-import { Navigate } from "react-router-dom";
 
 // TODO: USE REDUX TO POPULATE :))))
 
@@ -24,7 +23,6 @@ const GameDetailsPage = ( props ) => {
     const [ listView, setListView ] = useState("players");
 
     const allGames = useSelector((state) => state);
-
 
     const currentGame = allGames.data.currGame;
 
@@ -56,13 +54,13 @@ const GameDetailsPage = ( props ) => {
 
     function getListView(view) {
         if (view == "players") {
-            return <PlayerListComponent data={game}/>;
+            return <PlayerListComponent data={currentGame.players}/>;
         } else if (view == "squad") {
-            return <SquadListComponent data={game}/>;
+            return <SquadListComponent data={currentGame.squads}/>;
         } else if (view == "human") {
             return <BiteCodeComponent />
         } else if (view == "zombie") {
-            return <KillsListComponent data={game}/>;
+            return <KillsListComponent data={currentGame.kills}/>;
         }
     }
 

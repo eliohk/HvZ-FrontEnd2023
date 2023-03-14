@@ -14,8 +14,10 @@ import "../../css/modal.css";
 
 
 
-const MapComponent = () => {   
+const MapComponent = (props) => {   
+    const [players, setPlayers] = useState(props.players)
     const [currentClickPosition, setCurrentClickPosition] = useState(null)
+    console.log(players)
 
     function LocationMarker() {
         const map = useMapEvents({
@@ -41,7 +43,9 @@ const MapComponent = () => {
                 url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             />
-            <PlayerMarker lat={59.911491} lng={10.757933}></PlayerMarker>
+            {players.map(function(item, i){
+                return <PlayerMarker key={i} lat={item.lat} lng={item.lng}></PlayerMarker>
+            })}
             <DeadMarker lat={59.8} lng={10.8}></DeadMarker>
             <LocationMarker></LocationMarker>
             <button className='mapBtn' onClick={handleButtonClick}>Hei koie</button>

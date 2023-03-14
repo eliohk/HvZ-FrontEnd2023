@@ -10,7 +10,7 @@ const SquadListComponent = ( props ) => {
     const squads = props.data.map((squad, i) => {
         return (
             <div className="squadItem" key={i}>
-                <p>{squad.name}</p>
+                <p>Squad {squad}</p>
             </div>
         );
     });

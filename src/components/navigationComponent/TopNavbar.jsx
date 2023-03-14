@@ -1,6 +1,5 @@
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 import { useState, forwardRef } from "react";
-import { slide as Menu } from 'react-burger-menu'
 import Dropdown from 'react-bootstrap/Dropdown';
 
 import LandingPage from "../../pages/landingPage/LandingPage";

@@ -20,6 +20,7 @@ const GameList = ( props ) => {
         dispatch(fetchGameById(i)).unwrap().then(() => navigate(`/game/${i}`))
     };
 
+
     return (
         <div className="mainGameContainer">
             <div className="innerMapContainer">
@@ -43,7 +44,7 @@ const GameList = ( props ) => {
                         </div>
                         <div id="cntr" className="alignStats">
                             <img src={playerIcon} alt="playerIcons" width="30"></img>
-                            <p className="playerCountText">{props.game.players}/{props.game.maxPlayers} players</p>
+                            <p className="playerCountText">{props.game.players.length}/{props.game.maxPlayers} players</p>
                         </div>
                     </div>
                 </div>     

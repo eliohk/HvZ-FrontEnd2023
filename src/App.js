@@ -9,7 +9,7 @@ function App() {
   dispatch(fetchGames());
 
   return (
-    <div>
+    <div className="App">
       <TopNavbar/>
     </div>
   );

@@ -29,7 +29,7 @@ const GameList = ( props ) => {
                 <div className="innerTitleContainer">
                     <div className="mostInnerTitleContainer">
                         <h3 id="title">{props.game.title}</h3>
-                        <p id="gameMode">{props.game.gameMode}</p>
+                        <p id="gameMode">{props.game.gameType}</p>
                     </div>
                     <p id="loremIpsum">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
                     <button id="gamedtBtn" onClick={handleGameClick} href={`game/${props.game.id-1}`}>Game details</button>

@@ -15,7 +15,7 @@ const BiteCodeComponent = ( props ) => {
 
     return (
         <div className="killContainer">
-            <h3 id="listTitle"> Bite code</h3>
+            <h3 id="biteTitle"> Bite code</h3>
             <input id="bcInput" type="text" name="name" value={biteCode}/>
             <button id="bcGenerator" onClick={handleMessage} type="button">Generate bite code</button>
             <div className="biteMarker">

@@ -28,7 +28,7 @@ const KillsListComponent = ( props ) => {
         <div className='listViewContainer'>
             <h3 id="listTitle">Kills</h3>
             <div className='playerContainer'>
-                <div className="buttonContainer">
+                <div className="killerContainer">
                     <button id="crtBtn"><img src={addIcon} alt="Add button" id="addBtn"/>Add kill</button>
                 </div>
                 <div className='headerContainer'>

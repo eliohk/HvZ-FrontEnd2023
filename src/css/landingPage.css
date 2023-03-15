@@ -11,6 +11,7 @@
     display: flex;
     align-items: center;
     justify-content: left;
+    color: white;
 }
 
 #label {
@@ -28,14 +29,11 @@
 .secondaryLandingContainer {
     display: flex;
     flex-direction: column;
-    background-color: #D3D3D3;
     padding: 1em;
 }
 
-
-
 button.btn.btn-primary {
-    background-color: transparent;
+    background-color: #E8EAEA;
     outline: black;
     color: black;
     border: solid black;
@@ -49,11 +47,8 @@ button.btn.btn-primary {
     border: solid black;
 }
 
-.sortByContainer .dropdown-toggle.btn.btn-primary {
+.dropdown-toggle.btn.btn-primary {
     height: 38px;
-    border: black solid;
-    border-width: 0.1px;
-    border-left: none;
 }
 
 .horizontalItems {

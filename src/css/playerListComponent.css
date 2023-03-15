@@ -2,8 +2,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 8px;
-    margin: 8px;
+    background-color: #2E2E2E;
+    border-radius: 28px;
+    height: 100%;
 }
 
 .headerContainer {
@@ -19,22 +20,19 @@
     margin-bottom: -1em;
 }
 
-.playerContainer {
+#biteTitle {
+    margin-top: 8px;
+    font-size: 14px;
+    margin-left: 26px;
+    margin-bottom: 0;
+}
 
+.playerContainer {
+    color: white;
 }
 
 .dropdownBtn {
 
-}
-
-.dropdown-toggle.btn.btn-primary {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    width: 100%;
-    height: 20px;
-    border: none;
 }
 
 .dropdown-menu.show {
@@ -72,10 +70,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 3em;
 }
 
 .playerItem {
+    color: white;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -103,6 +101,7 @@
 }
 
 .playerItemEdit {
+    color: white;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -125,6 +124,24 @@
     overflow: hidden;
 }
 
+.killerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.playerItemEdit .dropdown-toggle.btn.btn-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    font-size: 12px;
+    width: 100%;
+    height: 20px;
+    border: none;
+    color: white;
+}
+
 .squadItem {
     display: flex;
     justify-content: center;
@@ -135,8 +152,10 @@
 .squadItem p {
     margin: 0;
     border: black solid;
-    padding: 0.01em 2em 0.01em 2em;
     border-width: 0.1px;
+    background-color: #626263;
+    font-size: 14px;
+    width: 50%;
 }
 
 .squadItem p:hover {
@@ -145,12 +164,15 @@
 
 #crtBtn {
     border-radius: 32px;
-    background-color: transparent;
+    background-color: #626263;
     margin: 0em 1em 1em 1em;
     display: flex;
     align-items: center;
     justify-content: center;
     white-space: nowrap;
+    color: white;
+    height: 40px;
+    border: none;
 }
 
 #addBtn {
@@ -163,7 +185,7 @@
 }
 
 #bcInput {
-    width: 75%;
+    width: 65%;
     margin-left: 10%;
 }
 
@@ -171,9 +193,12 @@
     border-radius: 32px;
     border: solid black;
     margin-top: 8px;
-    margin-left: 30%;
+    margin-left: 15%;
+    height: 50px;
     background-color: transparent;
     border-width: 1px;
+    color: white;
+    background-color: #626263;
 }
 
 .killContainer {

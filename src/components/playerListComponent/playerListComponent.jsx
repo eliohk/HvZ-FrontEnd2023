@@ -12,7 +12,7 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import { useSelector, useDispatch } from 'react-redux';
 
 
-const PlayerRow = ( props) => {
+const PlayerRow = ( props ) => {
     // States for variables
     const [ name, setName ] = useState("");
     const [ faction, setFaction ] = useState("");
@@ -40,18 +40,24 @@ const PlayerRow = ( props) => {
     /**
      * Hook that alerts clicks outside of the passed ref
      */
-    function useOutsideAlerter(ref) {
+    function useOutsideAlerter(ref, props) {
+
         useEffect(() => {
         /**
          * Alert if clicked on outside of element
          */
         function handleClickOutside(event) {
             if (ref.current && !ref.current.contains(event.target)) {
-                props.callback({
-                    pName: name,
-                    pFaction: faction,
-                    pSquad: squad
-                });
+
+                if (props.player && props.squad && props.human) {
+                    props.callback({
+                        pName: "Player " + props.player.id,
+                        pFaction: props.human ? "Human" : "Zombie",
+                        pSquad: "Squad " + props.player.squad.id,
+                    });
+                }
+                
+
                 setEditable(false);
             }
         }
@@ -64,7 +70,6 @@ const PlayerRow = ( props) => {
         }, [ref]);
     }
 
-<<<<<<< HEAD
     const handleFaction = (event) => {
         setFaction(event.target.innerHTML);
     }
@@ -72,16 +77,6 @@ const PlayerRow = ( props) => {
     const handleSquad = (event) => {
         setSquad(event.target.innerHTML);
     }
-=======
-    const PlayerType = () => (
-        <p id="playerType">{props.player.human ? "Human" : "Zombie"}</p>
-    )
-
-    const SquadP = () => (
-        <p>{props.player.squadMember ? props.player.squadMember : "N/A"}</p>
-
-    )
->>>>>>> 2f84d3164965f327c21ee812dfbef29e07a25cd4
 
     useEffect(() => {
         setName("Player " + props.player.id);
@@ -93,11 +88,10 @@ const PlayerRow = ( props) => {
     let allSquads = "";
 
     if (squads) {
-        console.log(squads);
         allSquads = squads.map((squad, i) => {
             if (!(squad == `Squad ${squad}`)) {
                 return (
-                    <Dropdown.Item as="button" onClick={handleSquad}>Squad {squad}</Dropdown.Item>
+                    <Dropdown.Item as="button" onClick={handleSquad} key={i} >Squad {squad}</Dropdown.Item>
                 )
             } 
         })
@@ -105,7 +99,7 @@ const PlayerRow = ( props) => {
     
 
     const wrapperRef = useRef(null);
-    useOutsideAlerter(wrapperRef);
+    useOutsideAlerter(wrapperRef, props);
 
     return (
         editable? 
@@ -135,16 +129,12 @@ const PlayerRow = ( props) => {
 
 const PlayerListComponent = ( props ) => {
     const handleSave = (data) => {
-        callMeBackBaby();
-    }
-
-    const callMeBackBaby = ( data ) => {
         console.log(data);
     }
 
     const players = props.data.map((player, i) => {
         return (
-            <PlayerRow player={player} squad={props.squad} key={i} callback={callMeBackBaby}/>
+            <PlayerRow player={player} squad={props.squad} key={i} callback={handleSave}/>
         )
     });
     

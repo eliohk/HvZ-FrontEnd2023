@@ -15,6 +15,7 @@ import SquadMemberListComponent from "../../components/playerListComponent/squad
 import KillsListComponent from "../../components/playerListComponent/killsListComponent";
 import BiteCodeComponent from "../../components/playerListComponent/biteCodeComponent";
 import retIcon from "../../resources/retIcon.svg";
+import editIcon from "../../resources/editIcon.svg";
 // TODO: USE REDUX TO POPULATE :))))
 
 const GameDetailsPage = ( props ) => {
@@ -74,7 +75,7 @@ const GameDetailsPage = ( props ) => {
                     </div>
                     <div className="liftToHeader">
                         <h2 id="removeMargin">{currentGame.title}</h2>
-                        <h4 id="removeMargin">"{currentGame.gameType}"</h4>
+                        <h4 id="removeMargin" className="gameType">"{currentGame.gameType}"</h4>
                     </div>
                     <p id="removeMargin" className="desc">{currentGame.description}</p>
                     <div className="secondaryContainer">
@@ -108,17 +109,16 @@ const GameDetailsPage = ( props ) => {
                                 <div className="actualInput">
                                     <form>
                                         <input id="input" type="text" name="name" />
-                                        <button id="enterBtn" onClick={handleMessage} type="button">&gt;</button>
                                     </form>
                                 </div>
                             </div>
                         </div>
                         <div className="editDiv">
-                            <button id="editBtn">Edit game</button>
+                            <button id="editBtn"><img id="editBtnIcon" src={editIcon} alt="Edit Game Button" />Edit game</button>
                         </div>
                     </div>
-                    <button onClick={handleNewPlayer}>Hei koie</button>
                 </div>
+                <button id="joinBtn" onClick={handleNewPlayer}>Join game</button>
             </div>
         )
     } else {

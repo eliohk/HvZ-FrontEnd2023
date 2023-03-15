@@ -61,6 +61,7 @@ const GameDetailsPage = ( props ) => {
 
     function handleNewPlayer() {
         console.log("clickeroooo")
+
     }
     
     if (currentGame) {
@@ -124,7 +125,7 @@ const GameDetailsPage = ( props ) => {
         return (
             <div className="container">
                 <h3>
-                    Error fuck you bitch ass hoe
+                    Error
                 </h3>
             </div>
         )

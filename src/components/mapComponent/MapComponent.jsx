@@ -1,7 +1,8 @@
 import PlayerMarker from './PlayerMarker';
 import DeadMarker from './DeadMarker';
 import React from "react";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   MapContainer,
   TileLayer,
@@ -11,13 +12,17 @@ import {
 } 
 from "react-leaflet";
 import "../../css/modal.css";
+import { postCheckIn, setMarkers } from '../../states/dataSlice';
 
 
 
 const MapComponent = (props) => {   
+    const allGames = useSelector((state) => state);
     const [players, setPlayers] = useState(props.players)
-    const [currentClickPosition, setCurrentClickPosition] = useState(null)
-    console.log(players)
+    const [currentClickPosition, setCurrentClickPosition] = useState()
+    const dispatch = useDispatch();
+
+    console.log(players);
 
     function LocationMarker() {
         const map = useMapEvents({
@@ -27,14 +32,30 @@ const MapComponent = (props) => {
         })
     }
     
-    function handleButtonClick(){
-        console.log(currentClickPosition)
+    async function handleButtonClick(){
+        let now = new Date().toLocaleDateString('en-US', { weekday:"long", hour:"numeric", minute:"numeric", hour12: false}).toString();
+        
+        const checkinObj = {
+            id: 1,
+            lastCheckInTime: now,
+            lat: currentClickPosition.lat,
+            lng: currentClickPosition.lng
+        };
+
+        console.log(checkinObj)
+        dispatch(postCheckIn(checkinObj))
     }
 
     const playerMarkers = players.map((item, i) => {
-        console.log(item, i)
-        return <PlayerMarker key={i} lat={item.lat} lng={item.lng}></PlayerMarker>
+        return <PlayerMarker key={i} lat={item.lat} lng={item.lng}></PlayerMarker> 
     })
+
+    useEffect (() => {
+        setPlayers(allGames.data.markers);
+        console.log("Updating players with useEffect :)")
+    }, [allGames.data.markers]);
+
+    console.log(allGames.data.markers);
 
     return (
             <MapContainer style={{

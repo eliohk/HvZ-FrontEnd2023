@@ -14,9 +14,10 @@
     justify-content: center;
     width: 100%;
 }
-
+    
 .mapBtn {
-    position: relative;
+    position: absolute;
+    margin-left: 100px;
     font-size: 16px;
     z-index: 99999999;
 }

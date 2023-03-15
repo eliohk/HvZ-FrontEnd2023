@@ -46,8 +46,6 @@ const PlayerRow = ( props) => {
         setAction("")
     }
 
-    console.log(props);
-
     const PlayerType = () => (
         <p id="playerType">{props.player.human ? "Human" : "Zombie"}</p>
     )

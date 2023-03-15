@@ -6,7 +6,6 @@ import SplitButton from 'react-bootstrap/SplitButton';
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-
 import { fetchGames, fetchGameById } from '../../states/dataSlice';
 
  const  LandingPage = () => {
@@ -45,7 +44,7 @@ import { fetchGames, fetchGameById } from '../../states/dataSlice';
             <div className="secondaryLandingContainer">
                 <div className="sortByContainer">
                     <label id="label">Sort by</label>
-                    <SplitButton variant="primary" key="end" drop="end" id="dropdown-button-drop-end" className="endBtn" title={sortVariable}>
+                    <SplitButton variant="primary" key="end" drop="end" id="dropdown-button-drop-end" title={sortVariable}>
                         <div className="horizontalItems">
                             <Dropdown.Item className="items" onClick={handleSortVariable}>Date</Dropdown.Item>
                             <Dropdown.Item className="items" onClick={handleSortVariable}>State</Dropdown.Item>

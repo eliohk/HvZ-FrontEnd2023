@@ -32,7 +32,7 @@
     align-items: center;
     justify-content: center;
     font-size: 12px;
-    width: 90%;
+    width: 100%;
     height: 20px;
     border: none;
 }
@@ -78,11 +78,43 @@
 .playerItem {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    background-color: transparent;
+    border: none;
     width: 100%;
 }
 
 .playerItem p {
+    /* 12px for normal members */
+    margin-left: 12px;
+    margin-right: 12px;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 12px;
+    white-space:nowrap;
+    overflow: hidden;
+}
+
+.playerItem:hover {
+    border: solid black;
+    border-width: 0.1px;
+    padding: 0.1px;
+    border-radius: 32px;
+}
+
+.playerItemEdit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    cursor: default;
+    background-color: transparent;
+    border: solid black;
+    border-width: 0.1px;
+    border-radius: 32px;
+}
+
+.playerItemEdit p {
     /* 12px for normal members */
     margin-left: 12px;
     margin-right: 12px;

@@ -32,10 +32,7 @@
     padding: 1em;
 }
 
-.endBtn {
-    width: 100px;
-    background-color: black;
-}
+
 
 button.btn.btn-primary {
     background-color: transparent;
@@ -47,10 +44,17 @@ button.btn.btn-primary {
 }
 
 .endBtn.dropend.btn-group {
-    background-color: transparent;
+    background-color: white;
     border-radius: 32px;
+    border: solid black;
 }
 
+.sortByContainer .dropdown-toggle.btn.btn-primary {
+    height: 38px;
+    border: black solid;
+    border-width: 0.1px;
+    border-left: none;
+}
 
 .horizontalItems {
     display: flex;

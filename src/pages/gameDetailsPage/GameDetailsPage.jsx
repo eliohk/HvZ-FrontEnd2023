@@ -49,7 +49,7 @@ const GameDetailsPage = ( props ) => {
 
     function getListView(view) {
         if (view == "players") {
-            return <PlayerListComponent data={currentGame.players}/>;
+            return <PlayerListComponent data={currentGame.players} squad={currentGame.squads}/>;
         } else if (view == "squad") {
             return <SquadListComponent data={currentGame.squads}/>;
         } else if (view == "human") {

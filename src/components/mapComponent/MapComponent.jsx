@@ -22,8 +22,6 @@ const MapComponent = (props) => {
     const [currentClickPosition, setCurrentClickPosition] = useState()
     const dispatch = useDispatch();
 
-    console.log(players);
-
     function LocationMarker() {
         const map = useMapEvents({
           click(e) {
@@ -33,6 +31,7 @@ const MapComponent = (props) => {
     }
     
     async function handleButtonClick(){
+        console.log("BUTTON")
         let now = new Date().toLocaleDateString('en-US', { weekday:"long", hour:"numeric", minute:"numeric", hour12: false}).toString();
         
         const checkinObj = {
@@ -42,7 +41,6 @@ const MapComponent = (props) => {
             lng: currentClickPosition.lng
         };
 
-        console.log(checkinObj)
         dispatch(postCheckIn(checkinObj))
     }
 
@@ -52,15 +50,21 @@ const MapComponent = (props) => {
 
     useEffect (() => {
         setPlayers(allGames.data.markers);
-        console.log("Updating players with useEffect :)")
     }, [allGames.data.markers]);
 
-    console.log(allGames.data.markers);
-
     return (
-            <MapContainer style={{
+        <div style={{
             height: "600px",
             width: "600px",
+            minHeight: "100%",
+            minWidth: "100%",
+            borderRadius: "32px",
+            }} >
+            {/*<button className='mapBtn' onClick={handleButtonClick}>Hei koie</button>*/}
+            <a className="mapBtn" href="#" onClick={handleButtonClick} title="Zoom in" role="button" aria-label="Zoom in" aria-disabled="false"><span aria-hidden="true">KNAPP</span></a>
+            <MapContainer style={{
+            height: "600px",
+            width: "40%",
             minHeight: "100%",
             minWidth: "100%",
             borderRadius: "32px",
@@ -72,8 +76,8 @@ const MapComponent = (props) => {
             {playerMarkers}
             <DeadMarker lat={59.8} lng={10.8}></DeadMarker>
             <LocationMarker></LocationMarker>
-            <button className='mapBtn' onClick={handleButtonClick}>Hei koie</button>
             </MapContainer>
+        </div>  
     )
 }
 

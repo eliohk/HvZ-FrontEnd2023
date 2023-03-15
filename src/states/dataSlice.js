@@ -36,8 +36,6 @@ export const fetchGames = createAsyncThunk(
   export const postCheckIn = createAsyncThunk(
     'games/postCheckIn',
     async (checkInObj) => {
-      console.log("Within REDUX:")
-      console.log(checkInObj.lat);
       const response = await fetch(`//localhost:8080/api/v1/players/${checkInObj.id}/checkIn`, {
         method: 'PUT',
         headers: {
@@ -54,7 +52,6 @@ export const fetchGames = createAsyncThunk(
         }
       })
       .then(updatedUser => {
-        console.log("Sup?")
       })
       .catch(error => {
         console.log(error);
@@ -96,20 +93,15 @@ export const dataSlice = createSlice({
         state.currGame = action.payload;
 
         action.payload.players.map((player, i) => {
-          console.log("Pushing player to marker Array in Redux");
-          console.log(player)
           state.markers.push(player);
         })
 
         localStorage.setItem("currGame", JSON.stringify(action.payload));
     },
     [postCheckIn.fulfilled]:(state, action) => {
-      console.log(`Check-in posted! :D`)
 
       state.markers.map((marker, i) => {
         if (i == action.meta.arg.id) {
-          console.log("postCheckin");
-          console.log(action.meta.arg)
           state.markers[i] = action.meta.arg;
         }
       })

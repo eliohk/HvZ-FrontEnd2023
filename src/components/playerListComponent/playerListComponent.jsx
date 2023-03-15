@@ -64,6 +64,7 @@ const PlayerRow = ( props) => {
         }, [ref]);
     }
 
+<<<<<<< HEAD
     const handleFaction = (event) => {
         setFaction(event.target.innerHTML);
     }
@@ -71,6 +72,16 @@ const PlayerRow = ( props) => {
     const handleSquad = (event) => {
         setSquad(event.target.innerHTML);
     }
+=======
+    const PlayerType = () => (
+        <p id="playerType">{props.player.human ? "Human" : "Zombie"}</p>
+    )
+
+    const SquadP = () => (
+        <p>{props.player.squadMember ? props.player.squadMember : "N/A"}</p>
+
+    )
+>>>>>>> 2f84d3164965f327c21ee812dfbef29e07a25cd4
 
     useEffect(() => {
         setName("Player " + props.player.id);

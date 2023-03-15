@@ -14,8 +14,10 @@ import { fetchGames, fetchGameById } from '../../states/dataSlice';
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+
     const handleSortVariable = (event) => {
         let retval = event.target.innerHTML;
+        console.log(retval)
         setSortVariable(retval);
     };
 
@@ -23,7 +25,9 @@ import { fetchGames, fetchGameById } from '../../states/dataSlice';
         dispatch(fetchGameById(i)).unwrap().then(() => navigate(`/game/${i}`))
     };
 
-    const games = allGames.data.gamesArray.map((gameData, i) => {
+    const gamesSortedTitle = [].concat(allGames.data.gamesArray)
+        .sort((a, b) => a.title > b.title ? 1 : -1)
+        .map((gameData, i) => {
         return (
             <NavLink className="removeUnderline" key={i}>
                 <div className='widthConstraint' onClick={handleGameClick(i)}>
@@ -32,6 +36,56 @@ import { fetchGames, fetchGameById } from '../../states/dataSlice';
             </NavLink>
         );
     });
+
+    const gamesSortedState = [].concat(allGames.data.gamesArray)
+        .sort((a, b) => a.status < b.status ? 1 : -1)
+        .map((gameData, i) => {
+        return (
+            <NavLink className="removeUnderline" key={i}>
+                <div className='widthConstraint' onClick={handleGameClick(i)}>
+                    <GameListComponent game={gameData} key={i}></GameListComponent>
+                </div>                
+            </NavLink>
+        );
+    });
+
+    const gamesSortedPlayers = [].concat(allGames.data.gamesArray)
+        .sort((a, b) => (a.players) > (b.players) ? 1 : -1)
+        .map((gameData, i) => {
+        return (
+            <NavLink className="removeUnderline" key={i}>
+                <div className='widthConstraint' onClick={handleGameClick(i)}>
+                    <GameListComponent game={gameData} key={i}></GameListComponent>
+                </div>                
+            </NavLink>
+        );
+    });
+
+    // TODO not sure if this one works properly!
+    const gamesSortedDate = [].concat(allGames.data.gamesArray)
+        .sort((a, b) => new Date(a.date) > new Date(b.date) ? 1 : -1)
+        .map((gameData, i) => {
+        return (
+            <NavLink className="removeUnderline" key={i}>
+                <div className='widthConstraint' onClick={handleGameClick(i)}>
+                    <GameListComponent game={gameData} key={i}></GameListComponent>
+                </div>                
+            </NavLink>
+        );
+    });
+
+    let gamesArray;
+    if (sortVariable === 'Title'){
+        gamesArray = gamesSortedTitle;
+    } else if (sortVariable === 'Date'){
+        gamesArray = gamesSortedDate
+    } else if (sortVariable === 'Players'){
+        gamesArray = gamesSortedPlayers
+    } else if (sortVariable === 'State'){
+        gamesArray = gamesSortedState
+    }
+
+
 
     useEffect(() => {
         if (!allGames.data.gamesArray) {
@@ -53,7 +107,7 @@ import { fetchGames, fetchGameById } from '../../states/dataSlice';
                         </div>
                     </SplitButton>
                 </div>
-                {games}
+                {gamesArray}
             </div>
         </div>
     )

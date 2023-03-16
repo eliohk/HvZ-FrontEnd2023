@@ -10,23 +10,24 @@ import { useSelector } from "react-redux";
 import "../../css/topNavbar.css";
 import Register from "../registerComponent/Register";
 import AboutPage from "../../pages/aboutPage/AboutPage";
+import keycloak from "../../keycloak";
 
 const TopNavbar = () => {
     const state = useSelector((data) => data);
 
     const CustomToggle = forwardRef(({ children, onClick }, ref) => (
         <a
-        ref={ref}
-        onClick={(e) => {
-          e.preventDefault();
-          onClick(e);
-        }}
-        className="element"
-      >
-        {children}
-        <MiniProfile />
-      </a>
-      ));
+            ref={ref}
+            onClick={(e) => {
+                e.preventDefault();
+                onClick(e);
+            }}
+            className="element"
+        >
+            {children}
+            <MiniProfile />
+        </a>
+    ));
 
     return (
         <BrowserRouter>
@@ -59,23 +60,29 @@ const TopNavbar = () => {
                         </NavLink>
                     </div>
                     <Dropdown>
-                        <Dropdown.Toggle as={CustomToggle} variant="success" id="dropdown-basic"/>
+                        <Dropdown.Toggle as={CustomToggle} variant="success" id="dropdown-basic" />
                         <Dropdown.Menu>
-                        <Dropdown.Item href="/register">Register</Dropdown.Item>
-                             <Dropdown.Item href="#/action-1">Sign out</Dropdown.Item>
+                            {keycloak.authenticated && (
+                                <Dropdown.Item href="/register">Register</Dropdown.Item>
+                            )}
+                            {!keycloak.authenticated && (
+                                <Dropdown.Item href="#/action-1">Sign out</Dropdown.Item>
+
+                            )}
+
                         </Dropdown.Menu>
                     </Dropdown>
                 </div>
             </div>
 
             <Routes>
-                <Route path="/" element={<LandingPage />}/>
-                <Route path="/game/:gameId" element={<GameDetailsPage games={state.data.gamesArray}/>}/>
-                <Route path="/register" element={<Register />}/>
-                <Route path="/about" element={<AboutPage />}/>
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/game/:gameId" element={<GameDetailsPage games={state.data.gamesArray} />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/about" element={<AboutPage />} />
             </Routes>
         </BrowserRouter>
-      
+
     );
 }
 

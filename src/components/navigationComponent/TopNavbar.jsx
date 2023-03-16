@@ -34,33 +34,35 @@ const TopNavbar = () => {
                 <div className="navContainer">
                     <NavLink to="/" className="element">
                         <div className="innerContainerNavbar">
-                            <p className="logo">Humans vs Zombies</p>
+                            <p className="logo">Human</p>
+                            <p id="vs" className="logo">vs</p>
+                            <p className="logo">Zombies</p>
                         </div>
                     </NavLink>
+                    <div className="navLinkContainer">
+                        <NavLink to="/" className="element">
+                            <div className="innerContainerNavbar">
+                                <span>Home</span>
+                            </div>
+                        </NavLink>
 
-                    <NavLink to="/" className="element">
-                        <div className="innerContainerNavbar">
-                            <span>Home</span>
-                        </div>
-                    </NavLink>
+                        <NavLink to="/signup" className="element">
+                            <div className="innerContainerNavbar">
+                                <span>Sign up</span>
+                            </div>
+                        </NavLink>
 
-                    <NavLink to="/signup" className="element">
-                        <div className="innerContainerNavbar">
-                            <span>Sign up</span>
-                        </div>
-                    </NavLink>
-
-                    <NavLink to="/about" className="element">
-                        <div className="innerContainerNavbar">
-                            <span>About</span>
-                        </div>
-                    </NavLink>
-                        
+                        <NavLink to="/about" className="element">
+                            <div className="innerContainerNavbar">
+                                <span>About</span>
+                            </div>
+                        </NavLink>
+                    </div>
                     <Dropdown>
                         <Dropdown.Toggle as={CustomToggle} variant="success" id="dropdown-basic"/>
                         <Dropdown.Menu>
-                            <Dropdown.Item href="/register">Register</Dropdown.Item>
-                            <Dropdown.Item href="#/action-1">Sign out</Dropdown.Item>
+                        <Dropdown.Item href="/register">Register</Dropdown.Item>
+                             <Dropdown.Item href="#/action-1">Sign out</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                 </div>

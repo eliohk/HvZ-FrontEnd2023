@@ -105,6 +105,21 @@
     border: none;
 }
 
+#joinBtn:hover {
+    outline-color: transparent;
+    outline-style:solid;
+    box-shadow: 0 0 0 1px black;
+    transition: 0.7s;
+}
+
+#joinBtn:active {
+    background-color: #E8EAEA;
+}
+
+#joinBtn:focus {
+    background-color: #65C8FF;
+}
+
 ul {
     margin: 1em;
 }
@@ -280,11 +295,10 @@ form {
 #editBtn {
     display: flex;
     align-items: center;
-    border: none;
-    border-radius: 32px;
-    outline: none;
     background-color: transparent;
     color: white;
+    border: none;
+    border-radius: 16px;
     height: 30px;
     width: 125px;
     white-space: nowrap;

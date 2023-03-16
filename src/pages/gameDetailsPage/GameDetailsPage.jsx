@@ -31,7 +31,7 @@ const GameDetailsPage = ( props ) => {
     }
 
     // CONTAINS ALL DATA FOR GAME
-    console.log(currentGame);
+    // console.log(currentGame);
 
     const dispatch = useDispatch();
 

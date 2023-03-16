@@ -41,15 +41,8 @@
     height: 40px;
     border: none;
     text-decoration: none;
-    pointer-events: none;
     border: solid #626263 1px;
 }
-
-.mapBtn:hover {
-
-}
-
-
 
 .gameType {
     color: #65C8FF;

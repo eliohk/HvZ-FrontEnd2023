@@ -1,4 +1,4 @@
-import playerIcon from "../../resources/playerIcon.svg";
+import playerIcon from "../../resources/Player.svg";
 import L from 'leaflet';
 import { Popup, Marker } from 'react-leaflet';
 

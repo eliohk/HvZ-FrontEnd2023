@@ -31,6 +31,8 @@ a:hover {
     font-weight: bolder;
     color: white;
     margin: 0px 0px 0px 8px;
+    font-weight: bolder;
+
 }
 
 #vs {
@@ -67,4 +69,3 @@ a:hover {
     text-align: center;
     margin-left: -50px;
 }
-

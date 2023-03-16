@@ -1,14 +1,12 @@
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 import { useState, forwardRef } from "react";
 import Dropdown from 'react-bootstrap/Dropdown';
-
 import LandingPage from "../../pages/landingPage/LandingPage";
 import GameDetailsPage from "../../pages/gameDetailsPage/GameDetailsPage";
 import MiniProfile from "../miniProfileComponent/MiniProfile";
 import GameDetails from "../gameDetailsComponent/GameDetails";
 import { fetchGameById } from "../../states/dataSlice";
 import { useSelector } from "react-redux";
-
 import "../../css/topNavbar.css";
 import Register from "../registerComponent/Register";
 import AboutPage from "../../pages/aboutPage/AboutPage";
@@ -64,8 +62,7 @@ const TopNavbar = () => {
                         <Dropdown.Toggle as={CustomToggle} variant="success" id="dropdown-basic"/>
                         <Dropdown.Menu>
                         <Dropdown.Item href="/register">Register</Dropdown.Item>
- 
-                            <Dropdown.Item href="#/action-1">Sign out</Dropdown.Item>
+                             <Dropdown.Item href="#/action-1">Sign out</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                 </div>

@@ -91,7 +91,7 @@ const PlayerRow = ( props ) => {
         setFaction(props.player.human ? "Human" : "Zombie");
         setSquad(props.player.squad ? "Squad " + props.player.squad.id : "N/A");
         setSquads(props.squad);
-    }, []);
+    }, [props]);
     
     let allSquads = "";
 
@@ -144,8 +144,6 @@ const PlayerListComponent = ( props ) => {
     }
 
     const handleDelete = (data) => {
-        console.log("test?")
-
         let tempArr = [];
 
         playersInGame.map((player) => {
@@ -158,7 +156,6 @@ const PlayerListComponent = ( props ) => {
     }
 
     const players = playersInGame.map((player, i) => {
-        console.log(player);
         return (
             <PlayerRow player={player} squad={props.squad} key={i} saveCallback={handleSave} delCallback={handleDelete}/>
         )

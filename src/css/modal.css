@@ -129,6 +129,9 @@ li {
     margin: 0;
 }
 
+.mapTips {
+}
+
 .liftToHeader {
     display: flex;
     flex-direction: column;
@@ -197,6 +200,9 @@ li {
 
 .secondaryContainer {
     max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .selfMsg {

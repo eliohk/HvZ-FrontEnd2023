@@ -19,14 +19,18 @@ const PlayerRow = ( props ) => {
     const [ squad, setSquad ] = useState("");
     const [ squads, setSquads ] = useState([]);
 
-    // State(s) for edit && delete
-    const [ action, setAction ] = useState(true);
+    // Old states for variables to keep track of new && old
+    const [ oldFaction, setOldFaction ] = useState("");
+    const [ oldSquad, setOldSquad ] = useState("");
 
     // CSS-states
     const [ editable, setEditable ] = useState(false);
 
     const handleDelete = (event) => {
-        console.log("Test handleDelete")
+        setEditable(false);
+        console.log("THIS IS FROM THE ROW")
+        console.log(props.player)
+        props.delCallback(props.player.id);
     }
 
     const handleEdit = () => {
@@ -49,15 +53,19 @@ const PlayerRow = ( props ) => {
         function handleClickOutside(event) {
             if (ref.current && !ref.current.contains(event.target)) {
 
-                if (props.player && props.squad && props.human) {
-                    props.callback({
+                if (event.target.value == "Save") {
+                    console.log("YOOO THIS SHOULD SAVE MAAYN")
+                    props.saveCallback({
                         pName: "Player " + props.player.id,
                         pFaction: props.human ? "Human" : "Zombie",
                         pSquad: "Squad " + props.player.squad.id,
                     });
+                } else {
+                    console.log("THIS SHOULD POP OFF")
+                    setFaction(props.player.human ? "Human" : "Zombie");
+                    setSquad(props.player.squad ? "Squad " + props.player.squad.id : "N/A");
                 }
                 
-
                 setEditable(false);
             }
         }
@@ -81,9 +89,9 @@ const PlayerRow = ( props ) => {
     useEffect(() => {
         setName("Player " + props.player.id);
         setFaction(props.player.human ? "Human" : "Zombie");
-        setSquad(props.player.squadMember ? props.player.squadMember : "N/A");
+        setSquad(props.player.squad ? "Squad " + props.player.squad.id : "N/A");
         setSquads(props.squad);
-    }, []);
+    }, [props]);
     
     let allSquads = "";
 
@@ -128,20 +136,35 @@ const PlayerRow = ( props ) => {
 };
 
 const PlayerListComponent = ( props ) => {
+
+    const [ playersInGame, setPlayersInGame ] = useState(props.data);
+
     const handleSave = (data) => {
         console.log(data);
     }
 
-    const players = props.data.map((player, i) => {
+    const handleDelete = (data) => {
+        let tempArr = [];
+
+        playersInGame.map((player) => {
+            if (player.id != data) {
+                tempArr.push(player);
+            }
+        });
+
+        setPlayersInGame(tempArr);
+    }
+
+    const players = playersInGame.map((player, i) => {
         return (
-            <PlayerRow player={player} squad={props.squad} key={i} callback={handleSave}/>
+            <PlayerRow player={player} squad={props.squad} key={i} saveCallback={handleSave} delCallback={handleDelete}/>
         )
     });
-    
+
     return (
         <div className='listViewContainer'>
             <h3 id="listTitle">List of players</h3>
-            <button id="crtBtn" onClick={handleSave}>Save</button>
+            <button id="crtBtn" onClick={handleSave} value="Save">Save</button>
             <div className='playerContainer'>
                 <div className='headerContainer'>
                     <p className="title">Name</p>

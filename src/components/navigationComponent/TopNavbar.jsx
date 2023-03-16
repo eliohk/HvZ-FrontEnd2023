@@ -1,19 +1,15 @@
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 import { useState, forwardRef } from "react";
 import Dropdown from 'react-bootstrap/Dropdown';
-
 import LandingPage from "../../pages/landingPage/LandingPage";
 import GameDetailsPage from "../../pages/gameDetailsPage/GameDetailsPage";
 import MiniProfile from "../miniProfileComponent/MiniProfile";
 import GameDetails from "../gameDetailsComponent/GameDetails";
-
-import logo from "../../resources/tempIcon.png";
-
 import { fetchGameById } from "../../states/dataSlice";
 import { useSelector } from "react-redux";
-
 import "../../css/topNavbar.css";
 import Register from "../registerComponent/Register";
+import AboutPage from "../../pages/aboutPage/AboutPage";
 
 const TopNavbar = () => {
     const state = useSelector((data) => data);
@@ -38,9 +34,6 @@ const TopNavbar = () => {
                 <div className="navContainer">
                     <NavLink to="/" className="element">
                         <div className="innerContainerNavbar">
-                            <div className="alignLogo">
-                                <img className="logoPicture" src={logo} width="40" alt=""></img>
-                            </div>
                             <p className="logo">Humans vs Zombies</p>
                         </div>
                     </NavLink>
@@ -66,8 +59,7 @@ const TopNavbar = () => {
                     <Dropdown>
                         <Dropdown.Toggle as={CustomToggle} variant="success" id="dropdown-basic"/>
                         <Dropdown.Menu>
-                        <Dropdown.Item href="/register">register</Dropdown.Item>
- 
+                            <Dropdown.Item href="/register">Register</Dropdown.Item>
                             <Dropdown.Item href="#/action-1">Sign out</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
@@ -78,7 +70,7 @@ const TopNavbar = () => {
                 <Route path="/" element={<LandingPage />}/>
                 <Route path="/game/:gameId" element={<GameDetailsPage games={state.data.gamesArray}/>}/>
                 <Route path="/register" element={<Register />}/>
-
+                <Route path="/about" element={<AboutPage />}/>
             </Routes>
         </BrowserRouter>
       

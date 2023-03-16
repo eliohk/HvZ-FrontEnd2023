@@ -82,7 +82,7 @@ const GameDetailsPage = ( props ) => {
                         <div className="interactiveStuffContainer">
                             {/* map + squad list here */}
                             <div className="mapContainer">
-                                <MapComponent players={currentGame.players}></MapComponent>
+                                <MapComponent players={currentGame.players} kills={currentGame.kills}></MapComponent>
                             </div>                        
                             <div className="listContainer">
                                 {getListView(listView)}

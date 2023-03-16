@@ -81,6 +81,22 @@
     width: 150px;
     height: 50px;
     margin: 8px;
+    border: none;
+}
+
+#joinBtn:hover {
+    outline-color: transparent;
+    outline-style:solid;
+    box-shadow: 0 0 0 1px black;
+    transition: 0.7s;
+}
+
+#joinBtn:active {
+    background-color: #E8EAEA;
+}
+
+#joinBtn:focus {
+    background-color: #65C8FF;
 }
 
 ul {

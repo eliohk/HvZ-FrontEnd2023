@@ -83,7 +83,7 @@ const PlayerRow = ( props ) => {
         setFaction(props.player.human ? "Human" : "Zombie");
         setSquad(props.player.squadMember ? props.player.squadMember : "N/A");
         setSquads(props.squad);
-    }, []);
+    }, [props]);
     
     let allSquads = "";
 

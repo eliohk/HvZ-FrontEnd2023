@@ -25,7 +25,6 @@ a:hover {
     color: white;
 }
 
-
 .logo {
     font-size: 50px;
     font-family: 'Poppins', sans-serif;
@@ -36,6 +35,14 @@ a:hover {
 
 #vs {
     color: #65C8FF;
+}
+
+.navLinkContainer {
+    display: flex;
+    align-items:start;
+    justify-content: space-between;
+    width: 15%;
+    margin-left: -128px;
 }
 
 .navContainer {
@@ -54,10 +61,10 @@ a:hover {
 }
 
 .innerContainerNavbar {
-    width: auto;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+    margin-left: -50px;
 }
 

@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 
 import "../../css/topNavbar.css";
 import Register from "../registerComponent/Register";
+import AboutPage from "../../pages/aboutPage/AboutPage";
 
 const TopNavbar = () => {
     const state = useSelector((data) => data);
@@ -40,29 +41,29 @@ const TopNavbar = () => {
                             <p className="logo">Zombies</p>
                         </div>
                     </NavLink>
+                    <div className="navLinkContainer">
+                        <NavLink to="/" className="element">
+                            <div className="innerContainerNavbar">
+                                <span>Home</span>
+                            </div>
+                        </NavLink>
 
-                    <NavLink to="/" className="element">
-                        <div className="innerContainerNavbar">
-                            <span>Home</span>
-                        </div>
-                    </NavLink>
+                        <NavLink to="/signup" className="element">
+                            <div className="innerContainerNavbar">
+                                <span>Sign up</span>
+                            </div>
+                        </NavLink>
 
-                    <NavLink to="/signup" className="element">
-                        <div className="innerContainerNavbar">
-                            <span>Sign up</span>
-                        </div>
-                    </NavLink>
-
-                    <NavLink to="/about" className="element">
-                        <div className="innerContainerNavbar">
-                            <span>About</span>
-                        </div>
-                    </NavLink>
-                        
+                        <NavLink to="/about" className="element">
+                            <div className="innerContainerNavbar">
+                                <span>About</span>
+                            </div>
+                        </NavLink>
+                    </div>
                     <Dropdown>
                         <Dropdown.Toggle as={CustomToggle} variant="success" id="dropdown-basic"/>
                         <Dropdown.Menu>
-                        <Dropdown.Item href="/register">register</Dropdown.Item>
+                        <Dropdown.Item href="/register">Register</Dropdown.Item>
  
                             <Dropdown.Item href="#/action-1">Sign out</Dropdown.Item>
                         </Dropdown.Menu>
@@ -74,7 +75,7 @@ const TopNavbar = () => {
                 <Route path="/" element={<LandingPage />}/>
                 <Route path="/game/:gameId" element={<GameDetailsPage games={state.data.gamesArray}/>}/>
                 <Route path="/register" element={<Register />}/>
-
+                <Route path="/about" element={<AboutPage />}/>
             </Routes>
         </BrowserRouter>
       

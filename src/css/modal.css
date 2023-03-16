@@ -66,6 +66,7 @@
     width: 150px;
     height: 50px;
     margin: 8px;
+    border: none;
 }
 
 ul {
@@ -237,7 +238,11 @@ form {
 #editBtn {
     display: flex;
     align-items: center;
-    border-radius: 16px;
+    border: none;
+    border-radius: 32px;
+    outline: none;
+    background-color: transparent;
+    color: white;
     height: 30px;
     width: 125px;
     white-space: nowrap;

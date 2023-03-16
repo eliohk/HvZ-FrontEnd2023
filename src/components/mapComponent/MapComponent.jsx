@@ -71,7 +71,7 @@ const MapComponent = (props) => {
             borderRadius: "32px",
             position: "relative",
             }} >
-            {/*<button className='mapBtn' onClick={handleButtonClick}>Hei koie</button>*/}
+            <a className="kysEveryone" href="#" title="Zoom in" role="button" aria-label="Zoom in" aria-disabled="false"><span aria-hidden="true">HALLELUJA</span></a>
             { mapClicked ? <a className="mapBtn" href="#" onClick={handleButtonClick} title="Zoom in" role="button" aria-label="Zoom in" aria-disabled="false"><span aria-hidden="true">Check-in</span></a> : null}
             <MapContainer style={{
             height: "600px",

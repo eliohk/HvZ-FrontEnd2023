@@ -43,6 +43,27 @@
     text-decoration: none;
     border: solid #626263 1px;
 }
+.kysEveryone {
+    position: absolute;
+    margin-left: 20%;
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    padding-left: 5px;
+    padding-right: 5px;
+    z-index: 99999999;
+    border-radius: 32px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    color: #626263;
+    height: 40px;
+    border: none;
+    text-decoration: none;
+    border: solid #626263 1px;
+}
 
 .gameType {
     color: #65C8FF;

@@ -252,6 +252,9 @@ form {
 #editBtn {
     display: flex;
     align-items: center;
+    background-color: transparent;
+    color: white;
+    border: none;
     border-radius: 16px;
     height: 30px;
     width: 125px;

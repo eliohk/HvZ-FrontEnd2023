@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Love+Ya+Like+A+Sister&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Sanchez&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 
 .navigation {
     display: flex;
@@ -12,7 +12,7 @@
 
 .element {
     text-decoration: none;
-    font-family: 'Sanchez', serif;
+    font-family: 'Poppins', sans-serif;
     color: white;
     cursor: pointer;
 }
@@ -27,10 +27,15 @@ a:hover {
 
 
 .logo {
-    font-size: 24px;
-    font-family: 'Love Ya Like A Sister', cursive;
+    font-size: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bolder;
     color: white;
     margin: 0px 0px 0px 8px;
+}
+
+#vs {
+    color: #65C8FF;
 }
 
 .navContainer {

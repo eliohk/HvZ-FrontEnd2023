@@ -6,9 +6,6 @@ import LandingPage from "../../pages/landingPage/LandingPage";
 import GameDetailsPage from "../../pages/gameDetailsPage/GameDetailsPage";
 import MiniProfile from "../miniProfileComponent/MiniProfile";
 import GameDetails from "../gameDetailsComponent/GameDetails";
-
-import logo from "../../resources/tempIcon.png";
-
 import { fetchGameById } from "../../states/dataSlice";
 import { useSelector } from "react-redux";
 
@@ -38,10 +35,9 @@ const TopNavbar = () => {
                 <div className="navContainer">
                     <NavLink to="/" className="element">
                         <div className="innerContainerNavbar">
-                            <div className="alignLogo">
-                                <img className="logoPicture" src={logo} width="40" alt=""></img>
-                            </div>
-                            <p className="logo">Humans vs Zombies</p>
+                            <p className="logo">Human</p>
+                            <p id="vs" className="logo">vs</p>
+                            <p className="logo">Zombies</p>
                         </div>
                     </NavLink>
 

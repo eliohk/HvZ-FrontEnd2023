@@ -1,4 +1,4 @@
-import profilePic from "../../resources/male-user.png";
+import profilePic from "../../resources/profileIcon.svg";
 import "../../css/miniProfile.css";
 
 const Profile = () => {

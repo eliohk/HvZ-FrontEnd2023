@@ -1,5 +1,5 @@
 import Map from "../../resources/tempMap.jpg";
-import playerIcon from "../../resources/userIcon.svg";
+import playerIcon from "../../resources/numOfPlayerIcon.svg";
 import dateIcon from "../../resources/dateIcon.svg";
 import "../../css/gameList.css";
 import { useState } from "react";

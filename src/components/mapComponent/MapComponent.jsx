@@ -22,8 +22,11 @@ const MapComponent = (props) => {
     const allGames = useSelector((state) => state);
     const [mapClicked, setMapClicked] = useState(false)
     const [players, setPlayers] = useState(props.players)
+    const [kills, setKills] = useState(props.kills)
     const [currentClickPosition, setCurrentClickPosition] = useState()
     const dispatch = useDispatch();
+
+
 
     function LocationMarker() {
         const map = useMapEvents({
@@ -49,7 +52,11 @@ const MapComponent = (props) => {
     }
 
     const playerMarkers = players.map((item, i) => {
-        return <PlayerMarker key={i} lat={item.lat} lng={item.lng}></PlayerMarker> 
+        return <PlayerMarker key={i} player={item}></PlayerMarker> 
+    })
+
+    const killMarkers = kills.map((item, i) => {
+        return <DeadMarker key={i} kill={item}></DeadMarker>
     })
 
     useEffect (() => {
@@ -86,6 +93,7 @@ const MapComponent = (props) => {
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             />
             {playerMarkers}
+            {killMarkers}
             { mapClicked ? <Marker 
                                 position={[currentClickPosition.lat, currentClickPosition.lng]}
                                 icon={checkIn}
@@ -96,7 +104,7 @@ const MapComponent = (props) => {
                                     Latitude: {currentClickPosition.lng}
                                 </Popup>
                             </Marker> : null}
-            <DeadMarker lat={59.8} lng={10.8}></DeadMarker>
+            
             <LocationMarker></LocationMarker>
             </MapContainer>
         </div>  

@@ -31,6 +31,50 @@ export const fetchGames = createAsyncThunk(
         return result;
       }
     }
+  )   
+
+
+  //TODO ASK KHOI WHY DIS SHIT NO WORK XDD
+  export const fetchAllPlayers = createAsyncThunk(
+    '/players',
+    async () => {
+      const response = await fetch(
+        `${baseUrl}players`
+        )
+      
+      let result = await response.json()
+
+      if (result.length != 0) {
+        return result;
+      }
+    }
+  )
+    
+
+    
+  //TODO HAR IKKE LAGET REDUX SHIT FOR THIS SHIT
+  export const postPlayer = createAsyncThunk(
+    'players',
+    async (postObj) => {
+      const response = await fetch('//localhost:8080/api/v1/players' , {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            biteCode: postObj.biteCode,
+            patientZero: postObj.patientzero,
+            human: postObj.human
+        })
+      }).then(response => {
+        if (!response.ok) {
+          throw new Error('Post player not working')
+        }
+      })
+
+      let players = fetchAllPlayers();
+      console.log(players.data)
+    }
   )
 
   export const postCheckIn = createAsyncThunk(

@@ -16,6 +16,7 @@ import KillsListComponent from "../../components/playerListComponent/killsListCo
 import BiteCodeComponent from "../../components/playerListComponent/biteCodeComponent";
 import retIcon from "../../resources/retIcon.svg";
 import editIcon from "../../resources/editIcon.svg";
+import { postPlayer } from "../../states/dataSlice";
 // TODO: USE REDUX TO POPULATE :))))
 
 const GameDetailsPage = ( props ) => {
@@ -63,6 +64,15 @@ const GameDetailsPage = ( props ) => {
     function handleNewPlayer() {
         console.log("clickeroooo")
 
+        console.log(Math.max(...currentGame.players.map(o => o.id)))
+        
+        const playerObj = {
+            biteCode: "12345",
+            patientZero: false,
+            human: true
+        };
+
+        dispatch(postPlayer(playerObj))
     }
     
     if (currentGame) {

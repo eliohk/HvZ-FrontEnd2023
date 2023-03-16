@@ -1,8 +1,10 @@
 {
-    "realm": "hvz-noroff-2023",
-    "auth-server-url": "https://lemur-3.cloud-iam.com/auth/",
+    "realm": "localhost-hvz",
+    "auth-server-url": "http://localhost:8083/auth/",
     "ssl-required": "external",
     "resource": "react_localhost",
-    "public-client": true,
+    "credentials": {
+      "secret": "o064fbypXWTsYq66w0RaNcwjGJZdYpDq"
+    },
     "confidential-port": 0
-}
+  }

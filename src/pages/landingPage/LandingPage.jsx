@@ -7,6 +7,7 @@ import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { fetchGames, fetchGameById } from '../../states/dataSlice';
+import keycloak from "../../keycloak";
 
  const  LandingPage = () => {
     const [ sortVariable, setSortVariable ] = useState("Title");
@@ -109,6 +110,13 @@ import { fetchGames, fetchGameById } from '../../states/dataSlice';
                 </div>
                 {gamesArray}
             </div>
+            
+            {keycloak.token && (
+                <div className='container'>
+                <h4 style={{color:"white"}}>Token</h4>
+                <p style={{margin:"0px", maxWidth:"200px", width:"200px", height:"1000px", color:"white"}}>{keycloak.token}</p>
+                </div>
+            )}
         </div>
     )
 }

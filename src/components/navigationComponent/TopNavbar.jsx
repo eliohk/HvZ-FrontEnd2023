@@ -63,11 +63,10 @@ const TopNavbar = () => {
                         <Dropdown.Toggle as={CustomToggle} variant="success" id="dropdown-basic" />
                         <Dropdown.Menu>
                             {keycloak.authenticated && (
-                                <Dropdown.Item href="/register">Register</Dropdown.Item>
+                                <Dropdown.Item onClick={() => keycloak.logout()}>Sign out</Dropdown.Item>
                             )}
                             {!keycloak.authenticated && (
-                                <Dropdown.Item href="#/action-1">Sign out</Dropdown.Item>
-
+                                <Dropdown.Item onClick={() => keycloak.login()}>Sign in</Dropdown.Item>
                             )}
 
                         </Dropdown.Menu>

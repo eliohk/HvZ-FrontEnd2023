@@ -6,7 +6,7 @@ import SplitButton from 'react-bootstrap/SplitButton';
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import { fetchGames, fetchGameById } from '../../states/dataSlice';
+import { fetchGames, fetchGameById, postGame } from '../../states/dataSlice';
 
  const  LandingPage = () => {
     const [ sortVariable, setSortVariable ] = useState("Title");
@@ -85,6 +85,19 @@ import { fetchGames, fetchGameById } from '../../states/dataSlice';
         gamesArray = gamesSortedState
     }
 
+    const handleNewGame = () => {
+        console.log("Henlo")
+
+        const gameObj = {
+            title: "New Game",
+            description: "Newest game",
+            gameType: "Some new game",
+            maxPlayers: 2
+        }
+
+        dispatch(postGame(gameObj))
+    }
+
 
 
     useEffect(() => {
@@ -108,7 +121,8 @@ import { fetchGames, fetchGameById } from '../../states/dataSlice';
                     </SplitButton>
                 </div>
                 {gamesArray}
-            </div>
+                <button onClick={handleNewGame}>New game</button>
+            </div>  
         </div>
     )
 }

@@ -10,9 +10,6 @@ const PlayerMarker = (props) => {
         iconSize: [40, 40],
     })
 
-    console.log(props.player)
-
-
     return (
         <Marker
             position={[props.player.lat, props.player.lng]}

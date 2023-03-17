@@ -53,7 +53,7 @@ const GameDetailsPage = ( props ) => {
         if (view == "players") {
             return <PlayerListComponent data={currentGame.players} squad={currentGame.squads}/>;
         } else if (view == "squad") {
-            return <SquadListComponent data={currentGame.squads}/>;
+            return <SquadListComponent data={currentGame.squads} gameid={currentGame.id}/>;
         } else if (view == "human") {
             return <BiteCodeComponent />
         } else if (view == "zombie") {
@@ -61,11 +61,7 @@ const GameDetailsPage = ( props ) => {
         }
     }
 
-    function handleNewPlayer() {
-        console.log("clickeroooo")
-
-        console.log(Math.max(...currentGame.players.map(o => o.id)))
-        
+    function handleNewPlayer() {        
         const playerObj = {
             biteCode: "12345",
             patientZero: false,

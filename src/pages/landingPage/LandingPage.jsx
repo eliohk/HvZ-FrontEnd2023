@@ -111,12 +111,14 @@ import keycloak from "../../keycloak";
                 {gamesArray}
             </div>
             
+            {/*
             {keycloak.token && (
                 <div className='container'>
                 <h4 style={{color:"white"}}>Token</h4>
                 <p style={{margin:"0px", maxWidth:"200px", width:"200px", height:"1000px", color:"white"}}>{keycloak.token}</p>
                 </div>
             )}
+            */}
         </div>
     )
 }

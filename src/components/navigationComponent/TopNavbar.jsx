@@ -47,7 +47,7 @@ const TopNavbar = () => {
                             </div>
                         </NavLink>
 
-                        <NavLink to="/signup" className="element">
+                        <NavLink onClick={() => keycloak.register()} className="element">
                             <div className="innerContainerNavbar">
                                 <span>Sign up</span>
                             </div>

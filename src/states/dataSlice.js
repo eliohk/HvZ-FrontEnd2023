@@ -17,6 +17,8 @@ export const fetchGames = createAsyncThunk(
     'games/fetchGames',
     async () => {
 
+      console.log(keycloak)
+
       const response = await fetch(
         `${baseUrl}games` , {
           headers: {
@@ -38,7 +40,11 @@ export const fetchGames = createAsyncThunk(
     'games/fetchGameById',
     async (gameId) => {
       const response = await fetch(
-        `${baseUrl}games/${gameId + 1}`
+        `${baseUrl}games/${gameId + 1}`, {
+          headers: {
+              'Authorization': `Bearer ${keycloak.token}`,
+          },
+      }
       )
     
       let result = await response.json()

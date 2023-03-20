@@ -17,6 +17,10 @@
     cursor: pointer;
 }
 
+.elementHide {
+    display: none;
+}
+
 a:hover {
     color: white;
 }
@@ -35,6 +39,10 @@ a:hover {
 
 }
 
+.marginTop {
+    /* margin-top: 1%; */
+}
+
 #vs {
     color: #65C8FF;
 }
@@ -42,9 +50,10 @@ a:hover {
 .navLinkContainer {
     display: flex;
     align-items:start;
-    justify-content: space-between;
+    justify-content: space-around;
     width: 15%;
-    margin-left: -128px;
+    margin-left: -9%;
+    margin-top: 1%;
 }
 
 .navContainer {

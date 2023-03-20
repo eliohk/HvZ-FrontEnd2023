@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 .alignMiniProfile {
     display: flex;
     align-items: center;
@@ -13,6 +15,18 @@
     padding: 0.25em 2em 0.25em 2em;
     font-size: 16px;
     margin-top: 1em;
+    font-family: 'Poppins', sans-serif;
+}
+
+.fancyNameNotLoggedIn { 
+    border: solid white;
+    border-radius: 16px;
+    border-width: 2px;
+    padding: 0.25em 2em 0.25em 2em;
+    font-size: 16px;
+    margin-top: 1em;
+    text-decoration: underline;
+    font-family: 'Poppins', sans-serif;
 }
 
 .fancyProfilePic {

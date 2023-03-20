@@ -42,7 +42,7 @@ export const fetchGames = createAsyncThunk(
       const response = await fetch(
         `${baseUrl}games/${gameId + 1}`, {
           headers: {
-              'Authorization': `Bearer ${keycloak.token}`,
+              //'Authorization': `Bearer ${keycloak.token}`,
           },
       }
       )

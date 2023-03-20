@@ -99,7 +99,7 @@ const PlayerRow = ( props ) => {
         allSquads = squads.map((squad, i) => {
             if (!(squad == `Squad ${squad}`)) {
                 return (
-                    <Dropdown.Item as="button" onClick={handleSquad} key={i} >Squad {squad}</Dropdown.Item>
+                    <Dropdown.Item as="button" onClick={handleSquad} key={i} >Squad {squad.id}</Dropdown.Item>
                 )
             } 
         })

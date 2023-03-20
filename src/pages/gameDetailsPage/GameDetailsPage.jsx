@@ -113,9 +113,7 @@ const GameDetailsPage = ( props ) => {
                                     <Dropdown.Item>Zombie chat</Dropdown.Item>
                                 </DropdownButton>
                                 <div className="actualInput">
-                                    <form>
-                                        <input id="input" type="text" name="name" />
-                                    </form>
+                                    <input id="input" type="text" name="name" />
                                 </div>
                             </div>
                         </div>
@@ -131,7 +129,7 @@ const GameDetailsPage = ( props ) => {
         return (
             <div className="container">
                 <h3>
-                    Error
+                    Error occured my dudes.
                 </h3>
             </div>
         )

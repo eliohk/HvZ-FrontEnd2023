@@ -190,6 +190,7 @@ li {
 
 .chatContainer {
     max-width:inherit;
+    width: 96.5%;
     display: flex;
     justify-content: left;
     margin: 1em;
@@ -239,7 +240,7 @@ li {
     max-width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
 }
 
 .selfMsg {
@@ -248,11 +249,13 @@ li {
 }
 
 .chatInputContainer {
+    width: 100%;
     margin-left: 2em;
 }
 
 .chatInput {
     display: flex;
+    width: 100%;
 }
 
 .squadBtn {
@@ -263,6 +266,7 @@ li {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 45%;
 }
 
 form {
@@ -270,11 +274,10 @@ form {
 }
 
 #input {
-    width: 73%;
+    width: 250%;
     border-radius: 32px;
     height: 37.5px;
     margin-right: 4px;
-    padding-right: 375px;
     border: solid black;
     border-width: 2px;
     background-color: #E8EAEA;

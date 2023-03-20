@@ -5,7 +5,7 @@ const AboutPage = () => {
     return (
         <div className="container" style={{
             borderRadius:"32px",
-            marginLeft:"13em",
+            marginLeft:"10em",
             marginTop:"4em"
         }}>
             <h1 className="mt-3 mb-3" style={{

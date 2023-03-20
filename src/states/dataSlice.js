@@ -32,7 +32,7 @@ export const fetchGames = createAsyncThunk(
       const response = await fetch(
         `${baseUrl}games/${gameId + 1}`, {
           headers: {
-              'Authorization': `Bearer ${keycloak.token}`,
+              //'Authorization': `Bearer ${keycloak.token}`,
           },
       }
       )
@@ -63,6 +63,30 @@ export const fetchGames = createAsyncThunk(
       }).then(response => {
         if (!response.ok) {
           throw new Error('Post player not working')
+        }
+      })
+    }
+  )
+
+  export const postKill = createAsyncThunk(
+    'players',
+    async (postObj) => {
+      const response = await fetch('//localhost:8080/api/v1/kills', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          time_of_death: postObj.timeOfDeath,
+          story: postObj.story,
+          lat: postObj.lat,
+          lng: postObj.lng,
+          playerRef: postObj.playerRef,
+          gameRef: postObj.gameRef
+        })
+      }).then(response => {
+        if (!response.ok) {
+          throw new Error("Post kill not working XDDD")
         }
       })
     }
@@ -246,6 +270,12 @@ export const dataSlice = createSlice({
     [putGameObject.fulfilled]:(state, action) => {
       console.log("FUCK YES MOTHERFUCKER")
       console.log(action);
+    },
+    [postPlayer.fulfilled]:(state, action) => {
+      console.log("Player has been posted, not updated in redux yet XDD")
+    },
+    [postKill.fulfilled]:(state, action) => {
+      console.log("Kill has been posted, not updated in redux yet LOLOLOL")
     }
   },
 });

@@ -129,9 +129,6 @@ ul {
     margin: 1em;
 }
 
-li {
-
-}
 
 .btns {
     border: black solid;
@@ -170,8 +167,6 @@ li {
     margin: 0;
 }
 
-.mapTips {
-}
 
 .liftToHeader {
     display: flex;
@@ -275,6 +270,18 @@ li {
 
 form {
     margin-left: 4px;
+}
+
+.overBitecode{
+    text-align: center;
+}
+
+.bitecodeInput {
+    margin-bottom: 10px;
+}
+
+.killBtns {
+    text-align: center;
 }
 
 #input {

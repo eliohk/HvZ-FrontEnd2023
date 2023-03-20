@@ -125,9 +125,6 @@ ul {
     margin: 1em;
 }
 
-li {
-
-}
 
 .btns {
     border: black solid;
@@ -166,8 +163,6 @@ li {
     margin: 0;
 }
 
-.mapTips {
-}
 
 .liftToHeader {
     display: flex;

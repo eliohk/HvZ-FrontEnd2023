@@ -269,6 +269,18 @@ form {
     margin-left: 4px;
 }
 
+.overBitecode{
+    text-align: center;
+}
+
+.bitecodeInput {
+    margin-bottom: 10px;
+}
+
+.killBtns {
+    text-align: center;
+}
+
 #input {
     width: 73%;
     border-radius: 32px;

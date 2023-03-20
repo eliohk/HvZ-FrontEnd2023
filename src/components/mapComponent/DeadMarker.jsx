@@ -6,23 +6,19 @@ const DeadMarker = (props) => {
 
     var dead = L.icon({
         iconUrl: tombstone,
-        iconSize: [40, 40], // size of the icon
-        //shadowSize: [50, 64], // size of the shadow
-        //iconAnchor: [22, 85], // point of the icon which will correspond to marker's location
-        //shadowAnchor: [4, 62],  // the same for the shadow
-        //popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+        iconSize: [40, 40],
     })
 
     return (
         <Marker
-            position={[props.lat, props.lng]}
+            position={[props.kill.lat, props.kill.lng]}
             icon={dead}
         >
             <Popup>
-                Player: Khoi <br />
-                Killed by: Stupidity <br />
-                Longitude: {props.lat} <br />
-                Latitude: {props.lng}
+                Story: {props.kill.story} <br />
+                Time of death: {props.kill.time_of_death} <br />
+                Longitude: {props.kill.lat} <br />
+                Latitude: {props.kill.lng}
             </Popup>
         </Marker>
     )

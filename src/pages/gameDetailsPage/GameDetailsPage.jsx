@@ -16,6 +16,7 @@ import KillsListComponent from "../../components/playerListComponent/killsListCo
 import BiteCodeComponent from "../../components/playerListComponent/biteCodeComponent";
 import retIcon from "../../resources/retIcon.svg";
 import editIcon from "../../resources/editIcon.svg";
+import { postPlayer } from "../../states/dataSlice";
 // TODO: USE REDUX TO POPULATE :))))
 
 const GameDetailsPage = ( props ) => {
@@ -52,7 +53,7 @@ const GameDetailsPage = ( props ) => {
         if (view == "players") {
             return <PlayerListComponent data={currentGame.players} squad={currentGame.squads}/>;
         } else if (view == "squad") {
-            return <SquadListComponent data={currentGame.squads}/>;
+            return <SquadListComponent data={currentGame.squads} gameid={currentGame.id}/>;
         } else if (view == "human") {
             return <BiteCodeComponent />
         } else if (view == "zombie") {
@@ -60,9 +61,14 @@ const GameDetailsPage = ( props ) => {
         }
     }
 
-    function handleNewPlayer() {
-        console.log("clickeroooo")
+    function handleNewPlayer() {        
+        const playerObj = {
+            biteCode: "12345",
+            patientZero: false,
+            human: true
+        };
 
+        dispatch(postPlayer(playerObj))
     }
     
     if (currentGame) {
@@ -82,7 +88,7 @@ const GameDetailsPage = ( props ) => {
                         <div className="interactiveStuffContainer">
                             {/* map + squad list here */}
                             <div className="mapContainer">
-                                <MapComponent players={currentGame.players}></MapComponent>
+                                <MapComponent players={currentGame.players} kills={currentGame.kills}></MapComponent>
                             </div>                        
                             <div className="listContainer">
                                 {getListView(listView)}

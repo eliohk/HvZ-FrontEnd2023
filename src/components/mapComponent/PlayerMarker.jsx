@@ -7,23 +7,20 @@ const PlayerMarker = (props) => {
 
     var player = L.icon({
         iconUrl: playerIcon,
-        iconSize: [40, 40], // size of the icon
-        //shadowSize: [50, 64], // size of the shadow
-        //iconAnchor: [22, 85], // point of the icon which will correspond to marker's location
-        //shadowAnchor: [4, 62],  // the same for the shadow
-        //popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+        iconSize: [40, 40],
     })
 
     return (
         <Marker
-            position={[props.lat, props.lng]}
+            position={[props.player.lat, props.player.lng]}
             icon={player}
         >
             <Popup>
-                Player: Khoi <br />
-                Killed by: Stupidity <br />
-                Longitude: {props.lat} <br />
-                Latitude: {props.lng}
+            Squad: {props.player.squad ? props.player.squad.name : "No squad"} <br />
+            Last check in: {props.player.lastCheckInTime ? props.player.lastCheckInTime 
+                                                            : "No check in yet"} <br />
+            Longitude: {props.player.lat} <br />
+            Latitude: {props.player.lng}
             </Popup>
         </Marker>
     )

@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchGames, fetchGameById } from '../../states/dataSlice';
 import keycloak from "../../keycloak";
 
+
  const  LandingPage = () => {
     const [ sortVariable, setSortVariable ] = useState("Title");
     const allGames = useSelector((state) => state);
@@ -86,6 +87,19 @@ import keycloak from "../../keycloak";
         gamesArray = gamesSortedState
     }
 
+    const handleNewGame = () => {
+        console.log("Henlo")
+
+        const gameObj = {
+            title: "New Game",
+            description: "Newest game",
+            gameType: "Some new game",
+            maxPlayers: 2
+        }
+
+        dispatch(postGame(gameObj))
+    }
+
 
 
     useEffect(() => {
@@ -110,15 +124,16 @@ import keycloak from "../../keycloak";
                 </div>
                 {gamesArray}
             </div>
-            
-            {/*
-            {keycloak.token && (
-                <div className='container'>
-                <h4 style={{color:"white"}}>Token</h4>
-                <p style={{margin:"0px", maxWidth:"200px", width:"200px", height:"1000px", color:"white"}}>{keycloak.token}</p>
-                </div>
-            )}
-            */}
+                {/*
+                {keycloak.token && (
+                    <div className='container'>
+                    <h4 style={{color:"white"}}>Token</h4>
+                    <p style={{margin:"0px", maxWidth:"200px", width:"200px", height:"1000px", color:"white"}}>{keycloak.token}</p>
+                    </div>
+                )}
+                */}
+                <button onClick={handleNewGame}>New game</button>
+            </div>  
         </div>
     )
 }

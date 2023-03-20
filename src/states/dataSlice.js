@@ -1,16 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import keycloak from "../keycloak";
 
-const setAuthorizationHeader = (headers, keycloak) => {
-  const { token } = keycloak;
-  return {
-    ...headers,
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`,
-  };
-};
-
-
 //TODO: change to hosted url in deployment
 const baseUrl = 'http://localhost:8080/api/v1/'
 export const fetchGames = createAsyncThunk(
@@ -145,6 +135,38 @@ export const fetchGames = createAsyncThunk(
       })
     }
   )
+  
+  export const putGameObject = createAsyncThunk(
+    'games/postGame',
+    async (gameObj) => {
+      console.log(`${baseUrl}games/${gameObj.id}`);
+      const response = await fetch(`//localhost:8080/api/v1/games/${gameObj.id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+           // 'Authorization': `Bearer ${keycloak.token}`
+        },
+        body: JSON.stringify({
+          id: gameObj.id,
+          title: gameObj.title,
+          status: gameObj.status,
+          description: gameObj.description,
+          gameType: gameObj.gameType,
+          maxPlayers: gameObj.players
+        })
+      }).then(response => {
+        if (!response.ok) {
+          throw new Error('Could not post game object to id: ' + gameObj.id);
+        }
+      })
+      .then(updatedUser => {
+      })
+      .catch(error => {
+        console.log(error);
+      })
+    }
+  )
+
 
 export const dataSlice = createSlice({
   name: "data",
@@ -220,6 +242,10 @@ export const dataSlice = createSlice({
     [postSquad.fulfilled]:(state,action) => {
       console.log("Squad has been posted, not updated in redux");
       console.log(action.meta.arg)
+    },
+    [putGameObject.fulfilled]:(state, action) => {
+      console.log("FUCK YES MOTHERFUCKER")
+      console.log(action);
     }
   },
 });

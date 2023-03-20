@@ -1,6 +1,6 @@
 .mainLandingContainer {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -70,4 +70,26 @@ button.btn.btn-primary {
     text-decoration: none;
     transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
     cursor: default;
+}
+
+.container-label{
+    color: #E8EAEA;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.container-level-sort-create-game{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.landingside-create-game-container{
+    padding: 2px;
+    border-radius: 100px;
+    margin-left: 40px;
+}
+
+.modal-container {
+    display: flex;
+    flex-direction: column;
 }

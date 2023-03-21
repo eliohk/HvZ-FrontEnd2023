@@ -27,6 +27,7 @@ const GameDetailsPage = ( props ) => {
     const [ editGameView, setEditGameView ] = useState(false);
 
     let currentGame = allGames.data.currGame;
+    
 
     const data = localStorage.getItem("currGame");
 
@@ -35,7 +36,7 @@ const GameDetailsPage = ( props ) => {
     }
 
     // CONTAINS ALL DATA FOR GAME
-    // console.log(currentGame);
+    //console.log(currentGame.chat);
 
     const dispatch = useDispatch();
 
@@ -112,7 +113,7 @@ const GameDetailsPage = ( props ) => {
                         </div>
                         <div className="chatContainer">
                             {/* chatbox + buttons here */}
-                            <ChatViewComponent msg={currentGame}/>
+                            <ChatViewComponent chat={currentGame.chat}/>
                             <div className="buttonContainer">
                                 <button className="btns" onClick={handleListView} value="players">List of players</button>
                                 <button className="btns" onClick={handleListView} value="squad">Squad list</button>

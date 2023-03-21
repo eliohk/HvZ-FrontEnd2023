@@ -1,26 +1,30 @@
 import { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 
 const ChatViewComponent = (props) => {
     const messageRef = useRef();
+    const chatsState = useSelector((state) => state)
 
     useEffect(() => {
-        const chat = messageRef.current;
+        const chat = props.chat;
         if (chat) {
             chat.scrollTop = chat.scrollHeight - chat.clientHeight;
         }
     })
+    const chats = chatsState.data.currGame.chat.chats.map((item, i) => {
+        return (
+            <p key={i}>{item}</p>
+        )
+    })  
 
-    if (!props.msg.chat) {
+    console.log("LOGGING CHAT")
+    console.log(props.chat.chats)
+    if (chatsState.data.currGame.chat.chats.length > 0) {
         return (
             <div className="chatbox" ref={messageRef}>
-                <p className="msg">Adam: I can see 3 zombies at location X. Be careful!</p>
-                <p className="msg">Fatima: Thanks, Adam! Me and Khoi will hide.</p>
-                <p className="msg">Naughty boy: Come at me brah</p>
-                <p className="selfMsg">Thanks Adam, need backup?</p>
-                <p className="msg">Khoi: Let's do this!</p>
-                <p className="selfMsg">Thanks Adam, need backup?</p>
-                <p className="msg">Khoi: Let's do this!</p>
-            </div>
+                {chats}
+            </div>  
         )
     } else {
         // TODO: loop through msg and display em down like above

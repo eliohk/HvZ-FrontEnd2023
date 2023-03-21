@@ -194,19 +194,20 @@ export const fetchGames = createAsyncThunk(
   export const putGlobalChat = createAsyncThunk(
     'games/postGlobalChat',
     async (chatObj) => {
-      console.log(`${baseUrl}games/${chatObj.id}/TODO:`);
-      const response = await fetch(`${baseUrl}games/${chatObj.id}/TODO:`, {
+      console.log(chatObj);
+      const response = await fetch(`${baseUrl}chat/${chatObj.id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
            // 'Authorization': `Bearer ${keycloak.token}`
         },
         body: JSON.stringify({
-          chat: chatObj.chat
+          id: chatObj.id,
+          chats: [chatObj.chat]
         })
       }).then(response => {
         if (!response.ok) {
-          throw new Error('Could not post game object to id: ' + chatObj.id);
+          throw new Error('Could not post chat object to id: ' + chatObj.id);
         }
       })
       .then(updatedGame => {
@@ -246,7 +247,7 @@ export const dataSlice = createSlice({
     },
     login: (state, payload) => {
       state.token = payload.payload;
-    }
+    },
   },
   extraReducers: {
     [fetchGames.fulfilled]:(state,action)=>{
@@ -307,7 +308,7 @@ export const dataSlice = createSlice({
     }, 
     [putGlobalChat.fulfilled]:(state, action) => {
       console.log("PUT GLOBAL CHAT TO GAME YOOO SUCK A DICK")
-      console.log(action.meta.arg.chat);
+      state.currGame.chat.chats.push(action.meta.arg.chat)
     }
   },
 });

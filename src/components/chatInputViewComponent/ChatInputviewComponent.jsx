@@ -4,6 +4,7 @@ import sendMsgIcon from "../../resources/sendMsgIcon.svg";
 import { useState, useEffect } from 'react';
 import { putGlobalChat } from '../../states/dataSlice';
 import { useSelector, useDispatch } from 'react-redux';
+import Pusher from "pusher-js";
 
 const ChatInputViewComponent = (props) => {
     const [ chat, setChat ] = useState("Global chat");
@@ -39,6 +40,33 @@ const ChatInputViewComponent = (props) => {
             chat: currentMessage
         }))
     }
+
+    useEffect(() => {
+        const pusher = new Pusher("12be8984736013be627b", {
+          cluster: "eu",
+        });
+
+        console.log(pusher);
+    
+        const channel = pusher.subscribe("hvz-noroff");
+        
+        console.log(channel);
+
+        channel.bind("chat-event", function (data) {
+          setChat((prevState) => [
+            ...prevState,
+            { sender: data.sender, message: data.message },
+          ]);
+         console.log("in function")
+         console.log(data);
+        });
+
+        console.log(chat);
+    
+        return () => {
+          pusher.unsubscribe("chat");
+        };
+      }, []);
     
     return (
         <>

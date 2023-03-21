@@ -25,12 +25,12 @@ const GameDetailsPage = ( props ) => {
 
     let currentGame = allGames.data.currGame;
 
+
     const data = localStorage.getItem("currGame");
 
-    if (data) {
-        currentGame = JSON.parse(data);
-    }
+    console.log("tester ut",  typeof JSON.parse(data))
 
+    const dataJSON = JSON.parse(data);
     // CONTAINS ALL DATA FOR GAME
     // console.log(currentGame);
 

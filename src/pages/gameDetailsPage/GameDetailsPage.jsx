@@ -1,7 +1,7 @@
 import "../../css/modal.css";
 import 'leaflet/dist/leaflet.css';
 import PlayerListComponent from "../../components/playerListComponent/playerListComponent.jsx";
-
+import Popup from 'reactjs-popup';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { useSearchParams, useNavigate, createRoutesFromElements  } from "react-router-dom";
@@ -17,11 +17,13 @@ import BiteCodeComponent from "../../components/playerListComponent/biteCodeComp
 import retIcon from "../../resources/retIcon.svg";
 import editIcon from "../../resources/editIcon.svg";
 import { postPlayer } from "../../states/dataSlice";
+import EditGameComponent from "../../components/editGameComponent/EditGameComponent";
 // TODO: USE REDUX TO POPULATE :))))
 
 const GameDetailsPage = ( props ) => {
     const [ listView, setListView ] = useState("players");
     const allGames = useSelector((state) => state);
+    const [ editGameView, setEditGameView ] = useState(false);
 
     let currentGame = allGames.data.currGame;
 
@@ -44,6 +46,19 @@ const GameDetailsPage = ( props ) => {
         setListView(event.target.value);
     }
 
+    const handleEditGame = (event) => {
+        if (editGameView) {
+            setEditGameView(false);
+        } else {
+            setEditGameView(true);
+        }
+    }
+
+    const callback = (event) => {
+        console.log("yo")
+        setEditGameView(false);
+    }
+
     const params = window.location.pathname;
     const id = params.split("/")[2];
 
@@ -57,7 +72,7 @@ const GameDetailsPage = ( props ) => {
         } else if (view == "human") {
             return <BiteCodeComponent />
         } else if (view == "zombie") {
-            return <KillsListComponent data={currentGame.kills}/>;
+            return <KillsListComponent kills={currentGame.kills} players={currentGame.players} gameId={currentGame.id}/>;
         }
     }
 
@@ -77,7 +92,7 @@ const GameDetailsPage = ( props ) => {
                 <div className='mainContainer'>
                     <div className="header">
                         <h5 id="removeMargin">Administrator</h5>
-                        <a href="/" id="retBtn" class="button"><img id="exitIcon" src={retIcon} alt="Return button"/></a>
+                        <a href="/" id="retBtn" className="button"><img id="exitIcon" src={retIcon} alt="Return button"/></a>
                     </div>
                     <div className="liftToHeader">
                         <h2 id="removeMargin">{currentGame.title}</h2>
@@ -113,14 +128,14 @@ const GameDetailsPage = ( props ) => {
                                     <Dropdown.Item>Zombie chat</Dropdown.Item>
                                 </DropdownButton>
                                 <div className="actualInput">
-                                    <form>
-                                        <input id="input" type="text" name="name" />
-                                    </form>
+                                    <input id="input" type="text" name="name" />
                                 </div>
                             </div>
                         </div>
                         <div className="editDiv">
-                            <button id="editBtn"><img id="editBtnIcon" src={editIcon} alt="Edit Game Button" />Edit game</button>
+                            <Popup trigger={<button id="editBtn" onClick={handleEditGame}><img id="editBtnIcon" src={editIcon} alt="Edit Game Button" />Edit game</button>} modal>
+                                {close => (<EditGameComponent game={currentGame} edit={close}></EditGameComponent>)}
+                            </Popup>
                         </div>
                     </div>
                 </div>
@@ -131,7 +146,7 @@ const GameDetailsPage = ( props ) => {
         return (
             <div className="container">
                 <h3>
-                    Error
+                    Error occured my dudes.
                 </h3>
             </div>
         )

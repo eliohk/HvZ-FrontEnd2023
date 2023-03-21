@@ -57,7 +57,6 @@ const TopNavbar = () => {
                                         <span>Sign up</span>
                                     </div>
                                 </NavLink>
-
                                 <NavLink to="/about" className="element">
                                     <div className="innerContainerNavbar">
                                         <span>About</span>
@@ -146,7 +145,6 @@ const TopNavbar = () => {
                             og senere med sideombrekkingsprogrammet Aldus PageMaker som tok i bruk nettopp Lorem Ipsum for dummytekst.
                         </p>
                     </div>
-
                     <Routes>
                         <Route path="/" element={<LandingPage />} />
                         <Route path="/game/:gameId" element={<GameDetailsPage games={state.data.gamesArray} />} />

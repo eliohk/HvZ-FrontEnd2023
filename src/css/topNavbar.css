@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
-
 .navigation {
     display: flex;
     flex-direction: column;
@@ -19,6 +18,10 @@
     cursor: pointer;
 }
 
+.elementHide {
+    display: none;
+}
+
 a:hover {
     color: white;
 }
@@ -35,6 +38,10 @@ a:hover {
     margin: 0px 0px 0px 8px;
     font-weight: bolder;
 
+}
+
+.marginTop {
+    /* margin-top: 1%; */
 }
 
 #vs {

@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { fetchGames } from './states/dataSlice';
 
 function App() {
+  
   const dispatch = useDispatch();
   dispatch(fetchGames());
 

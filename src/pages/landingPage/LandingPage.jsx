@@ -27,8 +27,6 @@ const LandingPage = () => {
     const [maxPlayer, setMaxPlayer] = useState(0)
     const [open, setOpen] = useState(false);
 
-
-
     const allGames = useSelector((state) => state);
     const dispatch = useDispatch();
     const navigate = useNavigate();

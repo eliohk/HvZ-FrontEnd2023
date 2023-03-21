@@ -64,7 +64,7 @@ const TopNavbar = () => {
                         {keycloak.authenticated && (
                             <NavLink onClick={() => keycloak.logout()} className="element">
                                 <div className="innerContainerNavbar">
-                                    <span>Log out</span>
+                                    <span>Sign out</span>
                                 </div>
                             </NavLink>
                         )}

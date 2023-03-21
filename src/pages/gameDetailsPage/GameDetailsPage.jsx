@@ -18,6 +18,7 @@ import retIcon from "../../resources/retIcon.svg";
 import editIcon from "../../resources/editIcon.svg";
 import { postPlayer } from "../../states/dataSlice";
 import EditGameComponent from "../../components/editGameComponent/EditGameComponent";
+import ChatInputViewComponent from "../../components/chatInputViewComponent/ChatInputviewComponent";
 // TODO: USE REDUX TO POPULATE :))))
 
 const GameDetailsPage = ( props ) => {
@@ -111,7 +112,7 @@ const GameDetailsPage = ( props ) => {
                         </div>
                         <div className="chatContainer">
                             {/* chatbox + buttons here */}
-                            <ChatViewComponent />
+                            <ChatViewComponent msg={currentGame}/>
                             <div className="buttonContainer">
                                 <button className="btns" onClick={handleListView} value="players">List of players</button>
                                 <button className="btns" onClick={handleListView} value="squad">Squad list</button>
@@ -122,14 +123,7 @@ const GameDetailsPage = ( props ) => {
                         <div className="chatInputContainer">
                             {/* chat toggle + chat input here */}
                             <div className="chatInput">
-                                <DropdownButton id="dropdown-basic-button" title="Squad chat">
-                                    <Dropdown.Item>Squad chat</Dropdown.Item>
-                                    <Dropdown.Item>Human chat</Dropdown.Item>
-                                    <Dropdown.Item>Zombie chat</Dropdown.Item>
-                                </DropdownButton>
-                                <div className="actualInput">
-                                    <input id="input" type="text" name="name" />
-                                </div>
+                                <ChatInputViewComponent currGame={currentGame}></ChatInputViewComponent>
                             </div>
                         </div>
                         <div className="editDiv">

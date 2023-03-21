@@ -7,7 +7,7 @@ export const fetchGames = createAsyncThunk(
     'games/fetchGames',
     async () => {
 
-      console.log(keycloak)
+     // console.log(keycloak)
 
       const response = await fetch(
         `${baseUrl}games` , {

@@ -35,11 +35,12 @@ const LandingPage = () => {
 
     const handleSortVariable = (event) => {
         let retval = event.target.innerHTML;
-        console.log(retval)
+        //console.log(retval)
         setSortVariable(retval);
     };
 
     const handleGameClick = (i) => (event) => {
+        console.log("handlegame click ", i)
         dispatch(fetchGameById(i)).unwrap().then(() => navigate(`/game/${i}`))
     };
 
@@ -55,10 +56,15 @@ const LandingPage = () => {
     const gamesSortedTitle = [].concat(allGames.data.gamesArray)
         .sort((a, b) => a.title > b.title ? 1 : -1)
         .map((gameData, i) => {
+            console.log("sjekke id ",  i)
+            console.log("sjekke game ", gameData)
+            console.log("sjekke game data id ",  gameData.id)
+
+            
             return (
                 <NavLink className="removeUnderline" key={i}>
-                    <div className='widthConstraint' onClick={handleGameClick(i)}>
-                        <GameListComponent game={gameData} key={i}></GameListComponent>
+                    <div className='widthConstraint' onClick={handleGameClick(gameData.id-1)}>
+                        <GameListComponent game={gameData} key={gameData.id}></GameListComponent>
                     </div>
                 </NavLink>
             );
@@ -67,10 +73,12 @@ const LandingPage = () => {
     const gamesSortedState = [].concat(allGames.data.gamesArray)
         .sort((a, b) => a.status < b.status ? 1 : -1)
         .map((gameData, i) => {
+            
+
             return (
                 <NavLink className="removeUnderline" key={i}>
-                    <div className='widthConstraint' onClick={handleGameClick(i)}>
-                        <GameListComponent game={gameData} key={i}></GameListComponent>
+                    <div className='widthConstraint' onClick={handleGameClick(gameData.id-1)}>
+                        <GameListComponent game={gameData} key={gameData.id}></GameListComponent>
                     </div>
                 </NavLink>
             );
@@ -81,8 +89,8 @@ const LandingPage = () => {
         .map((gameData, i) => {
             return (
                 <NavLink className="removeUnderline" key={i}>
-                    <div className='widthConstraint' onClick={handleGameClick(i)}>
-                        <GameListComponent game={gameData} key={i}></GameListComponent>
+                    <div className='widthConstraint' onClick={handleGameClick(gameData.id-1)}>
+                        <GameListComponent game={gameData} key={gameData.id}></GameListComponent>
                     </div>
                 </NavLink>
             );
@@ -94,8 +102,8 @@ const LandingPage = () => {
         .map((gameData, i) => {
             return (
                 <NavLink className="removeUnderline" key={i}>
-                    <div className='widthConstraint' onClick={handleGameClick(i)}>
-                        <GameListComponent game={gameData} key={i}></GameListComponent>
+                    <div className='widthConstraint' onClick={handleGameClick(gameData.id-1)}>
+                        <GameListComponent game={gameData} key={gameData.id}></GameListComponent>
                     </div>
                 </NavLink>
             );
@@ -105,7 +113,7 @@ const LandingPage = () => {
 
 
     let gamesArray;
-    console.log("game array ", gamesArray)
+//    console.log("game array ", gamesArray)
     if (sortVariable === 'Title') {
         gamesArray = gamesSortedTitle;
     } else if (sortVariable === 'Date') {

@@ -71,20 +71,22 @@ const MapComponent = (props) => {
 
     return (
         <div style={{
-            height: "600px",
-            width: "600px",
+            height: "28rem",
+            width: "37.56rem",
             minHeight: "100%",
             minWidth: "100%",
             borderRadius: "32px",
-            position: "relative",
+            position: "relative",    
             }} >
             { mapClicked ? null : <a className="mapToolTip" href="#" title="Zoom in" role="button" aria-label="Zoom in" aria-disabled="false"><span aria-hidden="true">Click on the map to assign location, click on the "check in" button to confirm the check in.</span></a>}
             { mapClicked ? <a className="mapBtn" href="#" onClick={handleButtonClick} title="Zoom in" role="button" aria-label="Zoom in" aria-disabled="false"><span aria-hidden="true">Check-in</span></a> : null}
             <MapContainer style={{
-            height: "600px",
-            width: "40%",
+            height: "28rem",
+            width: "37.56rem",
             minHeight: "100%",
             minWidth: "100%",
+            
+            border: "solid black",
             borderRadius: "32px",
             cursor: "pointer",
             }} center={[59.911491, 10.757933]} zoom={13} scrollWheelZoom={false}>

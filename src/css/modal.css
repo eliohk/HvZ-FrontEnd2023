@@ -7,8 +7,11 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    width: 80%;
-    padding: 1em;
+    
+    padding-left: 5rem;
+    padding-right: 5rem;
+    padding-top: 30px;
+    padding-bottom: 3.125rem;
     color: white;
     border-radius: 16px;
     font-family: 'Poppins', sans-serif;
@@ -20,6 +23,7 @@
     justify-content: center;
     flex-direction: column;
     width: 100%;
+    font-family: 'poppins';
 }
     
 .mapBtn {
@@ -74,36 +78,39 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: solid black;
     border-radius: 32px;
-    width: 60%;
-    margin-left: 1em;
+    width: 37.56rem;
+    height: 28rem;
+    margin-right: 0.938rem;
 }
 
 .listContainer {
     display: flex;
     flex-direction: column;
-    width: 30%;
-    height: 600px;
+    width: 100%;
+    height: 28rem;
     min-height: 100%;
     border: black solid;
     border-radius: 32px;
-    margin-right: 70px;
     background-color: #2E2E2E;
 }
 
 #listTitle {
-    margin: 1em;
+    margin: 1.25rem;
+    font-weight: bold;
 }
 
 #joinBtn {
     border-radius: 12px;
     color: white;
-    background-color: #626263;
-    width: 150px;
+    background-color: #0CC70C;
+    width: 247px;
     height: 50px;
     margin: 8px;
     border: none;
+    font-size: 25px;
+    font-weight: bold;
+    color: black;
 }
 
 #joinBtn:hover {
@@ -132,8 +139,8 @@ li {
 .btns {
     border: black solid;
     font-size: 1rem;
-    min-width: 275px;
-    height: 40px;
+    width: 17rem;
+    height: 2.31rem;
     border-radius: 32px;
     margin-bottom: 8px;
     background-color: #2E2E2E;
@@ -162,9 +169,6 @@ li {
     width: 100%;
 }
 
-#removeMargin {
-    margin: 0;
-}
 
 .mapTips {
 }
@@ -182,35 +186,38 @@ li {
 }
 
 .interactiveStuffContainer{
-    max-width: 100%;
     display: flex;
-    justify-content: space-between;
-    margin: 1em;
+    justify-content: space-evenly;
+    max-width:100%;
+    /*margin: 1em;*/
+    margin-bottom: 0.938rem;
+    margin-top: 1.875rem;
 }
 
 .chatContainer {
-    max-width:inherit;
     display: flex;
-    justify-content: left;
-    margin: 1em;
+    justify-content: center;
 }
 
 .buttonContainer {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    align-items: center;
+    border-radius: 28px;
     height: 200px;
-    margin-left: 8px;
+    width: 16.5rem;
 }
 
+
 .chatbox {
-    margin-left: 1em;
-    border: solid black;
     background-color: #E8EAEA;
     color: black;
     border-radius: 32px;
-    width: 60%;
-    height: 200px;
+    position: relative;
+    height: 11.31rem;
+    width: 37.56rem;
+    margin-right: 0.938rem;
+    border: solid black;
     overflow: scroll;
     /* hide scrollbar for IE, Edge and Firefox */
     -ms-overflow-style: none;
@@ -228,9 +235,10 @@ li {
     margin-right: 1em;
     border-width: 0.1px;
     border-radius: 16px;
+    font-size: 12px;
 }
 
-.msg {
+.msg {  
     margin-left: 0px;
     text-align: left;
 }
@@ -239,7 +247,8 @@ li {
     max-width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: space-between;
+ 
 }
 
 .selfMsg {
@@ -248,7 +257,7 @@ li {
 }
 
 .chatInputContainer {
-    margin-left: 2em;
+    
 }
 
 .chatInput {
@@ -257,6 +266,19 @@ li {
 
 .squadBtn {
     border-radius: 16px;
+    width: 10rem;
+    height: 2.5rem;
+}
+
+#squadTitle{
+    margin: 1.25rem;
+    font-weight: bold;
+}
+
+#squadName{
+    width: 10.62rem;
+    height:1.56rem;  
+    border-radius: 0.313rem;
 }
 
 .actualInput {
@@ -266,19 +288,20 @@ li {
 }
 
 form {
-    margin-left: 4px;
 }
 
-#input {
-    width: 73%;
+
+#input{
     border-radius: 32px;
-    height: 37.5px;
-    margin-right: 4px;
-    padding-right: 375px;
+    height: 2.20rem;
     border: solid black;
     border-width: 2px;
-    background-color: #E8EAEA;
+    white-space: initial;
+    width: 25.66rem;
+    font-size: 12px;
+    padding-left: 10px;
 }
+
 
 #enterBtn {
     border-radius: 16px;
@@ -290,7 +313,7 @@ form {
 .editDiv {
     display: flex;
     justify-content:end;
-    width: 90%;
+    width: 100%;
 }
 
 #editBtn {
@@ -303,6 +326,7 @@ form {
     height: 30px;
     width: 125px;
     white-space: nowrap;
+    
 }
 
 #editBtnIcon {
@@ -339,8 +363,13 @@ form {
 }
 
 #exitIcon {
-    width: 20px;
-    height: 20px;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+#removeMarginTitle {
+    font-weight: bold;
+    font-size: 3rem;
 }
 
 #retBtn:hover {

@@ -74,7 +74,7 @@ const GameDetailsPage = ( props ) => {
                         <a href="/" id="retBtn" class="button"><img id="exitIcon" src={retIcon} alt="Return button"/></a>
                     </div>
                     <div className="liftToHeader">
-                        <h2 id="removeMargin">{currentGame.title}</h2>
+                        <h2 id="removeMarginTitle">{currentGame.title}</h2>
                         <h4 id="removeMargin" className="gameType">"{currentGame.gameType}"</h4>
                     </div>
                     <p id="removeMargin" className="desc">{currentGame.description}</p>

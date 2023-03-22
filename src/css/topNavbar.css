@@ -90,7 +90,6 @@ a:hover {
 .top-navbar-main-content{
     margin-top: 15px;
     color:#E8EAEA ;
-    padding-bottom: 5.75rem;
 }
 
 .navContainer-no-auth{
@@ -119,7 +118,7 @@ a:hover {
 }
 
 .navigation-no-aut{
-    padding: 0px 12.5rem;
+    padding: 0px 200px;
 }
 
 .logo-main-content{
@@ -128,8 +127,7 @@ a:hover {
     flex-direction: column;
     justify-content: flex-start;
     align-items: baseline;
-    padding-top: 1.875rem;
-    padding-bottom: 2.25rem;
+    padding-top: 20px;
 }
 
 .top-navbar-log-no-auth{

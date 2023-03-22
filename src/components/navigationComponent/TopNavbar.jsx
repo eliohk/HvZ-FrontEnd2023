@@ -33,51 +33,56 @@ const TopNavbar = () => {
     ));
 
     const authent = () => {
-        if (keycloak.authenticated == true) {
+        if (keycloak.authenticated) {
             return (
                 <BrowserRouter>
-                    <div className="navigation">
-                        <div className="navContainer">
-                            <NavLink to="/" className="element">
+                    <div className="navigation-no-aut">
+                        <div className="navContainer-no-auth">
+                            <div className="navbar-container-no-auth">
+
+                                <div className="navLinkContainer">
+                                    <NavLink to="/" className="element">
+                                        <div className="innerContainerNavbar-no-auth">
+                                            <span>Home</span>
+                                        </div>
+                                    </NavLink>
+
+                                    <NavLink onClick={() => keycloak.register()} className="element">
+                                        <div className="innerContainerNavbar-no-auth">
+                                            <span>Sign up</span>
+                                        </div>
+                                    </NavLink>
+
+                                    <NavLink to="/about" className="element">
+                                        <div className="innerContainerNavbar-no-auth">
+                                            <span>About</span>
+                                        </div>
+                                    </NavLink>
+                                </div>
+                                <Dropdown>
+                                    <Dropdown.Toggle as={CustomToggle} variant="success" id="dropdown-basic" />
+                                    <Dropdown.Menu>
+                                        {keycloak.authenticated && (
+                                            <Dropdown.Item onClick={() => keycloak.logout()}>Sign out</Dropdown.Item>
+                                        )}
+                                        {!keycloak.authenticated && (
+                                            <Dropdown.Item onClick={() => keycloak.login()}>Sign in</Dropdown.Item>
+                                        )}
+
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            </div>
+                            <div className="logo-main-content">
+                            <NavLink to="/">
                                 <div className="top-navbar-log">
                                     <p className="logo">Human</p>
                                     <p id="vs" className="logo">vs</p>
                                     <p className="logo">Zombies</p>
                                 </div>
                             </NavLink>
-                            <div className="navLinkContainer">
-                                <NavLink to="/" className="element">
-                                    <div className="innerContainerNavbar">
-                                        <span>Home</span>
-                                    </div>
-                                </NavLink>
-
-                                <NavLink onClick={() => keycloak.register()} className="element">
-                                    <div className="innerContainerNavbar">
-                                        <span>Sign up</span>
-                                    </div>
-                                </NavLink>
-                                <NavLink to="/about" className="element">
-                                    <div className="innerContainerNavbar">
-                                        <span>About</span>
-                                    </div>
-                                </NavLink>
                             </div>
-                            <Dropdown>
-                                <Dropdown.Toggle as={CustomToggle} variant="success" id="dropdown-basic" />
-                                <Dropdown.Menu>
-                                    {keycloak.authenticated && (
-                                        <Dropdown.Item onClick={() => keycloak.logout()}>Sign out</Dropdown.Item>
-                                    )}
-                                    {!keycloak.authenticated && (
-                                        <Dropdown.Item onClick={() => keycloak.login()}>Sign in</Dropdown.Item>
-                                    )}
-
-                                </Dropdown.Menu>
-                            </Dropdown>
                         </div>
                     </div>
-
                     <Routes>
                         <Route path="/" element={<LandingPage />} />
                         <Route path="/game/:gameId" element={<GameDetailsPage games={state.data.gamesArray} />} />

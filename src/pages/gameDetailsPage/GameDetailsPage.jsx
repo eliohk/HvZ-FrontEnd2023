@@ -4,7 +4,7 @@ import PlayerListComponent from "../../components/playerListComponent/playerList
 import Popup from 'reactjs-popup';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import { useSearchParams, useNavigate, createRoutesFromElements  } from "react-router-dom";
+import { useSearchParams, useNavigate, createRoutesFromElements } from "react-router-dom";
 import { useEffect, useState } from 'react'
 import ChatViewComponent from "../../components/chatViewComponent/ChatViewComponent";
 import MapComponent from "../../components/mapComponent/MapComponent";
@@ -18,19 +18,23 @@ import retIcon from "../../resources/retIcon.svg";
 import editIcon from "../../resources/editIcon.svg";
 import { postPlayer } from "../../states/dataSlice";
 import EditGameComponent from "../../components/editGameComponent/EditGameComponent";
+import keycloak from "../../keycloak";
 // TODO: USE REDUX TO POPULATE :))))
 
-const GameDetailsPage = ( props ) => {
-    const [ listView, setListView ] = useState("players");
+const GameDetailsPage = (props) => {
+    const [listView, setListView] = useState("players");
     const allGames = useSelector((state) => state);
-    const [ editGameView, setEditGameView ] = useState(false);
+    const [editGameView, setEditGameView] = useState(false);
 
     let currentGame = allGames.data.currGame;
 
 
     const data = localStorage.getItem("currGame");
 
-    console.log("tester ut",  typeof JSON.parse(data))
+    console.log("data verdier ", data.data)
+
+
+   // console.log("tester ut", typeof JSON.parse(data))
 
     const dataJSON = JSON.parse(data);
     // CONTAINS ALL DATA FOR GAME
@@ -64,19 +68,20 @@ const GameDetailsPage = ( props ) => {
 
     //const game = props.games[id];
 
+
     function getListView(view) {
         if (view == "players") {
-            return <PlayerListComponent data={currentGame.players} squad={currentGame.squads}/>;
+            return <PlayerListComponent data={currentGame.players} squad={currentGame.squads} />;
         } else if (view == "squad") {
-            return <SquadListComponent data={currentGame.squads} gameid={currentGame.id}/>;
+            return <SquadListComponent data={currentGame.squads} gameid={currentGame.id} />;
         } else if (view == "human") {
             return <BiteCodeComponent />
         } else if (view == "zombie") {
-            return <KillsListComponent kills={currentGame.kills} players={currentGame.players} gameId={currentGame.id}/>;
+            return <KillsListComponent kills={currentGame.kills} players={currentGame.players} gameId={currentGame.id} />;
         }
     }
 
-    function handleNewPlayer() {        
+    function handleNewPlayer() {
         const playerObj = {
             biteCode: "12345",
             patientZero: false,
@@ -85,14 +90,42 @@ const GameDetailsPage = ( props ) => {
 
         dispatch(postPlayer(playerObj))
     }
-    
+
+   // console.log("sjekke role for khoi bruker", keycloak.realmAccess.roles[0])
+    const role = keycloak.realmAccess.roles[0];
+    const firste_letter = role.charAt(0).toUpperCase();
+    const rest_letter = role.slice(1).toLocaleLowerCase();
+    const totalRole = firste_letter + rest_letter + "strator";
+    const displayDetailName = () => {
+
+        if (keycloak.realmAccess.roles[0] == "ADMIN") {
+            return totalRole
+
+        }
+
+    }
+
+    const displayEditGameAdmin = () => {
+        if (keycloak.realmAccess.roles[0] == "ADMIN") {
+            return (
+                <Popup trigger={<button id="editBtn" onClick={handleEditGame}><img id="editBtnIcon" src={editIcon} alt="Edit Game Button" />Edit game</button>} modal>
+                    {close => (<EditGameComponent game={currentGame} edit={close}></EditGameComponent>)}
+                </Popup>
+
+            )
+
+        }
+
+    }
+
+
     if (currentGame) {
         return (
             <div className="mostMainContainer">
                 <div className='mainContainer'>
                     <div className="header">
-                        <h5 id="removeMargin">Administrator</h5>
-                        <a href="/" id="retBtn" className="button"><img id="exitIcon" src={retIcon} alt="Return button"/></a>
+                        <h5 id="removeMargin">{displayDetailName()}</h5>
+                        <a href="/" id="retBtn" className="button"><img id="exitIcon" src={retIcon} alt="Return button" /></a>
                     </div>
                     <div className="liftToHeader">
                         <h2 id="removeMargin">{currentGame.title}</h2>
@@ -104,7 +137,7 @@ const GameDetailsPage = ( props ) => {
                             {/* map + squad list here */}
                             <div className="mapContainer">
                                 <MapComponent players={currentGame.players} kills={currentGame.kills}></MapComponent>
-                            </div>                        
+                            </div>
                             <div className="listContainer">
                                 {getListView(listView)}
                             </div>
@@ -133,9 +166,8 @@ const GameDetailsPage = ( props ) => {
                             </div>
                         </div>
                         <div className="editDiv">
-                            <Popup trigger={<button id="editBtn" onClick={handleEditGame}><img id="editBtnIcon" src={editIcon} alt="Edit Game Button" />Edit game</button>} modal>
-                                {close => (<EditGameComponent game={currentGame} edit={close}></EditGameComponent>)}
-                            </Popup>
+                            {displayEditGameAdmin()}
+
                         </div>
                     </div>
                 </div>

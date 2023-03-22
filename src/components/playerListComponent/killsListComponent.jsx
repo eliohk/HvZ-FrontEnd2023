@@ -7,6 +7,7 @@ import addIcon from "../../resources/addIcon.svg";
 import retIcon from "../../resources/retIcon.svg";
 import editIcon from "../../resources/editIcon.svg";
 import Popup from 'reactjs-popup';
+import keycloak from '../../keycloak';
 
 const KillsListComponent = ( props ) => {
     const [addGameClicked, setaddGameClicked] = useState(false)
@@ -30,14 +31,27 @@ const KillsListComponent = ( props ) => {
     const handleDelete = (event) => {
         console.log("Test handleDelete");
     }       
+
+    const displayAdminDelete =() => {
+        if(keycloak.realmAccess.roles[0] == "ADMIN"){
+            return (
+                <>
+                <a onClick={handleDelete} id="smallBtn" className="button"><img id="smallBtnImg" src={editIcon} alt="Edit user button"/></a>
+                <a id="smallBtn" className="button"><img id="smallBtnImg" src={retIcon} alt="Remove user button"/></a> 
+                </>
+
+            )
+                
+
+        }
+    }
     
     const kills = props.kills.map((kill, i) => {
         return (
             <div>
                 <div className="playerItem" key={i}>
-                    <a onClick={handleDelete} id="smallBtn" className="button"><img id="smallBtnImg" src={editIcon} alt="Edit user button"/></a>
                     <p>Kill id {kill.id}   -  {kill.time_of_death} <br></br> {kill.story} <br></br> Location: {kill.lat} - {kill.lng}</p>
-                    <a id="smallBtn" className="button"><img id="smallBtnImg" src={retIcon} alt="Remove user button"/></a>
+                    {displayAdminDelete()}
                 </div>
                 <hr></hr>
             </div>

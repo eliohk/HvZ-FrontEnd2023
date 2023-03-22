@@ -10,6 +10,7 @@ import "../../css/playerListComponent.css";
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { useSelector, useDispatch } from 'react-redux';
+import keycloak from '../../keycloak';
 import { deletePlayer } from '../../states/dataSlice';
 
 
@@ -33,12 +34,15 @@ const PlayerRow = ( props ) => {
     }
 
     const handleEdit = () => {
+        if(keycloak.realmAccess.roles[0] == "ADMIN"){
         if (editable) {
             setEditable(false);
             props.edit(false);
         } else {
             setEditable(true)
             props.edit(true);
+        }
+            
         }
     }
 
@@ -101,7 +105,14 @@ const PlayerRow = ( props ) => {
             } 
         })
     }
-
+    const deletePlayer  = () => {
+        if(keycloak.realmAccess.roles[0] == "ADMIN"){
+            return (
+                <a onClick={handleDelete} id="smallBtn" className="button"><img id="smallBtnImg" src={retIcon} alt="Remove user button"/></a>
+            )
+        }
+    }
+    
     const wrapperRef = useRef(null);
     useOutsideAlerter(wrapperRef, props, {nName:name, nFaction: faction, nSquad: squad});
 
@@ -127,11 +138,12 @@ const PlayerRow = ( props ) => {
             <a onClick={handleDelete} id="smallBtn" className="button"><img id="smallBtnImg" src={retIcon} alt="Remove user button"/></a>
         </button>
         :
-        <button className="playerItem" onClick={handleEdit}>
+        <button className="playerItem" onChange={handleEdit}>
             <p>{name}</p>
             <p>{faction}</p>
             <p>{squad}</p>
-            <a onClick={handleDelete} id="smallBtn" className="button"><img id="smallBtnImg" src={retIcon} alt="Remove user button"/></a>
+           {deletePlayer()}
+
         </button>
     );
 };

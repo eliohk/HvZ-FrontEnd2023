@@ -7,8 +7,9 @@ import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { fetchGames, fetchGameById, postGame, postPlayer } from '../../states/dataSlice';
-import keycloak from "../../keycloak";
 import { GrAddCircle } from 'react-icons/gr';
+import keycloak from "../../keycloak";
+
 
 import {
     Dialog,
@@ -29,6 +30,9 @@ const LandingPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    //console.log("sjekker keykloak", keycloak)
+
+   //console.log("keykloak sjekk ", keycloak.realmAccess.roles[1]);
 
 
     const handleSortVariable = (event) => {
@@ -38,6 +42,7 @@ const LandingPage = () => {
     };
 
     const handleGameClick = (i) => (event) => {
+        //console.log("handlegame click ", i)
         dispatch(fetchGameById(i)).unwrap().then(() => navigate(`/game/${i}`))
     };
 
@@ -52,6 +57,12 @@ const LandingPage = () => {
 
     const gamesSortedTitle = [].concat(allGames.data.gamesArray)
         .sort((a, b) => a.title > b.title ? 1 : -1)
+        .map((gameData, i) => {
+          //  console.log("sjekke id ",  i)
+           // console.log("sjekke game ", gameData)
+            //console.log("sjekke game data id ",  gameData.id)
+
+            
         .map((gameData, i) => {            
             return (
                 <NavLink className="removeUnderline" key={i}>
@@ -117,7 +128,7 @@ const LandingPage = () => {
     }
 
     const handleNewGame = () => {
-        console.log("Henlo")
+       // console.log("Henlo")
 
         const gameObj = {
             title: title,
@@ -156,12 +167,26 @@ const LandingPage = () => {
         }
     }, []);
     
+    
+   // console.log("keykloak sjekk ", keycloak.realmAccess.roles[1]);
 
     const removeSortButton = () => {
-        if (allGames.data.gamesArray.length == 0) {
-            return (
-                <>
+        if (allGames.data.gamesArray.length == 0 && keycloak.authenticated == true){
+           // console.log("sjekke role for khoi bruker", keycloak.realmAccess.roles[0] == "ADMIN")
+            //console.log("sjekke role for khoi bruker", keycloak.realmAccess.roles[0])
+
+            if(keycloak.realmAccess.roles[0]=== "ADMIN"){
+                //console.log("hello world")
+                return(
+                    <>
                     <button className="landingside-create-game-container" onClick={handleClickOpen}><GrAddCircle />  Create Game</button>
+                    </>
+
+                ) 
+            } 
+            else {
+                return (
+                    <>   
                     <Dialog className='testing' open={open} onClose={handleClose}>
                         <h3 className='dialog-content-modal' > Create a new game</h3>
                         <DialogContent className='dialog-content-modal' >
@@ -204,9 +229,11 @@ const LandingPage = () => {
                             </div>
                         </DialogContent>
                     </Dialog>
-                </>
-            )
+                    </>
+                )
+            }
         }
+
         else {
             return (
                 <>
@@ -221,7 +248,7 @@ const LandingPage = () => {
                             </div>
                         </SplitButton>
                     </div>
-                    <button className="landingside-create-game-container" onClick={handleClickOpen}><GrAddCircle />  Create Game</button>
+                    {/* <button className="landingside-create-game-container" onClick={handleClickOpen}><GrAddCircle />  Create Game</button> */}
                     <Dialog className='testing' open={open} onClose={handleClose}>
                         <h3 className='dialog-content-modal' > Create a new game</h3>
                         <DialogContent className='dialog-content-modal' >

@@ -11,11 +11,9 @@ import keycloak from "../../keycloak";
 import { GrAddCircle } from 'react-icons/gr';
 
 import {
-    Button,
     Dialog,
     DialogContent,
-    DialogTitle,
-    TextField,
+
 } from "@mui/material";
 
 
@@ -32,9 +30,10 @@ const LandingPage = () => {
     const navigate = useNavigate();
 
 
+
     const handleSortVariable = (event) => {
         let retval = event.target.innerHTML;
-        console.log(retval)
+        //console.log(retval)
         setSortVariable(retval);
     };
 
@@ -50,13 +49,14 @@ const LandingPage = () => {
         setOpen(false);
     };
 
+
     const gamesSortedTitle = [].concat(allGames.data.gamesArray)
         .sort((a, b) => a.title > b.title ? 1 : -1)
-        .map((gameData, i) => {
+        .map((gameData, i) => {            
             return (
                 <NavLink className="removeUnderline" key={i}>
-                    <div className='widthConstraint' onClick={handleGameClick(i)}>
-                        <GameListComponent game={gameData} key={i}></GameListComponent>
+                    <div className='widthConstraint' onClick={handleGameClick(gameData.id-1)}>
+                        <GameListComponent game={gameData} key={gameData.id}></GameListComponent>
                     </div>
                 </NavLink>
             );
@@ -65,10 +65,12 @@ const LandingPage = () => {
     const gamesSortedState = [].concat(allGames.data.gamesArray)
         .sort((a, b) => a.status < b.status ? 1 : -1)
         .map((gameData, i) => {
+            
+
             return (
                 <NavLink className="removeUnderline" key={i}>
-                    <div className='widthConstraint' onClick={handleGameClick(i)}>
-                        <GameListComponent game={gameData} key={i}></GameListComponent>
+                    <div className='widthConstraint' onClick={handleGameClick(gameData.id-1)}>
+                        <GameListComponent game={gameData} key={gameData.id}></GameListComponent>
                     </div>
                 </NavLink>
             );
@@ -79,8 +81,8 @@ const LandingPage = () => {
         .map((gameData, i) => {
             return (
                 <NavLink className="removeUnderline" key={i}>
-                    <div className='widthConstraint' onClick={handleGameClick(i)}>
-                        <GameListComponent game={gameData} key={i}></GameListComponent>
+                    <div className='widthConstraint' onClick={handleGameClick(gameData.id-1)}>
+                        <GameListComponent game={gameData} key={gameData.id}></GameListComponent>
                     </div>
                 </NavLink>
             );
@@ -92,14 +94,18 @@ const LandingPage = () => {
         .map((gameData, i) => {
             return (
                 <NavLink className="removeUnderline" key={i}>
-                    <div className='widthConstraint' onClick={handleGameClick(i)}>
-                        <GameListComponent game={gameData} key={i}></GameListComponent>
+                    <div className='widthConstraint' onClick={handleGameClick(gameData.id-1)}>
+                        <GameListComponent game={gameData} key={gameData.id}></GameListComponent>
                     </div>
                 </NavLink>
             );
         });
 
+
+
+
     let gamesArray;
+//    console.log("game array ", gamesArray)
     if (sortVariable === 'Title') {
         gamesArray = gamesSortedTitle;
     } else if (sortVariable === 'Date') {
@@ -120,16 +126,6 @@ const LandingPage = () => {
             maxPlayers: maxPlayer
         }
 
-        /*dispatch(postGame(Objec.key(gameObj).array.forEach(element => {
-            gameObj[element] = 
-            gameObj[element] = props.description,
-            gameObj[element] = props.gameType,
-            gameObj[element] = props.maxPlayers
-
-        
-        })))
-        */
-        console.log("tester allGame ", allGames)
 
         dispatch(postGame(gameObj))
     }
@@ -159,12 +155,62 @@ const LandingPage = () => {
             dispatch(fetchGames());
         }
     }, []);
+    
 
-    return (
-        <div className="mainLandingContainer">
-            <div className="secondaryLandingContainer">
-                <div className='container-level-sort-create-game'>
-                    <div className="sortByContainer">
+    const removeSortButton = () => {
+        if (allGames.data.gamesArray.length == 0) {
+            return (
+                <>
+                    <button className="landingside-create-game-container" onClick={handleClickOpen}><GrAddCircle />  Create Game</button>
+                    <Dialog className='testing' open={open} onClose={handleClose}>
+                        <h3 className='dialog-content-modal' > Create a new game</h3>
+                        <DialogContent className='dialog-content-modal' >
+                            <div className='align-input-label'>
+                                <label className='landingpage-label'>Game name</label>
+                                <input className='texfield'
+                                    value={title}
+                                    sx={{ fontWeight: 800 }}
+                                    onChange={titles}>
+                                </input>
+                            </div>
+                            <div className='align-input-label'>
+                                <label className='landingpage-label'>Description</label>
+                                <input
+                                    sx={{ fontWeight: 'bold' }}
+                                    className='texfield'
+                                    value={description}
+                                    onChange={descriptions}>
+                                </input>
+                            </div>
+                            <div className='align-input-label'>
+                                <label className='landingpage-label'>Game type</label>
+
+                                <input
+                                    className='texfield'
+                                    value={gameType}
+                                    onChange={gameTypes}>
+                                </input>
+                            </div>
+                            <div className='align-input-label'>
+                                <label className='landingpage-label'>Max number of player</label>
+                                <input
+                                    className='texfield'
+                                    value={maxPlayer}
+                                    onChange={maxAntallPlayer}></input>
+                            </div>
+                            <div className='button-modal-container'>
+                                <button className='modal-button' onClick={(handleNewGame)}>save</button>
+                                <button className='modal-button' onClick={(handleClose)}>close</button>
+                            </div>
+                        </DialogContent>
+                    </Dialog>
+                </>
+            )
+        }
+        else {
+            return (
+                <>
+                    <div>
                         <label id="label">Sort by</label>
                         <SplitButton variant="primary" key="end" drop="end" id="dropdown-button-drop-end" title={sortVariable}>
                             <div className="horizontalItems">
@@ -175,50 +221,71 @@ const LandingPage = () => {
                             </div>
                         </SplitButton>
                     </div>
-                    <button className= "landingside-create-game-container" onClick={handleClickOpen}><GrAddCircle/>  Create Game</button>
-                    <Dialog open={open} onClose={handleClose}>
-                        <DialogTitle> Create a new game</DialogTitle>
-                        <DialogContent sx={
-                            {
-                                display: 'flex',
-                                flexDirection: 'column',
-                                p:1,
-                                m: 1
-                            
-                            }
-                        }>
-                            <TextField sx={{m: 2}}
-                                label="Game Title"
-                                value={title}
-                                onChange={titles}>
-                            </TextField >
-                            <TextField sx={{m: 2}}
-                                label="Game description"
-                                value={description}
-                                onChange={descriptions}>
-                            </TextField>
-                            <TextField
-                                sx={{m: 2}}
-                                label="Game type"
-                                value={gameType}
-                                onChange={gameTypes}>
-                            </TextField >
-                            <TextField
-                                sx={{m: 2}}
-                                label="max number of player"
-                                value={maxPlayer}
-                                onChange={maxAntallPlayer}></TextField>
-                            <Button onClick={(handleNewGame)}>save</Button>
-                            <Button onClick={(handleClose)}>close</Button>
+                    <button className="landingside-create-game-container" onClick={handleClickOpen}><GrAddCircle />  Create Game</button>
+                    <Dialog className='testing' open={open} onClose={handleClose}>
+                        <h3 className='dialog-content-modal' > Create a new game</h3>
+                        <DialogContent className='dialog-content-modal' >
+                            <div className='align-input-label'>
+                                <label className='landingpage-label'>Game name</label>
+                                <input className='texfield'
+                                    value={title}
+                                    sx={{ fontWeight: 800 }}
+                                    onChange={titles}>
+                                </input>
+                            </div>
+                            <div className='align-input-label'>
+                                <label className='landingpage-label'>Description</label>
+                                <input
+                                    sx={{ fontWeight: 'bold' }}
+                                    className='texfield'
+                                    value={description}
+                                    onChange={descriptions}>
+                                </input>
+                            </div>
+                            <div className='align-input-label'>
+                                <label className='landingpage-label'>Game type</label>
 
+                                <input
+                                    className='texfield'
+                                    value={gameType}
+                                    onChange={gameTypes}>
+                                </input>
+                            </div>
+                            <div className='align-input-label'>
+                                <label className='landingpage-label'>Max number of player</label>
+                                <input
+                                    className='texfield'
+                                    value={maxPlayer}
+                                    onChange={maxAntallPlayer}></input>
+                            </div>
+                            <div className='button-modal-container'>
+                                <button className='modal-button' onClick={(handleNewGame)}>save</button>
+                                <button className='modal-button' onClick={(handleClose)}>close</button>
+                            </div>
                         </DialogContent>
                     </Dialog>
+
+                </>
+            )
+        }
+    }
+
+    return (
+      <>
+      <div className="mainLandingContainer">
+      
+            <div className="secondaryLandingContainer">
+                <div className='container-level-sort-create-game'>
+                    {/* <div className="sortByContainer"> */}
+                    {/* </div> */}
+                    {removeSortButton()}
                 </div>
 
                 {gamesArray}
             </div>
             {/* <button onClick={handleNewGame}>New game</button> */}
         </div>
+        </>
     )
 }
 

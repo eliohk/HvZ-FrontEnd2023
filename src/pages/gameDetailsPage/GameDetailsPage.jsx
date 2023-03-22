@@ -30,10 +30,7 @@ const GameDetailsPage = ( props ) => {
 
     const data = localStorage.getItem("currGame");
 
-    if (data) {
-        currentGame = JSON.parse(data);
-    }
-
+    const dataJSON = JSON.parse(data);
     // CONTAINS ALL DATA FOR GAME
     //console.log(currentGame.chat);
 

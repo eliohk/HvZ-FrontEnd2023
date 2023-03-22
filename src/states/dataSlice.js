@@ -8,7 +8,7 @@ export const fetchGames = createAsyncThunk(
     'games/fetchGames',
     async () => {
 
-      console.log(keycloak)
+     // console.log(keycloak)
 
       const response = await fetch(
         `${baseUrl}games` , {
@@ -217,6 +217,25 @@ export const fetchGames = createAsyncThunk(
       })
     }
   )
+  
+  
+  //TODO: Add authorization token cuz only admin can do this
+  export const deletePlayer = createAsyncThunk(
+    'player/delete',
+    async (id) => {
+      const response = await fetch(`${baseUrl}players/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(response => {
+        if (!response.ok) {
+          throw new Error('DELETE player not working')
+        }
+      })
+    }
+  )
+
 
 export const dataSlice = createSlice({
   name: "data",
@@ -314,6 +333,24 @@ export const dataSlice = createSlice({
     [putGlobalChat.fulfilled]:(state, action) => {
       console.log("@@@@@@SUCK DICK MAN@@@@@@@@")
       state.currGame.chat.chats.push(action.meta.arg.chat)
+    },
+    [deletePlayer.fulfilled]:(state, action) => {
+      console.log("PLAYER HAS BEEN DELETED MATEYYYY ARGGGGG")
+      console.log(action);
+
+      let tempArr = [];
+
+      state.currGame.players.map((player) => {
+          console.log("Supposed to remove: " + action.meta.arg)
+          console.log("Going through: " + player.id);
+          if (player.id != action.meta.arg) {
+            console.log("Adding: " + player.id)
+            tempArr.push(player);
+          }
+      });
+      console.log(tempArr)
+      state.currGame.players = tempArr;
+
     }
   },
 });

@@ -308,7 +308,7 @@ export const dataSlice = createSlice({
             tempArr.push(player);
           }
       });
-
+      console.log(tempArr)
       state.currGame.players = tempArr;
 
     }

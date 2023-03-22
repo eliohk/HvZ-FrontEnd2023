@@ -146,24 +146,13 @@ const PlayerListComponent = ( props ) => {
         console.log(data);
     }
 
-    const handleDelete = (data) => {
-        /*
-        let tempArr = [];
-
-        state.data.currGame.players.map((player) => {
-            if (player.id != data) {
-                tempArr.push(player);
-            }
-        });
-        */
-        
+    const handleDelete = (data) => {    
         dispatch(deletePlayer(data));
     }
 
     const players = data.data.currGame.players.map((player, i) => {
-        console.log(data.data.currGame.players);
         return (
-            <PlayerRow player={player} squad={props.squad} key={i} saveCallback={handleSave} delCallback={handleDelete} edit={setEditable}/>
+            <PlayerRow player={player} squad={props.squad} key={player.id} saveCallback={handleSave} delCallback={handleDelete} edit={setEditable}/>
         )
     });
 

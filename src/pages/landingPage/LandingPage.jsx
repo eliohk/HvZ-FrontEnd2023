@@ -57,12 +57,6 @@ const LandingPage = () => {
 
     const gamesSortedTitle = [].concat(allGames.data.gamesArray)
         .sort((a, b) => a.title > b.title ? 1 : -1)
-        .map((gameData, i) => {
-          //  console.log("sjekke id ",  i)
-           // console.log("sjekke game ", gameData)
-            //console.log("sjekke game data id ",  gameData.id)
-
-            
         .map((gameData, i) => {            
             return (
                 <NavLink className="removeUnderline" key={i}>

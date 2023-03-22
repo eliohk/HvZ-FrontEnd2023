@@ -15,7 +15,8 @@ import keycloak from "../../keycloak";
 const TopNavbar = () => {
     const state = useSelector((data) => data);
 
-    
+    //console.log("keykloak sjekker ", keycloak);
+
     //console.log("sjekker staten", state);
     const CustomToggle = forwardRef(({ children, onClick }, ref) => (
         <a
@@ -123,10 +124,6 @@ const TopNavbar = () => {
                                             <Dropdown.Item onClick={() => keycloak.login()}>Sign in</Dropdown.Item>
                                         )}
 
-                        {keycloak.authenticated && (
-                            <NavLink onClick={() => keycloak.logout()} className="element">
-                                <div className="innerContainerNavbar">
-                                    <span>Sign out</span>
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </div>

@@ -191,6 +191,23 @@ export const fetchGames = createAsyncThunk(
     }
   )
 
+  //TODO: Add authorization token cuz only admin can do this
+  export const deletePlayer = createAsyncThunk(
+    'player/delete',
+    async (id) => {
+      const response = await fetch(`${baseUrl}players/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(response => {
+        if (!response.ok) {
+          throw new Error('DELETE player not working')
+        }
+      })
+    }
+  )
+
 
 export const dataSlice = createSlice({
   name: "data",
@@ -276,6 +293,24 @@ export const dataSlice = createSlice({
     },
     [postKill.fulfilled]:(state, action) => {
       console.log("Kill has been posted, not updated in redux yet LOLOLOL")
+    },
+    [deletePlayer.fulfilled]:(state, action) => {
+      console.log("PLAYER HAS BEEN DELETED MATEYYYY ARGGGGG")
+      console.log(action);
+
+      let tempArr = [];
+
+      state.currGame.players.map((player) => {
+          console.log("Supposed to remove: " + action.meta.arg)
+          console.log("Going through: " + player.id);
+          if (player.id != action.meta.arg) {
+            console.log("Adding: " + player.id)
+            tempArr.push(player);
+          }
+      });
+
+      state.currGame.players = tempArr;
+
     }
   },
 });

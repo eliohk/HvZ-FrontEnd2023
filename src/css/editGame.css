@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+.mainPopUpContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #2E2E2E;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    width: 100%;
+}
+
+.popUpTitle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 95%;
+}
+
+#titlePopup {
+    text-align: center;
+}
+
+.popup-content {
+    background-color: #2E2E2E;
+    border: none;
+}
+
+.popUpInfo {
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    flex-direction: column;
+}
+
+.dropdownEdits {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+}
+
+#titleInput {
+    border-radius: 12px;
+}
+
+#descInput {
+    border-radius: 12px;
+    white-space: normal;
+    height: 100%;
+}
+
+.dropdownEdits .dropdown-toggle.btn.btn-primary {
+    border-radius: 12px;
+}
+
+.dropdownEdits p {
+    margin: 4px;
+}
+
+.edits {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: 4px;
+}
+
+.dividerRadio {
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+}
+
+.dividerRadio label {
+    margin-left: 4px;
+}
+
+.dividerRadio input {
+    margin-left: 4px;
+}
+
+#editSaveBtn {
+    border-radius: 32px;
+    width: 100px;
+    height: 40px;
+}
+
+#editSaveBtn:hover {
+    background-color: #626263;
+    color: white;
+}
+
+.borderSaveBtn {
+    position: relative;
+    border-radius: 4px;
+    bottom: -75px;
+    padding: 8px;
+    background-color: #2E2E2E;
+    border: black solid;
+}
+
+#numInput {
+    width: 20%;
+    margin: 0;
+    border-radius: 12px;
+    text-align: center;
+}

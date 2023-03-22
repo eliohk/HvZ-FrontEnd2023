@@ -1,10 +1,10 @@
 import "../../css/modal.css";
 import 'leaflet/dist/leaflet.css';
 import PlayerListComponent from "../../components/playerListComponent/playerListComponent.jsx";
-
+import Popup from 'reactjs-popup';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import { useSearchParams, useNavigate, createRoutesFromElements  } from "react-router-dom";
+import { useSearchParams, useNavigate, createRoutesFromElements } from "react-router-dom";
 import { useEffect, useState } from 'react'
 import ChatViewComponent from "../../components/chatViewComponent/ChatViewComponent";
 import MapComponent from "../../components/mapComponent/MapComponent";
@@ -16,24 +16,41 @@ import KillsListComponent from "../../components/playerListComponent/killsListCo
 import BiteCodeComponent from "../../components/playerListComponent/biteCodeComponent";
 import retIcon from "../../resources/retIcon.svg";
 import editIcon from "../../resources/editIcon.svg";
+import { postPlayer } from "../../states/dataSlice";
+import EditGameComponent from "../../components/editGameComponent/EditGameComponent";
+import keycloak from "../../keycloak";
 // TODO: USE REDUX TO POPULATE :))))
+import ChatInputViewComponent from "../../components/chatInputViewComponent/ChatInputviewComponent";
+import Pusher from "pusher-js";
 
-const GameDetailsPage = ( props ) => {
-    const [ listView, setListView ] = useState("players");
+const GameDetailsPage = (props) => {
+    const [listView, setListView] = useState("players");
     const allGames = useSelector((state) => state);
+    const [editGameView, setEditGameView] = useState(false);
 
     let currentGame = allGames.data.currGame;
 
     const data = localStorage.getItem("currGame");
 
-    if (data) {
-        currentGame = JSON.parse(data);
-    }
+    console.log("data verdier ", data.data)
 
+
+   // console.log("tester ut", typeof JSON.parse(data))
+
+    const dataJSON = JSON.parse(data);
     // CONTAINS ALL DATA FOR GAME
-    // console.log(currentGame);
+    //console.log(currentGame.chat);
 
     const dispatch = useDispatch();
+
+    const pusher = new Pusher("12be8984736013be627b", {
+        cluster: "eu",
+    }); 
+
+    window.addEventListener("beforeunload", (ev) => 
+    {  
+        pusher.unsubscribe("hvz-noroff");
+    });
 
     const handleMessage = () => {
         console.log("Handling message!")
@@ -43,35 +60,82 @@ const GameDetailsPage = ( props ) => {
         setListView(event.target.value);
     }
 
+    const handleEditGame = (event) => {
+        if (editGameView) {
+            setEditGameView(false);
+        } else {
+            setEditGameView(true);
+        }
+    }
+
+    const callback = (event) => {
+        console.log("yo")
+        setEditGameView(false);
+    }
+
     const params = window.location.pathname;
     const id = params.split("/")[2];
 
     //const game = props.games[id];
 
+
     function getListView(view) {
         if (view == "players") {
-            return <PlayerListComponent data={currentGame.players} squad={currentGame.squads}/>;
+            return <PlayerListComponent data={currentGame.players} squad={currentGame.squads} />;
         } else if (view == "squad") {
-            return <SquadListComponent data={currentGame.squads}/>;
+            return <SquadListComponent data={currentGame.squads} gameid={currentGame.id} />;
         } else if (view == "human") {
             return <BiteCodeComponent />
         } else if (view == "zombie") {
-            return <KillsListComponent data={currentGame.kills}/>;
+            return <KillsListComponent kills={currentGame.kills} players={currentGame.players} gameId={currentGame.id} />;
         }
     }
 
     function handleNewPlayer() {
-        console.log("clickeroooo")
+        const playerObj = {
+            biteCode: "12345",
+            patientZero: false,
+            human: true
+        };
+
+        dispatch(postPlayer(playerObj))
+    }
+
+   // console.log("sjekke role for khoi bruker", keycloak.realmAccess.roles[0])
+    const role = keycloak.realmAccess.roles[0];
+    const firste_letter = role.charAt(0).toUpperCase();
+    const rest_letter = role.slice(1).toLocaleLowerCase();
+    const totalRole = firste_letter + rest_letter + "strator";
+    const displayDetailName = () => {
+
+        if (keycloak.realmAccess.roles[0] == "ADMIN") {
+            return totalRole
+
+        }
 
     }
-    
+
+    const displayEditGameAdmin = () => {
+        if (keycloak.realmAccess.roles[0] == "ADMIN") {
+            return (
+                <Popup trigger={<button id="editBtn" onClick={handleEditGame}><img id="editBtnIcon" src={editIcon} alt="Edit Game Button" />Edit game</button>} modal>
+                    {close => (<EditGameComponent game={currentGame} edit={close}></EditGameComponent>)}
+                </Popup>
+
+            )
+
+        }
+
+    }
+
+
     if (currentGame) {
         return (
             <div className="mostMainContainer">
                 <div className='mainContainer'>
                     <div className="header">
-                        <h5 id="removeMargin">Administrator</h5>
-                        <a href="/" id="retBtn" class="button"><img id="exitIcon" src={retIcon} alt="Return button"/></a>
+                        <h5 id="removeMargin">{displayDetailName()}</h5>
+                        <a href="/" id="retBtn" className="button"><img id="exitIcon" src={retIcon} alt="Return button" /></a>
                     </div>
                     <div className="liftToHeader">
                         <h2 id="removeMarginTitle">{currentGame.title}</h2>
@@ -83,14 +147,14 @@ const GameDetailsPage = ( props ) => {
                             {/* map + squad list here */}
                             <div className="mapContainer">
                                 <MapComponent players={currentGame.players} kills={currentGame.kills}></MapComponent>
-                            </div>                        
+                            </div>
                             <div className="listContainer">
                                 {getListView(listView)}
                             </div>
                         </div>
                         <div className="chatContainer">
                             {/* chatbox + buttons here */}
-                            <ChatViewComponent />
+                            <ChatViewComponent chat={currentGame.chat} pusher={pusher}/>
                             <div className="buttonContainer">
                                 <button className="btns" onClick={handleListView} value="players">List of players</button>
                                 <button className="btns" onClick={handleListView} value="squad">Squad list</button>
@@ -101,20 +165,12 @@ const GameDetailsPage = ( props ) => {
                         <div className="chatInputContainer">
                             {/* chat toggle + chat input here */}
                             <div className="chatInput">
-                                <DropdownButton id="dropdown-basic-button" title="Squad chat">
-                                    <Dropdown.Item>Squad chat</Dropdown.Item>
-                                    <Dropdown.Item>Human chat</Dropdown.Item>
-                                    <Dropdown.Item>Zombie chat</Dropdown.Item>
-                                </DropdownButton>
-                                <div className="actualInput">
-                                    <form>
-                                        <input id="input" type="text" name="name" />
-                                    </form>
-                                </div>
+                                <ChatInputViewComponent currGame={currentGame} pusher={pusher}></ChatInputViewComponent>
                             </div>
                         </div>
                         <div className="editDiv">
-                            <button id="editBtn"><img id="editBtnIcon" src={editIcon} alt="Edit Game Button" />Edit game</button>
+                            {displayEditGameAdmin()}
+
                         </div>
                     </div>
                 </div>
@@ -125,7 +181,7 @@ const GameDetailsPage = ( props ) => {
         return (
             <div className="container">
                 <h3>
-                    Error
+                    Error occured my dudes.
                 </h3>
             </div>
         )

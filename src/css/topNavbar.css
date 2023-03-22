@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
-
 .navigation {
     display: flex;
+    flex-direction: column;
     align-items: center;
     width: 100%;
     height: 60px;
+    padding: 60px 350px;
     background-color: #2E2E2E;
     color: black;
 }
@@ -15,6 +16,10 @@
     font-family: 'Poppins', sans-serif;
     color: white;
     cursor: pointer;
+}
+
+.elementHide {
+    display: none;
 }
 
 a:hover {
@@ -35,6 +40,10 @@ a:hover {
 
 }
 
+.marginTop {
+    /* margin-top: 1%; */
+}
+
 #vs {
     color: #65C8FF;
 }
@@ -43,7 +52,7 @@ a:hover {
     display: flex;
     align-items:start;
     justify-content: space-between;
-    width: 15%;
+    /* width: 15%; */
     margin-left: -128px;
 }
 
@@ -51,8 +60,9 @@ a:hover {
     display: flex;
     width: 100%;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
+
 
 .alignLogo {
     display: flex;
@@ -67,5 +77,71 @@ a:hover {
     align-items: center;
     justify-content: center;
     text-align: center;
-    margin-left: -50px;
+    margin-left: 50px;
+}
+
+.top-navbar-log {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.top-navbar-main-content{
+    margin-top: 15px;
+    color:#E8EAEA ;
+}
+
+.navContainer-no-auth{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+
+
+}
+
+.navbar-container-no-auth{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    padding-top: 10px;
+
+
+}
+
+.top-navbar-log-no-auth{
+    padding: 20px;
+}
+
+.navigation-no-aut{
+    padding: 0px 200px;
+}
+
+.logo-main-content{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: baseline;
+    padding-top: 20px;
+}
+
+.top-navbar-log-no-auth{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    padding-left: 0px;
+}
+.innerContainerNavbar-no-auth{
+    padding-right: 20px;
+}
+
+.innerContainerNavbar-no-auth{
+    padding-right: 20px;
 }

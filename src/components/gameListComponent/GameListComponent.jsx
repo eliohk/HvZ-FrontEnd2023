@@ -32,7 +32,7 @@ const GameList = ( props ) => {
                         <h3 id="title">{props.game.title}</h3>
                         <p id="gameMode">{props.game.gameType}</p>
                     </div>
-                    <p id="loremIpsum">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                    <p id="loremIpsum">{props.game.description}</p>
                     <button id="gamedtBtn" onClick={handleGameClick} href={`game/${props.game.id-1}`}>Game details</button>
                 </div>
                 <div className="innerStatisticsContainer">
@@ -44,7 +44,7 @@ const GameList = ( props ) => {
                         </div>
                         <div id="cntr" className="alignStats">
                             <img src={playerIcon} alt="playerIcons" width="30"></img>
-                            <p className="playerCountText">{props.game.players.length}/{props.game.maxPlayers} players</p>
+                            <p className="playerCountText">{props.game.players.length }/{props.game.maxPlayers} players</p>
                         </div>
                     </div>
                 </div>     

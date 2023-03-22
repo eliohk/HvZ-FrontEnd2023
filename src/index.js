@@ -5,17 +5,26 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './states/Store';
 import { Provider } from 'react-redux';
-
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { initialize } from "./keycloak";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>
-);
+
+// Initialize Keycloak
+initialize()
+  .then(() => { // If No Keycloak Error occurred - Display the App
+    root.render(
+        <Provider store={store}>
+          <App />
+        </Provider>
+    );
+  })
+  .catch(() => {
+    root.render(
+      <React.StrictMode>
+        <p>Could Not Connect To Keycloak.</p>
+      </React.StrictMode>
+    );
+  });
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

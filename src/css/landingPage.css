@@ -1,9 +1,16 @@
 .mainLandingContainer {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     width: 100%;
+}
+
+
+.landingpage-main-contenet{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .sortByContainer {
@@ -16,6 +23,7 @@
 
 #label {
     margin-right: 8px;
+    color: #E8EAEA;
 }
 
 .widthConstraint {
@@ -70,4 +78,74 @@ button.btn.btn-primary {
     text-decoration: none;
     transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
     cursor: default;
+}
+
+.container-label{
+    color: #E8EAEA;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.container-level-sort-create-game{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 50px;
+
+}
+
+.landingside-create-game-container{
+    padding: 5px;
+    border-radius: 100px;
+    margin-left: 40px;
+    width: 140px;
+    height: 40px;
+    font-weight: 700;
+}
+
+.modal-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.dialog-content-modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #2E2E2E;
+    font-weight: 500;
+    color: #E8EAEA;
+    width: 500px;
+    margin: 0px;
+    padding: 20px;
+
+}
+
+.texfield{
+    background-color: #E8EAEA;
+    color: black;
+    font-weight: 800;
+    padding: 10px;
+}
+.align-input-label{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+.landingpage-label{
+    margin-bottom: 12px;
+    color: #E8EAEA;
+    font-weight: 800;
+}
+
+.button-modal-container {
+    display: flex;
+    flex-direction: row;
+
+}
+.modal-button{
+    margin: 10px;
+    border-radius: 10px;
+    padding: 5px;
 }

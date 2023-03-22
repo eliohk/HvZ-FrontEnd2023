@@ -24,7 +24,12 @@
     flex-direction: column;
     width: 100%;
     font-family: 'poppins';
+    padding-top: 65px;
 }
+
+.leaflet-touch .leaflet-control-attribution {
+    display: none;
+}    
     
 .mapBtn {
     position: absolute;
@@ -67,7 +72,6 @@
     max-width: 55%;
     white-space: initial;
     pointer-events: none;
-    
 }
 
 .gameType {
@@ -132,9 +136,6 @@ ul {
     margin: 1em;
 }
 
-li {
-
-}
 
 .btns {
     border: black solid;
@@ -170,8 +171,6 @@ li {
 }
 
 
-.mapTips {
-}
 
 .liftToHeader {
     display: flex;
@@ -240,6 +239,7 @@ li {
 
 .msg {  
     margin-left: 0px;
+    font-size: 14px;
     text-align: left;
 }
 
@@ -253,15 +253,18 @@ li {
 
 .selfMsg {
     margin-right: 0px;
+    font-size: 14px;
     text-align: right;
 }
 
 .chatInputContainer {
+    width: 100%;
     
 }
 
 .chatInput {
     display: flex;
+    width: 100%;
 }
 
 .squadBtn {
@@ -281,13 +284,86 @@ li {
     border-radius: 0.313rem;
 }
 
+.sendMsgBtn {
+    border: black solid;
+    border-radius: 32px;
+    background-color: #E8EAEA;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+    height: 100%;
+}
+
+.sendMsgBtn:hover {
+    outline-color: transparent;
+    outline-style:solid;
+    box-shadow: 0 0 0 1px black;
+    transition: 0.7s;
+    background-color: grey;
+}
+
+.msgIcon {
+    height: 70%;
+    width: 70%;
+}
+
+.sendMsgBtn {
+    border: black solid;
+    border-radius: 32px;
+    background-color: #E8EAEA;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+    height: 100%;
+}
+
+.sendMsgBtn:hover {
+    outline-color: transparent;
+    outline-style:solid;
+    box-shadow: 0 0 0 1px black;
+    transition: 0.7s;
+    background-color: grey;
+}
+
+.msgIcon {
+    height: 70%;
+    width: 70%;
+}
+
 .actualInput {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 45%;
 }
 
 form {
+}
+
+.overBitecode{
+    text-align: center;
+}
+
+.bitecodeInput {
+    margin-bottom: 10px;
+}
+
+.killBtns {
+    text-align: center;
+}
+
+.overBitecode{
+    text-align: center;
+}
+
+.bitecodeInput {
+    margin-bottom: 10px;
+}
+
+.killBtns {
+    text-align: center;
 }
 
 

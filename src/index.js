@@ -7,19 +7,15 @@ import store from './states/Store';
 import { Provider } from 'react-redux';
 import { initialize } from "./keycloak";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 // Initialize Keycloak
 initialize()
   .then(() => { // If No Keycloak Error occurred - Display the App
     root.render(
-      <React.StrictMode>
         <Provider store={store}>
           <App />
         </Provider>
-      </React.StrictMode>
     );
   })
   .catch(() => {

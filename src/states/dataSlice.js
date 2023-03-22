@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import keycloak from "../keycloak";
+import Pusher from "pusher-js";
 
 //TODO: change to hosted url in deployment
 const baseUrl = 'http://localhost:8080/api/v1/'
@@ -183,7 +184,7 @@ export const fetchGames = createAsyncThunk(
           throw new Error('Could not post game object to id: ' + gameObj.id);
         }
       })
-      .then(updatedUser => {
+      .then(updatedGame => {
       })
       .catch(error => {
         console.log(error);
@@ -191,6 +192,33 @@ export const fetchGames = createAsyncThunk(
     }
   )
 
+  export const putGlobalChat = createAsyncThunk(
+    'games/postGlobalChat',
+    async (chatObj) => {
+      const response = await fetch(`${baseUrl}chat/${chatObj.id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+           // 'Authorization': `Bearer ${keycloak.token}`
+        },
+        body: JSON.stringify({
+          id: chatObj.id,
+          chats: [chatObj.chat]
+        })
+      }).then(response => {
+        if (!response.ok) {
+          throw new Error('Could not post chat object to id: ' + chatObj.id);
+        }
+      })
+      .then(updatedGame => {
+      })
+      .catch(error => {
+        console.log(error);
+      })
+    }
+  )
+  
+  
   //TODO: Add authorization token cuz only admin can do this
   export const deletePlayer = createAsyncThunk(
     'player/delete',
@@ -235,11 +263,19 @@ export const dataSlice = createSlice({
     },
     login: (state, payload) => {
       state.token = payload.payload;
+    },
+    setChat: (state, payload) => {
+      console.log("PUSHING CHAT: " + payload.payload)
+      state.currGame.chat.chats.push(payload.payload);
+    },
+    setChats: (state, payload) => {
+      console.log("ASSIGNING")
+      console.log(payload.payload);
+      state.currGame.chat.chats = payload.payload
     }
   },
   extraReducers: {
     [fetchGames.fulfilled]:(state,action)=>{
-        console.log("Games have been fetched!");
         state.gamesArray = action.payload;
     },
     [fetchGameById.fulfilled]:(state,action)=>{
@@ -293,6 +329,10 @@ export const dataSlice = createSlice({
     },
     [postKill.fulfilled]:(state, action) => {
       console.log("Kill has been posted, not updated in redux yet LOLOLOL")
+    }, 
+    [putGlobalChat.fulfilled]:(state, action) => {
+      console.log("@@@@@@SUCK DICK MAN@@@@@@@@")
+      state.currGame.chat.chats.push(action.meta.arg.chat)
     },
     [deletePlayer.fulfilled]:(state, action) => {
       console.log("PLAYER HAS BEEN DELETED MATEYYYY ARGGGGG")
@@ -315,7 +355,7 @@ export const dataSlice = createSlice({
   },
 });
 
-export const { setFirstName, setLastName, setGamesArray, setMarkers} =
+export const { setFirstName, setLastName, setGamesArray, setMarkers, setChat, setChats} =
 dataSlice.actions;
 
 export default dataSlice.reducer;

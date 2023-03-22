@@ -13,11 +13,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 initialize()
   .then(() => { // If No Keycloak Error occurred - Display the App
     root.render(
-      <React.StrictMode>
         <Provider store={store}>
           <App />
         </Provider>
-      </React.StrictMode>
     );
   })
   .catch(() => {

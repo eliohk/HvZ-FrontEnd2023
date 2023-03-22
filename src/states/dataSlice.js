@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import keycloak from "../keycloak";
+import Pusher from "pusher-js";
 
 //TODO: change to hosted url in deployment
 const baseUrl = 'http://localhost:8080/api/v1/'
@@ -194,7 +195,6 @@ export const fetchGames = createAsyncThunk(
   export const putGlobalChat = createAsyncThunk(
     'games/postGlobalChat',
     async (chatObj) => {
-      console.log(chatObj);
       const response = await fetch(`${baseUrl}chat/${chatObj.id}`, {
         method: 'PUT',
         headers: {
@@ -217,9 +217,6 @@ export const fetchGames = createAsyncThunk(
       })
     }
   )
-
-
-
 
 export const dataSlice = createSlice({
   name: "data",
@@ -248,10 +245,18 @@ export const dataSlice = createSlice({
     login: (state, payload) => {
       state.token = payload.payload;
     },
+    setChat: (state, payload) => {
+      console.log("PUSHING CHAT: " + payload.payload)
+      state.currGame.chat.chats.push(payload.payload);
+    },
+    setChats: (state, payload) => {
+      console.log("ASSIGNING")
+      console.log(payload.payload);
+      state.currGame.chat.chats = payload.payload
+    }
   },
   extraReducers: {
     [fetchGames.fulfilled]:(state,action)=>{
-        console.log("Games have been fetched!");
         state.gamesArray = action.payload;
     },
     [fetchGameById.fulfilled]:(state,action)=>{
@@ -307,13 +312,13 @@ export const dataSlice = createSlice({
       console.log("Kill has been posted, not updated in redux yet LOLOLOL")
     }, 
     [putGlobalChat.fulfilled]:(state, action) => {
-      console.log("PUT GLOBAL CHAT TO GAME YOOO SUCK A DICK")
+      console.log("@@@@@@SUCK DICK MAN@@@@@@@@")
       state.currGame.chat.chats.push(action.meta.arg.chat)
     }
   },
 });
 
-export const { setFirstName, setLastName, setGamesArray, setMarkers} =
+export const { setFirstName, setLastName, setGamesArray, setMarkers, setChat, setChats} =
 dataSlice.actions;
 
 export default dataSlice.reducer;

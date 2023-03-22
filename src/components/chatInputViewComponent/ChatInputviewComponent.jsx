@@ -4,19 +4,28 @@ import sendMsgIcon from "../../resources/sendMsgIcon.svg";
 import { useState, useEffect } from 'react';
 import { putGlobalChat } from '../../states/dataSlice';
 import { useSelector, useDispatch } from 'react-redux';
-import Pusher from "pusher-js";
 import keycloak from '../../keycloak';
-import { current } from 'immer';
+import Pusher from "pusher-js";
 
 const ChatInputViewComponent = (props) => {
-    const [ chat, setChat ] = useState([]);
+    const [ chat, setChat ] = useState("Global chat");
     const [ currentMessage, setCurrentMessage ] = useState("");
     const dispatch = useDispatch();
     const data = useSelector((state) => state);
 
-
     const handleChatView = (event) => {
         setChat(event.target.innerHTML);
+
+        /*
+        if (event.target.innerHTML == "Global chat") {
+            // TODO: Change form hvz-noroff to "global-chat" later
+            console.log("Am i doing something?")
+            props.channel = props.pusher.subscribe("hvz-noroff");
+        } else {
+            console.log("Am i doing something? pt2")
+            props.pusher.unsubscribe("hvz-noroff");
+        }
+        */
     }
 
     const handleCurrentMessage = (event) => {
@@ -52,7 +61,7 @@ const ChatInputViewComponent = (props) => {
         } else {
             date = today.getDate()
         }
-        let currentDate = hour + ":" + minutes + " " + date + '-' + (month) + '-'
+        let currentDate = hour + ":" + minutes;
         return currentDate;
     }
 
@@ -60,32 +69,18 @@ const ChatInputViewComponent = (props) => {
         let name = keycloak.tokenParsed.given_name + " " + keycloak.tokenParsed.family_name
         let time = getTime()
         let message =name+"&"+time+"&"+currentMessage
-        console.log("KUUUK")
-        console.log(props.currGame)
+        
         dispatch(putGlobalChat({
             id: props.currGame.id,
             chat: message
         }))
-    }
 
-    useEffect(() => {
-        const pusher = new Pusher("12be8984736013be627b", {
-          cluster: "eu",
-        });    
-        const channel = pusher.subscribe("hvz-noroff");
-        channel.bind("chat-event", function (data) {
-            console.log(data.message)
-            setChat(...chat, data.message)
-        });    
-        return () => {
-          pusher.unsubscribe("chat");
-        };
-        
-      }, []);
+        setCurrentMessage("")
+    }
     
     return (
         <>
-            <DropdownButton id="dropdown-basic-button" title="helo">
+            <DropdownButton id="dropdown-basic-button" title={chat}>
                 {chats}
             </DropdownButton>
             <div className="actualInput">

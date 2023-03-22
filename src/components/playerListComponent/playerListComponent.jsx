@@ -11,6 +11,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { useSelector, useDispatch } from 'react-redux';
 import keycloak from '../../keycloak';
+import { deletePlayer } from '../../states/dataSlice';
 
 
 const PlayerRow = ( props ) => {
@@ -29,8 +30,6 @@ const PlayerRow = ( props ) => {
 
     const handleDelete = (event) => {
         setEditable(false);
-        console.log("THIS IS FROM THE ROW")
-        console.log(props.player)
         props.delCallback(props.player.id);
     }
 
@@ -38,8 +37,10 @@ const PlayerRow = ( props ) => {
         if(keycloak.realmAccess.roles[0] == "ADMIN"){
         if (editable) {
             setEditable(false);
+            props.edit(false);
         } else {
             setEditable(true)
+            props.edit(true);
         }
             
         }
@@ -48,28 +49,24 @@ const PlayerRow = ( props ) => {
     /**
      * Hook that alerts clicks outside of the passed ref
      */
-    function useOutsideAlerter(ref, props) {
-
+    function useOutsideAlerter(ref, props, data) {
         useEffect(() => {
         /**
          * Alert if clicked on outside of element
          */
         function handleClickOutside(event) {
             if (ref.current && !ref.current.contains(event.target)) {
-
                 if (event.target.value == "Save") {
-                    console.log("YOOO THIS SHOULD SAVE MAAYN")
                     props.saveCallback({
-                        pName: "Player " + props.player.id,
-                        pFaction: props.human ? "Human" : "Zombie",
-                        pSquad: "Squad " + props.player.squad.id,
+                        pName: data.nName,
+                        pFaction: data.nFaction,
+                        pSquad: data.nSquad
                     });
                 } else {
-                    console.log("THIS SHOULD POP OFF")
                     setFaction(props.player.human ? "Human" : "Zombie");
                     setSquad(props.player.squad ? "Squad " + props.player.squad.id : "N/A");
                 }
-                
+                props.edit(false);
                 setEditable(false);
             }
         }
@@ -79,7 +76,7 @@ const PlayerRow = ( props ) => {
             // Unbind the event listener on clean up
             document.removeEventListener("mousedown", handleClickOutside);
         };
-        }, [ref]);
+        }, [ref, data]);
     }
 
     const handleFaction = (event) => {
@@ -95,7 +92,7 @@ const PlayerRow = ( props ) => {
         setFaction(props.player.human ? "Human" : "Zombie");
         setSquad(props.player.squad ? "Squad " + props.player.squad.id : "N/A");
         setSquads(props.squad);
-    }, [props]);
+    }, []);
     
     let allSquads = "";
 
@@ -108,7 +105,6 @@ const PlayerRow = ( props ) => {
             } 
         })
     }
-
     const deletePlayer  = () => {
         if(keycloak.realmAccess.roles[0] == "ADMIN"){
             return (
@@ -117,9 +113,8 @@ const PlayerRow = ( props ) => {
         }
     }
     
-
     const wrapperRef = useRef(null);
-    useOutsideAlerter(wrapperRef, props);
+    useOutsideAlerter(wrapperRef, props, {nName:name, nFaction: faction, nSquad: squad});
 
     return (
         editable? 
@@ -133,6 +128,11 @@ const PlayerRow = ( props ) => {
                 }
             </DropdownButton>
             <DropdownButton id="dropdown-item-button" title={squad} className="dropdownBtn">
+                {squad ? 
+                    <Dropdown.Item as="button" onClick={handleSquad}>N/A</Dropdown.Item>
+                    :
+                    null
+                }
                 {allSquads}
             </DropdownButton>
             <a onClick={handleDelete} id="smallBtn" className="button"><img id="smallBtnImg" src={retIcon} alt="Remove user button"/></a>
@@ -149,35 +149,33 @@ const PlayerRow = ( props ) => {
 };
 
 const PlayerListComponent = ( props ) => {
-
-    const [ playersInGame, setPlayersInGame ] = useState(props.data);
+    const dispatch = useDispatch();
+    const data = useSelector((state) => state);
+    const [ editable, setEditable ] = useState(false);
 
     const handleSave = (data) => {
+        console.log("SAVED!")
         console.log(data);
     }
 
-    const handleDelete = (data) => {
-        let tempArr = [];
-
-        playersInGame.map((player) => {
-            if (player.id != data) {
-                tempArr.push(player);
-            }
-        });
-
-        setPlayersInGame(tempArr);
+    const handleDelete = (data) => {    
+        dispatch(deletePlayer(data));
     }
 
-    const players = playersInGame.map((player, i) => {
+    const players = data.data.currGame.players.map((player, i) => {
         return (
-            <PlayerRow player={player} squad={props.squad} key={i} saveCallback={handleSave} delCallback={handleDelete}/>
+            <PlayerRow player={player} squad={props.squad} key={player.id} saveCallback={handleSave} delCallback={handleDelete} edit={setEditable}/>
         )
     });
 
     return (
         <div className='listViewContainer'>
             <h3 id="listTitle">List of players</h3>
-            <button id="crtBtn" onClick={handleSave} value="Save">Save</button>
+            {editable ?
+                <button id="crtBtn" onClick={handleSave} value="Save">Save</button>
+                :
+                null
+            }
             <div className='playerContainer'>
                 <div className='headerContainer'>
                     <p className="title">Name</p>

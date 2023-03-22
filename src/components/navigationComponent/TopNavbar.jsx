@@ -123,6 +123,10 @@ const TopNavbar = () => {
                                             <Dropdown.Item onClick={() => keycloak.login()}>Sign in</Dropdown.Item>
                                         )}
 
+                        {keycloak.authenticated && (
+                            <NavLink onClick={() => keycloak.logout()} className="element">
+                                <div className="innerContainerNavbar">
+                                    <span>Sign out</span>
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </div>

@@ -68,7 +68,6 @@
     max-width: 55%;
     white-space: initial;
     pointer-events: none;
-    
 }
 
 .gameType {
@@ -233,6 +232,7 @@ ul {
 
 .msg {
     margin-left: 0px;
+    font-size: 14px;
     text-align: left;
 }
 
@@ -245,6 +245,7 @@ ul {
 
 .selfMsg {
     margin-right: 0px;
+    font-size: 14px;
     text-align: right;
 }
 
@@ -260,6 +261,30 @@ ul {
 
 .squadBtn {
     border-radius: 16px;
+}
+
+.sendMsgBtn {
+    border: black solid;
+    border-radius: 32px;
+    background-color: #E8EAEA;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+    height: 100%;
+}
+
+.sendMsgBtn:hover {
+    outline-color: transparent;
+    outline-style:solid;
+    box-shadow: 0 0 0 1px black;
+    transition: 0.7s;
+    background-color: grey;
+}
+
+.msgIcon {
+    height: 70%;
+    width: 70%;
 }
 
 .actualInput {
@@ -293,6 +318,7 @@ form {
     border: solid black;
     border-width: 2px;
     background-color: #E8EAEA;
+    padding-left: 8px;
 }
 
 #enterBtn {

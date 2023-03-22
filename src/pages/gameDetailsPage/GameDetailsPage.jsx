@@ -20,6 +20,8 @@ import { postPlayer } from "../../states/dataSlice";
 import EditGameComponent from "../../components/editGameComponent/EditGameComponent";
 import keycloak from "../../keycloak";
 // TODO: USE REDUX TO POPULATE :))))
+import ChatInputViewComponent from "../../components/chatInputViewComponent/ChatInputviewComponent";
+import Pusher from "pusher-js";
 
 const GameDetailsPage = (props) => {
     const [listView, setListView] = useState("players");
@@ -27,7 +29,6 @@ const GameDetailsPage = (props) => {
     const [editGameView, setEditGameView] = useState(false);
 
     let currentGame = allGames.data.currGame;
-
 
     const data = localStorage.getItem("currGame");
 
@@ -38,9 +39,18 @@ const GameDetailsPage = (props) => {
 
     const dataJSON = JSON.parse(data);
     // CONTAINS ALL DATA FOR GAME
-    // console.log(currentGame);
+    //console.log(currentGame.chat);
 
     const dispatch = useDispatch();
+
+    const pusher = new Pusher("12be8984736013be627b", {
+        cluster: "eu",
+    }); 
+
+    window.addEventListener("beforeunload", (ev) => 
+    {  
+        pusher.unsubscribe("hvz-noroff");
+    });
 
     const handleMessage = () => {
         console.log("Handling message!")
@@ -144,7 +154,7 @@ const GameDetailsPage = (props) => {
                         </div>
                         <div className="chatContainer">
                             {/* chatbox + buttons here */}
-                            <ChatViewComponent />
+                            <ChatViewComponent chat={currentGame.chat} pusher={pusher}/>
                             <div className="buttonContainer">
                                 <button className="btns" onClick={handleListView} value="players">List of players</button>
                                 <button className="btns" onClick={handleListView} value="squad">Squad list</button>
@@ -155,14 +165,7 @@ const GameDetailsPage = (props) => {
                         <div className="chatInputContainer">
                             {/* chat toggle + chat input here */}
                             <div className="chatInput">
-                                <DropdownButton id="dropdown-basic-button" title="Squad chat">
-                                    <Dropdown.Item>Squad chat</Dropdown.Item>
-                                    <Dropdown.Item>Human chat</Dropdown.Item>
-                                    <Dropdown.Item>Zombie chat</Dropdown.Item>
-                                </DropdownButton>
-                                <div className="actualInput">
-                                    <input id="input" type="text" name="name" />
-                                </div>
+                                <ChatInputViewComponent currGame={currentGame} pusher={pusher}></ChatInputViewComponent>
                             </div>
                         </div>
                         <div className="editDiv">

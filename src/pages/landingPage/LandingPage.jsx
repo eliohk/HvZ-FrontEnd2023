@@ -26,8 +26,6 @@ const LandingPage = () => {
     const [maxPlayer, setMaxPlayer] = useState(0)
     const [open, setOpen] = useState(false);
 
-
-
     const allGames = useSelector((state) => state);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -65,6 +63,7 @@ const LandingPage = () => {
             //console.log("sjekke game data id ",  gameData.id)
 
             
+        .map((gameData, i) => {            
             return (
                 <NavLink className="removeUnderline" key={i}>
                     <div className='widthConstraint' onClick={handleGameClick(gameData.id-1)}>

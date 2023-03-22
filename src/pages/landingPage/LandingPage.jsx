@@ -131,8 +131,8 @@ const LandingPage = () => {
             maxPlayers: maxPlayer
         }
 
-
         dispatch(postGame(gameObj))
+        window.location.reload(false);
     }
 
     const titles = (e) => {
@@ -242,7 +242,7 @@ const LandingPage = () => {
                             </div>
                         </SplitButton>
                     </div>
-                    {/* <button className="landingside-create-game-container" onClick={handleClickOpen}><GrAddCircle />  Create Game</button> */}
+                    {<button className="landingside-create-game-container" onClick={handleClickOpen}><GrAddCircle />  Create Game</button> }
                     <Dialog className='testing' open={open} onClose={handleClose}>
                         <h3 className='dialog-content-modal' > Create a new game</h3>
                         <DialogContent className='dialog-content-modal' >
@@ -301,10 +301,10 @@ const LandingPage = () => {
                     {/* </div> */}
                     {removeSortButton()}
                 </div>
-
+                
                 {gamesArray}
             </div>
-            {/* <button onClick={handleNewGame}>New game</button> */}
+            {/*<button onClick={handleNewGame}>New game</button> */}
         </div>
         </>
     )

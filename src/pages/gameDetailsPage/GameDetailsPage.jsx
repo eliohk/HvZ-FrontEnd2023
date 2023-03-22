@@ -32,7 +32,7 @@ const GameDetailsPage = (props) => {
 
     const data = localStorage.getItem("currGame");
 
-    console.log("data verdier ", data.data)
+    console.log("data verdier ", data)
 
 
    // console.log("tester ut", typeof JSON.parse(data))

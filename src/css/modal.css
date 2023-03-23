@@ -7,11 +7,12 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    width: 80%;
+    width: 75%;
     padding: 1em;
     color: white;
     border-radius: 16px;
     font-family: 'Poppins', sans-serif;
+    margin-top: -3rem;
 }
 
 .mostMainContainer {
@@ -242,7 +243,9 @@ ul {
     max-width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: start;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 
 .selfMsg {

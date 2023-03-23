@@ -16,11 +16,20 @@ const GameList = ( props ) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const handleGameClick = (i) => (event) => {
-        dispatch(fetchGameById(i)).unwrap().then(() => navigate(`/game/${i}`))
+    const handleGameClick = (event) => {
+
+        if (!props.game) {
+            navigate("/game/1");
+        } else {
+            //dispatch(fetchGameById(i)).unwrap().then(() => navigate(`/game/${i}`))
+        }
+        
+        // **** uncomment this line below and delete if above when in prod with db ****
+        //dispatch(fetchGameById(i)).unwrap().then(() => navigate(`/game/${i}`))
     };
-
-
+    
+    // **** REMOVE THIS WHEN PUSHING TO PROD WITH FUNCTIONAL DB. ****
+    /*
     return (
         <div className="mainGameContainer">
             <div className="innerMapContainer">
@@ -51,6 +60,68 @@ const GameList = ( props ) => {
             </div>
  
         </div>
+    )
+    */
+   
+    return (
+        props.game ?
+            <div className="mainGameContainer">
+                <div className="innerMapContainer">
+                    <img src={Map} width="250" height="175" alt="Map" className="mapImgList"/>
+                </div>
+                <div className="innerDataContainer">
+                    <div className="innerTitleContainer">
+                        <div className="mostInnerTitleContainer">
+                            <h3 id="title">{props.game.title}</h3>
+                            <p id="gameMode">{props.game.gameType}</p>
+                        </div>
+                        <p id="loremIpsum">{props.game.description}</p>
+                        <button id="gamedtBtn" onClick={handleGameClick} href={`game/${props.game.id-1}`}>Game details</button>
+                    </div>
+                    <div className="innerStatisticsContainer">
+                        <p id="status" className="statusComponent">{props.game.status}</p>
+                        <div className="playerCounter">
+                            <div id="dt" className="alignStats">
+                                <img src={dateIcon} alt="playerIcons" width="30"></img>
+                                <p className="dateText">{props.game.date}</p>
+                            </div>
+                            <div id="cntr" className="alignStats">
+                                <img src={playerIcon} alt="playerIcons" width="30"></img>
+                                <p className="playerCountText">{props.game.players.length }/{props.game.maxPlayers} players</p>
+                            </div>
+                        </div>
+                    </div>     
+                </div>
+            </div>
+            :
+            <div className="mainGameContainer">
+                <div className="innerMapContainer">
+                    <img src={Map} width="250" height="175" alt="Map" className="mapImgList"/>
+                </div>
+                <div className="innerDataContainer">
+                    <div className="innerTitleContainer">
+                        <div className="mostInnerTitleContainer">
+                            <h3 id="title">Dummy Data Test Title</h3>
+                            <p id="gameMode">Example game</p>
+                        </div>
+                        <p id="loremIpsum">This is a description of this game which should sound fun and enticing.</p>
+                        <button id="gamedtBtn" onClick={handleGameClick} href="/game/1">Game details</button>
+                    </div>
+                    <div className="innerStatisticsContainer">
+                        <p id="status" className="statusComponent">Example Status</p>
+                        <div className="playerCounter">
+                            <div id="dt" className="alignStats">
+                                <img src={dateIcon} alt="playerIcons" width="30"></img>
+                                <p className="dateText">23/03/23</p>
+                            </div>
+                            <div id="cntr" className="alignStats">
+                                <img src={playerIcon} alt="playerIcons" width="30"></img>
+                                <p className="playerCountText">69/420 players</p>
+                            </div>
+                        </div>
+                    </div>     
+                </div>
+            </div>
     )
 }
 

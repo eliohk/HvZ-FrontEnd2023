@@ -221,7 +221,11 @@ const SquadDetailsComponent = ( props ) => {
                 <h3 id="squadTitleStupidRetBtn">{squad.name}</h3>
             </div>
             <div className='playerContainer'>
-                <button id="crtBtn" onClick={handleAdd}><img id="plusImg" src={addIcon} alt="Add member to squad button"/>Add player</button>
+                {keycloak.authenticated ?
+                    <button id="crtBtn" onClick={handleAdd}><img id="plusImg" src={addIcon} alt="Add member to squad button"/>Add player</button>
+                    :
+                    <button id="crtBtn" onClick={() => keycloak.login()}><img id="plusImg" src={addIcon} alt="Add member to squad button"/>Login to add player</button>
+                }
                 <div className='headerContainer'>
                     {/* Name - Faction - Squad */}
                     <p className="title">Name</p>
@@ -279,7 +283,11 @@ const SquadListComponent = ( props ) => {
                         <hr className="hrTitle"></hr>
                     </div>
                     <div className='playerContainer'>
-                        <button id="crtBtn" onClick={handleNewSquad}><img src={addIcon} alt="Add button" id="addBtn"/>Create a Squad</button>
+                        {keycloak.authenticated ?
+                            <button id="crtBtn" onClick={handleNewSquad}><img src={addIcon} alt="Add button" id="addBtn"/>Create a Squad</button>
+                            :
+                            <button id="crtBtn" onClick={() => keycloak.login()}><img src={addIcon} alt="Add button" id="addBtn"/>Login to create squad</button>
+                        }
                         {squads}
                     </div>
                 </div>

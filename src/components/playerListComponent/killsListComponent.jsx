@@ -127,18 +127,24 @@ const KillsListComponent = ( props ) => {
             <h3 id="listTitle">Kills</h3>
             <div className='playerContainer'>
                 <div className="killerContainer">
-                    {addGameClicked ?   <div className='bitecodeInput'>
-                                        <div className='killBtns'>
-                                            <button id="crtKillBtn" onClick={handleSave} >Save</button>
-                                            <button id="cancelKillBtn" onClick={handleCancel} >Cancel</button>
-                                        </div>
-                                        <hr></hr>
-                                        <p className="overBitecode">Write bitecode under</p>
-                                        <input type="text" value={inputVal} onChange={handleInputChange}/>
-                                        <p className="overBitecode">Write kill story under</p>
-                                        <input type="text" value={story} onChange={handleStoryChange}/>
-                                        </div>
-                    : <button id="crtBtn" onClick={addKill}><img src={addIcon} alt="Add button" id="addBtn"/>Add kill</button>}
+                    {addGameClicked ?   
+                    <div className='bitecodeInput'>
+                    <div className='killBtns'>
+                        <button id="crtKillBtn" onClick={handleSave} >Save</button>
+                        <button id="cancelKillBtn" onClick={handleCancel} >Cancel</button>
+                    </div>
+                    <hr></hr>
+                    <p className="overBitecode">Write bitecode under</p>
+                    <input type="text" value={inputVal} onChange={handleInputChange}/>
+                    <p className="overBitecode">Write kill story under</p>
+                    <input type="text" value={story} onChange={handleStoryChange}/>
+                    </div>
+                    : 
+                    keycloak.authenticated ?
+                    <button id="crtBtn" onClick={addKill}><img src={addIcon} alt="Add button" id="addBtn"/>Add kill</button>
+                    :
+                    <button id="crtBtn" onClick={() => keycloak.login()}><img src={addIcon} alt="Add button" id="addBtn"/>Log in to add kill</button>
+                    }
                 </div>
                 {addGameClicked ?   <div className='headerContainer'>
                                         {/* Name - Faction - Squad */}

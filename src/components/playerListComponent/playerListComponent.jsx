@@ -107,7 +107,7 @@ const PlayerRow = ( props ) => {
     useOutsideAlerter(wrapperRef, props, {nName:name, nFaction: faction, nSquad: squad});
 
     return (
-        (keycloak.hasRealmRole("ADMIN") || keycloak.tokenParsed.preferred_username == name) && editable? 
+        (keycloak.hasRealmRole("ADMIN")) && editable? 
         <button className="playerItemEdit" ref={wrapperRef}>
             <p>{name}</p>
             <DropdownButton id="dropdown-item-button" title={faction} className="dropdownBtn">

@@ -37,8 +37,6 @@ const SquadRegisterComponent = ( props ) => {
     });
 
     const handleRet = () => {
-        console.log("yoo")
-        console.log(props)
         props.state("list")
     }
 

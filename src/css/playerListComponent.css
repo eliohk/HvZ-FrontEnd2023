@@ -98,6 +98,8 @@
 }
 
 .playerContainer {
+    width: 90%;
+    text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -226,7 +228,7 @@
 }
 
 #squadName {
-    width: 100%;
+    width: 50%;
     border: none;
     margin: 0.2rem;
 }
@@ -367,6 +369,21 @@
     margin: 0;
 }
 
+#savePlayer {
+    background-color: #626263;
+    color: white;
+    border-radius: 32px;
+    border: solid black;
+    border-width: 0.1px;
+}
+
+#savePlayer:hover {
+    outline-color: transparent;
+    outline-style:solid;
+    box-shadow: 0 0 0 1px black;
+    transition: 0.7s;
+}
+
 #sqRegSave {
     border-radius: 32px;
     background-color: #626263;
@@ -396,12 +413,29 @@
     text-align: center;
 }
 
+.alignSquadPlayers h4 {
+    margin: 0;
+}
+
+.alignTitleAndSave {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.alignTitleAndSave h3 {
+    margin: 0;
+}
+
 #playerTag {
     margin: 4px;
+    font-size: 12px;
     width: 100%;
 }
 
 #playerTagged {
+    font-size: 12px;
     margin: 4px;
     width: 100%;
     outline-color: transparent;

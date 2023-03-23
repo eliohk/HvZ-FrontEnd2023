@@ -236,6 +236,35 @@ export const fetchGames = createAsyncThunk(
     }
   )
 
+  export const putPlayerInSquad = createAsyncThunk(
+    'squad/putPlayer',
+    async (playerObj) => {
+      console.log("Putting the following object: " )
+      console.log(playerObj);
+      const response = await fetch(`${baseUrl}players/${playerObj.id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            id: playerObj.id,
+            biteCode: "6969420",
+            patientZero: false,
+            human: true,
+        })
+      }).then(response => {
+        if (!response.ok) {
+          throw new Error('Could not post player to squad')
+        }
+      })
+      .then(updatedUser => {
+      })
+      .catch(error => {
+        console.log(error);
+      })
+    }
+  )
+
 
 export const dataSlice = createSlice({
   name: "data",
@@ -319,6 +348,7 @@ export const dataSlice = createSlice({
     [postSquad.fulfilled]:(state,action) => {
       console.log("Squad has been posted, not updated in redux");
       console.log(action.meta.arg)
+      state.currGame.squads.push(action.meta.arg)
     },
     [putGameObject.fulfilled]:(state, action) => {
       console.log("FUCK YES MOTHERFUCKER")
@@ -351,6 +381,22 @@ export const dataSlice = createSlice({
       console.log(tempArr)
       state.currGame.players = tempArr;
 
+    },
+    [putPlayerInSquad.fulfilled]:(state, action) => {
+      console.log("PLAYER PUT IN SQUAD SUCCESSFULL MATEY!!!! :D ")
+      console.log(action.meta.arg);
+
+      const currSquad = state.currGame.squads.map((squad, i) => {
+        console.log(squad);
+        if (squad.id == action.meta.arg.squad.id) {
+          console.log(squad)
+          return squad;
+        }
+      })
+
+      console.log(currSquad)
+
+      state.currGame.squads[currSquad.id].players.push(action.meta.arg);
     }
   },
 });

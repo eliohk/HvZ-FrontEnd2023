@@ -5,28 +5,65 @@ import { fetchGameById, postSquad } from '../../states/dataSlice';
 import addIcon from "../../resources/addIcon.svg";
 import "../../css/playerListComponent.css";
 import retIcon from "../../resources/retIcon.svg";
+import { putPlayerInSquad } from "../../states/dataSlice";
 
 
 // All players list
 const AllPlayersComponent = ( props ) => {
+    const [ chosenPlayers, setChosenPlayers ] = useState([]);
+    const dispatch = useDispatch();
+
+    const handleChosenPlayers = (event) => {
+        if (chosenPlayers.includes(event.target.innerHTML)) {
+            let tempArr = [];
+            chosenPlayers.map((player, i) => {
+                if (player != event.target.innerHTML) {
+                    tempArr.push(player)
+                }
+            });
+            console.log("Removing: " + event.target.innerHTML)
+            console.log(tempArr);
+            setChosenPlayers(tempArr);
+
+        } else {
+            console.log("Adding: " + event.target.innerHTML)
+            setChosenPlayers([...chosenPlayers, event.target.innerHTML])
+        }
+    }
+
     const players = props.players.map((player, i) => {
-        return (
-            <p key={i}>Player {player.id}</p>
-        )
+        if (!player.squad && chosenPlayers.includes("Player " + player.id)) {
+            return <p key={i} id="playerTagged" onClick={handleChosenPlayers}>Player {player.id}</p>
+        } else if (!player.squad) {
+            return <p key={i} id="playerTag" onClick={handleChosenPlayers}>Player {player.id}</p>
+        }
     })
 
     const handleRet = () => {
-        props.retVal(true);
+        props.callback(true);
+    }
+
+    const handleSave = (event) => {
+        props.players.map((player, i) => {  
+            if (chosenPlayers.includes("Player " + player.id)) {
+                console.log("Posting player: " + player.id)
+                dispatch(putPlayerInSquad(player));
+            }
+        })
     }
 
     return (
-        <div className="mainListCon">
+        <div className="tempMainList">
             <div className='listViewContainer'>
                 <div className="rightAlignRet">
                     <a onClick={handleRet} id="retBtn" className="button"><img id="exitIcon2" src={retIcon} alt="Return button" /></a>
                 </div>
                 <div className="alignSquadTitle">
-                    <h3 id="squadTitle">Player list</h3>
+                    <div className="alignTitleAndSave">
+                        <h3>Player list</h3>
+                        <button id="savePlayer" type="button" onClick={handleSave}>Save</button>
+                    </div>
+                    
                     <hr className="hrTitle"></hr>
                 </div>
                 <div className='playerContainer'>
@@ -41,6 +78,22 @@ const AllPlayersComponent = ( props ) => {
 const SquadRegisterComponent = ( props ) => {
     const rd = useSelector((state) => state);
     const [ chosenPlayers, setChosenPlayers ] = useState([]);
+    const [ squadName, setSquadName ] = useState("");
+    const dispatch = useDispatch();
+
+    const handleSave = () => {
+        const squadObj = {
+            name: squadName,
+            gameRef: props.gameId
+        };
+
+        dispatch(postSquad(squadObj))
+        props.state("list");
+    }
+
+    const handleSquadName = (event) => {
+        setSquadName(event.target.value);
+    }
 
     const handleChoosePlayer = (event) => {
         if (chosenPlayers.includes(event.target.innerHTML)) {
@@ -79,9 +132,9 @@ const SquadRegisterComponent = ( props ) => {
             </div>
             <div className="alignSquadHeader">
                 <h3 id="sqTitleReg"> Create a new squad</h3>
-                <button id="sqRegSave" type="button">Save</button>
+                <button id="sqRegSave" type="button" onClick={handleSave}>Save</button>
             </div>
-            <input id="sqNameInput" type="text" placeholder="Enter squad name here .." name="name"/>
+            <input id="sqNameInput" type="text" onChange={handleSquadName} placeholder="Enter squad name here .." name="name"/>
             <p id="randomText">Select members to add to your team</p>
             <div className="alignSquadPlayers">
             <h4>List of players</h4>
@@ -127,6 +180,7 @@ const SquadDetailsComponent = ( props ) => {
     }
 
     return (
+        addState?
         <div className='listViewContainer'>
             {/*<h3 id="listTitle"><img src={squadIcon} style={{ width: "40px" }} alt="Squad icon" /> Player list</h3>*/}
             <div className="rightAlignRet">
@@ -148,6 +202,8 @@ const SquadDetailsComponent = ( props ) => {
                 {squads}
             </div>
         </div>
+        :
+        <AllPlayersComponent players={props.players} callback={setAddState}></AllPlayersComponent>
     )
 
     
@@ -155,19 +211,12 @@ const SquadDetailsComponent = ( props ) => {
 
 // START/DEFAULT SQUAD VIEW
 const SquadListComponent = ( props ) => {
-    const dispatch = useDispatch();
     // list, register, 
     const [ squadState, setSquadState ] = useState("list");
     const [ currSquad, setCurrSquad ] = useState({});
 
     const handleNewSquad = () => {
         setSquadState("register")
-        const squadObj = {
-            name: "New Squad",
-            gameRef: props.gameid
-        };
-        console.log("Game ref:" + props.gameid)
-        dispatch(postSquad(squadObj))
     }
 
     const handleSquadDetails = (event) => {
@@ -204,7 +253,7 @@ const SquadListComponent = ( props ) => {
                 :
                 (squadState === "register") ?
                 <div className='listViewContainer'>
-                    <SquadRegisterComponent state={setSquadState}></SquadRegisterComponent>
+                    <SquadRegisterComponent state={setSquadState} gameId={props.gameid}></SquadRegisterComponent>
                 </div>
                 :
                 (squadState === "add") ?

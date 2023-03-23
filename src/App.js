@@ -1,8 +1,8 @@
 import './App.css';
 import TopNavbar from "./components/navigationComponent/TopNavbar";
-
+import keycloak from './keycloak';
 import { useDispatch } from 'react-redux';
-import { fetchGames } from './states/dataSlice';
+import { fetchGames, fetchUserByToken } from './states/dataSlice';
 
 function App() {
   

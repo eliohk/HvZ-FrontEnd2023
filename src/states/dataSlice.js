@@ -111,6 +111,8 @@ export const fetchGames = createAsyncThunk(
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+            userTokenRef: postObj.userTokenRef,
+            gameRef: postObj.gameRef,
             biteCode: postObj.biteCode,
             patientZero: postObj.patientzero,
             human: postObj.human

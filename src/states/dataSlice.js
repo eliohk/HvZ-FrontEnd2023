@@ -285,7 +285,6 @@ export const dataSlice = createSlice({
           state.markers.push(player);
         })
 
-        localStorage.setItem("currGame", JSON.stringify(action.payload));
     },
     [postCheckIn.fulfilled]:(state, action) => {
       state.markers.map((marker, i) => {

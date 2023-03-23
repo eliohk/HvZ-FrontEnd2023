@@ -1,6 +1,7 @@
 html, body {
   background-color: #2E2E2E;
   height: 100% !important;
+  width: 100% !important;
   overflow: auto !important;
   min-height: 100vh !important;
 
@@ -11,6 +12,15 @@ html, body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* hide scrollbar for chrome, safari and opera */
+body::-webkit-scrollbar {
+  display: none;
 }
 
 code {

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 .listViewContainer {
     display: flex;
     flex-direction: column;
@@ -5,12 +7,15 @@
     background-color: #2E2E2E;
     border-radius: 28px;
     height: 100%;
+    width: 100%;
 }
 
 .headerContainer {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 1rem;
+    width: 100%;
 }
 
 .title {
@@ -20,6 +25,66 @@
     margin-bottom: -1em;
 }
 
+.tempMainList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.alignSquadTitle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+}
+
+.rightAlignRet {
+    display: flex;
+    margin-top: 1rem;
+    width: 80%;
+    flex-direction: row;
+    align-items: end;
+    justify-content: end;
+}
+
+#exitIcon2 {
+    width: 15px;
+}
+
+#addToSquad {
+    display: flex;
+    align-items: center;
+    width: 6em;
+    justify-content: space-between;
+    background-color: #626263;
+    border: white solid;
+    padding: 4px;
+    border-radius: 32px;
+    color: white;
+}
+
+.hrTest {
+    width: 100%;
+}
+
+.hrTitle {
+    width: 100%;
+}
+
+#playerListHr {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#plusImg {
+    width: 20px;
+    height: 20px;
+    border-radius: 32px;
+}
+
 #biteTitle {
     margin-top: 8px;
     font-size: 14px;
@@ -27,7 +92,23 @@
     margin-bottom: 0;
 }
 
+#squadTitle {
+    margin: 0;
+    margin-top: 2rem;
+}
+
+#squadTitleStupidRetBtn {
+    margin: 0;
+    margin-bottom: 0.5rem;
+}
+
 .playerContainer {
+    width: 90%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     color: white;
 }
 
@@ -79,6 +160,7 @@
     justify-content: space-between;
     background-color: transparent;
     border: none;
+    font-family: 'Poppins', sans-serif;
     width: 100%;
 }
 
@@ -147,6 +229,13 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    width: 100%;
+}
+
+#squadName {
+    width: 50%;
+    border: none;
+    margin: 0.2rem;
 }
 
 .squadItem p {
@@ -159,7 +248,34 @@
 }
 
 .squadItem p:hover {
+    outline-color: transparent;
+    outline-style:solid;
     box-shadow: 0 0 0 1px black;
+    transition: 0.7s;
+}
+
+.delSquadBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 22px;
+    background-color: transparent;
+    border: none;
+    border-radius: 32px;
+}
+
+.delSquadBtn:hover {
+    background-color: #626263;
+    transition: 0.7s;
+}
+
+.delSquadBtn:hover img {
+    z-index: 999;
+}
+
+.delSquadBtn:focus {
+    transition: 0.7s;
 }
 
 #crtBtn {
@@ -173,6 +289,14 @@
     color: white;
     height: 40px;
     border: none;
+}
+
+#crtBtn:hover {
+    outline-color: transparent;
+    outline-style:solid;
+    box-shadow: 0 0 0 1px black;
+    transition: 0.7s;
+
 }
 
 #addBtn {
@@ -248,4 +372,137 @@
     border-width: 0.1px;
     transition: 0.7s;
     border-radius: 32px;
+}
+
+.alignSquadHeader {
+    width: 100%;
+    margin-top: 2rem;
+    margin-bottom: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#sqNameInput {
+    width: 80%;
+}
+
+#sqTitleReg {
+    font-size: 14px;
+    margin: 0;
+}
+
+#sqTitle {
+    font-size: 16px;
+    width: 100%;
+    margin: 0;
+}
+
+#savePlayer {
+    margin-top: -1.5rem;
+    background-color: #626263;
+    color: white;
+    border-radius: 32px;
+    border: solid black;
+    border-width: 0.1px;
+}
+
+#savePlayer:hover {
+    outline-color: transparent;
+    outline-style:solid;
+    box-shadow: 0 0 0 1px black;
+    transition: 0.7s;
+}
+
+#savePlayerSquadTitle {
+    margin: 0;
+}
+
+#savePlayerSquad {
+    background-color: #626263;
+    color: white;
+    border-radius: 32px;
+    border: solid black;
+    border-width: 0.1px;
+}
+
+#savePlayerSquadHidden {
+    visibility: hidden;
+    transition: 1s;
+}
+
+#savePlayerSquad:hover {
+    outline-color: transparent;
+    outline-style:solid;
+    box-shadow: 0 0 0 1px black;
+    transition: 0.7s;
+}
+
+#sqRegSave {
+    border-radius: 32px;
+    background-color: #626263;
+    border: black solid;
+    border-width: 0.1px;
+    color: white;
+    width: 20%;
+}
+
+#sqRegSave:hover {
+    outline-color: transparent;
+    outline-style:solid;
+    box-shadow: 0 0 0 1px black;
+    transition: 0.7s;
+}
+
+#randomText {
+    font-size: 12px;
+    color: #65C8FF;
+}
+
+.alignSquadPlayers {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.alignSquadPlayers h4 {
+    margin: 0;
+}
+
+.alignTitleAndSave {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.alignTitleAndSave h3 {
+    margin: 0;
+}
+
+#playerTag {
+    margin: 4px;
+    font-size: 12px;
+    width: 100%;
+}
+
+#playerTagged {
+    font-size: 12px;
+    margin: 4px;
+    width: 100%;
+    outline-color: transparent;
+    outline-style:solid;
+    box-shadow: 0 0 0 1px black;
+    background-color: #65C8FF;
+    border-width: 0.1px;
+    color: black;
+}
+
+#playerTag:hover {
+    outline-color: transparent;
+    outline-style:solid;
+    box-shadow: 0 0 0 1px black;
+    transition: 0.7s;
 }

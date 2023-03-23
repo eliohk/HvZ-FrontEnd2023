@@ -11,11 +11,14 @@ function App() {
   const dispatch = useDispatch();
   dispatch(fetchGames());
 
-  const userObj = {
-    userToken: keycloak.idTokenParsed.sub,
-    userName: keycloak.tokenParsed.preferred_username
+  if (keycloak.authenticated) {
+    const userObj = {
+      userToken: keycloak.idTokenParsed.sub,
+      userName: keycloak.tokenParsed.preferred_username
+    }
+    dispatch(fetchUserByToken(userObj))
   }
-  dispatch(fetchUserByToken(userObj))
+  
 
   return (
     <div className="App">

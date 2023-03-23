@@ -5,8 +5,8 @@ import LandingPage from "../../pages/landingPage/LandingPage";
 import GameDetailsPage from "../../pages/gameDetailsPage/GameDetailsPage";
 import MiniProfile from "../miniProfileComponent/MiniProfile";
 import GameDetails from "../gameDetailsComponent/GameDetails";
-import { fetchGameById, fetchUserByToken } from "../../states/dataSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { fetchGameById } from "../../states/dataSlice";
+import { useSelector } from "react-redux";
 import "../../css/topNavbar.css";
 import Register from "../registerComponent/Register";
 import AboutPage from "../../pages/aboutPage/AboutPage";
@@ -14,7 +14,6 @@ import keycloak from "../../keycloak";
 
 const TopNavbar = () => {
     const state = useSelector((data) => data);
-   
 
     //console.log("keykloak sjekker ", keycloak);
 

@@ -89,8 +89,6 @@ const GameDetailsPage = (props) => {
 
     function handleNewPlayer() {
         const playerObj = {
-            userTokenRef : keycloak.idTokenParsed.sub,
-            gameRef: currentGame.id,
             biteCode: "12345",
             patientZero: false,
             human: true

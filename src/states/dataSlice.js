@@ -83,7 +83,7 @@ export const fetchGames = createAsyncThunk(
     "sup",
     async (postObj) => {
       const response = await fetch (
-        `${baseUrl}user` , {
+        `${baseUrl}users` , {
           method: "POST",
           headers: {
             'Content-Type': 'application/json'

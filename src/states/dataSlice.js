@@ -48,7 +48,6 @@ export const fetchGames = createAsyncThunk(
   export const fetchUserByToken = createAsyncThunk(
     "ok",
     async (userObj) => {
-      console.log(userObj)
       const response = await fetch(
         `${baseUrl}user/token/${userObj.userToken}`, {
           headers : {

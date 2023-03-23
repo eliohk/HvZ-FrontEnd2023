@@ -5,7 +5,7 @@
     background-color: #2E2E2E;
     border-radius: 28px;
     height: 100%;
-    width: 16.5rem;
+    width: 100%;
 }
 
 .headerContainer {
@@ -22,10 +22,11 @@
 }
 
 #biteTitle {
-    margin-top: 8px;
-    font-size: 14px;
-    margin-left: 26px;
-    margin-bottom: 0;
+    margin-top: 4.31rem;
+    margin-bottom: 1.88rem;
+    font-size: 0.875rem;
+    font-weight: bold;
+    margin-left: 1.94rem;
 }
 
 .playerContainer {
@@ -44,12 +45,11 @@
     border-radius: 28px;
     border: solid black;
     height: 1.62rem;
-    width: 11.54rem;
+    width: 10rem;
     font-size: 0.825rem;
     padding-bottom: 25px;
     margin-right: 0.438rem;
-    
-    
+    margin-left: 0.1rem;
 }
 
 .dropdown-menu.show {
@@ -189,7 +189,7 @@
 
 #crtBtn1 {
     border-radius: 1.25rem;
-    background-color: #626263;
+    background-color: #525252;
     width: 10.62rem;
     height: 2.5rem;
     margin-bottom: 1.62rem;
@@ -202,6 +202,36 @@
     color: white;
     border: none;
 }
+#crtBtn1:hover{
+    outline-color: transparent;
+    outline-style:solid;
+    box-shadow: 0 0 0 1px black;
+    transition: 0.7s;
+    background-color: #A3A3A3;    
+}
+
+#crtBtn2 {
+    border-radius: 1.25rem;
+    background-color: #525252;
+    width: 10.62rem;
+    height: 2.5rem;
+    margin-bottom: 1.62rem;
+    font-size: 0.875rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    color: white;
+    border: none;
+}
+#crtBtn2:hover{
+    outline-color: transparent;
+    outline-style:solid;
+    box-shadow: 0 0 0 1px black;
+    transition: 0.7s;
+    background-color: #A3A3A3;    
+}
 
 #addBtn {
     width: 15px;
@@ -210,30 +240,44 @@
     border-radius: 128px;
     margin-right: 6px;
     color: white;
-    
 }
 
 #bcInput {
-    width: 65%;
-    margin-left: 10%;
+    width: 30%;
+    margin-bottom: 1.62rem;
+    margin-left: 1.94rem;
+    background-color: transparent;
+    color: #A6A6A6;
+    border: 0;
 }
 
 #bcGenerator {
     border-radius: 32px;
-    border: solid black;
-    margin-top: 8px;
-    margin-left: 15%;
-    height: 50px;
+    border:black;
+    height: 2.5rem;
     background-color: transparent;
     border-width: 1px;
     color: white;
-    background-color: #626263;
+    background-color: #525252;
+    width: 9.375rem;
+    font-size: 0.875rem;
+    margin-left: 3.5rem;  
+    margin-bottom: 4.44rem;  
+}
+
+#bcGenerator:hover{
+    outline-color: transparent;
+    outline-style:solid;
+    box-shadow: 0 0 0 1px black;
+    transition: 0.7s;
+    background-color: #A3A3A3;    
 }
 
 .killContainer {
     display: flex;
     flex-direction: column;
     align-items:start;
+    justify-content: center;
 }
 
 .biteMarker {
@@ -241,17 +285,19 @@
     display: flex;
     flex-direction: column;
     align-items: start;
-    margin-top: 3em;
-    margin-left: 2em;
+    margin-left: 1.94em;
+    font-size: 0.875rem;
 }
 
 #coordinates {
     white-space: nowrap;
     font-size: 12px;
+    margin-top:0.88rem;
+    color: #BBBBBB;
 }
 
 #markerLocation {
-    font-weight: 700;
+    font-weight: Bold;
 }
 
 .biteMarker p {
@@ -277,4 +323,27 @@
     border-width: 0.1px;
     transition: 0.7s;
     border-radius: 32px;
+}
+
+#crtKillBtn {
+    border-radius: 32px;
+    background-color: #626263;
+    margin-right: 1.563rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    color: white;
+    border: none;
+    
+}
+
+#cancelKillBtn{
+    background-color: transparent;
+    border: 0;
+}
+
+#exitIconKill{
+    width: 1rem;
+    height: 1rem;
 }

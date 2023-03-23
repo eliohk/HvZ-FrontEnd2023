@@ -6,6 +6,7 @@ import squadIcon from "../../resources/squadIcon.svg";
 import addIcon from "../../resources/addIcon.svg";
 import retIcon from "../../resources/retIcon.svg";
 import editIcon from "../../resources/editIcon.svg";
+import addButtonW from "../../resources/addButtonW.svg";
 import Popup from 'reactjs-popup';
 import keycloak from '../../keycloak';
 
@@ -130,7 +131,7 @@ const KillsListComponent = ( props ) => {
                     {addGameClicked ?   <div className='bitecodeInput'>
                                         <div className='killBtns'>
                                             <button id="crtKillBtn" onClick={handleSave} >Save</button>
-                                            <button id="cancelKillBtn" onClick={handleCancel} >Cancel</button>
+                                            <button href="/" className="button" id="cancelKillBtn" onClick={handleCancel} ><img id="exitIconKill" src={retIcon} alt="Return button" /></button>
                                         </div>
                                         <hr></hr>
                                         <p className="overBitecode">Write bitecode under</p>
@@ -138,7 +139,7 @@ const KillsListComponent = ( props ) => {
                                         <p className="overBitecode">Write kill story under</p>
                                         <input type="text" value={story} onChange={handleStoryChange}/>
                                         </div>
-                    : <button id="crtBtn" onClick={addKill}><img src={addIcon} alt="Add button" id="addBtn"/>Add kill</button>}
+                    : <button id="crtBtn2" onClick={addKill}><img src={addButtonW} alt="Add button" id="addBtn"/>Add player kill</button>}
                 </div>
                 {addGameClicked ?   <div className='headerContainer'>
                                         {/* Name - Faction - Squad */}
@@ -148,7 +149,9 @@ const KillsListComponent = ( props ) => {
                                     : 
                                     <div className='headerContainer'>
                                         {/* Name - Faction - Squad */}
-                                        <p className="title">Kill info</p>
+                                        <p className="title">Name</p>
+                                        <p className="title">Squad</p>
+                                        <p className="title">Bitecode</p>
                                     </div>}
 
                 <hr></hr>

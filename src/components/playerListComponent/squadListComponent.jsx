@@ -33,7 +33,7 @@ const SquadListComponent = ( props ) => {
             {/*<h3 id="listTitle"><img src={squadIcon} style={{ width: "40px" }} alt="Squad icon" /> Squad list</h3>*/}
             <h3 id="squadTitle">Squad list</h3>
             <div className='playerContainer'>
-                <button id="crtBtn" onClick={handleNewSquad}><img src={addButtonW} alt="Add button" id="addBtn"/>Create a Squad</button>
+                <button id="crtBtn1" onClick={handleNewSquad}><img src={addButtonW} alt="Add button" id="addBtn"/>Create a Squad</button>
                 {squads}
             </div>
         </div>

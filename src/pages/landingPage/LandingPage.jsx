@@ -121,10 +121,8 @@ const LandingPage = () => {
         });
 
     let gamesArray;
-    console.log("VI ER HER")
     if (allGames.data.gamesArray != undefined) {
         if (sortVariable === 'Title') {
-            console.log("INNE HER")
             gamesArray = gamesSortedTitle;
         } else if (sortVariable === 'Date') {
             gamesArray = gamesSortedDate
@@ -173,7 +171,6 @@ const LandingPage = () => {
             dispatch(fetchGames());
         }
     }, []);
-    console.log("NÅ ER VI HER")
     
    // console.log("keykloak sjekk ", keycloak.realmAccess.roles[1]);
 
@@ -314,7 +311,6 @@ const LandingPage = () => {
                     {removeSortButton()}
                     {<button className="landingside-create-game-container" onClick={handleClickOpen}><GrAddCircle />  Create Game</button> }
                 </div>
-                {console.log("GAMESARRAY: " + gamesArray)}
                 {gamesArray == null ? <p>No games yet</p> : gamesArray}
             </div>
             {/*<button onClick={handleNewGame}>New game</button> */}

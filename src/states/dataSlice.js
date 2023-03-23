@@ -44,6 +44,63 @@ export const fetchGames = createAsyncThunk(
       }
     }
   )   
+
+  export const fetchUserByToken = createAsyncThunk(
+    "ok",
+    async (userObj) => {
+      console.log(userObj)
+      const response = await fetch(
+        `${baseUrl}user/token/${userObj.userToken}`, {
+          headers : {
+          },
+        }
+      )
+      console.log(response.status)
+      if (response.status === 400){
+        console.log("hei på deg")
+
+        const response2 = await fetch (
+          `${baseUrl}user` , {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              username: userObj.userName,
+              idToken: userObj.userToken
+            })
+          }
+        )
+        if (response2.ok){
+          console.log("helo")
+        }
+        console.log(response2)
+        console.log("hei på deg 2")
+      }
+    }
+  )
+
+  export const postUser = createAsyncThunk(
+    "sup",
+    async (postObj) => {
+      const response = await fetch (
+        `${baseUrl}user` , {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            username: postObj.username,
+            idToken: postObj.idToken
+          })
+        }.then(response => {
+          if (!response.ok) {
+            throw new Error('Post user not working :DDDD XXXXDDDDDDDd')
+          }
+        })
+      )
+    }
+  )
     
     
   //TODO HAR IKKE LAGET REDUX SHIT FOR THIS SHIT
@@ -56,6 +113,8 @@ export const fetchGames = createAsyncThunk(
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+            userTokenRef: postObj.userTokenRef,
+            gameRef: postObj.gameRef,
             biteCode: postObj.biteCode,
             patientZero: postObj.patientzero,
             human: postObj.human
@@ -246,6 +305,7 @@ export const dataSlice = createSlice({
     markers: [],
     currGame: {},
     token: null,
+    user: null,
   },
   reducers: {
     setFirstName: (state, payload) => {

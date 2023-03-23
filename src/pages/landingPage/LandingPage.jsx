@@ -32,7 +32,7 @@ const LandingPage = () => {
 
     //console.log("sjekker keykloak", keycloak)
 
-   //console.log("keykloak sjekk ", keycloak.realmAccess.roles[1]);
+    //console.log("keykloak sjekk ", keycloak.realmAccess.roles[1]);
 
 
     const handleSortVariable = (event) => {
@@ -63,7 +63,7 @@ const LandingPage = () => {
             } else {
                 return (
                     <NavLink className="removeUnderline" key={i}>
-                        <div className='widthConstraint' onClick={handleGameClick(gameData.id-1)}>
+                        <div className='widthConstraint' onClick={handleGameClick(gameData.id - 1)}>
                             <GameListComponent game={gameData} key={gameData.id}></GameListComponent>
                         </div>
                     </NavLink>
@@ -79,7 +79,7 @@ const LandingPage = () => {
             } else {
                 return (
                     <NavLink className="removeUnderline" key={i}>
-                        <div className='widthConstraint' onClick={handleGameClick(gameData.id-1)}>
+                        <div className='widthConstraint' onClick={handleGameClick(gameData.id - 1)}>
                             <GameListComponent game={gameData} key={gameData.id}></GameListComponent>
                         </div>
                     </NavLink>
@@ -95,7 +95,7 @@ const LandingPage = () => {
             } else {
                 return (
                     <NavLink className="removeUnderline" key={i}>
-                        <div className='widthConstraint' onClick={handleGameClick(gameData.id-1)}>
+                        <div className='widthConstraint' onClick={handleGameClick(gameData.id - 1)}>
                             <GameListComponent game={gameData} key={gameData.id}></GameListComponent>
                         </div>
                     </NavLink>
@@ -112,7 +112,7 @@ const LandingPage = () => {
             } else {
                 return (
                     <NavLink className="removeUnderline" key={i}>
-                        <div className='widthConstraint' onClick={handleGameClick(gameData.id-1)}>
+                        <div className='widthConstraint' onClick={handleGameClick(gameData.id - 1)}>
                             <GameListComponent game={gameData} key={gameData.id}></GameListComponent>
                         </div>
                     </NavLink>
@@ -121,10 +121,8 @@ const LandingPage = () => {
         });
 
     let gamesArray;
-    console.log("VI ER HER")
     if (allGames.data.gamesArray != undefined) {
         if (sortVariable === 'Title') {
-            console.log("INNE HER")
             gamesArray = gamesSortedTitle;
         } else if (sortVariable === 'Date') {
             gamesArray = gamesSortedDate
@@ -135,7 +133,7 @@ const LandingPage = () => {
         }
     }
     const handleNewGame = () => {
-       // console.log("Henlo")
+        // console.log("Henlo")
 
         const gameObj = {
             title: title,
@@ -173,75 +171,15 @@ const LandingPage = () => {
             dispatch(fetchGames());
         }
     }, []);
-    console.log("NÅ ER VI HER")
-    
-   // console.log("keykloak sjekk ", keycloak.realmAccess.roles[1]);
+
+    // console.log("keykloak sjekk ", keycloak.realmAccess.roles[1]);
 
     const removeSortButton = () => {
-        if (keycloak.authenticated == true){
-           // console.log("sjekke role for khoi bruker", keycloak.realmAccess.roles[0] == "ADMIN")
-            //console.log("sjekke role for khoi bruker", keycloak.realmAccess.roles[0])
+        
+        // Dersom brukeren ikke er authenticated skal vedkommende kunne se og sortere 
 
-            if(keycloak.realmAccess.roles[0]=== "ADMIN"){
-                //console.log("hello world")
-                return(
-                    <>
-                    <button className="landingside-create-game-container" onClick={handleClickOpen}><GrAddCircle />  Create Game</button>
-                    </>
-
-                ) 
-            } 
-            else {
-                return (
-                    <>   
-                    <Dialog className='testing' open={open} onClose={handleClose}>
-                        <h3 className='dialog-content-modal' > Create a new game</h3>
-                        <DialogContent className='dialog-content-modal' >
-                            <div className='align-input-label'>
-                                <label className='landingpage-label'>Game name</label>
-                                <input className='texfield'
-                                    value={title}
-                                    sx={{ fontWeight: 800 }}
-                                    onChange={titles}>
-                                </input>
-                            </div>
-                            <div className='align-input-label'>
-                                <label className='landingpage-label'>Description</label>
-                                <input
-                                    sx={{ fontWeight: 'bold' }}
-                                    className='texfield'
-                                    value={description}
-                                    onChange={descriptions}>
-                                </input>
-                            </div>
-                            <div className='align-input-label'>
-                                <label className='landingpage-label'>Game type</label>
-
-                                <input
-                                    className='texfield'
-                                    value={gameType}
-                                    onChange={gameTypes}>
-                                </input>
-                            </div>
-                            <div className='align-input-label'>
-                                <label className='landingpage-label'>Max number of player</label>
-                                <input
-                                    className='texfield'
-                                    value={maxPlayer}
-                                    onChange={maxAntallPlayer}></input>
-                            </div>
-                            <div className='button-modal-container'>
-                                <button className='modal-button' onClick={(handleNewGame)}>save</button>
-                                <button className='modal-button' onClick={(handleClose)}>close</button>
-                            </div>
-                        </DialogContent>
-                    </Dialog>
-                    </>
-                )
-            }
-        }
-
-        else {
+        if(keycloak.authenticated == false){
+            console.log("bruker er ikke authenticated")
             return (
                 <>
                     <div>
@@ -300,25 +238,160 @@ const LandingPage = () => {
 
                 </>
             )
+
+        }
+
+        // Dersom vedkommende er authentived og kan logge inn 
+        if (keycloak.authenticated == true) {
+
+            //console.log("sjekke role for bruker", keycloak.realmAccess.roles[0] == "ADMIN")
+            //console.log("sjekke role for khoi bruker", keycloak.realmAccess.roles[0])
+
+            // Dersom bruker har admin role skal han kunne lage et nytt spill
+            if (keycloak.realmAccess.roles[0] === "ADMIN") {
+                return (
+                    <>
+                        <div>
+                            <label id="label">Sort by</label>
+                            <SplitButton variant="primary" key="end" drop="end" id="dropdown-button-drop-end" title={sortVariable}>
+                                <div className="horizontalItems">
+                                    <Dropdown.Item className="items" onClick={handleSortVariable}>Date</Dropdown.Item>
+                                    <Dropdown.Item className="items" onClick={handleSortVariable}>State</Dropdown.Item>
+                                    <Dropdown.Item className="items" onClick={handleSortVariable}>Players</Dropdown.Item>
+                                    <Dropdown.Item className="items" onClick={handleSortVariable}>Title</Dropdown.Item>
+                                </div>
+                            </SplitButton>
+                        </div>
+                        <button className="landingside-create-game-container" onClick={handleClickOpen}><GrAddCircle />  Create Game</button>
+                        <Dialog className='testing' open={open} onClose={handleClose}>
+                            <h3 className='dialog-content-modal' > Create a new game</h3>
+                            <DialogContent className='dialog-content-modal' >
+                                <div className='align-input-label'>
+                                    <label className='landingpage-label'>Game name</label>
+                                    <input className='texfield'
+                                        value={title}
+                                        sx={{ fontWeight: 800 }}
+                                        onChange={titles}>
+                                    </input>
+                                </div>
+                                <div className='align-input-label'>
+                                    <label className='landingpage-label'>Description</label>
+                                    <input
+                                        sx={{ fontWeight: 'bold' }}
+                                        className='texfield'
+                                        value={description}
+                                        onChange={descriptions}>
+                                    </input>
+                                </div>
+                                <div className='align-input-label'>
+                                    <label className='landingpage-label'>Game type</label>
+
+                                    <input
+                                        className='texfield'
+                                        value={gameType}
+                                        onChange={gameTypes}>
+                                    </input>
+                                </div>
+                                <div className='align-input-label'>
+                                    <label className='landingpage-label'>Max number of player</label>
+                                    <input
+                                        className='texfield'
+                                        value={maxPlayer}
+                                        onChange={maxAntallPlayer}></input>
+                                </div>
+                                <div className='button-modal-container'>
+                                    <button className='modal-button' onClick={(handleNewGame)}>save</button>
+                                    <button className='modal-button' onClick={(handleClose)}>close</button>
+                                </div>
+                            </DialogContent>
+                        </Dialog>
+
+                    </>
+
+                )
+            }
+
+            // Dersom vedkommende ikke har admin rolle skal vedkommende kunne sortere eksisterende spill
+            else {
+                return (
+                    <>
+                     <div>
+                        <label id="label">Sort by</label>
+                        <SplitButton variant="primary" key="end" drop="end" id="dropdown-button-drop-end" title={sortVariable}>
+                            <div className="horizontalItems">
+                                <Dropdown.Item className="items" onClick={handleSortVariable}>Date</Dropdown.Item>
+                                <Dropdown.Item className="items" onClick={handleSortVariable}>State</Dropdown.Item>
+                                <Dropdown.Item className="items" onClick={handleSortVariable}>Players</Dropdown.Item>
+                                <Dropdown.Item className="items" onClick={handleSortVariable}>Title</Dropdown.Item>
+                            </div>
+                        </SplitButton>
+                    </div>
+                    <Dialog className='testing' open={open} onClose={handleClose}>
+                        <h3 className='dialog-content-modal' > Create a new game</h3>
+                        <DialogContent className='dialog-content-modal' >
+                            <div className='align-input-label'>
+                                <label className='landingpage-label'>Game name</label>
+                                <input className='texfield'
+                                    value={title}
+                                    sx={{ fontWeight: 800 }}
+                                    onChange={titles}>
+                                </input>
+                            </div>
+                            <div className='align-input-label'>
+                                <label className='landingpage-label'>Description</label>
+                                <input
+                                    sx={{ fontWeight: 'bold' }}
+                                    className='texfield'
+                                    value={description}
+                                    onChange={descriptions}>
+                                </input>
+                            </div>
+                            <div className='align-input-label'>
+                                <label className='landingpage-label'>Game type</label>
+
+                                <input
+                                    className='texfield'
+                                    value={gameType}
+                                    onChange={gameTypes}>
+                                </input>
+                            </div>
+                            <div className='align-input-label'>
+                                <label className='landingpage-label'>Max number of player</label>
+                                <input
+                                    className='texfield'
+                                    value={maxPlayer}
+                                    onChange={maxAntallPlayer}></input>
+                            </div>
+                            <div className='button-modal-container'>
+                                <button className='modal-button' onClick={(handleNewGame)}>save</button>
+                                <button className='modal-button' onClick={(handleClose)}>close</button>
+                            </div>
+                        </DialogContent>
+                    </Dialog>
+                    </>
+                    
+                )
+            }
         }
     }
+    
 
     return (
-      <>
-      <div className="mainLandingContainer">
-      
-            <div className="secondaryLandingContainer">
-                <div className='container-level-sort-create-game'>
-                    {/* <div className="sortByContainer"> */}
-                    {/* </div> */}
-                    {removeSortButton()}
-                    {<button className="landingside-create-game-container" onClick={handleClickOpen}><GrAddCircle />  Create Game</button> }
+        <>
+            <div className="mainLandingContainer">
+
+                <div className="secondaryLandingContainer">
+                    <div className='container-level-sort-create-game'>
+                        {/* <div className="sortByContainer"> */}
+                        {/* </div> */}
+                        {removeSortButton()}
+                        {/* {<button className="landingside-create-game-container" onClick={handleClickOpen}><GrAddCircle />  Create Game</button> } */}
+                    </div>
+                    {/* {console.log("GAMESARRAY: " + gamesArray)} */}
+                    {gamesArray == null ? <p>No games yet</p> : gamesArray}
                 </div>
-                {console.log("GAMESARRAY: " + gamesArray)}
-                {gamesArray == null ? <p>No games yet</p> : gamesArray}
+                {/*<button onClick={handleNewGame}>New game</button> */}
             </div>
-            {/*<button onClick={handleNewGame}>New game</button> */}
-        </div>
         </>
     )
 }

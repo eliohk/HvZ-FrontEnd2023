@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import keycloak from "../keycloak";
 import Pusher from "pusher-js";
+import { useDispatch } from "react-redux";
 
 //TODO: change to hosted url in deployment
 const baseUrl = 'http://localhost:8080/api/v1/'
@@ -17,8 +18,6 @@ export const fetchGames = createAsyncThunk(
           },
       }
       )
-
-    
       let result = await response.json()
   
       if (result.length != 0) {
@@ -297,7 +296,7 @@ export const dataSlice = createSlice({
     },
     [postGame.fulfilled]:(state, action) => {
       console.log("Game has been posted :)")
-      console.log(action.meta.arg)
+      /*console.log(action.meta.arg)
       action.meta.arg.players = []
       let today = new Date()
       let month, date;
@@ -314,7 +313,7 @@ export const dataSlice = createSlice({
       }
       let currentDate = date + '-' + (month) + '-' + today.getFullYear();
       action.meta.arg.date = currentDate
-      state.gamesArray.push(action.meta.arg)
+      state.gamesArray.push(action.meta.arg)*/
     },
     [postSquad.fulfilled]:(state,action) => {
       console.log("Squad has been posted, not updated in redux");

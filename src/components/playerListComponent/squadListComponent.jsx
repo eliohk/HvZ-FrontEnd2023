@@ -6,6 +6,37 @@ import addIcon from "../../resources/addIcon.svg";
 import "../../css/playerListComponent.css";
 import retIcon from "../../resources/retIcon.svg";
 
+
+// All players list
+const AllPlayersComponent = ( props ) => {
+    const players = props.players.map((player, i) => {
+        return (
+            <p key={i}>Player {player.id}</p>
+        )
+    })
+
+    const handleRet = () => {
+        props.retVal(true);
+    }
+
+    return (
+        <div className="mainListCon">
+            <div className='listViewContainer'>
+                <div className="rightAlignRet">
+                    <a onClick={handleRet} id="retBtn" className="button"><img id="exitIcon2" src={retIcon} alt="Return button" /></a>
+                </div>
+                <div className="alignSquadTitle">
+                    <h3 id="squadTitle">Player list</h3>
+                    <hr className="hrTitle"></hr>
+                </div>
+                <div className='playerContainer'>
+                    {players}
+                </div>
+            </div>
+        </div>
+    )
+}
+
 // ADD NEW SQUADS HERE
 const SquadRegisterComponent = ( props ) => {
     const rd = useSelector((state) => state);
@@ -42,15 +73,15 @@ const SquadRegisterComponent = ( props ) => {
     }
 
     return (
-        <div className="mainListCon">
+        <div className="tempMainList">
             <div className="rightAlignRet">
                 <a onClick={handleRet} id="retBtn" className="button"><img id="exitIcon2" src={retIcon} alt="Return button" /></a>
             </div>
             <div className="alignSquadHeader">
-                <h3 id="sqTitle"> Create a new squad</h3>
+                <h3 id="sqTitleReg"> Create a new squad</h3>
                 <button id="sqRegSave" type="button">Save</button>
             </div>
-            <input id="sqNameInput" type="text" placeholder="Enter name here .." name="name"/>
+            <input id="sqNameInput" type="text" placeholder="Enter squad name here .." name="name"/>
             <p id="randomText">Select members to add to your team</p>
             <div className="alignSquadPlayers">
             <h4>List of players</h4>
@@ -62,11 +93,13 @@ const SquadRegisterComponent = ( props ) => {
 
 // DETAILED VIEW OF SQUAD W/ ALL PLAYERS
 const SquadDetailsComponent = ( props ) => {
-    console.log(props.squad);
+    const [ addState, setAddState ] = useState(true);
 
     const handleDelete = (event) => {
         console.log(event.target.value);
     }
+
+    console.log(props);
 
     const squads = props.squad.players.map((player, i) => {
         return (
@@ -85,6 +118,14 @@ const SquadDetailsComponent = ( props ) => {
         props.state("list")
     }
 
+    const handleAdd = (event) => {
+        if (addState) {
+            setAddState(false)
+        } else {
+            setAddState(true)
+        }
+    }
+
     return (
         <div className='listViewContainer'>
             {/*<h3 id="listTitle"><img src={squadIcon} style={{ width: "40px" }} alt="Squad icon" /> Player list</h3>*/}
@@ -95,7 +136,7 @@ const SquadDetailsComponent = ( props ) => {
                 <h3 id="squadTitleStupidRetBtn">{props.squad.name}</h3>
             </div>
             <div className='playerContainer'>
-                <button id="crtBtn"><img id="plusImg" src={addIcon} alt="Add member to squad button"/>Add player</button>
+                <button id="crtBtn" onClick={handleAdd}><img id="plusImg" src={addIcon} alt="Add member to squad button"/>Add player</button>
                 <div className='headerContainer'>
                     {/* Name - Faction - Squad */}
                     <p className="title">Name</p>
@@ -130,9 +171,8 @@ const SquadListComponent = ( props ) => {
     }
 
     const handleSquadDetails = (event) => {
-        console.log(event.target.innerHTML);
         props.data.map((squad, i) => {
-            if ("Squad " + squad.id === event.target.innerHTML) {
+            if (squad.name === event.target.innerHTML) {
                 setCurrSquad(squad);
             }
         });
@@ -142,7 +182,7 @@ const SquadListComponent = ( props ) => {
     const squads = props.data.map((squad, i) => {
         return (
             <div className="squadItem" key={i}>
-                <p id="squadName" onClick={handleSquadDetails}>Squad {squad.id}</p>
+                <p id="squadName" onClick={handleSquadDetails}>{squad.name}</p>
             </div>
         );
     });
@@ -169,7 +209,7 @@ const SquadListComponent = ( props ) => {
                 :
                 (squadState === "add") ?
                 <div className='listViewContainer'>
-                    <SquadDetailsComponent squad={currSquad} state={setSquadState}></SquadDetailsComponent>
+                    <SquadDetailsComponent squad={currSquad} state={setSquadState} players={props.players}></SquadDetailsComponent>
                 </div>
                 :
                 null

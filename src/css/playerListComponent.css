@@ -25,7 +25,12 @@
     margin-bottom: -1em;
 }
 
-.mainListCon {
+.tempMainList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
 .alignSquadTitle {
@@ -341,9 +346,10 @@
 .alignSquadHeader {
     width: 100%;
     margin-top: 2rem;
+    margin-bottom: 1rem;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 #sqNameInput {
@@ -364,9 +370,17 @@
 #sqRegSave {
     border-radius: 32px;
     background-color: #626263;
-    border: none;
+    border: black solid;
+    border-width: 0.1px;
     color: white;
     width: 20%;
+}
+
+#sqRegSave:hover {
+    outline-color: transparent;
+    outline-style:solid;
+    box-shadow: 0 0 0 1px black;
+    transition: 0.7s;
 }
 
 #randomText {
@@ -388,12 +402,19 @@
 }
 
 #playerTagged {
-    border: yellow solid;
-    border-radius: 16px;
+    margin: 4px;
     width: 100%;
+    outline-color: transparent;
+    outline-style:solid;
+    box-shadow: 0 0 0 1px black;
+    background-color: #65C8FF;
+    border-width: 0.1px;
+    color: black;
 }
 
 #playerTag:hover {
-    border: white solid;
-    border-radius: 16px;
+    outline-color: transparent;
+    outline-style:solid;
+    box-shadow: 0 0 0 1px black;
+    transition: 0.7s;
 }

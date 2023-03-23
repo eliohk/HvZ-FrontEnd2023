@@ -83,7 +83,7 @@ const GameDetailsPage = (props) => {
         if (view == "players") {
             return <PlayerListComponent data={currentGame.players} squad={currentGame.squads} />;
         } else if (view == "squad") {
-            return <SquadListComponent data={currentGame.squads} gameid={currentGame.id} />;
+            return <SquadListComponent data={currentGame.squads} gameid={currentGame.id} players={currentGame.players} />;
         } else if (view == "human") {
             return <BiteCodeComponent />
         } else if (view == "zombie") {

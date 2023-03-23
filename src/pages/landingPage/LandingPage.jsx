@@ -57,70 +57,83 @@ const LandingPage = () => {
 
     const gamesSortedTitle = [].concat(allGames.data.gamesArray)
         .sort((a, b) => a.title > b.title ? 1 : -1)
-        .map((gameData, i) => {            
-            return (
-                <NavLink className="removeUnderline" key={i}>
-                    <div className='widthConstraint' onClick={handleGameClick(gameData.id-1)}>
-                        <GameListComponent game={gameData} key={gameData.id}></GameListComponent>
-                    </div>
-                </NavLink>
-            );
+        .map((gameData, i) => {
+            if (gameData == undefined) {
+                return null
+            } else {
+                return (
+                    <NavLink className="removeUnderline" key={i}>
+                        <div className='widthConstraint' onClick={handleGameClick(gameData.id-1)}>
+                            <GameListComponent game={gameData} key={gameData.id}></GameListComponent>
+                        </div>
+                    </NavLink>
+                );
+            }
         });
 
     const gamesSortedState = [].concat(allGames.data.gamesArray)
         .sort((a, b) => a.status < b.status ? 1 : -1)
         .map((gameData, i) => {
-            
-
-            return (
-                <NavLink className="removeUnderline" key={i}>
-                    <div className='widthConstraint' onClick={handleGameClick(gameData.id-1)}>
-                        <GameListComponent game={gameData} key={gameData.id}></GameListComponent>
-                    </div>
-                </NavLink>
-            );
+            if (gameData == undefined) {
+                return null
+            } else {
+                return (
+                    <NavLink className="removeUnderline" key={i}>
+                        <div className='widthConstraint' onClick={handleGameClick(gameData.id-1)}>
+                            <GameListComponent game={gameData} key={gameData.id}></GameListComponent>
+                        </div>
+                    </NavLink>
+                );
+            }
         });
 
     const gamesSortedPlayers = [].concat(allGames.data.gamesArray)
         .sort((a, b) => (a.players) > (b.players) ? 1 : -1)
         .map((gameData, i) => {
-            return (
-                <NavLink className="removeUnderline" key={i}>
-                    <div className='widthConstraint' onClick={handleGameClick(gameData.id-1)}>
-                        <GameListComponent game={gameData} key={gameData.id}></GameListComponent>
-                    </div>
-                </NavLink>
-            );
+            if (gameData == undefined) {
+                return null
+            } else {
+                return (
+                    <NavLink className="removeUnderline" key={i}>
+                        <div className='widthConstraint' onClick={handleGameClick(gameData.id-1)}>
+                            <GameListComponent game={gameData} key={gameData.id}></GameListComponent>
+                        </div>
+                    </NavLink>
+                );
+            }
         });
 
     // TODO not sure if this one works properly!
     const gamesSortedDate = [].concat(allGames.data.gamesArray)
         .sort((a, b) => new Date(a.date) > new Date(b.date) ? 1 : -1)
         .map((gameData, i) => {
-            return (
-                <NavLink className="removeUnderline" key={i}>
-                    <div className='widthConstraint' onClick={handleGameClick(gameData.id-1)}>
-                        <GameListComponent game={gameData} key={gameData.id}></GameListComponent>
-                    </div>
-                </NavLink>
-            );
+            if (gameData == undefined) {
+                return null
+            } else {
+                return (
+                    <NavLink className="removeUnderline" key={i}>
+                        <div className='widthConstraint' onClick={handleGameClick(gameData.id-1)}>
+                            <GameListComponent game={gameData} key={gameData.id}></GameListComponent>
+                        </div>
+                    </NavLink>
+                );
+            }
         });
 
-
-
-
     let gamesArray;
-//    console.log("game array ", gamesArray)
-    if (sortVariable === 'Title') {
-        gamesArray = gamesSortedTitle;
-    } else if (sortVariable === 'Date') {
-        gamesArray = gamesSortedDate
-    } else if (sortVariable === 'Players') {
-        gamesArray = gamesSortedPlayers
-    } else if (sortVariable === 'State') {
-        gamesArray = gamesSortedState
+    console.log("VI ER HER")
+    if (allGames.data.gamesArray != undefined) {
+        if (sortVariable === 'Title') {
+            console.log("INNE HER")
+            gamesArray = gamesSortedTitle;
+        } else if (sortVariable === 'Date') {
+            gamesArray = gamesSortedDate
+        } else if (sortVariable === 'Players') {
+            gamesArray = gamesSortedPlayers
+        } else if (sortVariable === 'State') {
+            gamesArray = gamesSortedState
+        }
     }
-
     const handleNewGame = () => {
        // console.log("Henlo")
 
@@ -131,8 +144,8 @@ const LandingPage = () => {
             maxPlayers: maxPlayer
         }
 
-
         dispatch(postGame(gameObj))
+        window.location.reload(false);
     }
 
     const titles = (e) => {
@@ -160,12 +173,12 @@ const LandingPage = () => {
             dispatch(fetchGames());
         }
     }, []);
-    
+    console.log("NÅ ER VI HER")
     
    // console.log("keykloak sjekk ", keycloak.realmAccess.roles[1]);
 
     const removeSortButton = () => {
-        if (allGames.data.gamesArray.length == 0 && keycloak.authenticated == true){
+        if (keycloak.authenticated == true){
            // console.log("sjekke role for khoi bruker", keycloak.realmAccess.roles[0] == "ADMIN")
             //console.log("sjekke role for khoi bruker", keycloak.realmAccess.roles[0])
 
@@ -242,7 +255,6 @@ const LandingPage = () => {
                             </div>
                         </SplitButton>
                     </div>
-                    {/* <button className="landingside-create-game-container" onClick={handleClickOpen}><GrAddCircle />  Create Game</button> */}
                     <Dialog className='testing' open={open} onClose={handleClose}>
                         <h3 className='dialog-content-modal' > Create a new game</h3>
                         <DialogContent className='dialog-content-modal' >
@@ -300,11 +312,12 @@ const LandingPage = () => {
                     {/* <div className="sortByContainer"> */}
                     {/* </div> */}
                     {removeSortButton()}
+                    {<button className="landingside-create-game-container" onClick={handleClickOpen}><GrAddCircle />  Create Game</button> }
                 </div>
-
-                {gamesArray}
+                {console.log("GAMESARRAY: " + gamesArray)}
+                {gamesArray == null ? <p>No games yet</p> : gamesArray}
             </div>
-            {/* <button onClick={handleNewGame}>New game</button> */}
+            {/*<button onClick={handleNewGame}>New game</button> */}
         </div>
         </>
     )

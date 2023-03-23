@@ -5,8 +5,9 @@ import { fetchGameById, postSquad } from '../../states/dataSlice';
 import addIcon from "../../resources/addIcon.svg";
 import "../../css/playerListComponent.css";
 import retIcon from "../../resources/retIcon.svg";
-const SquadRegisterComponent = ( props ) => {
 
+// ADD NEW SQUADS HERE
+const SquadRegisterComponent = ( props ) => {
     const rd = useSelector((state) => state);
     const [ chosenPlayers, setChosenPlayers ] = useState([]);
 
@@ -41,13 +42,13 @@ const SquadRegisterComponent = ( props ) => {
     }
 
     return (
-        <div>
+        <div className="mainListCon">
+            <div className="rightAlignRet">
+                <a onClick={handleRet} id="retBtn" className="button"><img id="exitIcon2" src={retIcon} alt="Return button" /></a>
+            </div>
             <div className="alignSquadHeader">
                 <h3 id="sqTitle"> Create a new squad</h3>
                 <button id="sqRegSave" type="button">Save</button>
-                <div className="rightAlignRet">
-                    <a onClick={handleRet} id="retBtn" className="button"><img id="exitIcon2" src={retIcon} alt="Return button" /></a>
-                </div>
             </div>
             <input id="sqNameInput" type="text" placeholder="Enter name here .." name="name"/>
             <p id="randomText">Select members to add to your team</p>
@@ -59,14 +60,23 @@ const SquadRegisterComponent = ( props ) => {
     )
 }
 
+// DETAILED VIEW OF SQUAD W/ ALL PLAYERS
 const SquadDetailsComponent = ( props ) => {
     console.log(props.squad);
+
+    const handleDelete = (event) => {
+        console.log(event.target.value);
+    }
+
     const squads = props.squad.players.map((player, i) => {
         return (
             <div className="playerItem" key={i}>
-                <p>Player {player.id}</p>
-                <p>Pussy</p>
-                <p>{player.human ? "Alive" : "Dead"}</p>
+                <>
+                    <p>Player {player.id}</p>
+                    <p>Pussy</p>
+                    <p>{player.human ? "Alive" : "Dead"}</p>
+                    <a onClick={handleDelete} id="smallBtn" className="button"><img id="smallBtnImg" src={retIcon} alt="Remove user button"/></a>
+                </>
             </div>
         );
     });
@@ -78,14 +88,14 @@ const SquadDetailsComponent = ( props ) => {
     return (
         <div className='listViewContainer'>
             {/*<h3 id="listTitle"><img src={squadIcon} style={{ width: "40px" }} alt="Squad icon" /> Player list</h3>*/}
+            <div className="rightAlignRet">
+                <a onClick={handleRet} id="retBtn" className="button"><img id="exitIcon2" src={retIcon} alt="Return button" /></a>
+            </div>
             <div className="alignSquadTitle">
-                <h3 id="squadTitle">{props.squad.name}</h3>
-                <div className="rightAlignRet">
-                    <a onClick={handleRet} id="retBtn" className="button"><img id="exitIcon2" src={retIcon} alt="Return button" /></a>
-                </div>
+                <h3 id="squadTitleStupidRetBtn">{props.squad.name}</h3>
             </div>
             <div className='playerContainer'>
-                <button id="addToSquad"><img id="plusImg" src={addIcon} alt="Add member to squad button"/>Add player</button>
+                <button id="crtBtn"><img id="plusImg" src={addIcon} alt="Add member to squad button"/>Add player</button>
                 <div className='headerContainer'>
                     {/* Name - Faction - Squad */}
                     <p className="title">Name</p>
@@ -102,6 +112,7 @@ const SquadDetailsComponent = ( props ) => {
     
 }
 
+// START/DEFAULT SQUAD VIEW
 const SquadListComponent = ( props ) => {
     const dispatch = useDispatch();
     // list, register, 
@@ -137,15 +148,13 @@ const SquadListComponent = ( props ) => {
     });
 
     return (
-        <div>
+        <div className="mainListCon">
             {(squadState === "list") ?
                 <div className='listViewContainer'>
                     {/*<h3 id="listTitle"><img src={squadIcon} style={{ width: "40px" }} alt="Squad icon" /> Squad list</h3>*/}
                     <div className="alignSquadTitle">
                         <h3 id="squadTitle">Squad list</h3>
-                        <div className="rightAlignRet">
-                            <a href="/" id="retBtn" className="button"><img id="exitIcon2" src={retIcon} alt="Return button" /></a>
-                        </div>
+                        <hr className="hrTitle"></hr>
                     </div>
                     <div className='playerContainer'>
                         <button id="crtBtn" onClick={handleNewSquad}><img src={addIcon} alt="Add button" id="addBtn"/>Create a Squad</button>

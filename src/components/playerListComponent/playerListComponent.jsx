@@ -170,7 +170,7 @@ const PlayerListComponent = ( props ) => {
 
     return (
         <div className='listViewContainer'>
-            <h3 id="listTitle">List of players</h3>
+            <h3 id="squadTitle">List of players</h3>
             {editable ?
                 <button id="crtBtn" onClick={handleSave} value="Save">Save</button>
                 :
@@ -182,7 +182,7 @@ const PlayerListComponent = ( props ) => {
                     <p className="title">Faction</p>
                     <p className="title">Squad</p>
                 </div>
-                <hr></hr>
+                <hr className='hrTitle'></hr>
                 <div className="playersDiv">
                     {players}
                 </div>

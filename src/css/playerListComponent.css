@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 .listViewContainer {
     display: flex;
     flex-direction: column;
@@ -5,6 +7,7 @@
     background-color: #2E2E2E;
     border-radius: 28px;
     height: 100%;
+    width: 100%;
 }
 
 .headerContainer {
@@ -12,6 +15,7 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 1rem;
+    width: 100%;
 }
 
 .title {
@@ -21,16 +25,24 @@
     margin-bottom: -1em;
 }
 
+.mainListCon {
+}
+
 .alignSquadTitle {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 90%;
 }
 
 .rightAlignRet {
-    position: relative;
-    left: 1.75rem;
-    bottom: 1rem;
+    display: flex;
+    margin-top: 1rem;
+    width: 80%;
+    flex-direction: row;
+    align-items: end;
+    justify-content: end;
 }
 
 #exitIcon2 {
@@ -53,6 +65,10 @@
     width: 100%;
 }
 
+.hrTitle {
+    width: 100%;
+}
+
 #plusImg {
     width: 20px;
     height: 20px;
@@ -64,6 +80,16 @@
     font-size: 14px;
     margin-left: 26px;
     margin-bottom: 0;
+}
+
+#squadTitle {
+    margin: 0;
+    margin-top: 2rem;
+}
+
+#squadTitleStupidRetBtn {
+    margin: 0;
+    margin-bottom: 0.5rem;
 }
 
 .playerContainer {
@@ -122,6 +148,7 @@
     justify-content: space-between;
     background-color: transparent;
     border: none;
+    font-family: 'Poppins', sans-serif;
     width: 100%;
 }
 
@@ -195,6 +222,8 @@
 
 #squadName {
     width: 100%;
+    border: none;
+    margin: 0.2rem;
 }
 
 .squadItem p {
@@ -207,7 +236,10 @@
 }
 
 .squadItem p:hover {
+    outline-color: transparent;
+    outline-style:solid;
     box-shadow: 0 0 0 1px black;
+    transition: 0.7s;
 }
 
 #crtBtn {
@@ -221,6 +253,14 @@
     color: white;
     height: 40px;
     border: none;
+}
+
+#crtBtn:hover {
+    outline-color: transparent;
+    outline-style:solid;
+    box-shadow: 0 0 0 1px black;
+    transition: 0.7s;
+
 }
 
 #addBtn {
@@ -299,15 +339,20 @@
 }
 
 .alignSquadHeader {
+    width: 100%;
     margin-top: 2rem;
-    margin-bottom: 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
 #sqNameInput {
-    width: 100%;
+    width: 75%;
+}
+
+#sqTitleReg {
+    font-size: 12px;
+    margin: 0;
 }
 
 #sqTitle {

@@ -163,6 +163,7 @@ const LandingPage = () => {
     
     
    // console.log("keykloak sjekk ", keycloak.realmAccess.roles[1]);
+   console.log(keycloak);
 
     const removeSortButton = () => {
         if (allGames.data.gamesArray.length == 0 && keycloak.authenticated == true){
@@ -175,7 +176,6 @@ const LandingPage = () => {
                     <>
                     <button className="landingside-create-game-container" onClick={handleClickOpen}><GrAddCircle />  Create Game</button>
                     </>
-
                 ) 
             } 
             else {

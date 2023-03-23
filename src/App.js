@@ -3,8 +3,6 @@ import TopNavbar from "./components/navigationComponent/TopNavbar";
 
 import { useDispatch } from 'react-redux';
 import { fetchGames } from './states/dataSlice';
-import keycloak from './keycloak';
-import { fetchUserByToken } from './states/dataSlice';
 
 function App() {
   
@@ -19,7 +17,6 @@ function App() {
     dispatch(fetchUserByToken(userObj))
   }
   
-
   return (
     <div className="App">
       <TopNavbar/>

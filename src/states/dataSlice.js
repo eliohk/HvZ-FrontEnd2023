@@ -101,7 +101,6 @@ export const fetchGames = createAsyncThunk(
     }
   )
     
-    
   //TODO HAR IKKE LAGET REDUX SHIT FOR THIS SHIT
   export const postPlayer = createAsyncThunk(
     'players',
@@ -112,8 +111,6 @@ export const fetchGames = createAsyncThunk(
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            userTokenRef: postObj.userTokenRef,
-            gameRef: postObj.gameRef,
             biteCode: postObj.biteCode,
             patientZero: postObj.patientzero,
             human: postObj.human
@@ -304,7 +301,6 @@ export const dataSlice = createSlice({
     markers: [],
     currGame: {},
     token: null,
-    user: null,
   },
   reducers: {
     setFirstName: (state, payload) => {

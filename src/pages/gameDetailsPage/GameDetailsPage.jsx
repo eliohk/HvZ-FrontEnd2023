@@ -22,6 +22,7 @@ import keycloak from "../../keycloak";
 // TODO: USE REDUX TO POPULATE :))))
 import ChatInputViewComponent from "../../components/chatInputViewComponent/ChatInputviewComponent";
 import Pusher from "pusher-js";
+import { current } from "@reduxjs/toolkit";
 
 const GameDetailsPage = (props) => {
     const [listView, setListView] = useState("players");
@@ -29,15 +30,10 @@ const GameDetailsPage = (props) => {
     const [editGameView, setEditGameView] = useState(false);
 
     let currentGame = allGames.data.currGame;
-
-    const data = localStorage.getItem("currGame");
-
-    console.log("data verdier ", data.data)
-
+    console.log(currentGame)
 
    // console.log("tester ut", typeof JSON.parse(data))
 
-    const dataJSON = JSON.parse(data);
     // CONTAINS ALL DATA FOR GAME
     //console.log(currentGame.chat);
 
@@ -93,11 +89,13 @@ const GameDetailsPage = (props) => {
 
     function handleNewPlayer() {
         const playerObj = {
+            userTokenRef: keycloak.idTokenParsed.sub,
+            gameRef: currentGame.id,
             biteCode: "12345",
             patientZero: false,
             human: true
         };
-
+        console.log(playerObj)
         dispatch(postPlayer(playerObj))
     }
 

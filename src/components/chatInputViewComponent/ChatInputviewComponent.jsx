@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { putGlobalChat } from '../../states/dataSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import keycloak from '../../keycloak';
-// import Pusher from "pusher-js";
+import Pusher from "pusher-js";
 
 const ChatInputViewComponent = (props) => {
     const [ chat, setChat ] = useState("Global chat");

@@ -35,8 +35,6 @@ const LandingPage = () => {
 
     //console.log("keykloak sjekk ", keycloak);
 
-
-
     const handleSortVariable = (event) => {
         let retval = event.target.innerHTML;
         //console.log(retval)
@@ -56,7 +54,6 @@ const LandingPage = () => {
         setOpen(false);
     };
 
-
     const gamesSortedTitle = [].concat(allGames.data.gamesArray)
         .sort((a, b) => a.title > b.title ? 1 : -1)
         .map((gameData, i) => {
@@ -65,7 +62,7 @@ const LandingPage = () => {
             } else {
                 return (
                     <NavLink className="removeUnderline" key={i}>
-                        <div className='widthConstraint' onClick={handleGameClick(gameData.id - 1)}>
+                        <div className='widthConstraint' onClick={handleGameClick(gameData.id)}>
                             <GameListComponent game={gameData} key={gameData.id}></GameListComponent>
                         </div>
                     </NavLink>
@@ -81,7 +78,7 @@ const LandingPage = () => {
             } else {
                 return (
                     <NavLink className="removeUnderline" key={i}>
-                        <div className='widthConstraint' onClick={handleGameClick(gameData.id - 1)}>
+                        <div className='widthConstraint' onClick={handleGameClick(gameData.id)}>
                             <GameListComponent game={gameData} key={gameData.id}></GameListComponent>
                         </div>
                     </NavLink>
@@ -97,7 +94,7 @@ const LandingPage = () => {
             } else {
                 return (
                     <NavLink className="removeUnderline" key={i}>
-                        <div className='widthConstraint' onClick={handleGameClick(gameData.id - 1)}>
+                        <div className='widthConstraint' onClick={handleGameClick(gameData.id)}>
                             <GameListComponent game={gameData} key={gameData.id}></GameListComponent>
                         </div>
                     </NavLink>
@@ -114,7 +111,7 @@ const LandingPage = () => {
             } else {
                 return (
                     <NavLink className="removeUnderline" key={i}>
-                        <div className='widthConstraint' onClick={handleGameClick(gameData.id - 1)}>
+                        <div className='widthConstraint' onClick={handleGameClick(gameData.id)}>
                             <GameListComponent game={gameData} key={gameData.id}></GameListComponent>
                         </div>
                     </NavLink>
@@ -166,8 +163,6 @@ const LandingPage = () => {
         setMaxPlayer(e.target.value)
     }
 
-
-
     useEffect(() => {
         if (!allGames.data.gamesArray) {
             dispatch(fetchGames());
@@ -178,9 +173,7 @@ const LandingPage = () => {
     // console.log("keykloak sjekk ", keycloak.realmAccess.roles[1]);
 
     const removeSortButton = () => {
-
         // Dersom brukeren ikke er authenticated skal vedkommende kunne se og sortere 
-
         if (keycloak.authenticated == false) {
             console.log("bruker er ikke authenticated")
             return (
@@ -385,7 +378,6 @@ const LandingPage = () => {
     return (
         <>
             <div className="mainLandingContainer">
-
                 <div className="secondaryLandingContainer">
                     <div className='container-level-sort-create-game'>
                         {/* <div className="sortByContainer"> */}

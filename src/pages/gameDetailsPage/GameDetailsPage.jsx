@@ -28,6 +28,7 @@ const GameDetailsPage = (props) => {
     const [listView, setListView] = useState("players");
     const allGames = useSelector((state) => state);
     const [editGameView, setEditGameView] = useState(false);
+    const [ loading, setLoading ] = useState("");
 
     let currentGame = allGames.data.currGame;
     console.log(currentGame)
@@ -39,6 +40,13 @@ const GameDetailsPage = (props) => {
 
     const dispatch = useDispatch();
 
+    const params = window.location.pathname;
+    const id = params.split("/")[2];
+
+    if (!currentGame.id) {
+        dispatch(fetchGameById(id)).unwrap();
+    }
+
     const pusher = new Pusher("12be8984736013be627b", {
         cluster: "eu",
     }); 
@@ -47,10 +55,6 @@ const GameDetailsPage = (props) => {
     {  
         pusher.unsubscribe("hvz-noroff");
     });
-
-    const handleMessage = () => {
-        console.log("Handling message!")
-    }
 
     const handleListView = (event) => {
         setListView(event.target.value);
@@ -68,9 +72,6 @@ const GameDetailsPage = (props) => {
         console.log("yo")
         setEditGameView(false);
     }
-
-    const params = window.location.pathname;
-    const id = params.split("/")[2];
 
     //const game = props.games[id];
 
@@ -95,7 +96,6 @@ const GameDetailsPage = (props) => {
             patientZero: false,
             human: true
         };
-        console.log(playerObj)
         dispatch(postPlayer(playerObj))
     }
 
@@ -127,7 +127,7 @@ const GameDetailsPage = (props) => {
     }
 
 
-    if (currentGame) {
+    if (currentGame.id) {
         return (
             <div className="mostMainContainer">
                 <div className='mainContainer'>

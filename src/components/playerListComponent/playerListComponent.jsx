@@ -10,8 +10,8 @@ import "../../css/playerListComponent.css";
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { useSelector, useDispatch } from 'react-redux';
-import keycloak from '../../keycloak';
 import { deletePlayer } from '../../states/dataSlice';
+import keycloak from '../../keycloak';
 
 
 const PlayerRow = ( props ) => {
@@ -34,15 +34,12 @@ const PlayerRow = ( props ) => {
     }
 
     const handleEdit = () => {
-        if(keycloak.realmAccess.roles[0] == "ADMIN"){
         if (editable) {
             setEditable(false);
             props.edit(false);
         } else {
             setEditable(true)
             props.edit(true);
-        }
-            
         }
     }
 
@@ -105,19 +102,12 @@ const PlayerRow = ( props ) => {
             } 
         })
     }
-    const deletePlayer  = () => {
-        if(keycloak.realmAccess.roles[0] == "ADMIN"){
-            return (
-                <a onClick={handleDelete} id="smallBtn" className="button"><img id="smallBtnImg" src={retIcon} alt="Remove user button"/></a>
-            )
-        }
-    }
-    
+
     const wrapperRef = useRef(null);
     useOutsideAlerter(wrapperRef, props, {nName:name, nFaction: faction, nSquad: squad});
 
     return (
-        editable? 
+        (keycloak.hasRealmRole("ADMIN") || keycloak.tokenParsed.preferred_username == name) && editable? 
         <button className="playerItemEdit" ref={wrapperRef}>
             <p>{name}</p>
             <DropdownButton id="dropdown-item-button" title={faction} className="dropdownBtn">
@@ -138,12 +128,10 @@ const PlayerRow = ( props ) => {
             <a onClick={handleDelete} id="smallBtn" className="button"><img id="smallBtnImg" src={retIcon} alt="Remove user button"/></a>
         </button>
         :
-        <button className="playerItem" onChange={handleEdit}>
+        <button className="playerItem" onClick={handleEdit}>
             <p>{name}</p>
             <p>{faction}</p>
             <p>{squad}</p>
-           {deletePlayer()}
-
         </button>
     );
 };
@@ -170,9 +158,9 @@ const PlayerListComponent = ( props ) => {
 
     return (
         <div className='listViewContainer'>
-            <h3 id="squadTitle">List of players</h3>
-            {editable ?
-                <button id="crtBtn" onClick={handleSave} value="Save">Save</button>
+            <h3 id="listTitle">List of players</h3>
+            {keycloak.hasRealmRole("ADMIN") && editable ?
+                <button id="savePlayer" onClick={handleSave} value="Save">Save</button>
                 :
                 null
             }
@@ -182,7 +170,7 @@ const PlayerListComponent = ( props ) => {
                     <p className="title">Faction</p>
                     <p className="title">Squad</p>
                 </div>
-                <hr className='hrTitle'></hr>
+                <hr id="playerListHr" className="hrTitle"></hr>
                 <div className="playersDiv">
                     {players}
                 </div>

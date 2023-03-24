@@ -14,7 +14,7 @@ export const fetchGames = createAsyncThunk(
       const response = await fetch(
         `${baseUrl}games` , {
           headers: {
-              'Authorization': `Bearer ${keycloak.token}`,
+              //'Authorization': `Bearer ${keycloak.token}`,
           },
       }
       )
@@ -30,7 +30,7 @@ export const fetchGames = createAsyncThunk(
     'games/fetchGameById',
     async (gameId) => {
       const response = await fetch(
-        `${baseUrl}games/${gameId + 1}`, {
+        `${baseUrl}games/${gameId}`, {
           headers: {
               //'Authorization': `Bearer ${keycloak.token}`,
           },
@@ -44,11 +44,66 @@ export const fetchGames = createAsyncThunk(
       }
     }
   )   
-    
+
+  export const fetchUserByToken = createAsyncThunk(
+    "ok",
+    async (userObj) => {
+      const response = await fetch(
+        `${baseUrl}user/token/${userObj.userToken}`, {
+          headers : {
+          },
+        }
+      )
+      console.log(response.status)
+      if (response.status === 400){
+        console.log("hei på deg")
+
+        const response2 = await fetch (
+          `${baseUrl}user` , {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              username: userObj.userName,
+              idToken: userObj.userToken
+            })
+          }
+        )
+        if (response2.ok){
+          console.log("helo")
+        }
+        console.log(response2)
+        console.log("hei på deg 2")
+      }
+    }
+  )
+
+  export const postUser = createAsyncThunk(
+    "sup",
+    async (postObj) => {
+      const response = await fetch (
+        `${baseUrl}users` , {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            username: postObj.username,
+            idToken: postObj.idToken
+          })
+        }.then(response => {
+          if (!response.ok) {
+            throw new Error('Post user not working :DDDD XXXXDDDDDDDd')
+          }
+        })
+      )
+    }
+  )
     
   //TODO HAR IKKE LAGET REDUX SHIT FOR THIS SHIT
   export const postPlayer = createAsyncThunk(
-    'players',
+    'players/postPlayer',
     async (postObj) => {
       const response = await fetch('//localhost:8080/api/v1/players' , {
         method: 'POST',
@@ -56,6 +111,8 @@ export const fetchGames = createAsyncThunk(
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+            userTokenRef: postObj.userTokenRef,
+            gameRef: postObj.gameRef,
             biteCode: postObj.biteCode,
             patientZero: postObj.patientzero,
             human: postObj.human
@@ -69,7 +126,7 @@ export const fetchGames = createAsyncThunk(
   )
 
   export const postKill = createAsyncThunk(
-    'players',
+    'kill/postKill',
     async (postObj) => {
       const response = await fetch('//localhost:8080/api/v1/kills', {
         method: 'POST',
@@ -93,7 +150,7 @@ export const fetchGames = createAsyncThunk(
   )
 
   export const postGame = createAsyncThunk(
-    'games',
+    'games/postGame',
     async (postObj) => {
       const response = await fetch('//localhost:8080/api/v1/games', {
         method: 'POST',
@@ -115,16 +172,18 @@ export const fetchGames = createAsyncThunk(
   )
 
   export const postSquad = createAsyncThunk(
-    'squads',
+    'sqaud/postSquad',
     async (postObj) => {
-      const response = await fetch('//localhost:8080/api/v1/squad', {
+      console.log(postObj);
+      const response = await fetch('//localhost:8080/api/v1/squads', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           name: postObj.name,
-          gameRef: postObj.gameRef
+          gameRef: postObj.gameRef,
+          playerIds: postObj.playerIds
         })
       }).then(response => {
         if (!response.ok) {
@@ -235,6 +294,83 @@ export const fetchGames = createAsyncThunk(
     }
   )
 
+  export const putPlayerInSquad = createAsyncThunk(
+    'squad/putPlayer',
+    async (playerObj) => {
+      console.log("Putting the following object: " )
+      console.log(playerObj);
+      const response = await fetch(`${baseUrl}players/${playerObj.aPlayer.id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            id: playerObj.aPlayer.id,
+            squadRef: playerObj.aSquad.id,
+            human: playerObj.aPlayer.human
+        })
+      }).then(response => {
+        if (!response.ok) {
+          throw new Error('Could not post player to squad')
+        }
+      })
+      .then(updatedUser => {
+      })
+      .catch(error => {
+        console.log(error);
+      })
+    }
+  )
+
+  export const deletePlayerFromSquad = createAsyncThunk(
+    'squad/delPlayer',
+    async (playerObj) => {
+      console.log("Deleting the following object from squad: " )
+      console.log(playerObj);
+      const response = await fetch(`${baseUrl}players/${playerObj.aPlayer.id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            id: playerObj.aPlayer.id,
+            squadRef: 0,
+            human: playerObj.aPlayer.human
+        })
+      }).then(response => {
+        if (!response.ok) {
+          throw new Error('Could not delete player from squad')
+        }
+      })
+      .then(updatedUser => {
+      })
+      .catch(error => {
+        console.log(error);
+      })
+    }
+  )
+
+  export const fetchPlayerByToken = createAsyncThunk(
+    'player/fetchByToken',
+    async () => {
+
+     // console.log(keycloak)
+
+      const response = await fetch(
+        `${baseUrl}games` , {
+          headers: {
+              'Authorization': `Bearer ${keycloak.token}`,
+          },
+      }
+      )
+      let result = await response.json()
+  
+      if (result.length != 0) {
+        return result;
+      }
+    }
+  )
+
 
 export const dataSlice = createSlice({
   name: "data",
@@ -316,7 +452,14 @@ export const dataSlice = createSlice({
     },
     [postSquad.fulfilled]:(state,action) => {
       console.log("Squad has been posted, not updated in redux");
-      console.log(action.meta.arg)
+
+      const squad = {
+        gameRef: action.meta.arg.gameRef,
+        name: action.meta.arg.name,
+        players: action.meta.arg.players
+      };
+
+      state.currGame.squads.push(squad);
     },
     [putGameObject.fulfilled]:(state, action) => {
       console.log("FUCK YES MOTHERFUCKER")
@@ -324,9 +467,12 @@ export const dataSlice = createSlice({
     },
     [postPlayer.fulfilled]:(state, action) => {
       console.log("Player has been posted, not updated in redux yet XDD")
+      console.log(action);
+      state.currGame.players.push(action.meta.arg)
     },
     [postKill.fulfilled]:(state, action) => {
       console.log("Kill has been posted, not updated in redux yet LOLOLOL")
+      console.log(action);
     }, 
     [putGlobalChat.fulfilled]:(state, action) => {
       console.log("@@@@@@SUCK DICK MAN@@@@@@@@")
@@ -349,6 +495,38 @@ export const dataSlice = createSlice({
       console.log(tempArr)
       state.currGame.players = tempArr;
 
+    },
+    [putPlayerInSquad.fulfilled]:(state, action) => {
+      console.log("PLAYER PUT IN SQUAD SUCCESSFULL MATEY!!!! :D ")  
+      state.currGame.squads.map((squad, i) => {
+        if (squad.id == action.meta.arg.aSquad.id) {
+            squad.players.push(action.meta.arg.aPlayer);
+        }
+      })
+
+      state.currGame.players.map((player, i) => {
+        if (player.id == action.meta.arg.aPlayer.id) {
+          player.squad = action.meta.arg.aSquad;
+        }
+      })
+    },
+    [deletePlayerFromSquad.fulfilled]:(state, action) => {
+      console.log("Player deleted from squad cowboy!")
+      state.currGame.squads.map((squad, i) => {
+        if (squad.id == action.meta.arg.aSquad.id) {
+            squad.players.filter((player, i) => {
+                if (player.id != action.meta.arg.aPlayer.id) {
+                  return player;
+                }
+            });
+        }
+      })
+
+      state.currGame.players.map((player, i) => {
+        if (player.id == action.meta.arg.aPlayer.id) {
+          player.squad = null
+        }
+      })    
     }
   },
 });

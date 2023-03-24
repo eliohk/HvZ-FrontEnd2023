@@ -37,7 +37,9 @@
 .secondaryLandingContainer {
     display: flex;
     flex-direction: column;
-    padding: 1em;
+    width: 100%;
+    padding: 0px 200px;
+    margin-top: -3rem;
 }
 
 button.btn.btn-primary {

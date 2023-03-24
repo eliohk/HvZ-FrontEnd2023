@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 .listViewContainer {
     display: flex;
     flex-direction: column;
@@ -12,6 +14,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 1rem;
+    width: 100%;
 }
 
 .title {
@@ -19,6 +23,66 @@
     margin-right: 10px;
     margin-top: 0;
     margin-bottom: -1em;
+}
+
+.tempMainList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.alignSquadTitle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+}
+
+.rightAlignRet {
+    display: flex;
+    margin-top: 1rem;
+    width: 80%;
+    flex-direction: row;
+    align-items: end;
+    justify-content: end;
+}
+
+#exitIcon2 {
+    width: 15px;
+}
+
+#addToSquad {
+    display: flex;
+    align-items: center;
+    width: 6em;
+    justify-content: space-between;
+    background-color: #626263;
+    border: white solid;
+    padding: 4px;
+    border-radius: 32px;
+    color: white;
+}
+
+.hrTest {
+    width: 100%;
+}
+
+.hrTitle {
+    width: 100%;
+}
+
+#playerListHr {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#plusImg {
+    width: 20px;
+    height: 20px;
+    border-radius: 32px;
 }
 
 #biteTitle {
@@ -29,7 +93,23 @@
     margin-left: 1.94rem;
 }
 
+#squadTitle {
+    margin: 0;
+    margin-top: 2rem;
+}
+
+#squadTitleStupidRetBtn {
+    margin: 0;
+    margin-bottom: 0.5rem;
+}
+
 .playerContainer {
+    width: 90%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     color: white;
     margin-right: 3.125rem;
     margin-left: 3.125rem;
@@ -92,6 +172,7 @@
     justify-content: space-between;
     background-color: transparent;
     border: none;
+    font-family: 'Poppins', sans-serif;
     width: 100%;
 }
 
@@ -160,6 +241,13 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    width: 100%;
+}
+
+#squadName {
+    width: 50%;
+    border: none;
+    margin: 0.2rem;
 }
 
 .squadItem p {
@@ -172,7 +260,34 @@
 }
 
 .squadItem p:hover {
+    outline-color: transparent;
+    outline-style:solid;
     box-shadow: 0 0 0 1px black;
+    transition: 0.7s;
+}
+
+.delSquadBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 22px;
+    background-color: transparent;
+    border: none;
+    border-radius: 32px;
+}
+
+.delSquadBtn:hover {
+    background-color: #626263;
+    transition: 0.7s;
+}
+
+.delSquadBtn:hover img {
+    z-index: 999;
+}
+
+.delSquadBtn:focus {
+    transition: 0.7s;
 }
 
 #crtBtn {

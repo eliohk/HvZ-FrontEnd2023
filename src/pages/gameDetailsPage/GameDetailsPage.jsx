@@ -22,12 +22,14 @@ import keycloak from "../../keycloak";
 // TODO: USE REDUX TO POPULATE :))))
 import ChatInputViewComponent from "../../components/chatInputViewComponent/ChatInputviewComponent";
 import Pusher from "pusher-js";
-import { current } from "@reduxjs/toolkit";
+import { AiOutlineWarning } from 'react-icons/ai';
+import Alert from 'react-bootstrap/Alert';
 
 const GameDetailsPage = (props) => {
     const [listView, setListView] = useState("players");
     const allGames = useSelector((state) => state);
     const [editGameView, setEditGameView] = useState(false);
+    const [ loading, setLoading ] = useState("");
 
     let currentGame = allGames.data.currGame;
     console.log(currentGame)
@@ -39,6 +41,13 @@ const GameDetailsPage = (props) => {
 
     const dispatch = useDispatch();
 
+    const params = window.location.pathname;
+    const id = params.split("/")[2];
+
+    if (!currentGame.id) {
+        dispatch(fetchGameById(id)).unwrap();
+    }
+
     const pusher = new Pusher("12be8984736013be627b", {
         cluster: "eu",
     }); 
@@ -47,10 +56,6 @@ const GameDetailsPage = (props) => {
     {  
         pusher.unsubscribe("hvz-noroff");
     });
-
-    const handleMessage = () => {
-        console.log("Handling message!")
-    }
 
     const handleListView = (event) => {
         setListView(event.target.value);
@@ -69,9 +74,6 @@ const GameDetailsPage = (props) => {
         setEditGameView(false);
     }
 
-    const params = window.location.pathname;
-    const id = params.split("/")[2];
-
     //const game = props.games[id];
 
 
@@ -79,7 +81,7 @@ const GameDetailsPage = (props) => {
         if (view == "players") {
             return <PlayerListComponent data={currentGame.players} squad={currentGame.squads} />;
         } else if (view == "squad") {
-            return <SquadListComponent data={currentGame.squads} gameid={currentGame.id} />;
+            return <SquadListComponent data={currentGame.squads} gameid={currentGame.id} players={currentGame.players} />;
         } else if (view == "human") {
             return <BiteCodeComponent />
         } else if (view == "zombie") {
@@ -89,30 +91,17 @@ const GameDetailsPage = (props) => {
 
     function handleNewPlayer() {
         const playerObj = {
+            userTokenRef: keycloak.idTokenParsed.sub,
+            gameRef: currentGame.id,
             biteCode: "12345",
             patientZero: false,
             human: true
         };
-
         dispatch(postPlayer(playerObj))
     }
 
-   // console.log("sjekke role for khoi bruker", keycloak.realmAccess.roles[0])
-    const role = keycloak.realmAccess.roles[0];
-    const firste_letter = role.charAt(0).toUpperCase();
-    const rest_letter = role.slice(1).toLocaleLowerCase();
-    const totalRole = firste_letter + rest_letter + "strator";
-    const displayDetailName = () => {
-
-        if (keycloak.realmAccess.roles[0] == "ADMIN") {
-            return totalRole
-
-        }
-
-    }
-
     const displayEditGameAdmin = () => {
-        if (keycloak.realmAccess.roles[0] == "ADMIN") {
+        if (keycloak.hasRealmRole("ADMIN")) {
             return (
                 <Popup trigger={<button id="editBtn" onClick={handleEditGame}><img id="editBtnIcon" src={editIcon} alt="Edit Game Button" />Edit game</button>} modal>
                     {close => (<EditGameComponent game={currentGame} edit={close}></EditGameComponent>)}
@@ -125,12 +114,16 @@ const GameDetailsPage = (props) => {
     }
 
 
-    if (currentGame) {
+    if (currentGame.id) {
         return (
             <div className="mostMainContainer">
                 <div className='mainContainer'>
                     <div className="header">
-                        <h5 id="removeMargin">{displayDetailName()}</h5>
+                        {keycloak.hasRealmRole("ADMIN") ?
+                            <h5 id="removeMargin">Admin</h5>
+                            :
+                            <h5 id="removeMargin"></h5>
+                        }
                         <a href="/" id="retBtn" className="button"><img id="exitIcon" src={retIcon} alt="Return button" /></a>
                     </div>
                     <div className="liftToHeader">
@@ -166,19 +159,24 @@ const GameDetailsPage = (props) => {
                         </div>
                         <div className="editDiv">
                             {displayEditGameAdmin()}
-
                         </div>
                     </div>
                 </div>
-                <button id="joinBtn" onClick={handleNewPlayer}>Join game</button>
+                {keycloak.authenticated ?
+                    <button id="joinBtn" onClick={handleNewPlayer}>Join game</button>
+                    :
+                    <button id="joinBtn" onClick={() => keycloak.login()}>Log in</button>
+                }
             </div>
         )
     } else {
         return (
             <div className="container">
-                <h3>
-                    Error occured my dudes.
-                </h3>
+                <div style={{display:"flex", alignItems:"center", justifyContent:"center", height:"100%", width:"100%"}}>
+                    <Alert key="danger" variant="danger">
+                        <AiOutlineWarning/> <i> This component has no functionality as i was too lazy to create dummy data</i>
+                    </Alert>                
+                </div>
             </div>
         )
     }

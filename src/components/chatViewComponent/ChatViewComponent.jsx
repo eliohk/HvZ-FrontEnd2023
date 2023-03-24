@@ -28,24 +28,28 @@ const ChatViewComponent = (props) => {
         }
     }, [])
 
-    const chats = chatsState.data.currGame.chat.chats.map((item, i) => {
-        const arr = item.split("&");
-        const name = arr[0];
-        const timestamp = arr[1];
-        const chat = arr[2];
+    let chats = [];
 
-        const selfName = keycloak.tokenParsed.given_name + " " + keycloak.tokenParsed.family_name;
-        if (name == selfName) {
-            return (
-                <p className="selfMsg" key={i}>{chat}</p>
-            )
-        } else {
-            return (
-                <p className="msg" key={i}>[{timestamp}]{name}: {chat}</p>
-            )
-        }
-        
-    });
+    if (chatsState.data.currGame) {
+        chats = chatsState.data.currGame.chat.chats.map((item, i) => {
+            const arr = item.split("&");
+            const name = arr[0];
+            const timestamp = arr[1];
+            const chat = arr[2];
+    
+            const selfName = keycloak.tokenParsed.given_name + " " + keycloak.tokenParsed.family_name;
+            if (name == selfName) {
+                return (
+                    <p className="selfMsg" key={i}>{chat}</p>
+                )
+            } else {
+                return (
+                    <p className="msg" key={i}>[{timestamp}]{name}: {chat}</p>
+                )
+            }
+            
+        });
+    } 
 
     console.log(chatsState.data.currGame.chat)
 
@@ -59,7 +63,7 @@ const ChatViewComponent = (props) => {
         // TODO: loop through msg and display em down like above
         return (
             <div className="chatbox" ref={messageRef}>
-                <p>Chats not loaded ..</p>
+                <p>There are no chats yet, start chatting buddy!</p>
             </div>
         )
     }

@@ -17,10 +17,21 @@ const GameList = ( props ) => {
     const navigate = useNavigate();
 
     const handleGameClick = (i) => (event) => {
+
+        /*
+        if (!props.game) {
+            navigate("/game/1");
+        } else {
+            //dispatch(fetchGameById(i)).unwrap().then(() => navigate(`/game/${i}`))
+        }
+        
+        // **** uncomment this line below and delete if above when in prod with db ****
+        */
+
         dispatch(fetchGameById(i)).unwrap().then(() => navigate(`/game/${i}`))
     };
-
-
+    
+    // **** REMOVE THIS WHEN PUSHING TO PROD WITH FUNCTIONAL DB. ****
     return (
         <div className="mainGameContainer">
             <div className="innerMapContainer">

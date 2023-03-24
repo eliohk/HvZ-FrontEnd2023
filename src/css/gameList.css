@@ -13,20 +13,20 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-left: 2em;
+    margin-left: 2rem;
     margin-top: 4px;
-    margin-right: 6em;
     height: 100%;
-    width: 400px;
+    width: 50%;
 }
 
 .innerStatisticsContainer {
     display: flex;
-    align-items: center;
+    align-items: end;
+    margin-right: 2rem;
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
-    width: 400px;
+    width: 50%;
 }
 
 .mainGameContainer {
@@ -35,7 +35,7 @@
     align-items: center;
     width: fit-content;
     margin-bottom: 0em;
-    height: 175px;
+    height: 11rem;
     width: 100%;
     margin-top: 1em;
     font-family: 'Poppins', sans-serif;
@@ -46,7 +46,6 @@
 }
 
 .statusComponent {
-    margin-left: 200px;
     margin-top: 8px;
     text-align: center;
 }
@@ -70,15 +69,19 @@
 }
 
 #gameMode {
-    width: 200px;
+    width: fit-content;
     margin: 0;
     margin-left: 8px;
     color: #65CBFF;
+    font-size: 12px;
+    white-space: nowrap;
 }
 
 .innerDataContainer {
     display: flex;
-    width: 90%;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
     height: 100%;
     border-radius: 16px;
     margin-left: 12px;
@@ -95,6 +98,7 @@
 }
 
 #loremIpsum {
+    margin-top: -1rem;
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;

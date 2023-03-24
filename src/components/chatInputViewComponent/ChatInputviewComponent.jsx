@@ -4,8 +4,7 @@ import sendMsgIcon from "../../resources/sendMsgIcon.svg";
 import { useState, useEffect } from 'react';
 import { putGlobalChat } from '../../states/dataSlice';
 import { useSelector, useDispatch } from 'react-redux';
-import keycloak from '../../keycloak';
-import Pusher from "pusher-js";
+import keycloak from "../../keycloak";
 
 const ChatInputViewComponent = (props) => {
     const [ chat, setChat ] = useState("Global chat");
@@ -77,17 +76,30 @@ const ChatInputViewComponent = (props) => {
 
         setCurrentMessage("")
     }
-    
+
+    console.log(keycloak);
+
     return (
-        <>
-            <DropdownButton id="dropdown-basic-button" title={chat}>
-                {chats}
-            </DropdownButton>
-            <div className="actualInput">
-                <input id="input" type="text" name="name" onKeyDown={handleEnter} onChange={handleCurrentMessage} placeholder='Enter message here ...'/>
-                <button className='sendMsgBtn' onClick={handleSendMsg}><img src={sendMsgIcon} alt="Send message button" className="msgIcon"></img></button>
-            </div>
-        </>
+        keycloak.authenticated ?
+            <>
+                <DropdownButton id="dropdown-basic-button" title={chat}>
+                    {chats}
+                </DropdownButton>
+                <div className="actualInput">
+                    <input id="input" type="text" name="name" onKeyDown={handleEnter} onChange={handleCurrentMessage} placeholder='Enter message here ...'/>
+                    <button className='sendMsgBtn' onClick={handleSendMsg}><img src={sendMsgIcon} alt="Send message button" className="msgIcon"></img></button>
+                </div>
+            </>
+            :
+            <>
+                <DropdownButton id="dropdown-basic-button" title={chat}>
+                    <Dropdown.Item onClick={() => keycloak.login()}>Login to chat</Dropdown.Item>
+                </DropdownButton>
+                <div className="actualInput">
+                    <input id="input" type="text" name="name" disabled placeholder='Log in to chat ...'/>
+                    <button className='sendMsgBtn' disabled ><img src={sendMsgIcon} alt="Send message button" className="msgIcon"></img></button>
+                </div>
+            </>
     )
 }
 

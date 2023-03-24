@@ -106,13 +106,18 @@ const GameDetailsPage = (props) => {
 
     function handleNewPlayer() {
         const rand = Math.floor(100000 + Math.random() * 900000);
-
+        let isHuman;
+        if (currentGame.players.length == 0) {
+            isHuman = false;
+        } else {
+            isHuman = true;
+        }
         const playerObj = {
             userTokenRef: keycloak.idTokenParsed.sub,
             gameRef: currentGame.id,
             biteCode: rand,
-            patientZero: currentGame.players && currentGame.players.length == 0 ? true : false,
-            human: true,
+            patientZero: isHuman,
+            human: isHuman,
             username: keycloak.tokenParsed.preferred_username
         };
 

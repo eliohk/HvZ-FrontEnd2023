@@ -52,7 +52,9 @@ const MapComponent = (props) => {
     }
 
     const playerMarkers = players.map((item, i) => {
-        return <PlayerMarker key={i} player={item}></PlayerMarker> 
+        if (item.human){
+            return <PlayerMarker key={i} player={item}></PlayerMarker> 
+        }
     })
 
     const killMarkers = kills.map((item, i) => {

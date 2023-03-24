@@ -144,7 +144,7 @@ const GameDetailsPage = (props) => {
                         <div className="chatContainer">
                             {/* chatbox + buttons here */}
                             <ChatViewComponent chat={currentGame.chat} pusher={pusher}/>
-                            <div className="buttonContainer">
+                            <div className="buttonContainerTest">
                                 <button className="btns" onClick={handleListView} value="players">List of players</button>
                                 <button className="btns" onClick={handleListView} value="squad">Squad list</button>
                                 <button className="btns" onClick={handleListView} value="human">Bite code</button>

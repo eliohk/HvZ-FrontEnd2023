@@ -144,7 +144,6 @@ ul {
     width: 100%;
     height: 2.31rem;
     border-radius: 32px;
-    margin-bottom: 8px;
     background-color: #2E2E2E;
     color: white;
 }
@@ -196,15 +195,16 @@ ul {
 
 .chatContainer {
     display: flex;
-    justify-content: center;
+    height: 100%;
+    width: 100%;
 }
 
-.buttonContainer {
+.buttonContainerTest {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
+    justify-content: space-between;
     border-radius: 28px;
-    height: 200px;
     width: 16.5rem;
 }
 
@@ -270,6 +270,16 @@ ul {
     justify-content: left;
 }
 
+.chatInput #dropdown-basic-button {
+    border-radius: 28px;
+    border: solid black;
+    height: 1.62rem;
+    width: 10rem;
+    font-size: 0.825rem;
+    padding-bottom: 25px;
+    margin-right: 0.438rem;
+    margin-left: 0.1rem;}
+
 .squadBtn {
     border-radius: 16px;
     width: 10rem;
@@ -309,16 +319,6 @@ ul {
 .msgIcon {
     height: 70%;
     width: 70%;
-}
-
-
-
-.sendMsgBtn:hover {
-    outline-color: transparent;
-    outline-style:solid;
-    box-shadow: 0 0 0 1px black;
-    transition: 0.7s;
-    background-color: grey;
 }
 
 .msgIcon {

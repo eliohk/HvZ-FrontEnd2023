@@ -9,8 +9,6 @@ function App() {
   const dispatch = useDispatch();
   dispatch(fetchGames());
 
-  console.log(keycloak.token)
-
   if (keycloak.authenticated) {
     const userObj = {
       userToken: keycloak.idTokenParsed.sub,

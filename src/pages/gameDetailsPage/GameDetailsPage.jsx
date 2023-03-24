@@ -105,13 +105,17 @@ const GameDetailsPage = (props) => {
     }
 
     function handleNewPlayer() {
+        const rand = Math.floor(100000 + Math.random() * 900000);
+
         const playerObj = {
             userTokenRef: keycloak.idTokenParsed.sub,
             gameRef: currentGame.id,
-            biteCode: "12345",
-            patientZero: false,
+            biteCode: rand,
+            patientZero: currentGame.players && currentGame.players.length == 0 ? true : false,
             human: true,
+            username: keycloak.tokenParsed.preferred_username
         };
+
         dispatch(postPlayer(playerObj))
         setUserJoined(true)
     }

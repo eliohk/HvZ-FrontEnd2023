@@ -462,8 +462,12 @@ export const dataSlice = createSlice({
       state.currGame.squads.push(squad);
     },
     [putGameObject.fulfilled]:(state, action) => {
-      console.log("FUCK YES MOTHERFUCKER")
-      console.log(action);
+      state.currGame.description = action.meta.arg.description
+      state.currGame.gameType = action.meta.arg.gameType
+      state.currGame.id = action.meta.arg.id
+      state.currGame.player = action.meta.arg.player
+      state.currGame.title = action.meta.arg.title
+      state.currGame.status = action.meta.arg.status
     },
     [postPlayer.fulfilled]:(state, action) => {
       console.log("Player has been posted, not updated in redux yet XDD")

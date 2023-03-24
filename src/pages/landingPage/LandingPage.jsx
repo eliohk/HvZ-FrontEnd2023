@@ -235,7 +235,7 @@ const LandingPage = () => {
                     }
                     {/* {<button className="landingside-create-game-container" onClick={handleClickOpen}><GrAddCircle />  Create Game</button> } */}
                 </div>
-                {gamesArray[0] == null ? 
+                {gamesArray == undefined ? 
                     <GameListComponent></GameListComponent>
                 :
                     null

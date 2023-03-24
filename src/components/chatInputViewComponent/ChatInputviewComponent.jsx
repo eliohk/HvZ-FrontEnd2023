@@ -77,8 +77,6 @@ const ChatInputViewComponent = (props) => {
         setCurrentMessage("")
     }
 
-    console.log(keycloak);
-
     return (
         keycloak.authenticated ?
             <>

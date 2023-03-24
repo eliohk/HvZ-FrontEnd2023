@@ -15,6 +15,7 @@ import {
 from "react-leaflet";
 import "../../css/modal.css";
 import { postCheckIn, setMarkers } from '../../states/dataSlice';
+import keycloak from '../../keycloak';
 
 
 
@@ -25,7 +26,28 @@ const MapComponent = (props) => {
     const [kills, setKills] = useState(props.kills)
     const [currentClickPosition, setCurrentClickPosition] = useState()
     const dispatch = useDispatch();
+    const [isPlayer, setIsPlayer] = useState(false)
+    const currentGame = allGames.data.currGame;
+    const userName = keycloak.tokenParsed.preferred_username
 
+    useEffect(() => {
+        console.log(currentGame.players)
+        if (currentGame.players){
+            let found = false
+            loop:
+            for (let i = 0; i  < currentGame.players.length; i++){
+                console.log(currentGame.players[i].username)
+                if (currentGame.players[i].username === userName){
+                    setIsPlayer(true)
+                    found = true
+                    break loop;
+                }
+            }
+            if (found === false){
+                setIsPlayer(false)
+            }
+        }
+    }, [currentGame])
 
 
     function LocationMarker() {
@@ -80,8 +102,10 @@ const MapComponent = (props) => {
             borderRadius: "32px",
             position: "relative",    
             }} >
-            { mapClicked ? null : <a className="mapToolTip" href="#" title="Zoom in" role="button" aria-label="Zoom in" aria-disabled="false"><span aria-hidden="true">Click on the map to assign location, click on the "check in" button to confirm the check in.</span></a>}
-            { mapClicked ? <a className="mapBtn" href="#" onClick={handleButtonClick} title="Zoom in" role="button" aria-label="Zoom in" aria-disabled="false"><span aria-hidden="true">Check-in</span></a> : null}
+            { isPlayer ? mapClicked ? null : <a className="mapToolTip" href="#" title="Zoom in" role="button" aria-label="Zoom in" aria-disabled="false"><span aria-hidden="true">Click on the map to assign location, click on the "check in" button to confirm the check in.</span></a> 
+                : null}
+            { isPlayer ? mapClicked ? <a className="mapBtn" href="#" onClick={handleButtonClick} title="Zoom in" role="button" aria-label="Zoom in" aria-disabled="false"><span aria-hidden="true">Check-in</span></a> : null
+                : null}
             <MapContainer style={{
             height: "28rem",
             width: "37.56rem",
@@ -98,7 +122,7 @@ const MapComponent = (props) => {
             />
             {playerMarkers}
             {killMarkers}
-            { mapClicked ? <Marker 
+            { isPlayer ? mapClicked ? <Marker 
                                 position={[currentClickPosition.lat, currentClickPosition.lng]}
                                 icon={checkIn}
                             >
@@ -107,7 +131,8 @@ const MapComponent = (props) => {
                                     Longitude: {currentClickPosition.lat} <br />
                                     Latitude: {currentClickPosition.lng}
                                 </Popup>
-                            </Marker> : null}
+                            </Marker> : null
+                        : null}
             
             <LocationMarker></LocationMarker>
             </MapContainer>

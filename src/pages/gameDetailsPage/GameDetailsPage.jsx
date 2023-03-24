@@ -49,7 +49,7 @@ const GameDetailsPage = (props) => {
                 }
             }
         }
-    }, [])
+    }, [currentGame])
 
    // console.log("tester ut", typeof JSON.parse(data))
 
@@ -129,7 +129,7 @@ const GameDetailsPage = (props) => {
         console.log(userJoined)
         const deleteObj = {
             token: token,
-            callback: setUserJoined
+            callback: setUserJoined,
         }
         dispatch(deletePlayerByToken(deleteObj))
         setUserJoined(false)
@@ -143,11 +143,8 @@ const GameDetailsPage = (props) => {
                 </Popup>
 
             )
-
         }
-
     }
-
 
     if (currentGame.id) {
         return (

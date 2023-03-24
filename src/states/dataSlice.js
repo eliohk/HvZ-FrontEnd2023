@@ -511,12 +511,12 @@ export const dataSlice = createSlice({
 
       state.currGame.players.map((player) => {
         if (player.userTokenRef != action.meta.arg.token) {
+          console.log("Adding: " + player.id)
           tempArr.push(player);
         }
       });
       state.currGame.players = tempArr;
       action.meta.arg.callback(false)
-
     },
     [deletePlayer.fulfilled]:(state, action) => {
       console.log("PLAYER HAS BEEN DELETED MATEYYYY ARGGGGG")

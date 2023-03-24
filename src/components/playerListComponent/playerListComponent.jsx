@@ -85,7 +85,7 @@ const PlayerRow = ( props ) => {
     }
 
     useEffect(() => {
-        setName("Player " + props.player.id);
+        setName(props.player.username);
         setFaction(props.player.human ? "Human" : "Zombie");
         setSquad(props.player.squad ? "Squad " + props.player.squad.id : "N/A");
         setSquads(props.squad);

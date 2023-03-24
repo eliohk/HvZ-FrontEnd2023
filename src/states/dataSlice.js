@@ -115,7 +115,8 @@ export const fetchGames = createAsyncThunk(
             gameRef: postObj.gameRef,
             biteCode: postObj.biteCode,
             patientZero: postObj.patientzero,
-            human: postObj.human
+            human: postObj.human,
+            username: postObj.username
         })
       }).then(response => {
         if (!response.ok) {
@@ -486,8 +487,9 @@ export const dataSlice = createSlice({
       state.currGame.status = action.meta.arg.status
     },
     [postPlayer.fulfilled]:(state, action) => {
-      console.log("Player has been posted, not updated in redux yet XDD")
+      console.log("Player has been posted")
       console.log(action);
+
       state.currGame.players.push(action.meta.arg)
     },
     [postKill.fulfilled]:(state, action) => {
@@ -512,13 +514,10 @@ export const dataSlice = createSlice({
     },
     [deletePlayer.fulfilled]:(state, action) => {
       console.log("PLAYER HAS BEEN DELETED MATEYYYY ARGGGGG")
-      console.log(action);
 
       let tempArr = [];
 
       state.currGame.players.map((player) => {
-          console.log("Supposed to remove: " + action.meta.arg)
-          console.log("Going through: " + player.id);
           if (player.id != action.meta.arg) {
             console.log("Adding: " + player.id)
             tempArr.push(player);

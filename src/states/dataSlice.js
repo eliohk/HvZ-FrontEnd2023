@@ -485,6 +485,12 @@ export const dataSlice = createSlice({
       state.currGame.player = action.meta.arg.player
       state.currGame.title = action.meta.arg.title
       state.currGame.status = action.meta.arg.status
+
+      state.gamesArray.map((game, i) => {
+        if (game.id == action.meta.arg.id) {
+          state.gamesArray[i] = action.meta.arg
+        }
+      })
     },
     [postPlayer.fulfilled]:(state, action) => {
       console.log("Player has been posted")

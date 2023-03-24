@@ -31,10 +31,6 @@ const LandingPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    //console.log("sjekker keykloak", keycloak)
-
-    //console.log("keykloak sjekk ", keycloak);
-
     const handleSortVariable = (event) => {
         let retval = event.target.innerHTML;
         //console.log(retval)
@@ -167,6 +163,9 @@ const LandingPage = () => {
         if (!allGames.data.gamesArray) {
             dispatch(fetchGames());
         }
+
+        console.log(gamesArray)
+
     }, []);
 
     return (
@@ -235,11 +234,7 @@ const LandingPage = () => {
                     }
                     {/* {<button className="landingside-create-game-container" onClick={handleClickOpen}><GrAddCircle />  Create Game</button> } */}
                 </div>
-                {gamesArray == undefined ? 
-                    <GameListComponent></GameListComponent>
-                :
-                    null
-                }
+                {gamesArray}
             </div>
         </div>
     )

@@ -311,7 +311,7 @@ export const fetchGames = createAsyncThunk(
     }
   )
 
-  export const putPlayerInSquad = createAsyncThunk(
+  export const updatePlayer = createAsyncThunk(
     'squad/putPlayer',
     async (playerObj) => {
       console.log("Putting the following object: " )
@@ -511,12 +511,12 @@ export const dataSlice = createSlice({
 
       state.currGame.players.map((player) => {
         if (player.userTokenRef != action.meta.arg.token) {
+          console.log("Adding: " + player.id)
           tempArr.push(player);
         }
       });
       state.currGame.players = tempArr;
       action.meta.arg.callback(false)
-
     },
     [deletePlayer.fulfilled]:(state, action) => {
       console.log("PLAYER HAS BEEN DELETED MATEYYYY ARGGGGG")
@@ -533,7 +533,7 @@ export const dataSlice = createSlice({
       state.currGame.players = tempArr;
 
     },
-    [putPlayerInSquad.fulfilled]:(state, action) => {
+    [updatePlayer.fulfilled]:(state, action) => {
       console.log("PLAYER PUT IN SQUAD SUCCESSFULL MATEY!!!! :D ")  
       state.currGame.squads.map((squad, i) => {
         if (squad.id == action.meta.arg.aSquad.id) {

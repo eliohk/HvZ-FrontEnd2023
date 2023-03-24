@@ -284,7 +284,7 @@ const SquadListComponent = ( props ) => {
                     </div>
                     <div className='playerContainer'>
                         {keycloak.authenticated ?
-                            <button id="crtBtn" onClick={handleNewSquad}><img src={addIcon} alt="Add button" id="addBtn"/>Create a Squad</button>
+                            <button id="crtBtn" onClick={handleNewSquad}><img src={addButtonW} alt="Add button" id="addBtn"/>Create a Squad</button>
                             :
                             <button id="crtBtn" onClick={() => keycloak.login()}><img src={addIcon} alt="Add button" id="addBtn"/>Login to create squad</button>
                         }

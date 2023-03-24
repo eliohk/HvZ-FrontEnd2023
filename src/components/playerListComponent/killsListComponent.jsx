@@ -142,7 +142,7 @@ const KillsListComponent = ( props ) => {
                     </div>
                     : 
                     keycloak.authenticated ?
-                    <button id="crtBtn" onClick={addKill}><img src={addIcon} alt="Add button" id="addBtn"/>Add kill</button>
+                    <button id="crtBtn" onClick={addKill}><img src={addButtonW} alt="Add button" id="addBtn"/>Add kill</button>
                     :
                     <button id="crtBtn" onClick={() => keycloak.login()}><img src={addIcon} alt="Add button" id="addBtn"/>Log in to add kill</button>
                     }

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import addIcon from "../../resources/addIcon.svg";
 import "../../css/playerListComponent.css";
 import retIcon from "../../resources/retIcon.svg";
-import { putPlayerInSquad, deletePlayerFromSquad, fetchGameById, postSquad } from "../../states/dataSlice";
+import { updatePlayer, deletePlayerFromSquad, fetchGameById, postSquad } from "../../states/dataSlice";
 import keycloak from "../../keycloak";
 
 
@@ -45,7 +45,7 @@ const AllPlayersComponent = ( props ) => {
     const handleSave = (event) => {
         data.data.currGame.players.map((player, i) => {  
             if (chosenPlayers.includes("Player " + player.id)) {
-                dispatch(putPlayerInSquad({
+                dispatch(updatePlayer({
                     aPlayer: player,
                     aSquad: props.squad,
                 }));

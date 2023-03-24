@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchGameById , postKill} from '../../states/dataSlice';
+import { fetchGameById , postKill, updatePlayer} from '../../states/dataSlice';
 import "../../css/playerListComponent.css";
 import squadIcon from "../../resources/squadIcon.svg";
 import addIcon from "../../resources/addIcon.svg";
@@ -103,6 +103,13 @@ const KillsListComponent = ( props ) => {
                 setaddGameClicked(false)
                 setInputVal("")
                 setStory("")
+
+                const updatedPlayerObj = {
+                    id: killObj.playerRef,
+                    squadRef: 0,
+                    human: false
+                }
+                dispatch(updatePlayer(updatedPlayerObj))
                 return null;
             }
         }

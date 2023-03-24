@@ -12,8 +12,6 @@ const ChatViewComponent = (props) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log(props);
-
         props.pusher.subscribe("hvz-noroff").bind("chat-event", function (data) {
             const myName = keycloak.tokenParsed.given_name + " " + keycloak.tokenParsed.family_name;
             if (data.message.split("&")[0] != myName) {
@@ -50,8 +48,6 @@ const ChatViewComponent = (props) => {
             
         });
     } 
-
-    console.log(chatsState.data.currGame.chat)
 
     if (chatsState.data.currGame.chat.chats.length > 0) {
         return (

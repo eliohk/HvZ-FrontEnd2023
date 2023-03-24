@@ -24,6 +24,7 @@ import ChatInputViewComponent from "../../components/chatInputViewComponent/Chat
 import Pusher from "pusher-js";
 import { AiOutlineWarning } from 'react-icons/ai';
 import Alert from 'react-bootstrap/Alert';
+import { current } from "@reduxjs/toolkit";
 
 const GameDetailsPage = (props) => {
     const [listView, setListView] = useState("players");
@@ -33,23 +34,23 @@ const GameDetailsPage = (props) => {
     const [userJoined, setUserJoined] = useState(false);
 
     let currentGame = allGames.data.currGame;
-    console.log(currentGame)
-    console.log(keycloak)
     let token = keycloak.idTokenParsed.sub;
     let userName = keycloak.tokenParsed.preferred_username
-    console.log(currentGame.players)
     let currentPlayer;
-    
-    if (currentGame.players != undefined && !userJoined){
-        loop:
-        for (let i = 0; i  < currentGame.players.length; i++){
-            if (currentGame.players[i].username === userName || !userJoined){
-                currentPlayer = currentGame.players[i]
-                setUserJoined(true)
-                break loop;
+
+    useEffect(() => {
+        if (currentGame.players && !userJoined){
+            loop:
+            for (let i = 0; i  < currentGame.players.length; i++){
+                if (currentGame.players[i].username === userName){
+                    currentPlayer = currentGame.players[i]
+                    setUserJoined(true)
+                    break loop;
+                }
             }
         }
-    }
+    }, [])
+
    // console.log("tester ut", typeof JSON.parse(data))
 
     // CONTAINS ALL DATA FOR GAME
@@ -86,12 +87,10 @@ const GameDetailsPage = (props) => {
     }
 
     const callback = (event) => {
-        console.log("yo")
         setEditGameView(false);
     }
 
     //const game = props.games[id];
-
 
     function getListView(view) {
         if (view == "players") {
@@ -106,19 +105,23 @@ const GameDetailsPage = (props) => {
     }
 
     function handleNewPlayer() {
+        const rand = Math.floor(100000 + Math.random() * 900000);
+
         const playerObj = {
             userTokenRef: keycloak.idTokenParsed.sub,
             gameRef: currentGame.id,
-            biteCode: "12345",
-            patientZero: false,
-            human: true
+            biteCode: rand,
+            patientZero: currentGame.players && currentGame.players.length == 0 ? true : false,
+            human: true,
+            username: keycloak.tokenParsed.preferred_username
         };
+
         dispatch(postPlayer(playerObj))
         setUserJoined(true)
-
     }
 
     function handleLeaveGame() {
+        console.log(userJoined)
         const deleteObj = {
             token: token,
             callback: setUserJoined
@@ -147,7 +150,8 @@ const GameDetailsPage = (props) => {
                 <a href="/" id="retBtn" className="button"><img id="exitIcon" src={retIcon} alt="Return button" /></a>
                 <div className='mainContainer'>
                     <div className="header">
-                        {keycloak.authenticated ? userJoined ? 
+                        {keycloak.authenticated ? 
+                                userJoined ? 
                                 <button id="leaveBtn" onClick={handleLeaveGame}>Leave game</button>
                                 :
                                 <button id="joinBtn" onClick={handleNewPlayer}>Join game</button>

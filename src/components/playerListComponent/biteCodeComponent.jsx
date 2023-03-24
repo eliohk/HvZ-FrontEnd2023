@@ -8,19 +8,25 @@ import { AiOutlineWarning } from 'react-icons/ai';
 import Alert from 'react-bootstrap/Alert';
 
 const BiteCodeComponent = ( props ) => {
-    const [ biteCode, setBiteCode ] = useState(0);
+    const data = useSelector((state) => state);
+    const [ bc, setBc ] = useState("");
 
-    const handleMessage = (event) => {
-        const rand = Math.floor(100000 + Math.random() * 900000);
-        setBiteCode(rand);
-    }
+    useEffect(() => {
+        data.data.currGame.players.map((player, i) => {
+            if (player.username == keycloak.tokenParsed.preferred_username) {
+                console.log("yo?")
+                setBc(player.biteCode);
+            }
+        });
+    }, [])
+
+    
 
     return (
         keycloak.authenticated ?
             <div className="killContainer">
                 <h3 id="biteTitle"> Bite code</h3>
-                <input id="bcInput" type="text" name="name" value={biteCode}/>
-                <button id="bcGenerator" onClick={handleMessage} type="button">Generate bite code</button>
+                <input id="bcInput" type="text" name="name" value={bc}/>
                 <div className="biteMarker">
                     <p id="markerLocation">Marker location</p>
                     <p id="coordinates">N40° 44.9064', W073° 59.0735'</p>

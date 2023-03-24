@@ -3,7 +3,6 @@
 .listViewContainer {
     display: flex;
     flex-direction: column;
-    align-items: center;
     background-color: #2E2E2E;
     border-radius: 28px;
     height: 100%;
@@ -104,12 +103,11 @@
 }
 
 .playerContainer {
-    width: 90%;
+    width: 100%;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     color: white;
 }
 
@@ -157,23 +155,34 @@
 .playerItem {
     color: white;
     display: flex;
-    align-items: center;
     justify-content: space-between;
     background-color: transparent;
     border: none;
     font-family: 'Poppins', sans-serif;
     width: 100%;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
 }
 
 .playerItem p {
     /* 12px for normal members */
-    margin-left: 12px;
-    margin-right: 12px;
     margin-top: 0;
     margin-bottom: 0;
     font-size: 12px;
-    white-space:nowrap;
-    overflow: hidden;
+    inline-size: 4.9375rem;
+}
+
+.playerItem #pName {
+    white-space: normal;
+    overflow-wrap: break-word;
+}
+
+.playerItem #pFaction {
+    
+}
+
+.playerItem #pSquad {
+    
 }
 
 .playerItem:hover {
@@ -202,7 +211,7 @@
     margin-right: 12px;
     margin-top: 0;
     margin-bottom: 0;
-    font-size: 12px;
+    font-size: 12xpx;
     white-space:nowrap;
     overflow: hidden;
 }

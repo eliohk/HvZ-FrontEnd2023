@@ -85,7 +85,7 @@ const PlayerRow = ( props ) => {
     }
 
     useEffect(() => {
-        setName("Player " + props.player.id);
+        setName(props.player.username);
         setFaction(props.player.human ? "Human" : "Zombie");
         setSquad(props.player.squad ? "Squad " + props.player.squad.id : "N/A");
         setSquads(props.squad);
@@ -129,9 +129,9 @@ const PlayerRow = ( props ) => {
         </button>
         :
         <button className="playerItem" onClick={handleEdit}>
-            <p>{name}</p>
-            <p>{faction}</p>
-            <p>{squad}</p>
+            <p id="pName">{name}</p>
+            <p id="pFaction">{faction}</p>
+            <p id="pSquad">{squad}</p>
         </button>
     );
 };

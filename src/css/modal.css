@@ -85,7 +85,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 32px;
+    border-radius: 0.9375rem;
+  
+    
     width: 37.56rem;
     height: 28rem;
     margin-right: 0.938rem;
@@ -97,26 +99,30 @@
     width: 16.5rem;
     height: 28rem;
     min-height: 100%;
-    border: white;
-    border-radius: 32px;
+    border: solid white;
+    border-width: 0.0625rem;
+    border-radius: 1.25rem;
     background-color: #2E2E2E;
 }
 
 #listTitle {
-    margin: 1.25rem;
+    margin-top: 1.38rem;
+    margin-left: 3.6876rem;
+    margin-bottom: 5.3125rem;
+    width:fit-content;
+    font-size: 1.25rem;
     font-weight: bold;
 }
 
 #joinBtn {
-    border-radius: 12px;
+    border-radius: 0.528rem;
     color: white;
     background-color: #0CC70C;
     width: 11.09rem;
     height: 2.2rem;
-   
     border: none;
-    font-size: 25px;
-    font-weight: bold;
+    font-size: 1rem;
+    font-weight: 900;
     color: black;
 }
 
@@ -131,9 +137,7 @@
     background-color: #E8EAEA;
 }
 
-#joinBtn:focus {
-    background-color: #65C8FF;
-}
+
 
 #leaveBtn {
     border-radius: 0.528rem;
@@ -141,7 +145,6 @@
     background-color: #df3213;
     width: 11.09rem;
     height: 2.2rem;
-    
     border: none;
     font-size: 1rem;
     font-weight: bold;
@@ -169,28 +172,27 @@ ul {
 
 
 .btns {
-    border: black solid;
+    border: solid white;
+    border-width: 0.0625rem;
     font-size: 1rem;
     width: 100%;
     height: 2.31rem;
-    border-radius: 32px;
+    border-radius: 0.9375rem;
     background-color: #2E2E2E;
     color: white;
+    
 }
 
 .btns:hover {
-    outline-color: transparent;
-    outline-style:solid;
+    background-color: #515151;
     box-shadow: 0 0 0 1px black;
-    transition: 0.7s;
 }
 
 .btns:focus {
-    outline-color: transparent;
-    outline-style:solid;
     box-shadow: 0 0 0 1px black;
-    transition: 0.7s;
-    background-color: grey;
+    background-color: transparent;
+    border: solid #65C8FF;
+    font-weight: bold;
 }
 
 .header {
@@ -242,12 +244,13 @@ ul {
 .chatbox {
     background-color: #E8EAEA;
     color: black;
-    border-radius: 32px;
+    border-radius: 0.9375rem;
     position: relative;
     height: 11.31rem;
     width: 37.56rem;
     margin-right: 0.938rem;
-    border: solid black;
+    border: solid white;
+    border-width: 0.0625rem;
     overflow: scroll;
     /* hide scrollbar for IE, Edge and Firefox */
     -ms-overflow-style: none;
@@ -298,17 +301,23 @@ ul {
     display: flex;
     width: 100%;
     justify-content: left;
+    margin-top: 0.625rem;
+    
 }
 
 .chatInput #dropdown-basic-button {
-    border-radius: 28px;
-    border: solid black;
-    height: 1.62rem;
+    border-radius: 0.9375rem;
+    border: solid white;
+    border-width: 0.0625rem;
+    height: 2.2 rem;
     width: 10rem;
-    font-size: 0.825rem;
+    font-size: 0.875rem;
+    justify-content: center;
     padding-bottom: 25px;
-    margin-right: 0.438rem;
-    margin-left: 0.1rem;}
+    margin-right: 0.5rem;
+    margin-left: 0.1rem;
+
+}
 
 .squadBtn {
     border-radius: 16px;
@@ -327,33 +336,39 @@ ul {
     border-radius: 0.313rem;
 }
 
-.sendMsgBtn {
-    border: black solid;
-    border-radius: 32px;
+/*.sendMsgBtn {
+    border: solid white;
+    border-width: 0.0625rem;
+    border-radius: 1.25rem;
     background-color: #E8EAEA;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 10%;
     height: 2.2rem;
+}*/
+
+.sendMsgBtn {
+    border: none;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10%;
+    height: 100%;
 }
 
-.sendMsgBtn:hover {
+/*.sendMsgBtn:hover {
     outline-color: transparent;
     outline-style:solid;
     box-shadow: 0 0 0 1px black;
     transition: 0.7s;
-    background-color: grey;
-}
+}*/
 
 .msgIcon {
-    height: 70%;
-    width: 70%;
-}
-
-.msgIcon {
-    height: 70%;
-    width: 70%;
+    height: 1.5625rem;
+    width: 1.5625rem;
+    
 }
 
 .actualInput {
@@ -384,17 +399,15 @@ form {
 
 
 #input{
-    border-radius: 32px;
-    height: 2.2rem;
-    border: solid black;
-    border-width: 2px;
+    border-radius: 0.9375rem;
+    height: 100%;
+    border: solid white;
+    border-width: 0.0625rem;
     white-space: initial;
     width: 90%;
-    
-    border: solid black;
-    margin-right: 0.438rem;
     font-size: 12px;
     padding-left: 10px;
+    background-color: #E8EAEA;
 }
 
 

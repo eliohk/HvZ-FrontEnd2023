@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 .mainContainer {
-    background-color: #626263;   
+    background-color: #2E2E2E;   
     min-height: 100%;
     display: flex;
     align-items: center;
@@ -16,6 +16,8 @@
     border-radius: 16px;
     font-family: 'Poppins', sans-serif;
     margin-top: -3rem;
+    border:solid white;
+    border-width: 0.0625rem;
 }
 
 .mostMainContainer {
@@ -95,7 +97,7 @@
     width: 16.5rem;
     height: 28rem;
     min-height: 100%;
-    border: black solid;
+    border: white;
     border-radius: 32px;
     background-color: #2E2E2E;
 }
@@ -109,9 +111,9 @@
     border-radius: 12px;
     color: white;
     background-color: #0CC70C;
-    width: 247px;
-    height: 50px;
-    margin: 8px;
+    width: 11.09rem;
+    height: 2.2rem;
+   
     border: none;
     font-size: 25px;
     font-weight: bold;
@@ -134,14 +136,14 @@
 }
 
 #leaveBtn {
-    border-radius: 12px;
+    border-radius: 0.528rem;
     color: white;
     background-color: #df3213;
-    width: 247px;
-    height: 50px;
-    margin: 8px;
+    width: 11.09rem;
+    height: 2.2rem;
+    
     border: none;
-    font-size: 25px;
+    font-size: 1rem;
     font-weight: bold;
     color: black;
 }
@@ -456,13 +458,39 @@ form {
 }
 
 #exitIcon {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1.875rem;
+    height: 1.875rem;
+    margin-left: 60rem;
+    margin-top: 0.6rem;
+    z-index: 999999;
+
 }
 
 #removeMarginTitle {
-    font-weight: bold;
+    font-weight: Bold;
     font-size: 3rem;
+    
+}
+
+#removeMargins{
+    justify-content: right;
+    font-size: 1.25rem;
+    font-family: 'poppins';
+    font-weight: Bold;
+
+}
+
+#removeMargin.gameType {
+    font-size: 1.25rem;
+
+}
+
+#removeMargin.desc {
+    font-size: 1rem;
+    font-family: 'poppins';
+    font-weight: regular;
+    max-width: 54rem;
+
 }
 
 #retBtn:hover {

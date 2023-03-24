@@ -63,7 +63,7 @@ const ChatViewComponent = (props) => {
         // TODO: loop through msg and display em down like above
         return (
             <div className="chatbox" ref={messageRef}>
-                <p>Chats not loaded ..</p>
+                <p>There are no chats yet, start chatting buddy!</p>
             </div>
         )
     }

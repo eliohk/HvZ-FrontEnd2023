@@ -294,6 +294,22 @@ export const fetchGames = createAsyncThunk(
     }
   )
 
+  export const deletePlayerByToken = createAsyncThunk(
+    'players/token/delete',
+    async (deleteObj) => {
+      const response = await fetch(`${baseUrl}players/deleteByToken/${deleteObj.token}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(response => {
+        if (!response.ok){
+          throw new Error("Could not delete player by token lol")
+        }
+      })
+    }
+  )
+
   export const putPlayerInSquad = createAsyncThunk(
     'squad/putPlayer',
     async (playerObj) => {
@@ -481,6 +497,18 @@ export const dataSlice = createSlice({
     [putGlobalChat.fulfilled]:(state, action) => {
       console.log("@@@@@@SUCK DICK MAN@@@@@@@@")
       state.currGame.chat.chats.push(action.meta.arg.chat)
+    },
+    [deletePlayerByToken.fulfilled]:(state, action) => {
+      let tempArr = []
+
+      state.currGame.players.map((player) => {
+        if (player.userTokenRef != action.meta.arg.token) {
+          tempArr.push(player);
+        }
+      });
+      state.currGame.players = tempArr;
+      action.meta.arg.callback(false)
+
     },
     [deletePlayer.fulfilled]:(state, action) => {
       console.log("PLAYER HAS BEEN DELETED MATEYYYY ARGGGGG")

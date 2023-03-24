@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react'
 import ChatViewComponent from "../../components/chatViewComponent/ChatViewComponent";
 import MapComponent from "../../components/mapComponent/MapComponent";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchGameById, fetchGames } from "../../states/dataSlice";
+import { deletePlayerByToken, fetchGameById, fetchGames } from "../../states/dataSlice";
 import SquadListComponent from "../../components/playerListComponent/squadListComponent";
 import SquadMemberListComponent from "../../components/playerListComponent/squadMemberListComponent";
 import KillsListComponent from "../../components/playerListComponent/killsListComponent";
@@ -30,10 +30,25 @@ const GameDetailsPage = (props) => {
     const allGames = useSelector((state) => state);
     const [editGameView, setEditGameView] = useState(false);
     const [ loading, setLoading ] = useState("");
+    const [userJoined, setUserJoined] = useState(false);
 
     let currentGame = allGames.data.currGame;
     console.log(currentGame)
-
+    let token = keycloak.idTokenParsed.sub;
+    let userName = keycloak.tokenParsed.preferred_username
+    console.log(currentGame.players)
+    let currentPlayer;
+    
+    if (currentGame.players != undefined && !userJoined){
+        loop:
+        for (let i = 0; i  < currentGame.players.length; i++){
+            if (currentGame.players[i].username === userName || !userJoined){
+                currentPlayer = currentGame.players[i]
+                setUserJoined(true)
+                break loop;
+            }
+        }
+    }
    // console.log("tester ut", typeof JSON.parse(data))
 
     // CONTAINS ALL DATA FOR GAME
@@ -98,6 +113,17 @@ const GameDetailsPage = (props) => {
             human: true
         };
         dispatch(postPlayer(playerObj))
+        setUserJoined(true)
+
+    }
+
+    function handleLeaveGame() {
+        const deleteObj = {
+            token: token,
+            callback: setUserJoined
+        }
+        dispatch(deletePlayerByToken(deleteObj))
+        setUserJoined(false)
     }
 
     const displayEditGameAdmin = () => {
@@ -119,6 +145,13 @@ const GameDetailsPage = (props) => {
             <div className="mostMainContainer">
                 <div className='mainContainer'>
                     <div className="header">
+                        {keycloak.authenticated ? userJoined ? 
+                                <button id="leaveBtn" onClick={handleLeaveGame}>Leave game</button>
+                                :
+                                <button id="joinBtn" onClick={handleNewPlayer}>Join game</button>
+                            :
+                            <button id="joinBtn" onClick={() => keycloak.login()}>Log in</button>
+                        }
                         {keycloak.hasRealmRole("ADMIN") ?
                             <h5 id="removeMargin">Admin</h5>
                             :
@@ -162,11 +195,6 @@ const GameDetailsPage = (props) => {
                         </div>
                     </div>
                 </div>
-                {keycloak.authenticated ?
-                    <button id="joinBtn" onClick={handleNewPlayer}>Join game</button>
-                    :
-                    <button id="joinBtn" onClick={() => keycloak.login()}>Log in</button>
-                }
             </div>
         )
     } else {
@@ -183,3 +211,4 @@ const GameDetailsPage = (props) => {
 }
 
 export default GameDetailsPage;
+

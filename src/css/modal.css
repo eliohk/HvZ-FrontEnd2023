@@ -133,6 +133,34 @@
     background-color: #65C8FF;
 }
 
+#leaveBtn {
+    border-radius: 12px;
+    color: white;
+    background-color: #df3213;
+    width: 247px;
+    height: 50px;
+    margin: 8px;
+    border: none;
+    font-size: 25px;
+    font-weight: bold;
+    color: black;
+}
+
+
+#leaveBtn:hover {
+    outline-color: transparent;
+    outline-style:solid;
+    box-shadow: 0 0 0 1px black;
+    transition: 0.7s;
+}
+
+#leaveBtn:active {
+    background-color: #E8EAEA;
+}
+
+#leaveBtn:focus {
+    background-color: #df3213;
+}
 ul {
     margin: 1em;
 }

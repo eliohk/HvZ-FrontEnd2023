@@ -36,3 +36,18 @@
     width: 50px;
     margin-left: -12px;
 }
+
+@media only screen and (max-width: 450px) {
+    .alignMiniProfile{
+        height: 50px;
+        margin-left: 10px;
+
+    }
+    .fancyNameNotLoggedIn{
+        font-size: 13px;
+    }
+    .fancyProfilePic{
+        width: 40px;
+    }
+    
+}

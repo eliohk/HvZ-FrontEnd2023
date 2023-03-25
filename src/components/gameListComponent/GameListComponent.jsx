@@ -50,11 +50,11 @@ const GameList = ( props ) => {
                     <p id="status" className="statusComponent">{props.game.status}</p>
                     <div className="playerCounter">
                         <div id="dt" className="alignStats">
-                            <img src={dateIcon} alt="playerIcons" width="30"></img>
+                            <img className="image-tag-gamelist" src={dateIcon} alt="playerIcons" width="30"></img>
                             <p className="dateText">{props.game.date}</p>
                         </div>
                         <div id="cntr" className="alignStats">
-                            <img src={playerIcon} alt="playerIcons" width="30"></img>
+                            <img className="image-tag-gamelist" src={playerIcon} alt="playerIcons" width="30"></img>
                             <p className="playerCountText">{props.game.players.length }/{props.game.maxPlayers} players</p>
                         </div>
                     </div>

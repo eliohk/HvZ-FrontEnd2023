@@ -11,6 +11,7 @@ import "../../css/topNavbar.css";
 import Register from "../registerComponent/Register";
 import AboutPage from "../../pages/aboutPage/AboutPage";
 import keycloak from "../../keycloak";
+import HamburgerMenu from "../menu/HamburgerMenu";
 
 const TopNavbar = () => {
     const state = useSelector((data) => data);
@@ -73,7 +74,10 @@ const TopNavbar = () => {
                                 </Dropdown.Menu>
                             </Dropdown>
                         </div>
+
                     <div className="logo-main-content">
+                    <HamburgerMenu/>
+
                     <NavLink to="/">
                         <div className="top-navbar-log">
                             <p className="logo">Human</p>

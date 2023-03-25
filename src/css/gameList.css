@@ -4,7 +4,6 @@
     display: flex;
     align-items: center;
     height: 102%;
-
     border: solid black;
     border-radius: 16px;
 }
@@ -42,11 +41,11 @@
 }
 
 .mapImgList {
-    border-radius: 16px;
+    border-radius: 1rem;
 }
 
 .statusComponent {
-    margin-top: 8px;
+    margin-top: 0.5rem;
     text-align: center;
 }
 
@@ -54,13 +53,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 4px;
+    margin-bottom: 0.25rem;
 }
 
 #title {
-    font-size: 25px;
+    font-size: 1.6rem;
     font-weight: 700;
-    line-height:  14px;
+    line-height:  0.875rem;
     white-space: nowrap;
 }
 
@@ -71,9 +70,9 @@
 #gameMode {
     width: fit-content;
     margin: 0;
-    margin-left: 8px;
+    margin-left: 0.5rem;
     color: #65CBFF;
-    font-size: 12px;
+    font-size: 0.75rem;
     white-space: nowrap;
 }
 
@@ -107,7 +106,8 @@
 }
 
 #gamedtBtn {
-    width: 150px;
+    width: 120px;
+    font-size: 10px;
     border-radius: 16px;
     background-color: #2E2E2E;
     color: white;
@@ -147,4 +147,82 @@
     margin: 0;
     margin-left: 8px;
     white-space: nowrap;
+}
+
+
+@media only screen and (max-width: 800px) {
+    .mapImgList{
+        display: none;
+        border: none;
+    }
+    .innerMapContainer{
+        border: none;
+    }
+
+    .playerCounter{
+        width: 6.2rem;
+    }
+    .alignStats{
+        width: 3.75rem;
+        margin: 0px 0.125rem;
+    }
+    .dateText{
+        font-size: 0.75rem;
+        margin-right: 5.625rem;
+        font-weight: 700;
+    }
+    .image-tag-gamelist{
+        width: 0.75rem;
+    }
+    .playerCountText{
+        font-size: 0.75rem;
+        margin-left: 0.313rem;
+        font-weight: 700;
+        padding-right: 1.188rem;
+    }
+    .innerTitleContainer {
+        margin-left: 0.5rem;
+        padding-left: 0.375rem;
+    }
+    #status{
+        font-size: 0.75rem;
+        width: 40%;
+        font-weight: 700;        
+    }
+    #ctnr {
+        margin: 0px 0.5rem;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .mainGameContainer{
+        width: 20.875rem;
+    }
+    #gamedtBtn{
+        width: 93px;
+        font-size: 12px;
+        padding: 6px;
+    }
+    .dateText{
+        font-size: 0.75rem;
+    }
+    .playerCountText{
+        font-size: 0.65rem;
+    }
+
+    #status{
+        font-size: 0.6rem;
+    }
+    .innerStatisticsContainer{
+        height: 90%;
+    }
+
+    #title{
+        font-size: 0.8rem;
+    }
+    #gameMode {
+        font-size: 0.6rem;
+    }
+
+
 }

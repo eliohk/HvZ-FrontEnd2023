@@ -240,6 +240,13 @@ button.btn.btn-primary {
     padding-right: 10px;
 }
 
+@media only screen and (max-width: 850px) {
+    .secondaryLandingContainer {
+        padding: 0px 75px !important;
+    }
+}
+
+
 
 /*
 @media only screen and (max-width: 1200px) {

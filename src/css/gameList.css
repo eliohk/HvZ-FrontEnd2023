@@ -3,7 +3,9 @@
 .innerMapContainer {
     display: flex;
     align-items: center;
-    width: 14.56rem;
+    width: 14.56rem !important;
+    max-width: 30%;
+    min-width: 30%;
     height: 9.88rem;
     border-radius: 16px;
 }
@@ -15,8 +17,12 @@
 
 .mapImgList {
     border-radius: 1rem;
-    width: 14.56rem;
-    height: 9.88rem;
+    width: 14.56rem !important;
+    max-width: 100%;
+    min-width: 100%;
+    height: 9.88rem !important;
+    max-height: 100%;
+    min-height: 100%;
     border: solid white;
     border-width: 0.1px;
 }
@@ -52,9 +58,8 @@
     display: flex;
     flex-direction: row;
     align-items: start;
-    height: 9.88rem;
-    width: 100%;
-    min-width: 50%;
+    height: 9.88rem !important;
+    width: 100% !important;
     font-family: 'Poppins', sans-serif;
 }
 
@@ -76,7 +81,7 @@
 }
 
 #title {
-    font-size: 1.5625rem;
+    font-size: 1.8vw;
     font-weight: bold;
     line-height:  0.875rem;
     white-space: nowrap;
@@ -85,7 +90,6 @@
 }
 
 #status {
-    width: 100%;
 }
 
 #gameMode {
@@ -102,7 +106,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    width: 70% !important;
     height: 100%;
     border-radius: 16px;
     margin-left: 1.5625rem;
@@ -118,10 +122,13 @@
 }
 
 #loremIpsum {
+    overflow-wrap: break-word;
     margin-top: 0.81rem;
-    font-size: 1rem;
+    font-size: 1.2vw;
     height: 2.1875rem;
-    width: 115%;
+    width: 20vw !important;
+    min-width: 50% !important;
+    max-width: 100% !important;
 }
 
 #gamedtBtn {
@@ -181,14 +188,169 @@
     width: min-content;
 }
 
+@media only screen and (max-width: 1000px) and (min-width: 350px) and (orientation: portrait){
+    .mapImgList{
+        margin: 0;
+    }
+    .innerMapContainer{
+        margin: 0;
+    }
+    .mainGameContainer {
+        width: 70% !important;
+        display: flex;
+        justify-content: start;
+        align-items: start;
+    }
 
+    #gamedtBtn {
+        width: 24vw;
+        height: 3vh;
+        font-size: 3vw;
+        white-space: nowrap;
+        margin: 0;
+    }
+
+    #title {
+        font-size: 5vw;
+    }
+
+    #gameMode {
+        font-size: 5vw;
+    }
+
+    #status {
+        font-size: 3vw;
+    }
+
+    .statusComponent {
+        width: fit-content;
+    }
+
+    .playerCounter {
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        justify-content: center;
+    }
+
+    #dt {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        margin: 0;
+    }
+
+    .dateText {
+        margin-left: 0.25rem;
+        font-size: 3vw;
+        margin-bottom: 2vh;
+    }
+
+    .image-tag-gamelist {
+        margin-bottom: 1vw;
+        height: 3vh;
+        width: 4vw;
+    }
+
+    #pcimg {
+    }
+
+    #dtimg {
+        margin-bottom: 2.3vh;
+    }
+
+    #cntr {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        text-align: end;
+        margin: 0;
+    }
+
+    .playerCountText {
+        font-size: 3vw;
+        margin-bottom: 1vw;
+        margin-right: 0.5rem;
+    }
+
+    #loremIpsum {
+        margin: 0;
+        margin-top: 0.5rem;
+        font-size: 3vw;
+        width: 85% !important;
+        overflow: hidden;
+    }
+
+    .innerDataContainer {
+        width: 100% !important;
+        display: flex;
+        justify-content: start;
+        align-items: start;
+
+    }
+
+    .innerTitleContainer {
+        display: flex;
+        justify-content: space-between;
+        margin: 0;
+        padding-bottom: 0.6rem;
+        padding-left: 1rem;
+    }
+
+    .innerStatisticsContainer {
+        margin: 0;
+        padding-top: 0.5rem;
+    }
+
+    .mostInnerTitleContainer {
+    }
+}
+/*
 @media only screen and (max-width: 800px) {
+
+    .mainGameContainer {
+        width: 100% !important;
+        display: flex;
+        justify-content: start;
+        align-items: start;
+    }
+
+    .innerStatisticsContainer {
+        width: 100% !important;
+    }
+
+    .playerCounter {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
+    }
+
+    #dt {
+        display: flex;
+        align-items: start;
+        justify-content: start;
+    }
+
+    .dateText
+
+    #cntr {
+        display: flex;
+        align-items: start;
+        justify-content: start;
+    }
+
+    .innerDataContainer {
+        width: 100% !important;
+    }
+
     .mapImgList{
         display: none;
         border: none;
     }
     .innerMapContainer{
         border: none;
+        display: none;
     }
 
     .playerCounter{
@@ -225,6 +387,7 @@
         margin: 0px 0.5rem;
     }
 }
+*/
 
 @media only screen and (max-width: 450px) {
     .mainGameContainer{

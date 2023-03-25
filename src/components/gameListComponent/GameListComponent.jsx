@@ -65,11 +65,11 @@ const mapArray = [{map: Nes, x: "16", y: "59.8674", z: "10.5263"}, {map: Noroff,
                     <p id="status" className="statusComponent">{props.game.status}</p>
                     <div className="playerCounter">
                         <div id="dt">
-                            <img className="image-tag-gamelist" src={dateIcon} alt="playerIcons"></img>
+                            <img className="image-tag-gamelist" id="dtimg" src={dateIcon} alt="playerIcons"></img>
                             <p className="dateText">{props.game.date}</p>
                         </div>
                         <div id="cntr">
-                            <img className="image-tag-gamelist" src={playerIcon} alt="playerIcons"></img>
+                            <img className="image-tag-gamelist" id="pcimg" src={playerIcon} alt="playerIcons"></img>
                             <p className="playerCountText">{props.game.players.length }/{props.game.maxPlayers} players</p>
                         </div>
                     </div>

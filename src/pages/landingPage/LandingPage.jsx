@@ -149,7 +149,7 @@ const LandingPage = () => {
         console.log(gameObj);
 
         dispatch(postGame(gameObj))
-        //window.location.reload(false);
+        window.location.reload(false);
     }
 
     const titles = (e) => {

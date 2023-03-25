@@ -107,7 +107,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 65% !important;
+    width: 67% !important;
     height: 100%;
     border-radius: 16px;
     color: white;
@@ -203,7 +203,7 @@
     }
 
     #gamedtBtn {
-        width: 24vw;
+        width: 26vw;
         height: 3vh;
         font-size: 3vw;
         white-space: nowrap;
@@ -211,11 +211,11 @@
     }
 
     #title {
-        font-size: 5vw;
+        font-size: 3vw;
     }
 
     #gameMode {
-        font-size: 5vw;
+        font-size: 3vw;
     }
 
     #status {
@@ -275,7 +275,6 @@
 
     #loremIpsum {
         margin: 0;
-        margin-top: 0.5rem;
         font-size: 3vw;
         width: 85% !important;
         overflow: hidden;

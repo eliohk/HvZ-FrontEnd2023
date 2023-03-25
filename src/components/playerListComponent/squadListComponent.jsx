@@ -44,6 +44,7 @@ const AllPlayersComponent = ( props ) => {
 
     const handleSave = (event) => {
         data.data.currGame.players.map((player, i) => {  
+            console.log("sjekker om det virker her")
             if (chosenPlayers.includes("Player " + player.id)) {
                 dispatch(updatePlayer({
                     aPlayer: player,

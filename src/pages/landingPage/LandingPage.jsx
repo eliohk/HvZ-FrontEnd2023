@@ -118,6 +118,8 @@ const LandingPage = () => {
 
     let gamesArray;
     if (allGames.data.gamesArray != undefined) {
+    //    console.log(gamesArray)
+
         if (sortVariable === 'Title') {
             gamesArray = gamesSortedTitle;
         } else if (sortVariable === 'Date') {
@@ -127,8 +129,13 @@ const LandingPage = () => {
         } else if (sortVariable === 'State') {
             gamesArray = gamesSortedState
         }
+   //     console.log(gamesArray)
+
     }
+
+
     const handleNewGame = () => {
+
         // console.log("Henlo")
 
         const gameObj = {
@@ -137,7 +144,6 @@ const LandingPage = () => {
             gameType: gameType,
             maxPlayers: maxPlayer
         }
-
         dispatch(postGame(gameObj))
         window.location.reload(false);
     }
@@ -168,7 +174,7 @@ const LandingPage = () => {
             dispatch(fetchGames());
         }
 
-        console.log(gamesArray)
+   //     console.log(gamesArray)
 
     }, []);
 
@@ -252,7 +258,7 @@ const LandingPage = () => {
                                             onChange={maxAntallPlayer}></input>
                                     </div>
                                     <div className='button-modal-container'>
-                                        <button className='modal-button' onClick={(handleNewGame)}>save</button>
+                                        <button className='modal-button' onClick={() => handleNewGame()}>save</button>
                                         <button className='modal-button' onClick={(handleClose)}>close</button>
                                     </div>
                                 </DialogContent>
@@ -263,8 +269,8 @@ const LandingPage = () => {
                     }
                     {/* {<button className="landingside-create-game-container" onClick={handleClickOpen}><GrAddCircle />  Create Game</button> } */}
                 </div>
-                {gamesArray}
-            </div>
+                 {gamesArray}
+              </div>
         </div>
     )
 }

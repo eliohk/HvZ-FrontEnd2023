@@ -535,15 +535,32 @@ export const dataSlice = createSlice({
     },
     [updatePlayer.fulfilled]:(state, action) => {
       console.log("PLAYER PUT IN SQUAD SUCCESSFULL MATEY!!!! :D ")  
+      console.log(action.meta.arg);
+
       state.currGame.squads.map((squad, i) => {
+        if (action.meta.arg.aPlayer.squad == action.meta.arg.aPlayer.squadRef && squad.name == action.meta.arg.aPlayer.squadRef) {
+            let temp = [];
+            squad.players.map((player, i) => {
+              if (player.id != action.meta.arg.aPlayer.id) {
+                temp.push(player);
+              }
+            });
+
+            squad.players = temp;
+        }
         if (squad.id == action.meta.arg.aSquad.id) {
-            squad.players.push(action.meta.arg.aPlayer);
+            squad = action.meta.arg.aSquad;
         }
       })
 
+      console.log(action.meta.arg)
+      
       state.currGame.players.map((player, i) => {
         if (player.id == action.meta.arg.aPlayer.id) {
+          player.human = action.meta.arg.aPlayer.human;
           player.squad = action.meta.arg.aSquad;
+          player.squadRef = action.meta.arg.aPlayer.squadRef;
+          console.log(player)
         }
       })
     },

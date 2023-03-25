@@ -33,6 +33,7 @@ const GameList = ( props ) => {
     
     // **** REMOVE THIS WHEN PUSHING TO PROD WITH FUNCTIONAL DB. ****
     return (
+        
         <div className="mainGameContainer">
             <div className="innerMapContainer">
                 <img src={Map} alt="Map" className="mapImgList"/>

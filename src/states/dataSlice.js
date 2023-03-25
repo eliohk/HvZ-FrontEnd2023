@@ -9,9 +9,6 @@ const baseUrl = 'http://localhost:8080/api/v1/'
 export const fetchGames = createAsyncThunk(
     'games/fetchGames',
     async () => {
-     //console.log("FETCHING GAMES")
-     // console.log(keycloak)
-
       const response = await fetch(
         `${azureUrl}/games` , {
           headers: {

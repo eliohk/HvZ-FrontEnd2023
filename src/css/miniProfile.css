@@ -15,6 +15,7 @@
     padding: 0.25em 2em 0.25em 2em;
     font-size: 16px;
     margin-top: 1em;
+    font-weight: bold;
     font-family: 'Poppins', sans-serif;
 }
 
@@ -25,16 +26,14 @@
     padding: 0.25em 2em 0.25em 2em;
     font-size: 16px;
     margin-top: 1em;
-    text-decoration: underline;
+    font-weight: bold;
     font-family: 'Poppins', sans-serif;
 }
 
 .fancyProfilePic {
-    border: solid white;
-    border-radius: 32px;
-    border-width: 2px;
     width: 50px;
-    margin-left: -12px;
+    margin-left: -11px;
+    background-color: transparent;
 }
 
 @media only screen and (max-width: 450px) {

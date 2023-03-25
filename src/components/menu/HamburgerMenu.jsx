@@ -3,9 +3,9 @@ import { NavLink } from 'react-router-dom';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import MiniProfile from "../miniProfileComponent/MiniProfile";
 
-
 import './../../css/HamburgerMenu.css';
 import keycloak from '../../keycloak';
+import { Nav } from 'react-bootstrap';
 
 const HamburgerMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,10 +17,7 @@ const HamburgerMenu = () => {
 
   const register = () => {
     keycloak.register()
-
   }
-
-
 
   return (
     <div className="hamburger-menu-component">
@@ -28,7 +25,6 @@ const HamburgerMenu = () => {
         <p className='hamburger-img-component'><RxHamburgerMenu /></p>
       </button>
       {isOpen && (
-        <nav className="hamburger-nav-component">
           <ul className='hamburger-ul-component'>
             <li>
               <NavLink to="/" onClick={toggleMenu}>
@@ -40,24 +36,39 @@ const HamburgerMenu = () => {
                 About
               </NavLink>
             </li>
-            <li>
-              <NavLink onClick={register} 
-              >
-                Sign Up
-              </NavLink>
-            </li>
+            {!keycloak.authenticated && (
+              <>
+                <li>
+                  <NavLink onClick={ () => keycloak.login()}>
+                    Log Inn
+                  </NavLink>
+                </li>
+                <li> 
+                  <NavLink onClick={() => keycloak.register()}> 
+                    Register 
+                  </NavLink>
+                </li>
+              </>
+            )}
+            {keycloak.authenticated && (
+              <>
+              <li>
+                <NavLink onClick={() => keycloak.logout()}>
+                  Log out 
+                </NavLink>
+              </li>
+              </>
+            )}
             {/* Add other links as needed */}
           </ul>
-        </nav>
       )}
-          <NavLink to="/">
-                        <div className="top-navbar-log-menu-hamburger">
-                            <p className="logo">Human</p>
-                            <p id="vs" className="logo">vs</p>
-                            <p className="logo">Zombies</p>
-                        </div>
-                    </NavLink>
-      <MiniProfile/>
+      <NavLink to="/">
+        <div className="top-navbar-log-menu-hamburger">
+          <p className="logo">Human</p>
+          <p id="vs" className="logo">vs</p>
+          <p className="logo">Zombies</p>
+        </div>
+      </NavLink>
     </div>
   );
 };

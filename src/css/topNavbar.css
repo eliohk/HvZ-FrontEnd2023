@@ -162,6 +162,9 @@ a:hover {
     .top-navbar-log{
         display: none;
     }
+    .top-navbar-main-content{
+        margin-top: 85px;
+    }
   
     
 }

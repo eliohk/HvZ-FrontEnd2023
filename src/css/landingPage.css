@@ -210,3 +210,21 @@ button.btn.btn-primary {
     }
   }
   */
+
+
+  @media only screen and (max-width: 450px){
+
+    .secondaryLandingContainer{
+        display: flex;
+        justify-content: center;
+        margin: 200px ;
+    }
+    .landing-page-create-game-component{
+        border: 2px solid red;
+    }
+
+
+
+  
+    
+  }

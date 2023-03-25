@@ -185,7 +185,7 @@ const LandingPage = () => {
                         </SplitButton>
                     </div>
                     {keycloak.hasRealmRole("ADMIN") ? 
-                        <div>
+                        <div className='landing-page-create-game-component'>
                             <button className="landingside-create-game-container" onClick={handleClickOpen}><GrAddCircle />  Create Game</button>
                             <Dialog className='testing' open={open} onClose={handleClose}>
                                 <h3 className='dialog-content-modal' > Create a new game</h3>

@@ -15,6 +15,7 @@ import HamburgerMenu from "../menu/HamburgerMenu";
 
 const TopNavbar = () => {
     const state = useSelector((data) => data);
+   // console.log("sjekker endepunktet", process.env.REACT_APP_AZURE_APP_API+ "/players")
 
     const CustomToggle = forwardRef(({ children, onClick }, ref) => (
         <a

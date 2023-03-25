@@ -125,6 +125,8 @@ const PlayerListComponent = ( props ) => {
     }
 
     const handleSave = () => {
+        console.log("sjekker om dette fungerer")
+        console.log("sjekke om navnet blir endret ",  name)
         handleEdit();
         player.human = faction;
         player.squad = squad;
@@ -143,6 +145,7 @@ const PlayerListComponent = ( props ) => {
     }
 
     const handleEdit = () => {
+        
         if (editable) {
             setEditable(false);
         } else {
@@ -151,8 +154,8 @@ const PlayerListComponent = ( props ) => {
     }
 
     const players = data.data.currGame.players.map((thisPlayer, i) => {
-        console.log("Checking all players over again, Index: " + i)
-        console.log(thisPlayer);
+    //    console.log("Checking all players over again, Index: " + i)
+     //   console.log(thisPlayer);
         return (
             <PlayerRow player={thisPlayer} saveCallback={handleSave} delCallback={handleDelete} edit={setEditable} editVal={editable} setPlayer={setPlayer}/>
         )

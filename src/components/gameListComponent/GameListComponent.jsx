@@ -48,6 +48,7 @@ const mapArray = [{map: Nes, x: "16", y: "59.8674", z: "10.5263"}, {map: Noroff,
     };
     
     return (
+        
         <div className="mainGameContainer">
             <div className="innerMapContainer">
                 {map}

@@ -22,11 +22,10 @@ const LandingPage = () => {
     const [sortVariable, setSortVariable] = useState("Title");
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("")
-    const [gameType, setGameType] = useState("")
+    const [gameType, setGameType] = useState("Hide and seek")
     const [gameMap, setGameMap] = useState("")
     const [maxPlayer, setMaxPlayer] = useState(0)
     const [open, setOpen] = useState(false);
-
 
     const allGames = useSelector((state) => state);
     const dispatch = useDispatch();
@@ -138,14 +137,19 @@ const LandingPage = () => {
 
         // console.log("Henlo")
 
+        // add this later + coords
+        //console.log(gameMap)
         const gameObj = {
             title: title,
             description: description,
             gameType: gameType,
             maxPlayers: maxPlayer
         }
+
+        console.log(gameObj);
+
         dispatch(postGame(gameObj))
-        window.location.reload(false);
+        //window.location.reload(false);
     }
 
     const titles = (e) => {
@@ -224,22 +228,22 @@ const LandingPage = () => {
                                         <label className='landingpage-label'>Game type</label>
                                         <div className="editPlayerFactions">
                                             <input type="radio" onClick={gameTypes} value="Hide and seek" id="HS" name="type" defaultChecked/>
-                                            <label htmlFor="HS">[Hide & Seek]</label>
+                                            <label htmlFor="HS">Hide & Seek</label>
                                         </div>
                                         <div className="editPlayerFactions">
                                             <input type="radio" onClick={gameTypes} value="Rescue mission" id="RS" name="type"/>
-                                            <label htmlFor="RS">[Rescue mission]</label>
+                                            <label htmlFor="RS">Rescue mission</label>
                                         </div>
                                         <div className="editPlayerFactions">
                                             <input type="radio" onClick={gameTypes} value="Capture the flag" id="CTF" name="type"/>
-                                            <label htmlFor="CTF">[Capture the Flag]</label>
+                                            <label htmlFor="CTF">Capture the Flag</label>
                                         </div>
                                     </div>
                                     <div className='align-input-label'>
                                         <label className='landingpage-label'>Map</label>
                                         <div className="editPlayerFactions">
                                             <input type="radio" onClick={gameMaps} value="Slottet" id="slottet" name="map" defaultChecked/>
-                                            <label htmlFor="slottet">[Slottet]</label>
+                                            <label htmlFor="slottet">Slottet</label>
                                         </div>
                                         <div className="editPlayerFactions">
                                             <input type="radio" onClick={gameMaps} value="Nesøya" id="nes" name="map"/>

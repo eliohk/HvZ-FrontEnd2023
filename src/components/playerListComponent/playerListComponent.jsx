@@ -100,6 +100,8 @@ const PlayerListComponent = ( props ) => {
     const handleSquad = (event) => {
         data.data.currGame.squads.map((squad, i) => {
             if (squad.name == event.target.value) {
+                console.log(squad.name);
+                console.log(squad);
                 setSquad(squad.name);
                 setSquadObj(squad);
             }
@@ -127,6 +129,9 @@ const PlayerListComponent = ( props ) => {
         player.human = faction;
         player.squad = squad;
         player.username = name;
+
+        console.log(player);
+        console.log(squadObj);
         dispatch(updatePlayer({
             aPlayer: player,
             aSquad: squadObj

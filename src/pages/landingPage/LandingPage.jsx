@@ -23,6 +23,7 @@ const LandingPage = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("")
     const [gameType, setGameType] = useState("")
+    const [gameMap, setGameMap] = useState("")
     const [maxPlayer, setMaxPlayer] = useState(0)
     const [open, setOpen] = useState(false);
 
@@ -106,11 +107,11 @@ const LandingPage = () => {
                 return null
             } else {
                 return (
-                    <div className='widthConstraint' onClick={handleGameClick(gameData.id)}>
-                        <NavLink className="removeUnderline" key={i}>
-                                <GameListComponent game={gameData} key={gameData.id}></GameListComponent>
-                        </NavLink>
-                    </div>
+                    <NavLink className="removeUnderline" key={i}>
+                        <div className='widthConstraint' onClick={handleGameClick(gameData.id)}>
+                            <GameListComponent game={gameData} key={gameData.id}></GameListComponent>
+                        </div>
+                    </NavLink>
                 );
             }
         });
@@ -152,7 +153,10 @@ const LandingPage = () => {
 
     const gameTypes = (e) => {
         setGameType(e.target.value);
+    }
 
+    const gameMaps = (e) => {
+        setGameMap(e.target.value);
     }
 
     const maxAntallPlayer = (e) => {
@@ -190,8 +194,9 @@ const LandingPage = () => {
                             {/*<button className="landingside-create-game-container" onClick={handleClickOpen}><GrAddCircle />  Create Game</button>*/}
                             <button className="landingside-create-game-container" onClick={handleClickOpen}><img src={addIcon2} id="crtGmBtn" alt="Create game button"/>  Create game</button>
                             <Dialog className='testing' open={open} onClose={handleClose}>
-                                <h3 className='dialog-content-modal' > Create a new game</h3>
                                 <DialogContent className='dialog-content-modal' >
+                                    <h3 className="titleModal"> Create a new game</h3>
+                                    <hr className="hrModal"></hr>
                                     <div className='align-input-label'>
                                         <label className='landingpage-label'>Game name</label>
                                         <input className='texfield'
@@ -211,11 +216,33 @@ const LandingPage = () => {
                                     </div>
                                     <div className='align-input-label'>
                                         <label className='landingpage-label'>Game type</label>
-                                        <input
-                                            className='texfield'
-                                            value={gameType}
-                                            onChange={gameTypes}>
-                                        </input>
+                                        <div className="editPlayerFactions">
+                                            <input type="radio" onClick={gameTypes} value="Hide and seek" id="HS" name="type" defaultChecked/>
+                                            <label htmlFor="HS">[Hide & Seek]</label>
+                                        </div>
+                                        <div className="editPlayerFactions">
+                                            <input type="radio" onClick={gameTypes} value="Rescue mission" id="RS" name="type"/>
+                                            <label htmlFor="RS">[Rescue mission]</label>
+                                        </div>
+                                        <div className="editPlayerFactions">
+                                            <input type="radio" onClick={gameTypes} value="Capture the flag" id="CTF" name="type"/>
+                                            <label htmlFor="CTF">[Capture the Flag]</label>
+                                        </div>
+                                    </div>
+                                    <div className='align-input-label'>
+                                        <label className='landingpage-label'>Map</label>
+                                        <div className="editPlayerFactions">
+                                            <input type="radio" onClick={gameMaps} value="Slottet" id="slottet" name="map" defaultChecked/>
+                                            <label htmlFor="slottet">[Slottet]</label>
+                                        </div>
+                                        <div className="editPlayerFactions">
+                                            <input type="radio" onClick={gameMaps} value="Nesøya" id="nes" name="map"/>
+                                            <label htmlFor="nes">Nesøya</label>
+                                        </div>
+                                        <div className="editPlayerFactions">
+                                            <input type="radio" onClick={gameMaps} value="Noroff" id="noroff" name="map"/>
+                                            <label htmlFor="noroff">Noroff</label>
+                                        </div>
                                     </div>
                                     <div className='align-input-label'>
                                         <label className='landingpage-label'>Max number of player</label>

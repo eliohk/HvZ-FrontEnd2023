@@ -323,7 +323,7 @@ export const fetchGames = createAsyncThunk(
         },
         body: JSON.stringify({
             id: playerObj.aPlayer.id,
-            squadRef: playerObj.aSquad.id,
+            squadRef: playerObj.aSquad.id == "N/A" ? null : playerObj.aSquad.id,
             human: playerObj.aPlayer.human
         })
       }).then(response => {
@@ -332,6 +332,7 @@ export const fetchGames = createAsyncThunk(
         }
       })
       .then(updatedUser => {
+        console.log(updatedUser)
       })
       .catch(error => {
         console.log(error);

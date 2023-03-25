@@ -9,7 +9,7 @@ const baseUrl = 'http://localhost:8080/api/v1/'
 export const fetchGames = createAsyncThunk(
     'games/fetchGames',
     async () => {
-    //  console.log("FETCHING GAMES")
+     //console.log("FETCHING GAMES")
      // console.log(keycloak)
 
       const response = await fetch(
@@ -348,7 +348,7 @@ console.log("sjekke om post fungerer")
         },
         body: JSON.stringify({
             id: playerObj.aPlayer.id,
-            squadRef: playerObj.aSquad.id == "N/A" ? null : playerObj.aSquad.id,
+            squadRef: playerObj.aPlayer.squadRef,
             human: playerObj.aPlayer.human
         })
       }).then(response => {

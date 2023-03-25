@@ -51,7 +51,8 @@ const mapArray = [{map: Nes, x: "16", y: "59.8674", z: "10.5263"}, {map: Noroff,
         
         <div className="mainGameContainer">
             <div className="innerMapContainer">
-                {map}
+                {/*{map}*/}
+                <img src={Nes} alt="Map" className="mapImgList"/>
             </div>
             <div className="innerDataContainer">
                 <div className="innerTitleContainer">

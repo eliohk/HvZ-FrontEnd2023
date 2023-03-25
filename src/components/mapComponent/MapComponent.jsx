@@ -28,12 +28,11 @@ const MapComponent = (props) => {
     const dispatch = useDispatch();
     const [isPlayer, setIsPlayer] = useState(false)
     const currentGame = allGames.data.currGame;
-    const userName = keycloak.tokenParsed.preferred_username
 
     useEffect(() => {
-        console.log(currentGame.players)
-        if (currentGame.players){
+        if (currentGame.players && keycloak.authenticated){
             let found = false
+            const userName = keycloak.tokenParsed.preferred_username
             loop:
             for (let i = 0; i  < currentGame.players.length; i++){
                 console.log(currentGame.players[i].username)

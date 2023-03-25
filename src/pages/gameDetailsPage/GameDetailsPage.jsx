@@ -34,12 +34,11 @@ const GameDetailsPage = (props) => {
     const [userJoined, setUserJoined] = useState(false);
 
     let currentGame = allGames.data.currGame;
-    let token = keycloak.idTokenParsed.sub;
-    let userName = keycloak.tokenParsed.preferred_username
     let currentPlayer;
 
     useEffect(() => {
-        if (currentGame.players && !userJoined){
+        if (currentGame.players && !userJoined && keycloak.authenticated){
+            let userName = keycloak.tokenParsed.preferred_username
             loop:
             for (let i = 0; i  < currentGame.players.length; i++){
                 if (currentGame.players[i].username === userName){
@@ -127,6 +126,7 @@ const GameDetailsPage = (props) => {
 
     function handleLeaveGame() {
         console.log(userJoined)
+        let token = keycloak.idTokenParsed.sub
         const deleteObj = {
             token: token,
             callback: setUserJoined,

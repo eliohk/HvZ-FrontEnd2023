@@ -240,10 +240,45 @@ button.btn.btn-primary {
     padding-right: 10px;
 }
 
-@media only screen and (max-width: 850px) {
+@media only screen and (max-width: 1000px) and (orientation: portrait){
     .secondaryLandingContainer {
-        padding: 0px 50px !important;
+        padding: 0px 20px !important;
     }
+
+    .container-level-sort-create-game {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 0.5rem;
+        width: 100% !important;
+    }
+
+    .sortByText {
+        font-size: 4vw;
+        white-space: nowrap;
+    }
+
+    button.btn.btn-primary {
+        font-size: 4vw;
+        width: 14vw;
+        height: 4vh;
+    }
+    
+    .endBtn.dropend.btn-group {
+        
+    }
+    
+    .dropdown-toggle.btn.btn-primary {
+        width: 6vw;
+        height: 4vh;
+    }
+    
+    .landingside-create-game-container {
+        width: 37.5vw;
+        height: 4vh;
+        font-size: 4vw;
+        margin: 0;
+    }
+
 }
 
 /*
@@ -281,7 +316,7 @@ button.btn.btn-primary {
   }
   */
 
-
+/*
   @media only screen and (max-width: 450px){
 
     .secondaryLandingContainer{
@@ -299,3 +334,4 @@ button.btn.btn-primary {
   
     
   }
+*/

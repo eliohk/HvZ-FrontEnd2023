@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 
 //TODO: change to hosted url in deployment
 const azureUrl = process.env.REACT_APP_AZURE_APP_API
-const baseUrl = 'http://localhost:8080/api/v1/'
+const baseUrl = 'http://localhost:8080/api/v1'
 export const fetchGames = createAsyncThunk(
     'games/fetchGames',
     async () => {
@@ -81,7 +81,7 @@ export const fetchGames = createAsyncThunk(
     "sup",
     async (postObj) => {
       const response = await fetch (
-        `${baseUrl}/user` , {
+        `${azureUrl}/user` , {
           method: "POST",
           headers: {
             'Content-Type': 'application/json'

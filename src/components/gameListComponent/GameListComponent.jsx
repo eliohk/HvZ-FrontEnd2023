@@ -58,7 +58,7 @@ const mapArray = [{map: Nes, x: "16", y: "59.8674", z: "10.5263"}, {map: Noroff,
                 <div className="innerTitleContainer">
                     <div className="mostInnerTitleContainer">
                         <h3 id="title">{props.game.title}</h3>
-                        <p id="gameMode">{props.game.gameType}</p>
+                        <p id="gameMode">[{props.game.gameType}]</p>
                     </div>
                     <p id="loremIpsum">{props.game.description}</p>
                     <button id="gamedtBtn" onClick={handleGameClick} href={`game/${props.game.id-1}`}>Game details</button>

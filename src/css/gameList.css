@@ -188,15 +188,17 @@
     width: min-content;
 }
 
-@media only screen and (max-width: 1000px) and (min-width: 350px) and (orientation: portrait){
+@media only screen and (max-width: 1000px) and (orientation: portrait){
     .mapImgList{
         margin: 0;
+        display: none;
     }
     .innerMapContainer{
         margin: 0;
+        display: none;
     }
     .mainGameContainer {
-        width: 70% !important;
+        width: 100% !important;
         display: flex;
         justify-content: start;
         align-items: start;
@@ -210,20 +212,25 @@
         margin: 0;
     }
 
+    #gamedtBtn:active {
+        background-color: #878787;
+    }
+
     #title {
-        font-size: 3vw;
+        font-size: 5vw;
     }
 
     #gameMode {
-        font-size: 3vw;
+        font-size: 2.5vw;
+        overflow-wrap: break-word;
+        white-space: normal;
     }
 
     #status {
-        font-size: 3vw;
+        font-size: 4vw;
     }
 
     .statusComponent {
-        width: fit-content;
     }
 
     .playerCounter {
@@ -241,7 +248,7 @@
     }
 
     .dateText {
-        margin-left: 0.25rem;
+        margin-left: 0.5rem;
         font-size: 3vw;
         margin-bottom: 2vh;
     }
@@ -269,8 +276,7 @@
 
     .playerCountText {
         font-size: 3vw;
-        margin-bottom: 1vw;
-        margin-right: 0.5rem;
+        margin-left: 0.5rem;
     }
 
     #loremIpsum {
@@ -285,20 +291,18 @@
         display: flex;
         justify-content: start;
         align-items: start;
-
     }
 
     .innerTitleContainer {
         display: flex;
         justify-content: space-between;
         margin: 0;
-        padding-bottom: 0.6rem;
-        padding-left: 1rem;
     }
 
     .innerStatisticsContainer {
         margin: 0;
-        padding-top: 0.5rem;
+        justify-content: space-between;
+        height: 100% !important;
     }
 
     .mostInnerTitleContainer {
@@ -388,6 +392,7 @@
 }
 */
 
+/*
 @media only screen and (max-width: 450px) {
     .mainGameContainer{
         width: 20.875rem;
@@ -417,6 +422,5 @@
     #gameMode {
         font-size: 0.6rem;
     }
-
-
 }
+*/

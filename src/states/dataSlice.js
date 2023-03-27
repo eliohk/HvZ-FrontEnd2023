@@ -170,7 +170,10 @@ console.log("sjekke om post fungerer")
           title: postObj.title,
           description: postObj.description,
           gameType: postObj.gameType,
-          maxPlayers: postObj.maxPlayers
+          maxPlayers: postObj.maxPlayers,
+          lat: 0,
+          lng: 0,
+          map: "Helo"
         })
       }).then(response => {
         if (!response.ok) {

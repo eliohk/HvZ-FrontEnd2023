@@ -33,9 +33,10 @@ const GameList = ( props ) => {
     
     // **** REMOVE THIS WHEN PUSHING TO PROD WITH FUNCTIONAL DB. ****
     return (
+        
         <div className="mainGameContainer">
             <div className="innerMapContainer">
-                <img src={Map} width="250" height="175" alt="Map" className="mapImgList"/>
+                <img src={Map} alt="Map" className="mapImgList"/>
             </div>
             <div className="innerDataContainer">
                 <div className="innerTitleContainer">
@@ -49,12 +50,12 @@ const GameList = ( props ) => {
                 <div className="innerStatisticsContainer">
                     <p id="status" className="statusComponent">{props.game.status}</p>
                     <div className="playerCounter">
-                        <div id="dt" className="alignStats">
-                            <img src={dateIcon} alt="playerIcons" width="30"></img>
+                        <div id="dt">
+                            <img className="image-tag-gamelist" src={dateIcon} alt="playerIcons"></img>
                             <p className="dateText">{props.game.date}</p>
                         </div>
-                        <div id="cntr" className="alignStats">
-                            <img src={playerIcon} alt="playerIcons" width="30"></img>
+                        <div id="cntr">
+                            <img className="image-tag-gamelist" src={playerIcon} alt="playerIcons"></img>
                             <p className="playerCountText">{props.game.players.length }/{props.game.maxPlayers} players</p>
                         </div>
                     </div>

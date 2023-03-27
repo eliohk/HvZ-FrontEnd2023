@@ -1,6 +1,6 @@
 import React from 'react'
 import squadIcon from "../../resources/squadIcon.svg";
-import { fetchGameById } from '../../states/dataSlice';
+import { fetchGameById, updatePlayer } from '../../states/dataSlice';
 import retIcon from "../../resources/retIcon.svg";
 import editIcon from "../../resources/editIcon.svg";
 import { useState, useEffect, useRef } from 'react';
@@ -19,160 +19,232 @@ const PlayerRow = ( props ) => {
     const [ name, setName ] = useState("");
     const [ faction, setFaction ] = useState("");
     const [ squad, setSquad ] = useState("");
-    const [ squads, setSquads ] = useState([]);
-
-    // Old states for variables to keep track of new && old
-    const [ oldFaction, setOldFaction ] = useState("");
-    const [ oldSquad, setOldSquad ] = useState("");
-
-    // CSS-states
-    const [ editable, setEditable ] = useState(false);
+    const [ squadObj, setSquadObj ] = useState({})
 
     const handleDelete = (event) => {
-        setEditable(false);
         props.delCallback(props.player.id);
     }
 
     const handleEdit = () => {
-        if (editable) {
-            setEditable(false);
-            props.edit(false);
+        if (props.editVal) {
+            props.setPlayer({
+                id: props.player.id,
+                username: name,
+                squadRef: squad,
+                squad: squadObj,
+                human: faction
+            });
+            props.edit(false)
         } else {
-            setEditable(true)
-            props.edit(true);
+            props.edit(true)
         }
-    }
-
-    /**
-     * Hook that alerts clicks outside of the passed ref
-     */
-    function useOutsideAlerter(ref, props, data) {
-        useEffect(() => {
-        /**
-         * Alert if clicked on outside of element
-         */
-        function handleClickOutside(event) {
-            if (ref.current && !ref.current.contains(event.target)) {
-                if (event.target.value == "Save") {
-                    props.saveCallback({
-                        pName: data.nName,
-                        pFaction: data.nFaction,
-                        pSquad: data.nSquad
-                    });
-                } else {
-                    setFaction(props.player.human ? "Human" : "Zombie");
-                    setSquad(props.player.squad ? "Squad " + props.player.squad.id : "N/A");
-                }
-                props.edit(false);
-                setEditable(false);
-            }
-        }
-        // Bind the event listener
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            // Unbind the event listener on clean up
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-        }, [ref, data]);
-    }
-
-    const handleFaction = (event) => {
-        setFaction(event.target.innerHTML);
-    }
-
-    const handleSquad = (event) => {
-        setSquad(event.target.innerHTML);
     }
 
     useEffect(() => {
         setName(props.player.username);
-        setFaction(props.player.human ? "Human" : "Zombie");
-        setSquad(props.player.squad ? "Squad " + props.player.squad.id : "N/A");
-        setSquads(props.squad);
-    }, []);
-    
-    let allSquads = "";
-
-    if (squads) {
-        allSquads = squads.map((squad, i) => {
-            if (!(squad == `Squad ${squad}`)) {
-                return (
-                    <Dropdown.Item as="button" onClick={handleSquad} key={i} >Squad {squad.id}</Dropdown.Item>
-                )
-            } 
-        })
-    }
-
-    const wrapperRef = useRef(null);
-    useOutsideAlerter(wrapperRef, props, {nName:name, nFaction: faction, nSquad: squad});
+        setFaction(props.player.human);
+        setSquad(props.player.squad ? props.player.squad.name : "N/A");
+        setSquadObj(props.player.squad);
+    }, [props.player]);
 
     return (
-        (keycloak.hasRealmRole("ADMIN")) && editable? 
-        <button className="playerItemEdit" ref={wrapperRef}>
-            <p>{name}</p>
-            <DropdownButton id="dropdown-item-button" title={faction} className="dropdownBtn">
-                {faction == "Zombie" ? 
-                <Dropdown.Item as="button" onClick={handleFaction}>Human</Dropdown.Item>
-                :
-                <Dropdown.Item as="button" onClick={handleFaction}>Zombie</Dropdown.Item>
-                }
-            </DropdownButton>
-            <DropdownButton id="dropdown-item-button" title={squad} className="dropdownBtn">
-                {squad ? 
-                    <Dropdown.Item as="button" onClick={handleSquad}>N/A</Dropdown.Item>
+        <div className="playerContainer">
+            <div className="playerMainContainer">
+                <div className="staticHeaderContainer">
+                    <p id="headerText"><b>Name:</b> {name}</p>
+                    <p id="headerText"><b>Faction:</b> {faction ? "Human":"Zombie"}</p>
+                    <p id="headerText"><b>Squad:</b> {squad}</p>
+                </div>
+                {keycloak.hasRealmRole("ADMIN") ?
+                    <div className="staticPlayerBtn">
+                        <button className="playerBtn" onClick={handleDelete}><img src={retIcon} className="playerBtnImg" alt="Delete player button"/></button>
+                        <button className="playerBtn" onClick={handleEdit}><img src={editIcon} className="playerBtnImg" alt="Edit player button"/></button>
+                    </div>
                     :
-                    null
+                    (keycloak.authenticated && keycloak.tokenParsed.preferred_username === name ? 
+                    <div className="staticDeletePlayerBtn">
+                        <button className="playerBtn" onClick={handleEdit}><img src={editIcon} className="playerBtnImg" alt="Edit player button"/></button>
+                    </div>
+                    :
+                    null)
                 }
-                {allSquads}
-            </DropdownButton>
-            <a onClick={handleDelete} id="smallBtn" className="button"><img id="smallBtnImg" src={retIcon} alt="Remove user button"/></a>
-        </button>
-        :
-        <button className="playerItem" onClick={handleEdit}>
-            <p id="pName">{name}</p>
-            <p id="pFaction">{faction}</p>
-            <p id="pSquad">{squad}</p>
-        </button>
+            </div>
+            <hr id="playerSepHr"></hr>
+        </div>
     );
 };
 
 const PlayerListComponent = ( props ) => {
     const dispatch = useDispatch();
     const data = useSelector((state) => state);
-    const [ editable, setEditable ] = useState(false);
+    const [ editable, setEditable ] = useState(true);
+    const [ player, setPlayer ] = useState({username:"Error occured. Try again"});
+    const [ squadObj, setSquadObj ] = useState();
 
-    const handleSave = (data) => {
-        console.log("SAVED!")
-        console.log(data);
+    // states for actual datachange
+    const [ name, setName ] = useState("");
+    const [ squad, setSquad ] = useState("");
+    const [ faction, setFaction ] = useState("");
+    const [ changes, setChanges ] = useState(false);
+
+    const handleName = (event) => {
+        setName(event.target.value);
+
+        if (event.target.value == player.username) {
+            setChanges(false);
+        } else {
+            setChanges(true);
+        }    
+    }
+
+    const handleSquad = (event) => {
+        data.data.currGame.squads.map((squad, i) => {
+            if (squad.name == event.target.value) {
+                setSquad(squad.name);
+                setSquadObj(squad);
+            }
+        })
+    
+        if (event.target.value == player.squadRef) {
+            setChanges(false);
+        } else {
+            setChanges(true);
+        }
+    }
+
+    const handleFaction = (event) => {
+        setFaction(event.target.value == "Human" ? true : false);
+        const val = player.human ? "Human":"Zombie";
+        if (event.target.value == val) {
+            setChanges(false);
+        } else {
+            setChanges(true);
+        }
+    }
+
+    const handleSave = () => {
+        console.log("sjekker om dette fungerer")
+        console.log("sjekke om navnet blir endret ",  name)
+        handleEdit();
+        player.human = faction;
+        player.squad = squad;
+        player.username = name;
+        dispatch(updatePlayer({
+            aPlayer: player,
+            aSquad: squadObj
+        }));
     }
 
     const handleDelete = (data) => {    
         dispatch(deletePlayer(data));
     }
 
-    const players = data.data.currGame.players.map((player, i) => {
+    const handleEdit = () => {
+        
+        if (editable) {
+            setEditable(false);
+        } else {
+            setEditable(true);
+        }
+    }
+
+    const players = data.data.currGame.players.map((thisPlayer, i) => {
+    //    console.log("Checking all players over again, Index: " + i)
+     //   console.log(thisPlayer);
         return (
-            <PlayerRow player={player} squad={props.squad} key={player.id} saveCallback={handleSave} delCallback={handleDelete} edit={setEditable}/>
+            <PlayerRow player={thisPlayer} saveCallback={handleSave} delCallback={handleDelete} edit={setEditable} editVal={editable} setPlayer={setPlayer}/>
         )
     });
 
+    const allSquads = data.data.currGame.squads.map((squad, i) => {
+        return (
+            <Dropdown.Item as="button" onClick={handleSquad} value={squad.name} key={i}>{squad.name}</Dropdown.Item>
+        )
+    })
+
+    useEffect(() => {
+        if (player) {
+            setName(player.username);
+            setFaction(player.human);
+            setSquad(player.squadRef);
+
+            if (data) {
+                data.data.currGame.squads.map((squad, i) => {
+                    if (squad.name == player.squadRef) {
+                        setSquadObj(squad);
+                    }
+                })
+            }
+        }
+    }, [player]);
+    
     return (
+        editable?
         <div className='listViewContainer'>
             <h3 id="listTitle">List of players</h3>
-            {keycloak.hasRealmRole("ADMIN") && editable ?
-                <button id="savePlayer" onClick={handleSave} value="Save">Save</button>
-                :
-                null
-            }
+            <hr id="playerListHr"></hr>
             <div className='playerContainer'>
-                <div className='headerContainer'>
-                    <p className="title">Name</p>
-                    <p className="title">Faction</p>
-                    <p className="title">Squad</p>
-                </div>
-                <hr id="playerListHr" className="hrTitle"></hr>
                 <div className="playersDiv">
                     {players}
+                </div>
+            </div>
+        </div>
+        :
+        <div className='listViewContainer'>
+            <div className="rightAlignRet">
+                <a id="retBtn" onClick={handleEdit} className="button"><img id="exitIcon2" src={retIcon} alt="Return button" /></a>
+                
+            </div>
+            <h3 id="listTitle1">Edit player</h3>
+            <hr id="playerListHr"></hr>
+            {changes ?
+            <div className='confirmChanges'>
+                <p>Confirm changes?</p>
+                <button onClick={handleSave}>Save</button>
+            </div>
+            : 
+            <div className='confirmChangesHidden'>
+                <p>Confirm changes?</p>
+                <button>Save</button>
+            </div>
+            }
+            <div className='editPlayerContainer'>
+                <div className="editPlayersDiv">
+                    <div className="nameHeader">
+                        <p id="staticHeader">Name: </p>
+                        <input id="editPlayerInput" type="text" defaultValue={player.username} onChange={handleName}></input>
+                    </div>
+                    <div className="squadHeader">
+                        <p id="staticHeader">Squad: </p>
+                        <DropdownButton id="dropdown-basic-button" title={squad}>
+                            {allSquads}
+                            <Dropdown.Item as="button" onClick={handleSquad} value="N/A">N/A</Dropdown.Item>
+                        </DropdownButton>
+                    </div>
+                    <p id="staticHeader">Faction: </p>
+                    {player.human ? 
+                        <div className="mainEditPlayerFactions">
+                            <div className="editPlayerFactions">
+                                <input type="radio" onClick={handleFaction} value="Zombie" id="zombie" name="faction" />
+                                <label htmlFor="zombie">Zombie</label>
+                            </div>
+                            <div className="editPlayerFactions">
+                                <input type="radio" onClick={handleFaction} value="Human" id="human" name="faction" defaultChecked/>
+                                <label htmlFor="human">[Human]</label>
+                            </div>
+                        </div>
+                        :
+                        <div className="mainEditPlayerFactions">
+                            <div className="editPlayerFactions">
+                                <input type="radio" onClick={handleFaction} value="Zombie" id="zombie" name="faction" defaultChecked/>
+                                <label htmlFor="zombie">[Zombie]</label>
+                            </div>
+                            <div className="editPlayerFactions">
+                                <input type="radio" onClick={handleFaction} value="Human" id="human" name="faction"/>
+                                <label htmlFor="human">Human</label>
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
         </div>

@@ -28,10 +28,11 @@
 
 .widthConstraint {
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: center;
     flex-direction: column;
     width: 100%;
+    margin-bottom: 1.75rem;
 }
 
 .secondaryLandingContainer {
@@ -39,16 +40,24 @@
     flex-direction: column;
     width: 100%;
     padding: 0px 200px;
-    margin-top: -3rem;
 }
 
 button.btn.btn-primary {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #E8EAEA;
+    width: 3.375rem;
+    height: 1.875rem;
     outline: black;
     color: black;
-    border: solid black;
-    border-width: 0.1px;
     border-radius: 32px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    padding: 5px;
+    border-width: 0.0625rem;
+    border: solid black;
 }
 
 .endBtn.dropend.btn-group {
@@ -58,7 +67,13 @@ button.btn.btn-primary {
 }
 
 .dropdown-toggle.btn.btn-primary {
+    padding: 5px;
     height: 38px;
+    width: 1rem;
+    height: 1.875rem;
+    border-width: 0.0625rem;
+    border: solid black;
+    border-left: none;
 }
 
 .horizontalItems {
@@ -74,6 +89,15 @@ button.btn.btn-primary {
 
 .items {
     border-radius: 16px;
+}
+
+.sortByText {
+    color: white;
+    margin: 0;
+    margin-right: 0.325rem;
+    font-size: 0.875rem;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
 }
 
 .removeUnderline {
@@ -92,17 +116,34 @@ button.btn.btn-primary {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-top: 50px;
+    margin-top: 3.125rem;
+    margin-bottom: 0.4375rem;
+}
 
+#crtGmBtn {
+    width: 0.9375rem;
+    height: 0.9375rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .landingside-create-game-container{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    white-space: nowrap;
+    font-size: 0.75rem;
     padding: 5px;
     border-radius: 100px;
     margin-left: 40px;
-    width: 140px;
-    height: 40px;
+    width: 7.75rem;
+    height: 1.875rem;
     font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    border-width: 0.0625rem;
+    border: solid black;
 }
 
 .modal-container {
@@ -155,6 +196,7 @@ button.btn.btn-primary {
 
 .toggle-button-container{
     display: flex;
+    align-items: center;
     flex-direction: row;
     width: 150px;
 }
@@ -174,3 +216,57 @@ button.btn.btn-primary {
 .list-group-item{
     padding-right: 10px;
 }
+
+
+/*
+@media only screen and (max-width: 1200px) {
+    .mainLandingContainer {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        width: 80%;
+        border: 4px solid red;
+    }
+  }
+
+  */
+
+  /*
+
+@media only screen and (max-width: 800px) {
+    .mainLandingContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 90%;
+        border: 4px solid red;
+    }
+    .secondaryLandingContainer{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border: 4px solid greenyellow;
+        width: 80%;
+    }
+  }
+  */
+
+
+  @media only screen and (max-width: 450px){
+
+    .secondaryLandingContainer{
+        display: flex;
+        justify-content: center;
+        margin: 200px ;
+    }
+    .landing-page-create-game-component{
+        border: 2px solid red;
+    }
+
+
+
+  
+    
+  }

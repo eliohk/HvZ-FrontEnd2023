@@ -108,11 +108,20 @@
 #listTitle {
     margin-top: 1.38rem;
     margin-left: 3.6876rem;
-    margin-bottom: 5.3125rem;
+    margin-bottom: 2.375rem;
     width:fit-content;
     font-size: 1.25rem;
     font-weight: bold;
 }
+
+#listTitle1 {
+    margin-left: 3.6876rem;
+    
+    width:fit-content;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
 
 #joinBtn {
     border-radius: 0.528rem;
@@ -469,6 +478,7 @@ form {
     width: 20px;
     height: 20px;
 }
+
 
 #exitIcon {
     width: 1.875rem;

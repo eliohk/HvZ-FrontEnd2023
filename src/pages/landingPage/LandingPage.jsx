@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchGames, fetchGameById, postGame, postPlayer } from '../../states/dataSlice';
 import { GrAddCircle } from 'react-icons/gr';
 import keycloak from "../../keycloak";
-
+import addIcon2 from "../../resources/addIcon2.svg"
 
 import {
     Dialog,
@@ -106,17 +106,19 @@ const LandingPage = () => {
                 return null
             } else {
                 return (
-                    <NavLink className="removeUnderline" key={i}>
-                        <div className='widthConstraint' onClick={handleGameClick(gameData.id)}>
-                            <GameListComponent game={gameData} key={gameData.id}></GameListComponent>
-                        </div>
-                    </NavLink>
+                    <div className='widthConstraint' onClick={handleGameClick(gameData.id)}>
+                        <NavLink className="removeUnderline" key={i}>
+                                <GameListComponent game={gameData} key={gameData.id}></GameListComponent>
+                        </NavLink>
+                    </div>
                 );
             }
         });
 
     let gamesArray;
     if (allGames.data.gamesArray != undefined) {
+    //    console.log(gamesArray)
+
         if (sortVariable === 'Title') {
             gamesArray = gamesSortedTitle;
         } else if (sortVariable === 'Date') {
@@ -126,8 +128,13 @@ const LandingPage = () => {
         } else if (sortVariable === 'State') {
             gamesArray = gamesSortedState
         }
+   //     console.log(gamesArray)
+
     }
+
+
     const handleNewGame = () => {
+
         // console.log("Henlo")
 
         const gameObj = {
@@ -136,7 +143,6 @@ const LandingPage = () => {
             gameType: gameType,
             maxPlayers: maxPlayer
         }
-
         dispatch(postGame(gameObj))
         window.location.reload(false);
     }
@@ -164,7 +170,7 @@ const LandingPage = () => {
             dispatch(fetchGames());
         }
 
-        console.log(gamesArray)
+   //     console.log(gamesArray)
 
     }, []);
 
@@ -175,6 +181,7 @@ const LandingPage = () => {
                     {/* <div className="sortByContainer"> */}
                     {/* </div> */}
                     <div className='toggle-button-container'>
+                        <p className="sortByText">Sort by:</p>
                         <SplitButton variant="primary" key="end" drop="end" id="dropdown-button-drop-end" title={sortVariable}>
                             <div className="horizontalItems">
                                 <Dropdown.Item className="items" onClick={handleSortVariable}>Date</Dropdown.Item>
@@ -185,8 +192,9 @@ const LandingPage = () => {
                         </SplitButton>
                     </div>
                     {keycloak.hasRealmRole("ADMIN") ? 
-                        <div>
-                            <button className="landingside-create-game-container" onClick={handleClickOpen}><GrAddCircle />  Create Game</button>
+                        <div className='landing-page-create-game-component'>
+                            {/*<button className="landingside-create-game-container" onClick={handleClickOpen}><GrAddCircle />  Create Game</button>*/}
+                            <button className="landingside-create-game-container" onClick={handleClickOpen}><img src={addIcon2} id="crtGmBtn" alt="Create game button"/>  Create game</button>
                             <Dialog className='testing' open={open} onClose={handleClose}>
                                 <h3 className='dialog-content-modal' > Create a new game</h3>
                                 <DialogContent className='dialog-content-modal' >
@@ -223,7 +231,7 @@ const LandingPage = () => {
                                             onChange={maxAntallPlayer}></input>
                                     </div>
                                     <div className='button-modal-container'>
-                                        <button className='modal-button' onClick={(handleNewGame)}>save</button>
+                                        <button className='modal-button' onClick={() => handleNewGame()}>save</button>
                                         <button className='modal-button' onClick={(handleClose)}>close</button>
                                     </div>
                                 </DialogContent>
@@ -234,8 +242,8 @@ const LandingPage = () => {
                     }
                     {/* {<button className="landingside-create-game-container" onClick={handleClickOpen}><GrAddCircle />  Create Game</button> } */}
                 </div>
-                {gamesArray}
-            </div>
+                 {gamesArray}
+              </div>
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import profilePic from "../../resources/profileIcon.svg";
+import profilePic from "../../resources/profilePic.svg";
 import "../../css/miniProfile.css";
 import keycloak from "../../keycloak";
 

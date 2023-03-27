@@ -205,9 +205,9 @@
     }
 
     #gamedtBtn {
-        width: 26vw;
+        width: 30vw;
         height: 3vh;
-        font-size: 3vw;
+        font-size: 2.5vw;
         white-space: nowrap;
         margin: 0;
     }
@@ -221,13 +221,15 @@
     }
 
     #gameMode {
-        font-size: 2.5vw;
+        font-size: 2vw;
+        width: 100% !important;
         overflow-wrap: break-word;
         white-space: normal;
     }
 
     #status {
-        font-size: 4vw;
+        font-size: 3vw;
+        width: 100% !important;
     }
 
     .statusComponent {

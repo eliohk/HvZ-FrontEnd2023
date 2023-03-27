@@ -3,7 +3,6 @@
 .listViewContainer {
     display: flex;
     flex-direction: column;
-    align-items: center;
     background-color: #2E2E2E;
     border-radius: 28px;
     height: 100%;
@@ -48,6 +47,8 @@
     flex-direction: row;
     align-items: end;
     justify-content: end;
+    z-index: 999999999;
+
 }
 
 #exitIcon2 {
@@ -88,7 +89,15 @@
 }
 
 #staticHeader {
-    margin: 0;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+#editPlayerInput {
+    background-color: transparent;
+    border: none;
+    color: #FFFFFF;
 }
 
 .squadHeader {
@@ -190,8 +199,10 @@
     font-size: 12px;
     white-space: nowrap;
     overflow-y: hidden;
-}
+    font-family: 'poppins';
+    margin-left: 0.688rem;
 
+}
 .playerContainer {
     display: flex;
     flex-direction: column;
@@ -203,6 +214,7 @@
     display: flex;
     align-items: start;
     justify-content: start;
+    margin-left: 1.25rem;
 }
 
 .editPlayersDiv {
@@ -212,7 +224,7 @@
 #playerSepHr {
     color: #65C8FF;
     opacity: 1;
-    width: 110%;
+    width: 100%;
 }
 
 .playerMainContainer {
@@ -244,7 +256,7 @@
 #playerListHr {
     color: #65C8FF;
     opacity: 1;
-    width: 90%;
+    width: 0%;
     margin-top: -0.5rem;
     margin-bottom: 0.5rem;
 }
@@ -274,14 +286,16 @@
 }
 
 .playerContainer {
-    width: 90%;
+    width: 100%;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     color: white;
 }
+
+
+
 
 .dropdownBtn {
 
@@ -295,6 +309,8 @@
 .dropdown-menu {
     white-space: normal;
 }
+
+
 
 .dropdown-item {
     white-space: pre-wrap;
@@ -325,26 +341,39 @@
     align-items: center;
 }
 
+
 .playerItem {
     color: white;
     display: flex;
-    align-items: center;
     justify-content: space-between;
     background-color: transparent;
     border: none;
     font-family: 'Poppins', sans-serif;
     width: 100%;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
 }
 
 .playerItem p {
     /* 12px for normal members */
-    margin-left: 12px;
-    margin-right: 12px;
     margin-top: 0;
     margin-bottom: 0;
     font-size: 12px;
-    white-space:nowrap;
-    overflow: hidden;
+    inline-size: 4.9375rem;
+    
+}
+
+.playerItem #pName {
+    white-space: normal;
+    overflow-wrap: break-word;
+}
+
+.playerItem #pFaction {
+    
+}
+
+.playerItem #pSquad {
+    
 }
 
 .playerItem:hover {
@@ -373,7 +402,7 @@
     margin-right: 12px;
     margin-top: 0;
     margin-bottom: 0;
-    font-size: 12px;
+    font-size: 12xpx;
     white-space:nowrap;
     overflow: hidden;
 }

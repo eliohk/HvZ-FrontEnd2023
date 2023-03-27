@@ -235,14 +235,14 @@ const PlayerListComponent = ( props ) => {
                             </div>
                             <div className="editPlayerFactions">
                                 <input type="radio" onClick={handleFaction} value="Human" id="human" name="faction" defaultChecked/>
-                                <label htmlFor="human">[Human]</label>
+                                <label htmlFor="human"><b>Human</b></label>
                             </div>
                         </div>
                         :
                         <div className="mainEditPlayerFactions">
                             <div className="editPlayerFactions">
                                 <input type="radio" onClick={handleFaction} value="Zombie" id="zombie" name="faction" defaultChecked/>
-                                <label htmlFor="zombie">[Zombie]</label>
+                                <label htmlFor="zombie"><b>Zombie</b></label>
                             </div>
                             <div className="editPlayerFactions">
                                 <input type="radio" onClick={handleFaction} value="Human" id="human" name="faction"/>

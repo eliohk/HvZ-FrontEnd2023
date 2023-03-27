@@ -43,12 +43,11 @@
 .rightAlignRet {
     display: flex;
     margin-top: 1rem;
-    width: 80%;
+    width: 94%;
     flex-direction: row;
     align-items: end;
     justify-content: end;
     z-index: 999999999;
-
 }
 
 #exitIcon2 {
@@ -98,6 +97,9 @@
     background-color: transparent;
     border: none;
     color: #FFFFFF;
+    font-size: 0.875rem;
+    padding: 0;
+    
 }
 
 .squadHeader {
@@ -113,6 +115,7 @@
     flex-direction: column;
     justify-content: start;
     align-items: start;
+    font-size: 0.875rem;
 }
 
 .editPlayerFactions {
@@ -120,7 +123,9 @@
     justify-content: start;
     width: 100%;
     align-items: center;
+    
 }
+
 
 .editPlayerFactions label {
     margin-left: 0.5rem;
@@ -145,26 +150,28 @@
     font-weight: bolder;
     border: none;
     box-shadow: 0px 0px 0px 1px black;
-    border-width: 0.1px;
+    
     border-radius: 32px;
     font-size: 0.75rem;
 }
 
 .confirmChanges {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
-    width: 100%;
+    margin-left: 1.25rem;
+    width: 86%;
     margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    margin-top: 1.5rem;
 }
 
 .confirmChanges button {
-    background-color: transparent;
+    background-color: #626263;
     color: white;
     font-weight: bolder;
     border: none;
-    box-shadow: 0px 0px 0px 1px black;
-    border-width: 0.1px;
+    box-shadow: 1px 1px 1px 1px black;
     border-radius: 32px;
     font-size: 0.75rem;
 }
@@ -340,6 +347,45 @@
     justify-content: center;
     align-items: center;
 }
+
+.squadHeader #dropdown-basic-button {
+    width: fit-content;
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-size: 0.875rem;
+    font-weight: normal;
+    padding: 0;
+}
+
+input[type="radio"] {
+    appearance: none;
+    background-color: #A0A0A0;
+    margin: 0;
+    font: inherit;
+    width: 0.8rem;
+    height: 0.8rem;
+    border: 0.001em solid currentColor;
+    border-radius: 50%;
+    display: grid;
+    place-content: center;
+  }
+  
+  input[type="radio"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--form-control-color);
+    background-color: #65C8FF;
+  
+  }
+  
+  input[type="radio"]:checked::before {
+    transform: scale(1);
+  }
 
 
 .playerItem {
@@ -721,3 +767,4 @@
     box-shadow: 0 0 0 1px black;
     transition: 0.7s;
 }
+

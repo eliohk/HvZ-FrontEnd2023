@@ -10,7 +10,7 @@ export const fetchGames = createAsyncThunk(
     'games/fetchGames',
     async () => {
       const response = await fetch(
-        `${baseUrl}/games` , {
+        `${azureUrl}/games` , {
           headers: {
               //'Authorization': `Bearer ${keycloak.token}`,
           },
@@ -28,7 +28,7 @@ export const fetchGames = createAsyncThunk(
     'games/fetchGameById',
     async (gameId) => {
       const response = await fetch(
-        `${baseUrl}/games/${gameId}`, {
+        `${azureUrl}/games/${gameId}`, {
           headers: {
               //'Authorization': `Bearer ${keycloak.token}`,
           },
@@ -47,7 +47,7 @@ export const fetchGames = createAsyncThunk(
     "ok",
     async (userObj) => {
       const response = await fetch(
-        `${baseUrl}/user/token/${userObj.userToken}`, {
+        `${azureUrl}/user/token/${userObj.userToken}`, {
           headers : {
           },
         }
@@ -57,7 +57,7 @@ export const fetchGames = createAsyncThunk(
         console.log("hei på deg")
 
         const response2 = await fetch (
-          `${baseUrl}/user` , {
+          `${azureUrl}/user` , {
             method: "POST",
             headers: {
               'Content-Type': 'application/json'
@@ -233,7 +233,7 @@ export const fetchGames = createAsyncThunk(
     'games/putGameObject',
     async (gameObj) => {
 
-      console.log(`${baseUrl}/games/${gameObj.id}`);
+      console.log(`${azureUrl}/games/${gameObj.id}`);
 //      const response = await fetch(`//localhost:8080/api/v1/games/${gameObj.id}`, {
 
         const response = await fetch(`${azureUrl}/games/${gameObj.id}`,{
@@ -266,7 +266,7 @@ export const fetchGames = createAsyncThunk(
   export const putGlobalChat = createAsyncThunk(
     'games/postGlobalChat',
     async (chatObj) => {
-//      const response = await fetch(`${baseUrl}chat/${chatObj.id}`, {
+//      const response = await fetch(`${azureUrl}chat/${chatObj.id}`, {
 
         const response = await fetch(`${azureUrl}/chat/${chatObj.id}`, {
         method: 'PUT',
@@ -296,7 +296,7 @@ export const fetchGames = createAsyncThunk(
   export const deletePlayer = createAsyncThunk(
     'player/delete',
     async (id) => {
-      // const response = await fetch(`${baseUrl}players/${id}`, {
+      // const response = await fetch(`${azureUrl}players/${id}`, {
 
         const response = await fetch(`${azureUrl}/players/${id}`, {
         method: 'DELETE',
@@ -314,7 +314,7 @@ export const fetchGames = createAsyncThunk(
   export const deletePlayerByToken = createAsyncThunk(
     'players/token/delete',
     async (deleteObj) => {
-      //const response = await fetch(`${baseUrl}players/deleteByToken/${deleteObj.token}`, {
+      //const response = await fetch(`${azureUrl}players/deleteByToken/${deleteObj.token}`, {
 
         const response = await fetch(`${azureUrl}/players/deleteByToken/${deleteObj.token}`, {
         method: 'DELETE',
@@ -333,8 +333,8 @@ export const fetchGames = createAsyncThunk(
     'squad/putPlayer',
     async (playerObj) => {
       console.log("Putting the following object: " )
-      console.log(baseUrl + "/players/" + playerObj.aPlayer.id)
-      console.log(`${baseUrl}/players/${playerObj.aPlayer.id}`)
+      console.log(azureUrl + "/players/" + playerObj.aPlayer.id)
+      console.log(`${azureUrl}/players/${playerObj.aPlayer.id}`)
       console.log("player objekt", playerObj);
         const response = await fetch(`${azureUrl}/players/${playerObj.aPlayer.id}`, {
         method: 'PUT',
@@ -391,7 +391,7 @@ export const fetchGames = createAsyncThunk(
     'player/fetchByToken',
     async () => {
       const response = await fetch(
-        `${baseUrl}/games` , {
+        `${azureUrl}/games` , {
           headers: {
               'Authorization': `Bearer ${keycloak.token}`,
           },

@@ -51,9 +51,9 @@ const PlayerRow = ( props ) => {
         <div className="playerContainer">
             <div className="playerMainContainer">
                 <div className="staticHeaderContainer">
-                    <p id="headerText">Name: {name}</p>
-                    <p id="headerText">Faction: {faction ? "Human":"Zombie"}</p>
-                    <p id="headerText">Squad: {squad}</p>
+                    <p id="headerText"><b>Name:</b> {name}</p>
+                    <p id="headerText"><b>Faction:</b> {faction ? "Human":"Zombie"}</p>
+                    <p id="headerText"><b>Squad:</b> {squad}</p>
                 </div>
                 {keycloak.hasRealmRole("ADMIN") ?
                     <div className="staticPlayerBtn">
@@ -198,8 +198,9 @@ const PlayerListComponent = ( props ) => {
         <div className='listViewContainer'>
             <div className="rightAlignRet">
                 <a id="retBtn" onClick={handleEdit} className="button"><img id="exitIcon2" src={retIcon} alt="Return button" /></a>
+                
             </div>
-            <h3 id="listTitle">Edit player</h3>
+            <h3 id="listTitle1">Edit player</h3>
             <hr id="playerListHr"></hr>
             {changes ?
             <div className='confirmChanges'>
@@ -216,7 +217,7 @@ const PlayerListComponent = ( props ) => {
                 <div className="editPlayersDiv">
                     <div className="nameHeader">
                         <p id="staticHeader">Name: </p>
-                        <input type="text" defaultValue={player.username} onChange={handleName}></input>
+                        <input id="editPlayerInput" type="text" defaultValue={player.username} onChange={handleName}></input>
                     </div>
                     <div className="squadHeader">
                         <p id="staticHeader">Squad: </p>

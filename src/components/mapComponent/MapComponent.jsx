@@ -98,7 +98,7 @@ const MapComponent = (props) => {
             width: "37.56rem",
             minHeight: "100%",
             minWidth: "100%",
-            borderRadius: "32px",
+            borderRadius: "0.9375rem",
             position: "relative",    
             }} >
             { isPlayer ? mapClicked ? null : <a className="mapToolTip" href="#" title="Zoom in" role="button" aria-label="Zoom in" aria-disabled="false"><span aria-hidden="true">Click on the map to assign location, click on the "check in" button to confirm the check in.</span></a> 
@@ -111,8 +111,9 @@ const MapComponent = (props) => {
             minHeight: "100%",
             minWidth: "100%",
             
-            border: "solid black",
-            borderRadius: "32px",
+            border: "solid white",
+            borderWidth: "0.0625rem",
+            borderRadius: "0.9375rem",
             cursor: "pointer",
             }} center={[currentGame.lat, currentGame.lng]} zoom={16} scrollWheelZoom={false}>
             <TileLayer

@@ -28,7 +28,7 @@
     flex-direction: column;
     width: 100%;
     font-family: 'poppins';
-    padding-top: 65px;
+    padding-top: 45px;
     padding-bottom: 3.125rem;
 }
 
@@ -340,10 +340,167 @@ ul {
     font-weight: bold;
 }
 
+.alignmentOfButtons {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#leavePhoneBtn {
+    border-radius: 0.528rem;
+    color: white;
+    background-color: #df3213;
+    width: 100%;
+    height: 2.2rem;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    color: black;
+    margin-top: 0.5rem;
+}
+
+.mainInfotainment {
+    height: 100% !important;
+    width: 100% !important;
+    min-height: 100%;
+}
+
+.Stretchy {
+    height: 100%;
+    min-height: 100%;
+}
+
+.bodyButtons {
+    height: 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+#bodyBtn {
+    border-radius: 0.528rem;
+    color: white;
+    background-color: transparent;
+    border: none;
+    font-size: 5vw;
+    color: #65C8FF;
+    margin-top: 0.5rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+#leavePhoneBtn:hover {
+    outline-color: transparent;
+    outline-style:solid;
+    box-shadow: 0 0 0 1px black;
+    transition: 0.7s;
+}
+
+#leavePhoneBtn:active {
+    background-color: #E8EAEA;
+}
+
+#leavePhoneBtn:focus {
+    background-color: #df3213;
+}
+#phoneBtn {
+    width: 49%;
+    margin-bottom: 0.5rem;
+    background-color: #E8EAEA;
+    color: black;
+    font-family: 'Poppins', sans-serif;
+}
+.joinBtnDiv {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 10%;
+}
+#joinBtnPhone {
+    font-family: 'Poppins', sans-serif;
+    border-radius: 0.528rem;
+    color: white;
+    background-color: #0CC70C;
+    width: 100%;
+    height: 2.2rem;
+    margin-top: 0.5rem;
+    border: none;
+    font-size: 1rem;
+    font-weight: 900;
+    color: black;
+}
+
+#joinBtnPhone:hover {
+    outline-color: transparent;
+    outline-style:solid;
+    box-shadow: 0 0 0 1px black;
+    transition: 0.7s;
+}
+
+#joinBtnPhone:active {
+    background-color: #E8EAEA;
+}
+
+
+
 #squadName{
     width: 10.62rem;
     height:1.56rem;  
     border-radius: 0.313rem;
+}
+
+
+#btnEdit {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    color: white;
+    border: none;
+    border-radius: 16px;
+    height: 30px;
+    white-space: nowrap;
+    font-family: 'Poppins', sans-serif;
+}
+
+#phoneDisabled {
+    opacity: 0.5;
+    width: 49%;
+    margin-bottom: 0.5rem;
+    background-color: #E8EAEA;
+    color: black;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 16px;
+
+}
+
+.centerDetails {
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    width: 100% !important;
+    height: 100%;
+    min-height: 100% !important;
+}
+
+.topInfoHeader {
+    width: 100% !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    height: 10%;
+}
+
+.adminHeader {
+    margin: 0;
+    color: white;
+    font-size: 5vw;
 }
 
 /*.sendMsgBtn {
@@ -501,7 +658,6 @@ form {
     font-size: 1.25rem;
     font-family: 'poppins';
     font-weight: Bold;
-
 }
 
 #removeMargin.gameType {
@@ -541,4 +697,61 @@ form {
     box-shadow: 0 0 0 1px black;
     transition: 0.4s;
     background-color: grey;
+}
+
+
+@media only screen and (max-width: 1000px) and (orientation: portrait){
+    .chattiesboxies {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+    }
+
+    .chatbox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+    }
+
+    .chatInputBox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100% !important;
+        height: 100%;
+    }
+
+    .actualInput {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+    }
+
+    #input {
+        width: 80%;
+        height: 100% !important;
+    }
+
+    .sendMsgBtn {
+        width: 20%;
+    }
+
+    .actualInput {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100% !important;
+    }
+
+    .chatInputBox .dropdown-toggle.btn.btn-primary{
+        width: 25vw;
+        font-size: 3vw;
+    }
 }

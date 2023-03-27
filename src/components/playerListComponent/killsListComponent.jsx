@@ -132,7 +132,7 @@ const KillsListComponent = ( props ) => {
 
     return (
         <div className='listViewContainer'>
-            <h3 id="listTitle">Kills</h3>
+            <h3 id="listKills">Kills</h3>
             <div className='playerContainer'>
                 <div className="killerContainer">
                     {addGameClicked ?   

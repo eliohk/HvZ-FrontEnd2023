@@ -18,7 +18,7 @@ import {
 } from "@mui/material";
 
 
-const LandingPage = () => {
+const LandingPage = ( props ) => {
     const [sortVariable, setSortVariable] = useState("Title");
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("")

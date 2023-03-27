@@ -207,7 +207,7 @@
     font-size: 12px;
     white-space: nowrap;
     overflow-y: hidden;
-    font-family: 'poppins';
+    font-family: 'Poppins', sans-serif;
     margin-left: 0.688rem;
 
 }
@@ -781,8 +781,8 @@ input[type="radio"] {
     align-items: center;
     width: 12.75rem;
     border-radius: 4px;
-
 }
+
 #playerTag {
     display: flex;
     justify-content: space-between;
@@ -807,7 +807,9 @@ input[type="radio"] {
     transition: 0.7s;
 }
 
-
+#listKills {
+    color: white;
+}
 
 #playerTagged {
     font-size: 12px;
@@ -844,3 +846,28 @@ input[type="radio"] {
 }
 
 */
+
+@media only screen and (max-width: 1000px) and (orientation: portrait){
+    #listTitle {
+        color: white;
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .listViewContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        height: 100% !important;
+        min-height: 100%;
+    }
+
+    #squadTitle {
+        color: white;
+    }
+
+    #crtBtn {
+        width: 60vw;
+    }
+}

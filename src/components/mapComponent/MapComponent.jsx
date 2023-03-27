@@ -105,37 +105,72 @@ const MapComponent = (props) => {
                 : null}
             { isPlayer ? mapClicked ? <a className="mapBtn" href="#" onClick={handleButtonClick} title="Zoom in" role="button" aria-label="Zoom in" aria-disabled="false"><span aria-hidden="true">Check-in</span></a> : null
                 : null}
-            <MapContainer style={{
-            height: "28rem",
-            width: "37.56rem",
-            minHeight: "100%",
-            minWidth: "100%",
+            {props.device == "phone" ?
+                <MapContainer style={{
+                height: "28rem",
+                width: "37.56rem",
+                minHeight: "100%",
+                minWidth: "100%",
+                
+                border: "solid white",
+                borderWidth: "0.0625rem",
+                borderRadius: "0.9375rem",
+                cursor: "pointer",
+                }} center={[currentGame.lat, currentGame.lng]} zoom={32} scrollWheelZoom={false}>
+                <TileLayer
+                    url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
+                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                />
+                {playerMarkers}
+                {killMarkers}
+                { isPlayer ? mapClicked ? <Marker 
+                        position={[currentClickPosition.lat, currentClickPosition.lng]}
+                        icon={checkIn}
+                    >
+                        <Popup>
+                            Player: New position <br />
+                            Longitude: {currentClickPosition.lat} <br />
+                            Latitude: {currentClickPosition.lng}
+                        </Popup>
+                    </Marker> : null
+                : null}
+                
+                <LocationMarker></LocationMarker>
+                </MapContainer>
+                :
+                <MapContainer style={{
+                height: "28rem",
+                width: "37.56rem",
+                minHeight: "100%",
+                minWidth: "100%",
+                
+                border: "solid white",
+                borderWidth: "0.0625rem",
+                borderRadius: "0.9375rem",
+                cursor: "pointer",
+                }} center={[currentGame.lat, currentGame.lng]} zoom={16} scrollWheelZoom={false}>
+                <TileLayer
+                    url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
+                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                />
+                {playerMarkers}
+                {killMarkers}
+                { isPlayer ? mapClicked ? <Marker 
+                                    position={[currentClickPosition.lat, currentClickPosition.lng]}
+                                    icon={checkIn}
+                                >
+                                    <Popup>
+                                        Player: New position <br />
+                                        Longitude: {currentClickPosition.lat} <br />
+                                        Latitude: {currentClickPosition.lng}
+                                    </Popup>
+                                </Marker> : null
+                            : null}
+                
+                <LocationMarker></LocationMarker>
+                </MapContainer>
+            }
             
-            border: "solid white",
-            borderWidth: "0.0625rem",
-            borderRadius: "0.9375rem",
-            cursor: "pointer",
-            }} center={[currentGame.lat, currentGame.lng]} zoom={16} scrollWheelZoom={false}>
-            <TileLayer
-                url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
-                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            />
-            {playerMarkers}
-            {killMarkers}
-            { isPlayer ? mapClicked ? <Marker 
-                                position={[currentClickPosition.lat, currentClickPosition.lng]}
-                                icon={checkIn}
-                            >
-                                <Popup>
-                                    Player: New position <br />
-                                    Longitude: {currentClickPosition.lat} <br />
-                                    Latitude: {currentClickPosition.lng}
-                                </Popup>
-                            </Marker> : null
-                        : null}
-            
-            <LocationMarker></LocationMarker>
-            </MapContainer>
         </div>  
     )
 }

@@ -26,9 +26,14 @@ import { AiOutlineWarning } from 'react-icons/ai';
 import Alert from 'react-bootstrap/Alert';
 import { current } from "@reduxjs/toolkit";
 import { checkboxClasses } from "@mui/material";
+import playerzIcon from "../../resources/playerzIcon.svg"
+import squadzIcon from "../../resources/squadzIcon.svg"
+import chatIcon from "../../resources/chatIcon.svg"
+
 
 const GameDetailsPage = (props) => {
     const [listView, setListView] = useState("players");
+    const [phoneListView, setPhoneListView] = useState("map");
     const allGames = useSelector((state) => state);
     const [editGameView, setEditGameView] = useState(false);
     const [ loading, setLoading ] = useState("");
@@ -50,7 +55,7 @@ const GameDetailsPage = (props) => {
                 }
             }
         }
-        if (currentGame && currentGame.maxPlayers > currentGame.players.length) {
+        if (currentGame && currentGame.players && currentGame.maxPlayers > currentGame.players.length) {
             setFullGame(false)
         } else {
             setFullGame(true)
@@ -84,6 +89,10 @@ const GameDetailsPage = (props) => {
         setListView(event.target.value);
     }
 
+    const handlePhoneListView = (event) => {
+        setPhoneListView(event.target.value);
+    }
+
     const handleEditGame = (event) => {
         if (editGameView) {
             setEditGameView(false);
@@ -107,6 +116,29 @@ const GameDetailsPage = (props) => {
             return <BiteCodeComponent />
         } else if (view == "zombie") {
             return <KillsListComponent kills={currentGame.kills} players={currentGame.players} gameId={currentGame.id} />;
+        }
+    }
+
+    function getPhoneListView(view) {
+        if (view == "players") {
+            return <PlayerListComponent data={currentGame.players} squad={currentGame.squads} />;
+        } else if (view == "squad") {
+            return <SquadListComponent data={currentGame.squads} gameid={currentGame.id} players={currentGame.players} />;
+        } else if (view == "human") {
+            return <BiteCodeComponent />
+        } else if (view == "zombie") {
+            return <KillsListComponent kills={currentGame.kills} players={currentGame.players} gameId={currentGame.id} />;
+        } else if (view == "map") {
+            return <MapComponent players={currentGame.players} kills={currentGame.kills} device="phone"></MapComponent>
+        } else if (view == "chat") {
+            return (
+                <div className="chatiesboxies">
+                    <ChatViewComponent chat={currentGame.chat} pusher={pusher}/>
+                    <div className="chatInputBox">
+                        <ChatInputViewComponent currGame={currentGame} pusher={pusher}></ChatInputViewComponent>
+                    </div>
+                </div>
+            )
         }
     }
 
@@ -145,7 +177,7 @@ const GameDetailsPage = (props) => {
     const displayEditGameAdmin = () => {
         if (keycloak.hasRealmRole("ADMIN")) {
             return (
-                <Popup trigger={<button id="editBtn" onClick={handleEditGame}><img id="editBtnIcon" src={editIcon} alt="Edit Game Button" />Edit game</button>} modal>
+                <Popup trigger={<button id="btnEdit" onClick={handleEditGame}><img id="editBtnIcon" src={editIcon} alt="Edit Game Button" />Edit game</button>} modal>
                     {close => (<EditGameComponent game={currentGame} edit={close}></EditGameComponent>)}
                 </Popup>
 
@@ -155,66 +187,120 @@ const GameDetailsPage = (props) => {
 
 
     if (currentGame.id) {
-        return (
-            <div className="mostMainContainer">
-                <a href="/" id="retBtn" className="button"><img id="exitIcon" src={retIcon} alt="Return button" /></a>
-                <div className='mainContainer'>
-                    <div className="header">
-                        {keycloak.authenticated ? 
-                                userJoined ? 
-                                <button id="leaveBtn" onClick={handleLeaveGame}>Leave game</button>
-                                :
-                                fullGame ? <h2>Game is already full</h2>
-                                    : 
-                                    <button id="joinBtn" onClick={handleNewPlayer}>Join game</button>
-                            :
-                            <button id="joinBtn" onClick={() => keycloak.login()}>Log in</button>
-                        }
+        if (window.innerWidth < 1000) {
+            return (
+                <div className="centerDetails">
+                    <h4 id="removeMargin" className="gameType">"{currentGame.gameType}"</h4>
+                    <div className="topInfoHeader">
                         {keycloak.hasRealmRole("ADMIN") ?
-                            <h5 id="removeMargins">Administrator</h5>
+                            <h5 className="adminHeader">Administrator</h5>
                             :
-                            <h5 id="removeMargins"></h5>
+                            <h5 classNAme="adminHeader"></h5>
                         }
-                        
+                        {displayEditGameAdmin()}
                     </div>
-                    <div className="liftToHeader">
-                        <h2 id="removeMarginTitle">{currentGame.title}</h2>
-                        <h4 id="removeMargin" className="gameType">"{currentGame.gameType}"</h4>
+                    {keycloak.authenticated ? 
+                        <div className="alignmentOfButtons">
+                            <button id="phoneBtn" className="btns" onClick={handlePhoneListView} value="zombie">Kills</button>
+                            <button id="phoneBtn" className="btns" onClick={handlePhoneListView} value="human">Bite code</button>
+                        </div>
+                        :
+                        <div className="alignmentOfButtons">
+                            <button id="phoneDisabled" value="zombie">Kills</button>
+                            <button id="phoneDisabled" value="human">Bite code</button>
+                        </div>
+                    }
+                    <div className="mainInfotainment">
+                        <div className="Stretchy">
+                            {getPhoneListView(phoneListView)}
+                        </div>
                     </div>
-                    <p id="removeMargin" className="desc">{currentGame.description}</p>
-                    <div className="secondaryContainer">
-                        <div className="interactiveStuffContainer">
-                            {/* map + squad list here */}
-                            <div className="mapContainer">
-                                <MapComponent players={currentGame.players} kills={currentGame.kills}></MapComponent>
-                            </div>
-                            <div className="listContainer">
-                                {getListView(listView)}
-                            </div>
+                    <div className="joinBtnDiv">
+                    {keycloak.authenticated ? 
+                            userJoined ? 
+                                <button id="leavePhoneBtn" onClick={handleLeaveGame}>Leave game</button>
+                            :
+                            fullGame ? <h2>Game is already full</h2>
+                                : 
+                                <button id="joinBtnPhone" onClick={handleNewPlayer}>Join game</button>
+                        :
+                        <button id="joinBtnPhone" onClick={() => keycloak.login()}>Log in</button>
+                    }
+                    {phoneListView != "map" ?
+                        <button id="joinBtnPhone" onClick={handlePhoneListView} value="map">Back to map</button>
+                        :
+                        null
+                    }
+                    </div>
+                    <div className="bodyButtons">
+                        <button id="bodyBtn" onClick={handlePhoneListView} value="chat"><img src={chatIcon} alt="Chatbutton" /> Chat</button>
+                        <button id="bodyBtn" onClick={handlePhoneListView} value="squad"><img src={squadzIcon} alt="Chatbutton" /> Squads</button>
+                        <button id="bodyBtn" onClick={handlePhoneListView} value="players"><img src={playerzIcon} alt="Chatbutton" /> Players</button>
+                    </div>
+                </div>
+            )
+        } else {
+            return (
+                <div className="mostMainContainer">
+                    <a href="/" id="retBtn" className="button"><img id="exitIcon" src={retIcon} alt="Return button" /></a>
+                    <div className='mainContainer'>
+                        <div className="header">
+                            {keycloak.authenticated ? 
+                                    userJoined ? 
+                                    <button id="leaveBtn" onClick={handleLeaveGame}>Leave game</button>
+                                    :
+                                    fullGame ? <h2>Game is already full</h2>
+                                        : 
+                                        <button id="joinBtn" onClick={handleNewPlayer}>Join game</button>
+                                :
+                                <button id="joinBtn" onClick={() => keycloak.login()}>Log in</button>
+                            }
+                            {keycloak.hasRealmRole("ADMIN") ?
+                                <h5 id="removeMargins">Administrator</h5>
+                                :
+                                <h5 id="removeMargins"></h5>
+                            }
+                            
                         </div>
-                        <div className="chatContainer">
-                            {/* chatbox + buttons here */}
-                            <ChatViewComponent chat={currentGame.chat} pusher={pusher}/>
-                            <div className="buttonContainerTest">
-                                <button className="btns" onClick={handleListView} value="players">List of players</button>
-                                <button className="btns" onClick={handleListView} value="squad">Squad list</button>
-                                <button className="btns" onClick={handleListView} value="human">Bite code</button>
-                                <button className="btns" onClick={handleListView} value="zombie">Kills</button>
-                            </div>
+                        <div className="liftToHeader">
+                            <h2 id="removeMarginTitle">{currentGame.title}</h2>
+                            <h4 id="removeMargin" className="gameType">"{currentGame.gameType}"</h4>
                         </div>
-                        <div className="chatInputContainer">
-                            {/* chat toggle + chat input here */}
-                            <div className="chatInput">
-                                <ChatInputViewComponent currGame={currentGame} pusher={pusher}></ChatInputViewComponent>
+                        <p id="removeMargin" className="desc">{currentGame.description}</p>
+                        <div className="secondaryContainer">
+                            <div className="interactiveStuffContainer">
+                                {/* map + squad list here */}
+                                <div className="mapContainer">
+                                    <MapComponent players={currentGame.players} kills={currentGame.kills}></MapComponent>
+                                </div>
+                                <div className="listContainer">
+                                    {getListView(listView)}
+                                </div>
                             </div>
-                        </div>
-                        <div className="editDiv">
-                            {displayEditGameAdmin()}
+                            <div className="chatContainer">
+                                {/* chatbox + buttons here */}
+                                <ChatViewComponent chat={currentGame.chat} pusher={pusher}/>
+                                <div className="buttonContainerTest">
+                                    <button className="btns" onClick={handleListView} value="players">List of players</button>
+                                    <button className="btns" onClick={handleListView} value="squad">Squad list</button>
+                                    <button className="btns" onClick={handleListView} value="human">Bite code</button>
+                                    <button className="btns" onClick={handleListView} value="zombie">Kills</button>
+                                </div>
+                            </div>
+                            <div className="chatInputContainer">
+                                {/* chat toggle + chat input here */}
+                                <div className="chatInput">
+                                    <ChatInputViewComponent currGame={currentGame} pusher={pusher}></ChatInputViewComponent>
+                                </div>
+                            </div>
+                            <div className="editDiv">
+                                {displayEditGameAdmin()}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        )
+            )
+        }
     } else {
         return (
             <div className="container">

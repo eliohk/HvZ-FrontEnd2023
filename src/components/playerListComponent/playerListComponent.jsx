@@ -157,7 +157,7 @@ const PlayerListComponent = ( props ) => {
     //    console.log("Checking all players over again, Index: " + i)
      //   console.log(thisPlayer);
         return (
-            <PlayerRow player={thisPlayer} saveCallback={handleSave} delCallback={handleDelete} edit={setEditable} editVal={editable} setPlayer={setPlayer}/>
+            <PlayerRow key={i} player={thisPlayer} saveCallback={handleSave} delCallback={handleDelete} edit={setEditable} editVal={editable} setPlayer={setPlayer}/>
         )
     });
 

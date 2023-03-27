@@ -1,5 +1,5 @@
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
-import { useState, forwardRef } from "react";
+import { useState, forwardRef, useEffect } from "react";
 import Dropdown from 'react-bootstrap/Dropdown';
 import LandingPage from "../../pages/landingPage/LandingPage";
 import GameDetailsPage from "../../pages/gameDetailsPage/GameDetailsPage";
@@ -30,6 +30,12 @@ const TopNavbar = () => {
             <MiniProfile />
         </a>
     ));
+
+    useEffect(() => {
+        console.log("URL CHANGED!!! :D :D :D")
+        const params = window.location.pathname;
+        console.log(params);
+    });
 
     return (
         <BrowserRouter>
@@ -88,7 +94,8 @@ const TopNavbar = () => {
                         </div>
                     </div>
                     <p className='top-navbar-main-content'>
-                    Welcome to the thrilling world of Human vs Zombies, the ultimate game of survival! Are you ready to take on the challenge and become a hero in the fight against the apocalypse. Join us and find out!                    </p>
+                        Welcome to the thrilling world of Human vs Zombies, the ultimate game of survival! Are you ready to take on the challenge and become a hero in the fight against the apocalypse. Join us and find out!
+                    </p>
                 </div>
             </div>
             <Routes>

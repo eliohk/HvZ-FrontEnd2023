@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 .mainLandingContainer {
     display: flex;
     flex-direction: row;
@@ -39,7 +41,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 0px 200px;
+    padding: 0px 200px !important;
 }
 
 button.btn.btn-primary {
@@ -151,6 +153,27 @@ button.btn.btn-primary {
     flex-direction: column;
 }
 
+.hrModal {
+    color: white;
+    background-color: black;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+}
+
+.titleModal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #2E2E2E;
+    font-weight: 500;
+    color: #E8EAEA;
+    margin-top: 2rem;
+    font-family: 'Poppins', sans-serif;
+}
+
 .dialog-content-modal {
     display: flex;
     flex-direction: column;
@@ -159,10 +182,9 @@ button.btn.btn-primary {
     background-color: #2E2E2E;
     font-weight: 500;
     color: #E8EAEA;
-    width: 500px;
+    width: 100%;
+    height: 100%;
     margin: 0px;
-    padding: 20px;
-
 }
 
 .texfield{
@@ -170,29 +192,34 @@ button.btn.btn-primary {
     color: black;
     font-weight: 800;
     padding: 10px;
+    font-family: 'Poppins', sans-serif;
 }
 .align-input-label{
     display: flex;
     flex-direction: column;
-    margin: 10px;
 }
 .landingpage-label{
-    margin-bottom: 12px;
+    margin-top: 0.5rem;
+    margin-bottom: 0.75rem;
     color: #E8EAEA;
     font-weight: 800;
+    font-family: 'Poppins', sans-serif;
 }
 
 .button-modal-container {
     display: flex;
     flex-direction: row;
-
+    justify-content: start;
+    align-items: center;
 }
 .modal-button{
-    margin: 10px;
-    border-radius: 10px;
+    margin-top: 1rem;
+    margin-right: 0.5rem;
+    border-radius: 32px;
     padding: 5px;
+    background-color: #E8EAEA;
+    font-family: 'Poppins', sans-serif;
 }
-
 
 .toggle-button-container{
     display: flex;
@@ -217,6 +244,46 @@ button.btn.btn-primary {
     padding-right: 10px;
 }
 
+@media only screen and (max-width: 1000px) and (orientation: portrait){
+    .secondaryLandingContainer {
+        padding: 0px 20px !important;
+    }
+
+    .container-level-sort-create-game {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 0.5rem;
+        width: 100% !important;
+    }
+
+    .sortByText {
+        font-size: 4vw;
+        white-space: nowrap;
+    }
+
+    button.btn.btn-primary {
+        font-size: 4vw;
+        width: 14vw;
+        height: 4vh;
+    }
+    
+    .endBtn.dropend.btn-group {
+        
+    }
+    
+    .dropdown-toggle.btn.btn-primary {
+        width: 6vw;
+        height: 4vh;
+    }
+    
+    .landingside-create-game-container {
+        width: 37.5vw;
+        height: 4vh;
+        font-size: 4vw;
+        margin: 0;
+    }
+
+}
 
 /*
 @media only screen and (max-width: 1200px) {
@@ -253,7 +320,7 @@ button.btn.btn-primary {
   }
   */
 
-
+/*
   @media only screen and (max-width: 450px){
 
     .secondaryLandingContainer{
@@ -262,6 +329,7 @@ button.btn.btn-primary {
         margin: 200px ;
     }
     .landing-page-create-game-component{
+        font-family: 'Poppins', sans-serif;
         border: 2px solid red;
     }
 
@@ -270,3 +338,4 @@ button.btn.btn-primary {
   
     
   }
+*/

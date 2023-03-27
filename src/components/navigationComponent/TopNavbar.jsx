@@ -77,7 +77,7 @@ const TopNavbar = () => {
                         </div>
 
                     <div className="logo-main-content">
-                    <HamburgerMenu/>
+                    {/* <HamburgerMenu/> */}
 
                         <div className="top-navbar-log">
                             <NavLink to="/" className="remUnderline">
@@ -88,8 +88,7 @@ const TopNavbar = () => {
                         </div>
                     </div>
                     <p className='top-navbar-main-content'>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the.. Lorem Ipsum is simply dummy text of the printing.
-                    </p>
+                    Welcome to the thrilling world of Human vs Zombies, the ultimate game of survival! Are you ready to take on the challenge and become a hero in the fight against the apocalypse. Join us and find out!                    </p>
                 </div>
             </div>
             <Routes>

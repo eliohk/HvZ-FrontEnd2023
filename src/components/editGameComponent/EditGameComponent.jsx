@@ -112,7 +112,7 @@ const EditGameComponent = (props) => {
             </div>
             <div className="popUpInfo">
                 <div className="edits">
-                    <label htmlFor="titleInput">Title</label>
+                    <label htmlFor="titleInput"><b>Title</b></label>
                     <input id="titleInput" type="text" name="title" onChange={handleTitle} defaultValue={title} placeholder='Enter new title here'/>
                 </div>
                 <div className="dropdownEdits">
@@ -122,7 +122,7 @@ const EditGameComponent = (props) => {
                     </div>
                 </div>
                 <div className="edits">
-                    <label htmlFor="descInput">Description</label>
+                    <label htmlFor="descInput"><b>Description</b></label>
                     <textarea id="descInput" type="text" name="desc" onChange={handleDesc} defaultValue={description} placeholder='Enter new description here'/>
                 </div>
                 <div className='dropdownEdits'>

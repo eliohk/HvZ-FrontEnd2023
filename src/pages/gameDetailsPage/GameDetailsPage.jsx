@@ -25,6 +25,7 @@ import Pusher from "pusher-js";
 import { AiOutlineWarning } from 'react-icons/ai';
 import Alert from 'react-bootstrap/Alert';
 import { current } from "@reduxjs/toolkit";
+import { checkboxClasses } from "@mui/material";
 
 const GameDetailsPage = (props) => {
     const [listView, setListView] = useState("players");
@@ -32,6 +33,7 @@ const GameDetailsPage = (props) => {
     const [editGameView, setEditGameView] = useState(false);
     const [ loading, setLoading ] = useState("");
     const [userJoined, setUserJoined] = useState(false);
+    const [fullGame, setFullGame]  = useState(false);
 
     let currentGame = allGames.data.currGame;
     let currentPlayer;
@@ -47,6 +49,11 @@ const GameDetailsPage = (props) => {
                     break loop;
                 }
             }
+        }
+        if (currentGame && currentGame.maxPlayers > currentGame.players.length) {
+            setFullGame(false)
+        } else {
+            setFullGame(true)
         }
     }, [currentGame])
 
@@ -146,25 +153,29 @@ const GameDetailsPage = (props) => {
         }
     }
 
+
     if (currentGame.id) {
         return (
             <div className="mostMainContainer">
+                <a href="/" id="retBtn" className="button"><img id="exitIcon" src={retIcon} alt="Return button" /></a>
                 <div className='mainContainer'>
                     <div className="header">
                         {keycloak.authenticated ? 
                                 userJoined ? 
                                 <button id="leaveBtn" onClick={handleLeaveGame}>Leave game</button>
                                 :
-                                <button id="joinBtn" onClick={handleNewPlayer}>Join game</button>
+                                fullGame ? <h2>Game is already full</h2>
+                                    : 
+                                    <button id="joinBtn" onClick={handleNewPlayer}>Join game</button>
                             :
                             <button id="joinBtn" onClick={() => keycloak.login()}>Log in</button>
                         }
                         {keycloak.hasRealmRole("ADMIN") ?
-                            <h5 id="removeMargin">Admin</h5>
+                            <h5 id="removeMargins">Administrator</h5>
                             :
-                            <h5 id="removeMargin"></h5>
+                            <h5 id="removeMargins"></h5>
                         }
-                        <a href="/" id="retBtn" className="button"><img id="exitIcon" src={retIcon} alt="Return button" /></a>
+                        
                     </div>
                     <div className="liftToHeader">
                         <h2 id="removeMarginTitle">{currentGame.title}</h2>

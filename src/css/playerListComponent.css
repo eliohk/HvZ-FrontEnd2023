@@ -3,7 +3,6 @@
 .listViewContainer {
     display: flex;
     flex-direction: column;
-    align-items: center;
     background-color: #2E2E2E;
     border-radius: 28px;
     height: 100%;
@@ -44,10 +43,11 @@
 .rightAlignRet {
     display: flex;
     margin-top: 1rem;
-    width: 80%;
+    width: 94%;
     flex-direction: row;
     align-items: end;
     justify-content: end;
+    z-index: 999999999;
 }
 
 #exitIcon2 {
@@ -72,6 +72,7 @@
 
 .hrTitle {
     width: 100%;
+    margin-bottom: 2.18rem;
 }
 
 .staticPlayerBtn {
@@ -88,7 +89,18 @@
 }
 
 #staticHeader {
-    margin: 0;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+#editPlayerInput {
+    background-color: transparent;
+    border: none;
+    color: #FFFFFF;
+    font-size: 0.875rem;
+    padding: 0;
+    
 }
 
 .squadHeader {
@@ -104,6 +116,7 @@
     flex-direction: column;
     justify-content: start;
     align-items: start;
+    font-size: 0.875rem;
 }
 
 .editPlayerFactions {
@@ -111,7 +124,9 @@
     justify-content: start;
     width: 100%;
     align-items: center;
+    
 }
+
 
 .editPlayerFactions label {
     margin-left: 0.5rem;
@@ -136,26 +151,28 @@
     font-weight: bolder;
     border: none;
     box-shadow: 0px 0px 0px 1px black;
-    border-width: 0.1px;
+    
     border-radius: 32px;
     font-size: 0.75rem;
 }
 
 .confirmChanges {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
-    width: 100%;
+    margin-left: 1.25rem;
+    width: 86%;
     margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    margin-top: 1.5rem;
 }
 
 .confirmChanges button {
-    background-color: transparent;
+    background-color: #626263;
     color: white;
     font-weight: bolder;
     border: none;
-    box-shadow: 0px 0px 0px 1px black;
-    border-width: 0.1px;
+    box-shadow: 1px 1px 1px 1px black;
     border-radius: 32px;
     font-size: 0.75rem;
 }
@@ -190,8 +207,10 @@
     font-size: 12px;
     white-space: nowrap;
     overflow-y: hidden;
-}
+    font-family: 'poppins';
+    margin-left: 0.688rem;
 
+}
 .playerContainer {
     display: flex;
     flex-direction: column;
@@ -203,6 +222,7 @@
     display: flex;
     align-items: start;
     justify-content: start;
+    margin-left: 1.25rem;
 }
 
 .editPlayersDiv {
@@ -212,7 +232,7 @@
 #playerSepHr {
     color: #65C8FF;
     opacity: 1;
-    width: 110%;
+    width: 100%;
 }
 
 .playerMainContainer {
@@ -244,7 +264,7 @@
 #playerListHr {
     color: #65C8FF;
     opacity: 1;
-    width: 90%;
+    width: 0%;
     margin-top: -0.5rem;
     margin-bottom: 0.5rem;
 }
@@ -274,14 +294,16 @@
 }
 
 .playerContainer {
-    width: 90%;
+    width: 100%;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     color: white;
 }
+
+
+
 
 .dropdownBtn {
 
@@ -295,6 +317,8 @@
 .dropdown-menu {
     white-space: normal;
 }
+
+
 
 .dropdown-item {
     white-space: pre-wrap;
@@ -325,26 +349,78 @@
     align-items: center;
 }
 
+.squadHeader #dropdown-basic-button {
+    width: fit-content;
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-size: 0.875rem;
+    font-weight: normal;
+    padding: 0;
+}
+
+input[type="radio"] {
+    appearance: none;
+    background-color: #A0A0A0;
+    margin: 0;
+    font: inherit;
+    width: 0.8rem;
+    height: 0.8rem;
+    border: 0.001em solid currentColor;
+    border-radius: 50%;
+    display: grid;
+    place-content: center;
+  }
+  
+  input[type="radio"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--form-control-color);
+    background-color: #65C8FF;
+  
+  }
+  
+  input[type="radio"]:checked::before {
+    transform: scale(1);
+  }
+
+
 .playerItem {
     color: white;
     display: flex;
-    align-items: center;
     justify-content: space-between;
     background-color: transparent;
     border: none;
     font-family: 'Poppins', sans-serif;
     width: 100%;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
 }
 
 .playerItem p {
     /* 12px for normal members */
-    margin-left: 12px;
-    margin-right: 12px;
     margin-top: 0;
     margin-bottom: 0;
     font-size: 12px;
-    white-space:nowrap;
-    overflow: hidden;
+    inline-size: 4.9375rem;
+    
+}
+
+.playerItem #pName {
+    white-space: normal;
+    overflow-wrap: break-word;
+}
+
+.playerItem #pFaction {
+    
+}
+
+.playerItem #pSquad {
+    
 }
 
 .playerItem:hover {
@@ -373,7 +449,7 @@
     margin-right: 12px;
     margin-top: 0;
     margin-bottom: 0;
-    font-size: 12px;
+    font-size: 12xpx;
     white-space:nowrap;
     overflow: hidden;
 }
@@ -405,9 +481,15 @@
 }
 
 #squadName {
-    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.85rem;
+    font-family: 'Poppins', sans-serif;
+    color: #ffff;
     border: none;
     margin: 0.2rem;
+    width: 9.625rem;
 }
 
 .squadItem p {
@@ -453,7 +535,7 @@
 #crtBtn {
     border-radius: 32px;
     background-color: #626263;
-    margin: 0em 1em 1em 1em;
+    margin: 1.25rem 1em 2.188em 1em;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -461,6 +543,11 @@
     color: white;
     height: 40px;
     border: none;
+    font-size: 0.875rem;
+    font-family: 'Poppins', sans-serif;
+    width: 9.625rem;
+
+
 }
 
 #crtBtn:hover {
@@ -563,7 +650,7 @@
 .alignSquadHeader {
     width: 100%;
     margin-top: 2rem;
-    margin-bottom: 0.25rem;
+    margin-bottom: 1rem;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -571,11 +658,19 @@
 
 #sqNameInput {
     width: 80%;
+    height: 2.1rem;
+    font-size: 0.875rem;
+    font-family: bold;
+    font-family: 'Poppins', sans-serif;
+    padding-left: 4px;
+
 }
 
 #sqTitleReg {
-    font-size: 14px;
+    font-size: 0.875rem;
     margin: 0;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
 }
 
 #sqTitle {
@@ -631,6 +726,11 @@
     border-width: 0.1px;
     color: white;
     width: 20%;
+    font-size: 12px;
+    border: none;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+
 }
 
 #sqRegSave:hover {
@@ -638,23 +738,28 @@
     outline-style:solid;
     box-shadow: 0 0 0 1px black;
     transition: 0.7s;
+    border: none;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
 }
 
 #randomText {
-    font-size: 12px;
+    font-size: 0.75rem;
     color: #65C8FF;
+    margin-top: 2.5rem;
+    margin-bottom: 1.563rem;
 }
 
 .alignSquadPlayers {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     text-align: center;
 }
 
 .alignSquadPlayers h4 {
-    margin: 0;
+    margin-bottom: 0.813rem;
 }
 
 .alignTitleAndSave {
@@ -668,11 +773,41 @@
     margin: 0;
 }
 
+.playerDetaljer {
+    background-color: #525252;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 12.75rem;
+    border-radius: 4px;
+
+}
 #playerTag {
+    display: flex;
+    justify-content: space-between;
     margin: 4px;
     font-size: 12px;
     width: 100%;
+    font-size: 0.75rem;
+    color: #ffff;
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 4px;
+    border-radius: 4px;
+    align-items: center;
+    opacity: 0.7;
+
 }
+
+.playerDetaljer:hover {
+    outline-color: transparent;
+    outline-style:solid;
+    box-shadow: 0 0 0 1px black;
+    transition: 0.7s;
+}
+
+
 
 #playerTagged {
     font-size: 12px;
@@ -686,9 +821,26 @@
     color: black;
 }
 
+.dot {
+    height: 10px;
+    width: 10px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+  }
+
+
+  .dot.selected {
+    background-color: #65C8FF;
+  }
+
+/*
 #playerTag:hover {
     outline-color: transparent;
     outline-style:solid;
     box-shadow: 0 0 0 1px black;
     transition: 0.7s;
 }
+
+*/

@@ -9,7 +9,7 @@ import Alert from 'react-bootstrap/Alert';
 
 const BiteCodeComponent = ( props ) => {
     const data = useSelector((state) => state);
-    const [ bc, setBc ] = useState("");
+    const [ bc, setBc ] = useState("Error.");
 
     useEffect(() => {
         data.data.currGame.players.map((player, i) => {
@@ -18,15 +18,13 @@ const BiteCodeComponent = ( props ) => {
                 setBc(player.biteCode);
             }
         });
-    }, [])
-
-    
+    }, [data])
 
     return (
         keycloak.authenticated ?
             <div className="killContainer">
                 <h3 id="biteTitle"> Bite code</h3>
-                <input id="bcInput" type="text" name="name" value={bc}/>
+                <input id="bcInput" type="text" name="name" defaultValue={bc} disabled/>
                 <div className="biteMarker">
                     <p id="markerLocation">Marker location</p>
                     <p id="coordinates">N40° 44.9064', W073° 59.0735'</p>

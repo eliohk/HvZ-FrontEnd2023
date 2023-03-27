@@ -51,9 +51,9 @@ const PlayerRow = ( props ) => {
         <div className="playerContainer">
             <div className="playerMainContainer">
                 <div className="staticHeaderContainer">
-                    <p id="headerText">Name: {name}</p>
-                    <p id="headerText">Faction: {faction ? "Human":"Zombie"}</p>
-                    <p id="headerText">Squad: {squad}</p>
+                    <p id="headerText"><b>Name:</b> {name}</p>
+                    <p id="headerText"><b>Faction:</b> {faction ? "Human":"Zombie"}</p>
+                    <p id="headerText"><b>Squad:</b> {squad}</p>
                 </div>
                 {keycloak.hasRealmRole("ADMIN") ?
                     <div className="staticPlayerBtn">
@@ -100,6 +100,8 @@ const PlayerListComponent = ( props ) => {
     const handleSquad = (event) => {
         data.data.currGame.squads.map((squad, i) => {
             if (squad.name == event.target.value) {
+                console.log(squad.name);
+                console.log(squad);
                 setSquad(squad.name);
                 setSquadObj(squad);
             }
@@ -129,6 +131,9 @@ const PlayerListComponent = ( props ) => {
         player.human = faction;
         player.squad = squad;
         player.username = name;
+
+        console.log(player);
+        console.log(squadObj);
         dispatch(updatePlayer({
             aPlayer: player,
             aSquad: squadObj
@@ -193,8 +198,9 @@ const PlayerListComponent = ( props ) => {
         <div className='listViewContainer'>
             <div className="rightAlignRet">
                 <a id="retBtn" onClick={handleEdit} className="button"><img id="exitIcon2" src={retIcon} alt="Return button" /></a>
+                
             </div>
-            <h3 id="listTitle">Edit player</h3>
+            <h3 id="listTitle1">Edit player</h3>
             <hr id="playerListHr"></hr>
             {changes ?
             <div className='confirmChanges'>
@@ -211,7 +217,7 @@ const PlayerListComponent = ( props ) => {
                 <div className="editPlayersDiv">
                     <div className="nameHeader">
                         <p id="staticHeader">Name: </p>
-                        <input type="text" defaultValue={player.username} onChange={handleName}></input>
+                        <input id="editPlayerInput" type="text" defaultValue={player.username} onChange={handleName}></input>
                     </div>
                     <div className="squadHeader">
                         <p id="staticHeader">Squad: </p>
@@ -229,14 +235,14 @@ const PlayerListComponent = ( props ) => {
                             </div>
                             <div className="editPlayerFactions">
                                 <input type="radio" onClick={handleFaction} value="Human" id="human" name="faction" defaultChecked/>
-                                <label htmlFor="human">[Human]</label>
+                                <label htmlFor="human"><b>Human</b></label>
                             </div>
                         </div>
                         :
                         <div className="mainEditPlayerFactions">
                             <div className="editPlayerFactions">
                                 <input type="radio" onClick={handleFaction} value="Zombie" id="zombie" name="faction" defaultChecked/>
-                                <label htmlFor="zombie">[Zombie]</label>
+                                <label htmlFor="zombie"><b>Zombie</b></label>
                             </div>
                             <div className="editPlayerFactions">
                                 <input type="radio" onClick={handleFaction} value="Human" id="human" name="faction"/>

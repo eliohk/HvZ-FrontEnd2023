@@ -22,10 +22,10 @@ const LandingPage = () => {
     const [sortVariable, setSortVariable] = useState("Title");
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("")
-    const [gameType, setGameType] = useState("")
+    const [gameType, setGameType] = useState("Hide and seek")
+    const [gameMap, setGameMap] = useState({map: "temp", lat:0, lng:0})
     const [maxPlayer, setMaxPlayer] = useState(0)
     const [open, setOpen] = useState(false);
-
 
     const allGames = useSelector((state) => state);
     const dispatch = useDispatch();
@@ -106,11 +106,11 @@ const LandingPage = () => {
                 return null
             } else {
                 return (
-                    <div className='widthConstraint' onClick={handleGameClick(gameData.id)}>
-                        <NavLink className="removeUnderline" key={i}>
-                                <GameListComponent game={gameData} key={gameData.id}></GameListComponent>
-                        </NavLink>
-                    </div>
+                    <NavLink className="removeUnderline" key={i}>
+                        <div className='widthConstraint' onClick={handleGameClick(gameData.id)}>
+                            <GameListComponent game={gameData} key={gameData.id}></GameListComponent>
+                        </div>
+                    </NavLink>
                 );
             }
         });
@@ -137,14 +137,18 @@ const LandingPage = () => {
 
         // console.log("Henlo")
 
+        // add this later + coords
+        //console.log(gameMap)
         const gameObj = {
             title: title,
             description: description,
             gameType: gameType,
-            maxPlayers: maxPlayer
+            maxPlayers: maxPlayer,
+            map: gameMap.map,
+            lat: gameMap.lat,
+            lng: gameMap.lng
         }
         dispatch(postGame(gameObj))
-        window.location.reload(false);
     }
 
     const titles = (e) => {
@@ -158,7 +162,16 @@ const LandingPage = () => {
 
     const gameTypes = (e) => {
         setGameType(e.target.value);
+    }
 
+    const gameMaps = (e) => {
+        if (e.target.value == "Noroff") {
+            setGameMap({map: "Noroff", lat: 59.92988, lng: 10.75583})
+        } else if (e.target.value == "Nes") {
+            setGameMap({map: "Nes", lat: 59.8674, lng: 10.5263})
+        } else if (e.target.value == "Slottet") {
+            setGameMap({map: "Noroff", lat: 59.91761, lng: 10.72530})
+        }
     }
 
     const maxAntallPlayer = (e) => {
@@ -196,43 +209,68 @@ const LandingPage = () => {
                             {/*<button className="landingside-create-game-container" onClick={handleClickOpen}><GrAddCircle />  Create Game</button>*/}
                             <button className="landingside-create-game-container" onClick={handleClickOpen}><img src={addIcon2} id="crtGmBtn" alt="Create game button"/>  Create game</button>
                             <Dialog className='testing' open={open} onClose={handleClose}>
-                                <h3 className='dialog-content-modal' > Create a new game</h3>
                                 <DialogContent className='dialog-content-modal' >
-                                    <div className='align-input-label'>
-                                        <label className='landingpage-label'>Game name</label>
-                                        <input className='texfield'
-                                            value={title}
-                                            sx={{ fontWeight: 800 }}
-                                            onChange={titles}>
-                                        </input>
-                                    </div>
-                                    <div className='align-input-label'>
-                                        <label className='landingpage-label'>Description</label>
-                                        <input
-                                            sx={{ fontWeight: 'bold' }}
-                                            className='texfield'
-                                            value={description}
-                                            onChange={descriptions}>
-                                        </input>
-                                    </div>
-                                    <div className='align-input-label'>
-                                        <label className='landingpage-label'>Game type</label>
-                                        <input
-                                            className='texfield'
-                                            value={gameType}
-                                            onChange={gameTypes}>
-                                        </input>
-                                    </div>
-                                    <div className='align-input-label'>
-                                        <label className='landingpage-label'>Max number of player</label>
-                                        <input
-                                            className='texfield'
-                                            value={maxPlayer}
-                                            onChange={maxAntallPlayer}></input>
-                                    </div>
-                                    <div className='button-modal-container'>
-                                        <button className='modal-button' onClick={() => handleNewGame()}>save</button>
-                                        <button className='modal-button' onClick={(handleClose)}>close</button>
+                                <div className='centerModal'>
+                                    <h3 className="titleModal"> Create a new game</h3>
+                                        <hr className="hrModal"></hr>
+                                        <div className='align-input-label'>
+                                            <label className='landingpage-label'>Game name</label>
+                                            <input className='texfield'
+                                                value={title}
+                                                sx={{ fontWeight: 800 }}
+                                                onChange={titles}>
+                                            </input>
+                                        </div>
+                                        <div className='align-input-label'>
+                                            <label className='landingpage-label'>Description</label>
+                                            <input
+                                                sx={{ fontWeight: 'bold' }}
+                                                className='texfield'
+                                                value={description}
+                                                onChange={descriptions}>
+                                            </input>
+                                        </div>
+                                        <div className='align-input-label'>
+                                            <label className='landingpage-label'>Game type</label>
+                                            <div className="editPlayerFactions">
+                                                <input type="radio" onClick={gameTypes} value="Hide and seek" id="HS" name="type" defaultChecked/>
+                                                <label htmlFor="HS">Hide & Seek</label>
+                                            </div>
+                                            <div className="editPlayerFactions">
+                                                <input type="radio" onClick={gameTypes} value="Rescue mission" id="RS" name="type"/>
+                                                <label htmlFor="RS">Rescue mission</label>
+                                            </div>
+                                            <div className="editPlayerFactions">
+                                                <input type="radio" onClick={gameTypes} value="Capture the flag" id="CTF" name="type"/>
+                                                <label htmlFor="CTF">Capture the Flag</label>
+                                            </div>
+                                        </div>
+                                        <div className='align-input-label'>
+                                            <label className='landingpage-label'>Map</label>
+                                            <div className="editPlayerFactions">
+                                                <input type="radio" onClick={gameMaps} value="Slottet" id="slottet" name="map" defaultChecked/>
+                                                <label htmlFor="slottet">Slottet</label>
+                                            </div>
+                                            <div className="editPlayerFactions">
+                                                <input type="radio" onClick={gameMaps} value="Nesøya" id="nes" name="map"/>
+                                                <label htmlFor="nes">Nesøya</label>
+                                            </div>
+                                            <div className="editPlayerFactions">
+                                                <input type="radio" onClick={gameMaps} value="Noroff" id="noroff" name="map"/>
+                                                <label htmlFor="noroff">Noroff</label>
+                                            </div>
+                                        </div>
+                                        <div className='align-input-label'>
+                                            <label className='landingpage-label'>Max number of player</label>
+                                            <input
+                                                className='texfield'
+                                                value={maxPlayer}
+                                                onChange={maxAntallPlayer}></input>
+                                        </div>
+                                        <div className='button-modal-container'>
+                                            <button className='modal-button' onClick={() => handleNewGame()}>Save</button>
+                                            <button className='modal-button' onClick={(handleClose)}>Close</button>
+                                        </div>
                                     </div>
                                 </DialogContent>
                             </Dialog>

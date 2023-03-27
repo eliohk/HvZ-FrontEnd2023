@@ -16,6 +16,15 @@ function App() {
     }
     dispatch(fetchUserByToken(userObj))
   }
+
+  const height = window.innerHeight;
+  const width = window.innerWidth;
+
+  if (height > width) {
+    console.log("Phone view!")
+  } else {
+    console.log("Desktop view!")
+  }
   
   return (
     <div className="App">

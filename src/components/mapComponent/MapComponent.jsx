@@ -69,6 +69,8 @@ const MapComponent = (props) => {
             lng: currentClickPosition.lng
         };
 
+        console.log(checkinObj)
+
         dispatch(postCheckIn(checkinObj))
     }
 

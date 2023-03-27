@@ -23,7 +23,7 @@ const LandingPage = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("")
     const [gameType, setGameType] = useState("Hide and seek")
-    const [gameMap, setGameMap] = useState({map: "temp", lat:0, lng:0})
+    const [gameMap, setGameMap] = useState({map: "Noroff", lat:0, lng:0})
     const [maxPlayer, setMaxPlayer] = useState(0)
     const [open, setOpen] = useState(false);
 

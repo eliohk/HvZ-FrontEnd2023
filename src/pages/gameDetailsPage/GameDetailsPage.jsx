@@ -50,7 +50,7 @@ const GameDetailsPage = (props) => {
                 }
             }
         }
-        if (currentGame && currentGame.maxPlayers > currentGame.players.length) {
+        if (currentGame && currentGame.players && currentGame.maxPlayers > currentGame.players.length) {
             setFullGame(false)
         } else {
             setFullGame(true)

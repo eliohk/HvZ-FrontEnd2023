@@ -25,6 +25,7 @@ import Pusher from "pusher-js";
 import { AiOutlineWarning } from 'react-icons/ai';
 import Alert from 'react-bootstrap/Alert';
 import { current } from "@reduxjs/toolkit";
+import { checkboxClasses } from "@mui/material";
 
 const GameDetailsPage = (props) => {
     const [listView, setListView] = useState("players");
@@ -32,6 +33,7 @@ const GameDetailsPage = (props) => {
     const [editGameView, setEditGameView] = useState(false);
     const [ loading, setLoading ] = useState("");
     const [userJoined, setUserJoined] = useState(false);
+    const [fullGame, setFullGame]  = useState(false);
 
     let currentGame = allGames.data.currGame;
     let currentPlayer;
@@ -47,6 +49,11 @@ const GameDetailsPage = (props) => {
                     break loop;
                 }
             }
+        }
+        if (currentGame.maxPlayers > currentGame.players.length) {
+            setFullGame(false)
+        } else {
+            setFullGame(true)
         }
     }, [currentGame])
 
@@ -146,6 +153,7 @@ const GameDetailsPage = (props) => {
         }
     }
 
+
     if (currentGame.id) {
         return (
             <div className="mostMainContainer">
@@ -155,7 +163,9 @@ const GameDetailsPage = (props) => {
                                 userJoined ? 
                                 <button id="leaveBtn" onClick={handleLeaveGame}>Leave game</button>
                                 :
-                                <button id="joinBtn" onClick={handleNewPlayer}>Join game</button>
+                                fullGame ? <h2>Game is already full</h2>
+                                    : 
+                                    <button id="joinBtn" onClick={handleNewPlayer}>Join game</button>
                             :
                             <button id="joinBtn" onClick={() => keycloak.login()}>Log in</button>
                         }

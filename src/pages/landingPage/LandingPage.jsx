@@ -23,7 +23,7 @@ const LandingPage = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("")
     const [gameType, setGameType] = useState("Hide and seek")
-    const [gameMap, setGameMap] = useState("")
+    const [gameMap, setGameMap] = useState({map: "temp", lat:0, lng:0})
     const [maxPlayer, setMaxPlayer] = useState(0)
     const [open, setOpen] = useState(false);
 
@@ -143,13 +143,12 @@ const LandingPage = () => {
             title: title,
             description: description,
             gameType: gameType,
-            maxPlayers: maxPlayer
+            maxPlayers: maxPlayer,
+            map: gameMap.map,
+            lat: gameMap.lat,
+            lng: gameMap.lng
         }
-
-        console.log(gameObj);
-
         dispatch(postGame(gameObj))
-        window.location.reload(false);
     }
 
     const titles = (e) => {
@@ -166,7 +165,13 @@ const LandingPage = () => {
     }
 
     const gameMaps = (e) => {
-        setGameMap(e.target.value);
+        if (e.target.value == "Noroff") {
+            setGameMap({map: "Noroff", lat: 59.92988, lng: 10.75583})
+        } else if (e.target.value == "Nes") {
+            setGameMap({map: "Nes", lat: 59.8674, lng: 10.5263})
+        } else if (e.target.value == "Slottet") {
+            setGameMap({map: "Noroff", lat: 59.91761, lng: 10.72530})
+        }
     }
 
     const maxAntallPlayer = (e) => {

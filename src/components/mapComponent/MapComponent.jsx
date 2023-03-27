@@ -114,7 +114,7 @@ const MapComponent = (props) => {
             border: "solid black",
             borderRadius: "32px",
             cursor: "pointer",
-            }} center={[59.911491, 10.757933]} zoom={16} scrollWheelZoom={false}>
+            }} center={[currentGame.lat, currentGame.lng]} zoom={16} scrollWheelZoom={false}>
             <TileLayer
                 url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

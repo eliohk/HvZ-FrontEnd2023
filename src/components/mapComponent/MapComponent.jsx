@@ -22,13 +22,12 @@ import keycloak from '../../keycloak';
 const MapComponent = (props) => {   
     const allGames = useSelector((state) => state);
     const [mapClicked, setMapClicked] = useState(false)
-    const [players, setPlayers] = useState(props.players)
     const [kills, setKills] = useState(props.kills)
     const [currentClickPosition, setCurrentClickPosition] = useState()
     const dispatch = useDispatch();
     const [isPlayer, setIsPlayer] = useState(false)
     const currentGame = allGames.data.currGame;
-
+    const [currPlayer, setPlayer] = useState(null)
     useEffect(() => {
         if (currentGame.players && keycloak.authenticated){
             let found = false
@@ -37,6 +36,7 @@ const MapComponent = (props) => {
             for (let i = 0; i  < currentGame.players.length; i++){
                 console.log(currentGame.players[i].username)
                 if (currentGame.players[i].username === userName){
+                    setPlayer(currentGame.players[i])
                     setIsPlayer(true)
                     found = true
                     break loop;
@@ -48,7 +48,6 @@ const MapComponent = (props) => {
         }
     }, [currentGame])
 
-
     function LocationMarker() {
         const map = useMapEvents({
           click(e) {
@@ -59,11 +58,12 @@ const MapComponent = (props) => {
     }
     
     async function handleButtonClick(){
+        console.log(currPlayer)
         setMapClicked(false)
         let now = new Date().toLocaleDateString('en-US', { weekday:"long", hour:"numeric", minute:"numeric", hour12: false}).toString();
         
         const checkinObj = {
-            id: 1,
+            id: currPlayer.id,
             lastCheckInTime: now,
             lat: currentClickPosition.lat,
             lng: currentClickPosition.lng
@@ -72,7 +72,7 @@ const MapComponent = (props) => {
         dispatch(postCheckIn(checkinObj))
     }
 
-    const playerMarkers = players.map((item, i) => {
+    const playerMarkers = currentGame.players.map((item, i) => {
         if (item.human){
             return <PlayerMarker key={i} player={item}></PlayerMarker> 
         }
@@ -81,10 +81,6 @@ const MapComponent = (props) => {
     const killMarkers = kills.map((item, i) => {
         return <DeadMarker key={i} kill={item}></DeadMarker>
     })
-
-    useEffect (() => {
-        setPlayers(allGames.data.markers);
-    }, [allGames.data.markers]);
 
     
     var checkIn = L.icon({

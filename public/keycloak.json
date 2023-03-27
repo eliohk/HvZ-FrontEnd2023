@@ -2,7 +2,7 @@
     "realm": "hvz-noroff-2023",
     "auth-server-url": "https://lemur-3.cloud-iam.com/auth/",
     "ssl-required": "external",
-    "resource": "react_localhost",
+    "resource": "react_prod",
     "public-client": true,
     "confidential-port": 0
-}
+  }

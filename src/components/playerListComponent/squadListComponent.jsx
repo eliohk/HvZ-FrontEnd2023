@@ -131,11 +131,42 @@ const SquadRegisterComponent = ( props ) => {
         }
     }
 
+    const [color, setColor] = useState('#bbb');
+    const [backg, setBack] = useState("#525252");
+    const [opack, setOpack] = useState(0.7);
+    const[fontWeight, setFontWeight] = useState("nomal")
+
+
+    const changeColor = () => {
+        if(color === '#bbb' && backg === "#525252"){
+            setColor('#65C8FF');
+            setBack("#6C6C6C")
+            setOpack(0.1);
+            setFontWeight("bold")
+
+        }
+        else {
+            setColor('#bbb')
+            setBack("#525252")
+            setOpack(0.7)
+            setFontWeight("normal")
+        }
+    }
     const players = rd.data.currGame.players.map((player, i) => {
         if (!player.squad && chosenPlayers.includes("Player " + player.id)) {
-            return <p key={player.id} onClick={handleChoosePlayer} id="playerTagged">Player {player.id}</p>
+            console.log("tester player id", player)
+
+            return <p key={player.id} onClick={handleChoosePlayer} id="playerTagged">Player {player.id} sjekk</p>
         } else if (!player.squad) {
-            return <p key={player.id} onClick={handleChoosePlayer} id="playerTag">Player {player.id}</p>
+            console.log("sjekk eeeee", player)
+
+            return( 
+                <div className="playerDetaljer" style={{background: backg}} onClick={changeColor}>
+            <p style={{opac: opack, fontWeight: fontWeight}} key={player.id} onClick={handleChoosePlayer} id="playerTag">Player {player.id} </p>
+            
+            <span  style= {{background: color}}className="dot"></span>
+            </div>
+            )
         }
     });
 
@@ -281,7 +312,7 @@ const SquadListComponent = ( props ) => {
                     {/*<h3 id="listTitle"><img src={squadIcon} style={{ width: "40px" }} alt="Squad icon" /> Squad list</h3>*/}
                     <div className="alignSquadTitle">
                         <h3 id="squadTitle">Squad list</h3>
-                        <hr className="hrTitle"></hr>
+                        {/* <hr className="hrTitle"></hr> */}
                     </div>
                     <div className='playerContainer'>
                         {keycloak.authenticated ?

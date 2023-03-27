@@ -26,9 +26,7 @@ const GameList = ( props ) => {
 
     const mapArray = [Noroff, Nes, Slottsparken];
     const map = mapArray.map((item, i) => {
-        if (item.includes(props.game.title)) {
-            console.log(item)
-            console.log(props.game.title)
+        if (item.includes(props.game.map)) {
             return <img src={item} key={i} alt="Map" className="mapImgList"/>
         } 
     })
@@ -51,8 +49,7 @@ const mapArray = [{map: Nes, x: "16", y: "59.8674", z: "10.5263"}, {map: Noroff,
         
         <div className="mainGameContainer">
             <div className="innerMapContainer">
-                {/*{map}*/}
-                <img src={Nes} alt="Map" className="mapImgList"/>
+                {map}
             </div>
             <div className="innerDataContainer">
                 <div className="innerTitleContainer">

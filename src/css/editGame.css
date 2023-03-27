@@ -11,6 +11,10 @@
     width: 100%;
 }
 
+.mainPopUpContainer p {
+    font-weight: bold;
+}
+
 .popUpTitle {
     display: flex;
     flex-direction: column;
@@ -20,6 +24,8 @@
 
 #titlePopup {
     text-align: center;
+    font-weight: bolder;
+    padding: 0.625rem;
 }
 
 .popup-content {
@@ -43,13 +49,20 @@
 }
 
 #titleInput {
-    border-radius: 12px;
+    border-radius: 0.9375rem;
+    background-color: #E8EAEA;
+    height: 2.2rem;
+    border: none;
+    padding-left: 10px;
 }
 
 #descInput {
-    border-radius: 12px;
     white-space: normal;
     height: 100%;
+    background-color: #E8EAEA;
+    border-radius: 0.9375rem;
+    border: none;
+    padding-left: 10px;
 }
 
 .dropdownEdits .dropdown-toggle.btn.btn-primary {
@@ -83,9 +96,14 @@
 }
 
 #editSaveBtn {
-    border-radius: 32px;
-    width: 100px;
-    height: 40px;
+    border: solid white;
+    border-width: 0.0625rem;
+    font-size: 1rem;
+    width: 5rem;
+    height: 2.31rem;
+    border-radius: 0.9375rem;
+    background-color: #2E2E2E;
+    color: white;
 }
 
 #editSaveBtn:hover {
@@ -105,6 +123,15 @@
 #numInput {
     width: 20%;
     margin: 0;
-    border-radius: 12px;
+    border-radius: 0.9375rem;
     text-align: center;
+    background-color: #E8EAEA;
+    height: 2rem;
+    border: none;
+}
+
+.radioDiv{
+    display: flex;
+    justify-content: row;
+    align-items: center;
 }

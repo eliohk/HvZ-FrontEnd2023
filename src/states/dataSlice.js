@@ -161,9 +161,9 @@ export const fetchGames = createAsyncThunk(
           description: postObj.description,
           gameType: postObj.gameType,
           maxPlayers: postObj.maxPlayers,
-          lat: 0,
-          lng: 0,
-          map: "Helo"
+          lat: postObj.lat,
+          lng: postObj.lng,
+          map: postObj.map
         })
       }).then(response => {
         if (!response.ok) {
@@ -443,6 +443,7 @@ export const dataSlice = createSlice({
     },
     [postGame.fulfilled]:(state, action) => {
       console.log("Game has been posted :)")
+      window.location.reload(false);
       /*console.log(action.meta.arg)
       action.meta.arg.players = []
       let today = new Date()

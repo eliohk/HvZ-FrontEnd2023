@@ -50,7 +50,7 @@ const GameDetailsPage = (props) => {
                 }
             }
         }
-        if (currentGame.maxPlayers > currentGame.players.length) {
+        if (currentGame && currentGame.maxPlayers > currentGame.players.length) {
             setFullGame(false)
         } else {
             setFullGame(true)
@@ -157,6 +157,7 @@ const GameDetailsPage = (props) => {
     if (currentGame.id) {
         return (
             <div className="mostMainContainer">
+                <a href="/" id="retBtn" className="button"><img id="exitIcon" src={retIcon} alt="Return button" /></a>
                 <div className='mainContainer'>
                     <div className="header">
                         {keycloak.authenticated ? 
@@ -170,11 +171,11 @@ const GameDetailsPage = (props) => {
                             <button id="joinBtn" onClick={() => keycloak.login()}>Log in</button>
                         }
                         {keycloak.hasRealmRole("ADMIN") ?
-                            <h5 id="removeMargin">Admin</h5>
+                            <h5 id="removeMargins">Administrator</h5>
                             :
-                            <h5 id="removeMargin"></h5>
+                            <h5 id="removeMargins"></h5>
                         }
-                        <a href="/" id="retBtn" className="button"><img id="exitIcon" src={retIcon} alt="Return button" /></a>
+                        
                     </div>
                     <div className="liftToHeader">
                         <h2 id="removeMarginTitle">{currentGame.title}</h2>

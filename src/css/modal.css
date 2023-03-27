@@ -26,10 +26,12 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    width: 100%;
+    width: 100% !important;
     font-family: 'poppins';
     padding-top: 65px;
     padding-bottom: 3.125rem;
+    padding-right: 200px;
+    padding-left: 200px;
 }
 
 .leaflet-touch .leaflet-control-attribution {

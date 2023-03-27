@@ -72,6 +72,7 @@
 
 .hrTitle {
     width: 100%;
+    margin-bottom: 2.18rem;
 }
 
 .staticPlayerBtn {
@@ -405,9 +406,15 @@
 }
 
 #squadName {
-    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.85rem;
+    font-family: 'Poppins', sans-serif;
+    color: #ffff;
     border: none;
     margin: 0.2rem;
+    width: 9.625rem;
 }
 
 .squadItem p {
@@ -453,7 +460,7 @@
 #crtBtn {
     border-radius: 32px;
     background-color: #626263;
-    margin: 0em 1em 1em 1em;
+    margin: 1.25rem 1em 2.188em 1em;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -461,6 +468,11 @@
     color: white;
     height: 40px;
     border: none;
+    font-size: 0.875rem;
+    font-family: 'Poppins', sans-serif;
+    width: 9.625rem;
+
+
 }
 
 #crtBtn:hover {
@@ -563,7 +575,7 @@
 .alignSquadHeader {
     width: 100%;
     margin-top: 2rem;
-    margin-bottom: 0.25rem;
+    margin-bottom: 1rem;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -571,11 +583,19 @@
 
 #sqNameInput {
     width: 80%;
+    height: 2.1rem;
+    font-size: 0.875rem;
+    font-family: bold;
+    font-family: 'Poppins', sans-serif;
+    padding-left: 4px;
+
 }
 
 #sqTitleReg {
-    font-size: 14px;
+    font-size: 0.875rem;
     margin: 0;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
 }
 
 #sqTitle {
@@ -631,6 +651,11 @@
     border-width: 0.1px;
     color: white;
     width: 20%;
+    font-size: 12px;
+    border: none;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+
 }
 
 #sqRegSave:hover {
@@ -638,23 +663,28 @@
     outline-style:solid;
     box-shadow: 0 0 0 1px black;
     transition: 0.7s;
+    border: none;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
 }
 
 #randomText {
-    font-size: 12px;
+    font-size: 0.75rem;
     color: #65C8FF;
+    margin-top: 2.5rem;
+    margin-bottom: 1.563rem;
 }
 
 .alignSquadPlayers {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     text-align: center;
 }
 
 .alignSquadPlayers h4 {
-    margin: 0;
+    margin-bottom: 0.813rem;
 }
 
 .alignTitleAndSave {
@@ -668,11 +698,41 @@
     margin: 0;
 }
 
+.playerDetaljer {
+    background-color: #525252;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 12.75rem;
+    border-radius: 4px;
+
+}
 #playerTag {
+    display: flex;
+    justify-content: space-between;
     margin: 4px;
     font-size: 12px;
     width: 100%;
+    font-size: 0.75rem;
+    color: #ffff;
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 4px;
+    border-radius: 4px;
+    align-items: center;
+    opacity: 0.7;
+
 }
+
+.playerDetaljer:hover {
+    outline-color: transparent;
+    outline-style:solid;
+    box-shadow: 0 0 0 1px black;
+    transition: 0.7s;
+}
+
+
 
 #playerTagged {
     font-size: 12px;
@@ -686,9 +746,25 @@
     color: black;
 }
 
+.dot {
+    height: 10px;
+    width: 10px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+  }
+
+
+  .dot.selected {
+    background-color: #65C8FF;
+  }
+
+/*
 #playerTag:hover {
     outline-color: transparent;
     outline-style:solid;
     box-shadow: 0 0 0 1px black;
     transition: 0.7s;
 }
+*/

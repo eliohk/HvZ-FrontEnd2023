@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 
 //TODO: change to hosted url in deployment
 const azureUrl = process.env.REACT_APP_AZURE_APP_API
-const baseUrl = 'http://localhost:8080/api/v1/'
+const baseUrl = 'http://localhost:8080/api/v1'
 export const fetchGames = createAsyncThunk(
     'games/fetchGames',
     async () => {
@@ -13,7 +13,7 @@ export const fetchGames = createAsyncThunk(
      // console.log(keycloak)
 
       const response = await fetch(
-        `${azureUrl}/games` , {
+        `${baseUrl}/games` , {
           headers: {
               //'Authorization': `Bearer ${keycloak.token}`,
           },
@@ -31,7 +31,7 @@ export const fetchGames = createAsyncThunk(
     'games/fetchGameById',
     async (gameId) => {
       const response = await fetch(
-        `${azureUrl}/games/${gameId}`, {
+        `${baseUrl}/games/${gameId}`, {
           headers: {
               //'Authorization': `Bearer ${keycloak.token}`,
           },
@@ -50,7 +50,7 @@ export const fetchGames = createAsyncThunk(
     "ok",
     async (userObj) => {
       const response = await fetch(
-        `${azureUrl}/user/token/${userObj.userToken}`, {
+        `${baseUrl}/user/token/${userObj.userToken}`, {
           headers : {
           },
         }
@@ -60,7 +60,7 @@ export const fetchGames = createAsyncThunk(
         console.log("hei på deg")
 
         const response2 = await fetch (
-          `${azureUrl}/user` , {
+          `${baseUrl}/user` , {
             method: "POST",
             headers: {
               'Content-Type': 'application/json'
@@ -107,7 +107,7 @@ export const fetchGames = createAsyncThunk(
     'players/postPlayer',
     async (postObj) => {
       //const response = await fetch('//localhost:8080/api/v1/players' 
-      const response = await fetch(`${azureUrl}/players`, {
+      const response = await fetch(`${baseUrl}/players`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -133,7 +133,7 @@ export const fetchGames = createAsyncThunk(
     async (postObj) => {
       //const response = await fetch('//localhost:8080/api/v1/kills', {
 
-      const  reponse = await fetch(`${azureUrl}/kills`, {
+      const  reponse = await fetch(`${baseUrl}/kills`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -161,7 +161,7 @@ export const fetchGames = createAsyncThunk(
 
 console.log("sjekke om post fungerer")
 
-      const reponse = await fetch(`${azureUrl}/games`, {
+      const reponse = await fetch(`${baseUrl}/games`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -187,7 +187,7 @@ console.log("sjekke om post fungerer")
 
 //      const response = await fetch('//localhost:8080/api/v1/squads', {
 
-      const reponse = await fetch(`${azureUrl}/squads`, {
+      const reponse = await fetch(`${baseUrl}/squads`, {
       
         method: 'POST',
         headers: {
@@ -210,8 +210,8 @@ console.log("sjekke om post fungerer")
     'games/postCheckIn',
     async (checkInObj) => {
 //      const response = await fetch(`//localhost:8080/api/v1/players/${checkInObj.id}/checkIn`, {
-
-      const reponse = await fetch(`${azureUrl}/players${checkInObj.id}/checkIn`, {
+      console.log(checkInObj)
+      const response = await fetch(`${baseUrl}/players/${checkInObj.id}/checkIn`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -222,11 +222,10 @@ console.log("sjekke om post fungerer")
             lng: checkInObj.lng
         })
       }).then(response => {
+        console.log(response)
         if (!response.ok) {
           throw new Error('Could not do stuff')
         }
-      })
-      .then(updatedUser => {
       })
       .catch(error => {
         console.log(error);
@@ -238,10 +237,10 @@ console.log("sjekke om post fungerer")
     'games/postGame',
     async (gameObj) => {
 
-      console.log(`${azureUrl}/games/${gameObj.id}`);
+      console.log(`${baseUrl}/games/${gameObj.id}`);
 //      const response = await fetch(`//localhost:8080/api/v1/games/${gameObj.id}`, {
 
-      const reposne = await fetch(`${azureUrl}/games/${gameObj.id}`,{
+      const reposne = await fetch(`${baseUrl}/games/${gameObj.id}`,{
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -273,7 +272,7 @@ console.log("sjekke om post fungerer")
     async (chatObj) => {
 //      const response = await fetch(`${baseUrl}chat/${chatObj.id}`, {
 
-      const reposne = await fetch(`${azureUrl}/chat/${chatObj.id}`, {
+      const reposne = await fetch(`${baseUrl}/chat/${chatObj.id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -303,7 +302,7 @@ console.log("sjekke om post fungerer")
     async (id) => {
       // const response = await fetch(`${baseUrl}players/${id}`, {
 
-      const response = await fetch(`${azureUrl}/players/${id}`, {
+      const response = await fetch(`${baseUrl}/players/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
@@ -321,7 +320,7 @@ console.log("sjekke om post fungerer")
     async (deleteObj) => {
       //const response = await fetch(`${baseUrl}players/deleteByToken/${deleteObj.token}`, {
 
-      const response = await fetch(`${azureUrl}/players/deleteByToken/${deleteObj.token}`, {
+      const response = await fetch(`${baseUrl}/players/deleteByToken/${deleteObj.token}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
@@ -338,10 +337,10 @@ console.log("sjekke om post fungerer")
     'squad/putPlayer',
     async (playerObj) => {
       console.log("Putting the following object: " )
-      console.log(azureUrl + "/players/" + playerObj.aPlayer.id)
-      console.log(`${azureUrl}/players/${playerObj.aPlayer.id}`)
+      console.log(baseUrl + "/players/" + playerObj.aPlayer.id)
+      console.log(`${baseUrl}/players/${playerObj.aPlayer.id}`)
       console.log("player objekt", playerObj);
-      const response = await fetch(`${azureUrl}/players/${playerObj.aPlayer.id}`, {
+      const response = await fetch(`${baseUrl}/players/${playerObj.aPlayer.id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -369,7 +368,7 @@ console.log("sjekke om post fungerer")
     async (playerObj) => {
       console.log("Deleting the following object from squad: " )
       console.log(playerObj);
-      const response = await fetch(`${azureUrl}/players/${playerObj.aPlayer.id}`, {
+      const response = await fetch(`${baseUrl}/players/${playerObj.aPlayer.id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -399,7 +398,7 @@ console.log("sjekke om post fungerer")
      // console.log(keycloak)
 
       const response = await fetch(
-        `${azureUrl}/games` , {
+        `${baseUrl}/games` , {
           headers: {
               'Authorization': `Bearer ${keycloak.token}`,
           },
@@ -454,21 +453,22 @@ export const dataSlice = createSlice({
   extraReducers: {
     [fetchGames.fulfilled]:(state,action)=>{
       console.log(action)
-        state.gamesArray = action.payload;
+      state.gamesArray = action.payload;
     },
     [fetchGameById.fulfilled]:(state,action)=>{
-        console.log(`Game with id: ${action.payload.id} has been fetched!`);
-        state.currGame = action.payload;
+      console.log(`Game with id: ${action.payload.id} has been fetched!`);
+      state.currGame = action.payload;
 
-        action.payload.players.map((player, i) => {
-          state.markers.push(player);
-        })
-
+      action.payload.players.map((player, i) => {
+        state.markers.push(player);
+      })
     },
     [postCheckIn.fulfilled]:(state, action) => {
-      state.markers.map((marker, i) => {
-        if (i == action.meta.arg.id) {
-          state.markers[i] = action.meta.arg;
+      state.currGame.players.map((player, i) => {
+        if (action.meta.arg.id == player.id) {
+          player.lastCheckInTime = action.meta.arg.lastCheckInTime;
+          player.lat = action.meta.arg.lat;
+          player.lng = action.meta.arg.lng;
         }
       })
     },

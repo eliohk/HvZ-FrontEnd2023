@@ -167,7 +167,7 @@ const LandingPage = ( props ) => {
     const gameMaps = (e) => {
         if (e.target.value == "Noroff") {
             setGameMap({map: "Noroff", lat: 59.92988, lng: 10.75583})
-        } else if (e.target.value == "Nes") {
+        } else if (e.target.value == "Nesøya") {
             setGameMap({map: "Nes", lat: 59.8674, lng: 10.5263})
         } else if (e.target.value == "Slottet") {
             setGameMap({map: "Noroff", lat: 59.91761, lng: 10.72530})

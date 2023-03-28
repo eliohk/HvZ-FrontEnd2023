@@ -44,7 +44,10 @@ const GameDetailsPage = (props) => {
     let currentPlayer;
 
     useEffect(() => {
-        if (!props.moveVal) {
+        console.log("NAAAAA")
+        console.log(props.moveVal);
+        if (props.moveVal && window.innerWidth > 1000) {
+            console.log("YESSSS")
             props.move(false);
         }
     }, []);

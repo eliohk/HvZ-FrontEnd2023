@@ -34,7 +34,6 @@ const MapComponent = (props) => {
             const userName = keycloak.tokenParsed.preferred_username
             loop:
             for (let i = 0; i  < currentGame.players.length; i++){
-                console.log(currentGame.players[i].username)
                 if (currentGame.players[i].username === userName){
                     setPlayer(currentGame.players[i])
                     setIsPlayer(true)
@@ -46,6 +45,8 @@ const MapComponent = (props) => {
                 setIsPlayer(false)
             }
         }
+
+        console.log(currPlayer);
     }, [currentGame])
 
     function LocationMarker() {
@@ -73,12 +74,13 @@ const MapComponent = (props) => {
     }
 
     const playerMarkers = currentGame.players.map((item, i) => {
+        console.log(item);
         if (item.human && item.lat != undefined){
             return <PlayerMarker key={i} player={item}></PlayerMarker> 
         }
     })
 
-    const killMarkers = kills.map((item, i) => {
+    const killMarkers = currentGame.kills.map((item, i) => {
         return <DeadMarker key={i} kill={item}></DeadMarker>
     })
 

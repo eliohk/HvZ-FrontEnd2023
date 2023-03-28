@@ -179,11 +179,7 @@ export const fetchGames = createAsyncThunk(
     'sqaud/postSquad',
     async (postObj) => {
       console.log(postObj);
-
-//      const response = await fetch('//localhost:8080/api/v1/squads', {
-
         const response = await fetch(`${azureUrl}/squads`, {
-      
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -205,9 +201,8 @@ export const fetchGames = createAsyncThunk(
     'games/postCheckIn',
     async (checkInObj) => {
 //      const response = await fetch(`//localhost:8080/api/v1/players/${checkInObj.id}/checkIn`, {
-
-
-        const reponse = await fetch(`${azureUrl}/players${checkInObj.id}/checkIn`, {
+        console.log(checkInObj)
+        const reponse = await fetch(`${azureUrl}/players/${checkInObj.id}/checkIn`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -332,9 +327,6 @@ export const fetchGames = createAsyncThunk(
   export const updatePlayer = createAsyncThunk(
     'squad/putPlayer',
     async (playerObj) => {
-      console.log("Putting the following object: " )
-      console.log(azureUrl + "/players/" + playerObj.aPlayer.id)
-      console.log(`${azureUrl}/players/${playerObj.aPlayer.id}`)
       console.log("player objekt", playerObj);
         const response = await fetch(`${azureUrl}/players/${playerObj.aPlayer.id}`, {
         method: 'PUT',
@@ -343,7 +335,7 @@ export const fetchGames = createAsyncThunk(
         },
         body: JSON.stringify({
             id: playerObj.aPlayer.id,
-            squadRef: playerObj.aSquad.squadRef,
+            squadRef: playerObj.aSquad ? playerObj.aSquad.id : playerObj.aPlayer.squadRef,
             human: playerObj.aPlayer.human
         })
       }).then(response => {
@@ -457,6 +449,7 @@ export const dataSlice = createSlice({
       })
     },
     [postCheckIn.fulfilled]:(state, action) => {
+      console.log(action)
       state.currGame.players.map((player, i) => {
         if (action.meta.arg.id == player.id) {
           player.lastCheckInTime = action.meta.arg.lastCheckInTime;
@@ -497,6 +490,14 @@ export const dataSlice = createSlice({
       };
 
       state.currGame.squads.push(squad);
+
+      state.currGame.players.map((player, i) => {
+        action.meta.arg.playerIds.map((id, i) => {
+          if (player.id == id) {
+            player.squad = squad;
+          }
+        })
+      })
     },
     [putGameObject.fulfilled]:(state, action) => {
       state.currGame.description = action.meta.arg.description
@@ -516,6 +517,10 @@ export const dataSlice = createSlice({
           state.gamesArray[i].status = action.meta.arg.status
         }
       })
+
+      console.log(action)
+      console.log(state.currGame)
+      console.log(state.gamesArray)
     },
     [postPlayer.fulfilled]:(state, action) => {
       console.log("Player has been posted")
@@ -524,8 +529,13 @@ export const dataSlice = createSlice({
       state.currGame.players.push(action.meta.arg)
     },
     [postKill.fulfilled]:(state, action) => {
-      console.log("Kill has been posted, not updated in redux yet LOLOLOL")
-      console.log(action);
+      console.log("Kill has been posted")
+      state.currGame.kills.push(action.meta.arg)
+      state.gamesArray.map((game, i) => {
+        if (game.id == action.meta.arg.gameRef) {
+          game.kills.push(action.meta.arg);
+        }
+      });
     }, 
     [putGlobalChat.fulfilled]:(state, action) => {
       console.log("@@@@@@SUCK DICK MAN@@@@@@@@")
@@ -563,16 +573,15 @@ export const dataSlice = createSlice({
       console.log(action.meta.arg);
 
       state.currGame.squads.map((squad, i) => {
-        if (squad == action.meta.arg.aSquad.id) {
-          squad = action.meta.arg.aSquad;
-          squad.players.push(action.meta.arg.aPlayer.id);
+        if (squad == action.meta.arg.squadRef) {
+          squad.players.push(action.meta.arg.aPlayer);
         }
       })
       
       state.currGame.players.map((player, i) => {
         if (player.id == action.meta.arg.aPlayer.id) {
-          player.squad = action.meta.arg.aSquad
-          player = action.meta.arg.aPlayer;
+          player.human = action.meta.arg.aPlayer.human;
+          player.squad = action.meta.arg.aSquad ? action.meta.arg.aSquad : 0
         }
       })
     },

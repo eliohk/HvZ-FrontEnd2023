@@ -168,7 +168,10 @@ const GameDetailsPage = (props) => {
             username: keycloak.tokenParsed.preferred_username
         };
 
-        dispatch(postPlayer(playerObj))
+        dispatch(postPlayer(playerObj)).unwrap().then(() => {
+            dispatch(fetchGameById(currentGame.id)).unwrap()
+        })
+
         setUserJoined(true)
     }
 
@@ -314,7 +317,7 @@ const GameDetailsPage = (props) => {
             <div className="container">
                 <div style={{display:"flex", alignItems:"center", justifyContent:"center", height:"100%", width:"100%"}}>
                     <Alert key="danger" variant="danger">
-                        <AiOutlineWarning/> <i> This component has no functionality as i was too lazy to create dummy data</i>
+                        <AiOutlineWarning/> <i> This component is currently loading as i was too lazy to create dummy data or create a loading screen :)</i>
                     </Alert>                
                 </div>
             </div>

@@ -48,7 +48,9 @@ const AllPlayersComponent = ( props ) => {
                 dispatch(updatePlayer({
                     aPlayer: player,
                     aSquad: props.squad,
-                }));
+                })).unwrap().then(() => {
+                    dispatch(fetchGameById(data.data.currGame.id)).unwrap()
+                });
             }
         })
 
@@ -65,7 +67,7 @@ const AllPlayersComponent = ( props ) => {
                     <div className="alignTitleAndSave">
                         <h3 id="savePlayerSquadTitle">Player list</h3>
                         {chosenPlayers.length > 0 ?
-                        <button id="savePlayerSquad" type="button" onClick={handleSave}>Save</button>
+                        <button id="v" type="button" onClick={handleSave}>Save</button>
                         :
                         <button id="savePlayerSquadHidden" type="button" onClick={handleSave}>Save</button>
                         }
@@ -107,7 +109,11 @@ const SquadRegisterComponent = ( props ) => {
             players: playerArr
         };
 
-        dispatch(postSquad(squadObj))
+        console.log(squadObj);
+
+        dispatch(postSquad(squadObj)).unwrap().then(() => {
+            dispatch(fetchGameById(props.gameId)).unwrap();
+        });
         props.state("list");
     }
 
@@ -117,8 +123,6 @@ const SquadRegisterComponent = ( props ) => {
 
     const handleChoosePlayer = (event) => {
         if (chosenPlayers.includes(event.target.innerHTML)) {
-            console.log("LOLERN XDD")
-            console.log(event.target.innerHTML)
             let tempArr = [];
             chosenPlayers.map((player, i) => {
                 if (player != event.target.innerHTML) {
@@ -126,47 +130,17 @@ const SquadRegisterComponent = ( props ) => {
                 }
             });
             setChosenPlayers(tempArr);
-
         } else {
             setChosenPlayers([...chosenPlayers, event.target.innerHTML])
         }
     }
 
-    const [color, setColor] = useState('#bbb');
-    const [backg, setBack] = useState("#525252");
-    const [opack, setOpack] = useState(0.7);
-    const[fontWeight, setFontWeight] = useState("nomal")
-
-
-    const changeColor = () => {
-        if(color === '#bbb' && backg === "#525252"){
-            setColor('#65C8FF');
-            setBack("#6C6C6C")
-            setOpack(0.1);
-            setFontWeight("bold")
-
-        }
-        else {
-            setColor('#bbb')
-            setBack("#525252")
-            setOpack(0.7)
-            setFontWeight("normal")
-        }
-    }
     const players = rd.data.currGame.players.map((player, i) => {
         if (!player.squad && chosenPlayers.includes(player.username)) {
-            console.log("tester player id", player)
-
-            return <p key={player.id} onClick={handleChoosePlayer} id="playerTagged">Player {player.id} sjekk</p>
+            return <p key={player.id} onClick={handleChoosePlayer} id="playerTagged">{player.username}</p>
         } else if (!player.squad) {
-            console.log("sjekk eeeee", player)
-
             return( 
-                <div className="playerDetaljer" style={{background: backg}} onClick={changeColor}>
-            <p style={{opac: opack, fontWeight: fontWeight}} key={player.id} onClick={handleChoosePlayer} id="playerTag">Player {player.id} </p>
-            
-            <span  style= {{background: color}}className="dot"></span>
-            </div>
+                <p key={player.id} onClick={handleChoosePlayer} id="playerTag">{player.username}</p>
             )
         }
     });
@@ -211,12 +185,12 @@ const SquadDetailsComponent = ( props ) => {
     let squads = [];
 
     const squad = game.squads.find(squad => squad.id == props.squad.id);
-    if (squad.players) {
+    if (squad && squad.players) {
         squads = squad.players.map((player, i) => {
             return (
                 <div className="playerItem" key={i}>
-                    <p>Player {player.id}</p>
-                    <p>Pussy</p>
+                    <p>{player.username}</p>
+                    <p>Member</p>
                     <p>{player.human ? "Alive" : "Dead"}</p>
                     {keycloak.hasRealmRole("ADMIN") ?
                         <button className="delSquadBtn" onClick={() => handleDelete(player, squad)}><img key={player.id} id="smallBtnImg" src={retIcon} alt="Remove user button"/></button>

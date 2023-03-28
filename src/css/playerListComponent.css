@@ -711,7 +711,6 @@ input[type="radio"] {
 
 #savePlayerSquadHidden {
     visibility: hidden;
-    transition: 1s;
 }
 
 #savePlayerSquad:hover {
@@ -821,15 +820,15 @@ input[type="radio"] {
 }
 
 #playerTagged {
-    font-size: 12px;
-    margin: 4px;
-    width: 100%;
     outline-color: transparent;
     outline-style:solid;
     box-shadow: 0 0 0 1px black;
     background-color: #65C8FF;
-    border-width: 0.1px;
-    color: black;
+    color: #ffff;
+    font-size: 1rem;
+    border: solid #65C8FF;
+    border-radius: 0.9375rem;
+    width: 50%;
 }
 
 .dot {

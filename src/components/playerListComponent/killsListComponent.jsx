@@ -32,31 +32,20 @@ const KillsListComponent = ( props ) => {
     const handleDelete = (event) => {
         console.log("Test handleDelete");
     }       
-
-    const displayAdminDelete =() => {
-        if(keycloak.realmAccess.roles[0] == "ADMIN"){
-            return (
-                <>
-                <a onClick={handleDelete} id="smallBtn" className="button"><img id="smallBtnImg" src={editIcon} alt="Edit user button"/></a>
-                <a id="smallBtn" className="button"><img id="smallBtnImg" src={retIcon} alt="Remove user button"/></a> 
-                </>
-
-            )
-                
-
-        }
-    }
     
     const kills = props.kills.map((kill, i) => {
+        console.log(kill)
         return (
-            <div>
-                <div className="playerItem" key={i}>
-                    <p>Kill id {kill.id}   -  {kill.time_of_death} <br></br> {kill.story} <br></br> Location: {kill.lat} - {kill.lng}</p>
-                    {displayAdminDelete()}
+            <div className="playerItem" key={i}>
+                <p>{kill.id ? kill.id : kill.playerRef}</p>
+                <p>{kill.timeOfDeath ? kill.timeOfDeath : kill.time_of_death}</p>
+                <p>{kill.story}</p>
+                <p>{Math.floor(kill.lat)} - {Math.floor(kill.lng)}</p>
+                <div>
+                    <a onClick={handleDelete} id="smallBtn" className="button"><img id="smallBtnImg" src={editIcon} alt="Edit user button"/></a>
+                    <a id="smallBtn" className="button"><img id="smallBtnImg" src={retIcon} alt="Remove user button"/></a> 
                 </div>
-                <hr></hr>
-            </div>
-            
+            </div>            
         )
     });
 
@@ -99,18 +88,23 @@ const KillsListComponent = ( props ) => {
                     playerRef : props.players[i].id,
                     gameRef: props.gameId
                 }
-                dispatch(postKill(killObj))
+
+                console.log(killObj);
+                dispatch(postKill(killObj)).unwrap().then(() => {
+                    dispatch(fetchGameById(props.gameId)).unwrap();
+                })
                 setaddGameClicked(false)
                 setInputVal("")
                 setStory("")
 
                 const updatedPlayerObj = {
                     id: killObj.playerRef,
-                    squadRef: 0,
+                    squadRef: props.players[i].squad ? props.players[i].squad.id : 0,
                     human: false
                 }
-                dispatch(updatePlayer(updatedPlayerObj))
-                return null;
+                dispatch(updatePlayer(updatedPlayerObj)).unwrap().then(() => {
+                    dispatch(fetchGameById(props.gameId)).unwrap();
+                })
             }
         }
     }
@@ -162,12 +156,12 @@ const KillsListComponent = ( props ) => {
                                     : 
                                     <div className='headerContainer'>
                                         {/* Name - Faction - Squad */}
-                                        <p className="title">Name</p>
-                                        <p className="title">Squad</p>
-                                        <p className="title">Bitecode</p>
+                                        <p className="title">ID</p>
+                                        <p className="title">Time</p>
+                                        <p className="title">Story</p>
+                                        <p className="title">Location</p>
                                     </div>}
 
-                <hr></hr>
                 {/* Edit player - Player Name - Faction - Squadname - Remove player */}
                 {addGameClicked ? matchingPlayers : kills}
             </div>

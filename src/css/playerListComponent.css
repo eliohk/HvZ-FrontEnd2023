@@ -37,7 +37,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 90%;
+    width: 100%;
 }
 
 .rightAlignRet {
@@ -73,6 +73,7 @@
 .hrTitle {
     width: 100%;
     margin-bottom: 2.18rem;
+    color: #65C8FF;
 }
 
 .staticPlayerBtn {
@@ -270,9 +271,11 @@
 }
 
 #plusImg {
-    width: 20px;
-    height: 20px;
-    border-radius: 32px;
+    width: 15px;
+    height: 15px;
+    border-width: 2px;
+    border-radius: 128px;
+    margin-right: 6px;
 }
 
 #biteTitle {
@@ -607,7 +610,7 @@ input[type="radio"] {
     display: flex;
     flex-direction: column;
     align-items: start;
-    margin-left: 1.94em;
+    margin-left: 1.94rem;
     font-size: 0.875rem;
 }
 
@@ -702,9 +705,8 @@ input[type="radio"] {
 #savePlayerSquad {
     background-color: #626263;
     color: white;
-    border-radius: 32px;
-    border: solid black;
-    border-width: 0.1px;
+    border-radius: 0.9375rem;
+    border:  black;
 }
 
 #savePlayerSquadHidden {
@@ -753,7 +755,7 @@ input[type="radio"] {
 .alignSquadPlayers {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items:center;
     justify-content: center;
     text-align: center;
 }
@@ -775,6 +777,7 @@ input[type="radio"] {
 
 .playerDetaljer {
     background-color: #525252;
+    margin-bottom: 0.2rem;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -784,7 +787,15 @@ input[type="radio"] {
 }
 
 #playerTag {
-    display: flex;
+    color: #ffff;
+    font-size: 1rem;
+    border: solid #65C8FF;
+    border-radius: 0.9375rem;
+    width: 50%;
+}
+
+
+/*display: flex;
     justify-content: space-between;
     margin: 4px;
     font-size: 12px;
@@ -796,9 +807,7 @@ input[type="radio"] {
     padding-left: 4px;
     border-radius: 4px;
     align-items: center;
-    opacity: 0.7;
-
-}
+    opacity: 0.7;*/
 
 .playerDetaljer:hover {
     outline-color: transparent;

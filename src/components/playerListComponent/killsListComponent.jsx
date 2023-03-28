@@ -143,9 +143,9 @@ const KillsListComponent = ( props ) => {
                     </div>
                     <hr></hr>
                     <p className="overBitecode">Write bitecode under</p>
-                    <input type="text" value={inputVal} onChange={handleInputChange}/>
+                    <input id="killInput" type="text" value={inputVal} onChange={handleInputChange}/>
                     <p className="overBitecode">Write kill story under</p>
-                    <input type="text" value={story} onChange={handleStoryChange}/>
+                    <input id="killInput"type="text" value={story} onChange={handleStoryChange}/>
                     </div>
                     : 
                     keycloak.authenticated ?

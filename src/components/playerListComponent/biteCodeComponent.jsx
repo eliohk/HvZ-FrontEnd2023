@@ -24,7 +24,7 @@ const BiteCodeComponent = ( props ) => {
         keycloak.authenticated ?
             <div className="killContainer">
                 <h3 id="biteTitle"> Bite code</h3>
-                <input id="bcInput" type="text" name="name" defaultValue={bc} disabled/>
+                <p id="bcInput">{bc}</p>
                 <div className="biteMarker">
                     <p id="markerLocation">Marker location</p>
                     <p id="coordinates">N40° 44.9064', W073° 59.0735'</p>

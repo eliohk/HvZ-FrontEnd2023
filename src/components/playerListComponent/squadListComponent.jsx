@@ -31,10 +31,10 @@ const AllPlayersComponent = ( props ) => {
     }
 
     const players = data.data.currGame.players.map((player, i) => {
-        if (!player.squad && chosenPlayers.includes("Player " + player.id)) {
-            return <p key={i} id="playerTagged" onClick={handleChosenPlayers}>Player {player.id}</p>
+        if (!player.squad && chosenPlayers.includes(player.username)) {
+            return <p key={i} id="playerTagged" onClick={handleChosenPlayers}>{player.username}</p>
         } else if (!player.squad) {
-            return <p key={i} id="playerTag" onClick={handleChosenPlayers}>Player {player.id}</p>
+            return <p key={i} id="playerTag" onClick={handleChosenPlayers}>{player.username}</p>
         }
     })
 
@@ -44,8 +44,7 @@ const AllPlayersComponent = ( props ) => {
 
     const handleSave = (event) => {
         data.data.currGame.players.map((player, i) => {  
-            console.log("sjekker om det virker her")
-            if (chosenPlayers.includes("Player " + player.id)) {
+            if (chosenPlayers.includes(player.username)) {
                 dispatch(updatePlayer({
                     aPlayer: player,
                     aSquad: props.squad,
@@ -95,7 +94,7 @@ const SquadRegisterComponent = ( props ) => {
         let playerArr = [];
 
         rd.data.currGame.players.map((player, i) => {
-            if (chosenPlayers.includes("Player " + player.id)) {
+            if (chosenPlayers.includes(player.username)) {
                 tempArr.push(player.id);
                 playerArr.push(player);
             }
@@ -155,7 +154,7 @@ const SquadRegisterComponent = ( props ) => {
         }
     }
     const players = rd.data.currGame.players.map((player, i) => {
-        if (!player.squad && chosenPlayers.includes("Player " + player.id)) {
+        if (!player.squad && chosenPlayers.includes(player.username)) {
             console.log("tester player id", player)
 
             return <p key={player.id} onClick={handleChoosePlayer} id="playerTagged">Player {player.id} sjekk</p>

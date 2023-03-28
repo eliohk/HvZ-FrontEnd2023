@@ -30,7 +30,7 @@ const PlayerRow = ( props ) => {
             props.setPlayer({
                 id: props.player.id,
                 username: name,
-                squadRef: squad,
+                squadRef: squad.id ? squad.id : 0,
                 squad: squadObj,
                 human: faction
             });
@@ -100,18 +100,15 @@ const PlayerListComponent = ( props ) => {
     const handleSquad = (event) => {
         data.data.currGame.squads.map((squad, i) => {
             if (squad.name == event.target.value) {
-                console.log(squad.name);
-                console.log(squad);
                 setSquad(squad.name);
                 setSquadObj(squad);
+            } else if (event.target.value == "N/A") {
+                setSquad("N/A");
+                setSquadObj({id: 0})
             }
         })
-    
-        if (event.target.value == player.squadRef) {
-            setChanges(false);
-        } else {
-            setChanges(true);
-        }
+
+        setChanges(true);
     }
 
     const handleFaction = (event) => {
@@ -125,8 +122,6 @@ const PlayerListComponent = ( props ) => {
     }
 
     const handleSave = () => {
-        console.log("sjekker om dette fungerer")
-        console.log("sjekke om navnet blir endret ",  name)
         handleEdit();
         player.human = faction;
         player.squad = squad;
@@ -175,7 +170,7 @@ const PlayerListComponent = ( props ) => {
 
             if (data) {
                 data.data.currGame.squads.map((squad, i) => {
-                    if (squad.name == player.squadRef) {
+                    if (player.squad && squad.name == player.squad.name) {
                         setSquadObj(squad);
                     }
                 })
@@ -221,7 +216,7 @@ const PlayerListComponent = ( props ) => {
                     </div>
                     <div className="squadHeader">
                         <p id="staticHeader">Squad: </p>
-                        <DropdownButton id="dropdown-basic-button" title={squad}>
+                        <DropdownButton id="dropdown-basic-button" title={squad ? squad : "N/A"}>
                             {allSquads}
                             <Dropdown.Item as="button" onClick={handleSquad} value="N/A">N/A</Dropdown.Item>
                         </DropdownButton>

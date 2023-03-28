@@ -39,7 +39,7 @@ const LandingPage = ( props ) => {
 
     const handleGameClick = (i) => (event) => {
         //console.log("handlegame click ", i)
-        dispatch(fetchGameById(i)).unwrap().then(() => navigate(`/game/${i}`))
+        dispatch(fetchGameById(i)).unwrap().then(() => navigate(`/game/${i}`)).then(() => props.move(false))
     };
 
     const handleClickOpen = () => {
@@ -59,7 +59,7 @@ const LandingPage = ( props ) => {
                 return (
                     <NavLink className="removeUnderline" key={i}>
                         <div className='widthConstraint' onClick={handleGameClick(gameData.id)}>
-                            <GameListComponent game={gameData} key={gameData.id}></GameListComponent>
+                            <GameListComponent game={gameData} key={gameData.id} move={props.move}></GameListComponent>
                         </div>
                     </NavLink>
                 );
@@ -75,7 +75,7 @@ const LandingPage = ( props ) => {
                 return (
                     <NavLink className="removeUnderline" key={i}>
                         <div className='widthConstraint' onClick={handleGameClick(gameData.id)}>
-                            <GameListComponent game={gameData} key={gameData.id}></GameListComponent>
+                            <GameListComponent game={gameData} key={gameData.id} move={props.move}></GameListComponent>
                         </div>
                     </NavLink>
                 );
@@ -91,7 +91,7 @@ const LandingPage = ( props ) => {
                 return (
                     <NavLink className="removeUnderline" key={i}>
                         <div className='widthConstraint' onClick={handleGameClick(gameData.id)}>
-                            <GameListComponent game={gameData} key={gameData.id}></GameListComponent>
+                            <GameListComponent game={gameData} key={gameData.id} move={props.move}></GameListComponent>
                         </div>
                     </NavLink>
                 );
@@ -108,7 +108,7 @@ const LandingPage = ( props ) => {
                 return (
                     <NavLink className="removeUnderline" key={i}>
                         <div className='widthConstraint' onClick={handleGameClick(gameData.id)}>
-                            <GameListComponent game={gameData} key={gameData.id}></GameListComponent>
+                            <GameListComponent game={gameData} key={gameData.id} move={props.move}></GameListComponent>
                         </div>
                     </NavLink>
                 );

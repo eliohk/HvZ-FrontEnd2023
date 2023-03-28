@@ -10,7 +10,7 @@ import Slottsparken from "../../resources/Slottet.png";
 import playerIcon from "../../resources/numOfPlayerIcon.svg";
 import dateIcon from "../../resources/dateIcon.svg";
 import "../../css/gameList.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import "../../css/modal.css";
@@ -42,7 +42,7 @@ const mapArray = [{map: Nes, x: "16", y: "59.8674", z: "10.5263"}, {map: Noroff,
     */
 
     const handleGameClick = (i) => (event) => {
-        dispatch(fetchGameById(i)).unwrap().then(() => navigate(`/game/${i}`))
+        dispatch(fetchGameById(i)).unwrap().then(() => navigate(`/game/${i}`)).unwrap().then(props.move(false))
     };
     
     return (

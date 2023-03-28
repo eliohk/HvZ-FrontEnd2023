@@ -44,6 +44,12 @@ const GameDetailsPage = (props) => {
     let currentPlayer;
 
     useEffect(() => {
+        if (!props.moveVal) {
+            props.move(false);
+        }
+    }, []);
+
+    useEffect(() => {
         if (currentGame.players && !userJoined && keycloak.authenticated){
             let userName = keycloak.tokenParsed.preferred_username
             loop:

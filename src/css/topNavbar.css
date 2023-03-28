@@ -119,6 +119,16 @@ a:hover {
 
 }
 
+#logoTesterCenter {
+    position: relative;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+    cursor: pointer;
+    margin-bottom: -4.75rem;
+}
+
 .navbar-container-no-auth{
     display: flex;
     flex-direction: row;
@@ -126,7 +136,6 @@ a:hover {
     justify-content: flex-end;
     width: 100%;
     padding-top: 10px;
-
 }
 
 .top-navbar-log-no-auth{
@@ -135,7 +144,6 @@ a:hover {
 
 .navigation-no-aut{
     padding: 0px 200px;
-
 }
 
 .logo-main-content{

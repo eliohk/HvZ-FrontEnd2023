@@ -15,6 +15,7 @@ import HamburgerMenu from "../menu/HamburgerMenu";
 
 const TopNavbar = () => {
     const state = useSelector((data) => data);
+    const [ moveNav, setMoveNav ] = useState(true);
    // console.log("sjekker endepunktet", process.env.REACT_APP_AZURE_APP_API+ "/players")
 
     const CustomToggle = forwardRef(({ children, onClick }, ref) => (
@@ -31,6 +32,11 @@ const TopNavbar = () => {
         </a>
     ));
 
+    const handleRet = (event) => {
+        console.log("is this working?")
+        setMoveNav(true);
+    }
+
     useEffect(() => {
         console.log("URL CHANGED!!! :D :D :D")
         const params = window.location.pathname;
@@ -41,15 +47,23 @@ const TopNavbar = () => {
         <BrowserRouter>
             <div className="navigation-no-aut">
                 <div className="navContainer-no-auth">
+                {moveNav ? 
+                    null
+                    :
+                    <NavLink to="/" onClick={handleRet} id="logoTesterCenter" className="remUnderline">
+                        <p className="logo">Human</p>
+                        <p id="vs" className="logo">vs</p>
+                        <p className="logo">Zombies</p>
+                    </NavLink>
+                }
                     <div className="navbar-container-no-auth">
-
                         <div className="navLinkContainer">
-                            <NavLink to="/" className="element">
+                            <NavLink to="/" onClick={handleRet} className="element">
                                 <div className="innerContainerNavbar-no-auth">
                                     <span>Home</span>
                                 </div>
                             </NavLink>
-                            <NavLink to="/about" className="element">
+                            <NavLink to="/about" onClick={handleRet} className="element">
                                 <div className="innerContainerNavbar-no-auth">
                                     <span>About</span>
                                 </div>
@@ -81,26 +95,29 @@ const TopNavbar = () => {
                                 </Dropdown.Menu>
                             </Dropdown>
                         </div>
-
-                    <div className="logo-main-content">
-                    {/* <HamburgerMenu/> */}
-
-                        <div className="top-navbar-log">
-                            <NavLink to="/" className="remUnderline">
-                                <p className="logo">Human</p>
-                                <p id="vs" className="logo">vs</p>
-                                <p className="logo">Zombies</p>
-                            </NavLink>
+                    {moveNav ? 
+                        <div>
+                            <div className="logo-main-content">
+                                <div className="top-navbar-log">
+                                    <NavLink to="/" onClick={handleRet} className="remUnderline">
+                                        <p className="logo">Human</p>
+                                        <p id="vs" className="logo">vs</p>
+                                        <p className="logo">Zombies</p>
+                                    </NavLink>
+                                </div>
+                            </div>
+                            <p className='top-navbar-main-content'>
+                                Welcome to the thrilling world of Human vs Zombies, the ultimate game of survival! Are you ready to take on the challenge and become a hero in the fight against the apocalypse. Join us and find out!
+                            </p>
                         </div>
-                    </div>
-                    <p className='top-navbar-main-content'>
-                        Welcome to the thrilling world of Human vs Zombies, the ultimate game of survival! Are you ready to take on the challenge and become a hero in the fight against the apocalypse. Join us and find out!
-                    </p>
+                    : 
+                        null
+                    }
                 </div>
             </div>
             <Routes>
-                <Route path="/" element={<LandingPage />} />
-                <Route path="/game/:gameId" element={<GameDetailsPage games={state.data.gamesArray} />} />
+                <Route path="/" element={<LandingPage move={setMoveNav} moveVal={moveNav} />} />
+                <Route path="/game/:gameId" element={<GameDetailsPage games={state.data.gamesArray} move={setMoveNav} moveVal={moveNav}/>} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/about" element={<AboutPage />} />
             </Routes>

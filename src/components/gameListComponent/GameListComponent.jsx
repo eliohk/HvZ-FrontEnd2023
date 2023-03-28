@@ -42,7 +42,11 @@ const mapArray = [{map: Nes, x: "16", y: "59.8674", z: "10.5263"}, {map: Noroff,
     */
 
     const handleGameClick = (i) => (event) => {
-        dispatch(fetchGameById(i)).unwrap().then(() => navigate(`/game/${i}`)).unwrap().then(props.move(false))
+        dispatch(fetchGameById(i)).unwrap().then(() => navigate(`/game/${i}`)).unwrap().then(() => {
+            if (window.innerWidth > 1000) {
+                props.move(false)
+            }
+        })
     };
     
     return (

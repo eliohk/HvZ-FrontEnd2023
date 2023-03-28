@@ -39,7 +39,11 @@ const LandingPage = ( props ) => {
 
     const handleGameClick = (i) => (event) => {
         //console.log("handlegame click ", i)
-        dispatch(fetchGameById(i)).unwrap().then(() => navigate(`/game/${i}`)).then(() => props.move(false))
+        dispatch(fetchGameById(i)).unwrap().then(() => navigate(`/game/${i}`)).then(() => {
+            if (window.innerWidth > 1000) {
+                props.move(false)
+            }
+        })
     };
 
     const handleClickOpen = () => {

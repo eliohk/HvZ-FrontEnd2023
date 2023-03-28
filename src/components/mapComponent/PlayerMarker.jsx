@@ -4,12 +4,10 @@ import { Popup, Marker } from 'react-leaflet';
 
 
 const PlayerMarker = (props) => {
-
     var player = L.icon({
         iconUrl: playerIcon,
         iconSize: [40, 40],
     })
-
     return (
         <Marker
             position={[props.player.lat, props.player.lng]}

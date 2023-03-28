@@ -118,6 +118,8 @@ const SquadRegisterComponent = ( props ) => {
 
     const handleChoosePlayer = (event) => {
         if (chosenPlayers.includes(event.target.innerHTML)) {
+            console.log("LOLERN XDD")
+            console.log(event.target.innerHTML)
             let tempArr = [];
             chosenPlayers.map((player, i) => {
                 if (player != event.target.innerHTML) {

@@ -24,7 +24,7 @@ const LandingPage = ( props ) => {
     const [description, setDescription] = useState("")
     const [gameType, setGameType] = useState("Hide and seek")
     const [gameMap, setGameMap] = useState({map: "temp", lat:0, lng:0})
-    const [maxPlayer, setMaxPlayer] = useState(0)
+    const [maxPlayer, setMaxPlayer] = useState(16)
     const [open, setOpen] = useState(false);
 
     const allGames = useSelector((state) => state);
@@ -83,7 +83,7 @@ const LandingPage = ( props ) => {
         });
 
     const gamesSortedPlayers = [].concat(allGames.data.gamesArray)
-        .sort((a, b) => (a.players) > (b.players) ? 1 : -1)
+        .sort((a, b) => (a.players) < (b.players) ? 1 : -1)
         .map((gameData, i) => {
             if (gameData == undefined) {
                 return null
@@ -170,7 +170,9 @@ const LandingPage = ( props ) => {
         } else if (e.target.value == "Nesøya") {
             setGameMap({map: "Nes", lat: 59.8674, lng: 10.5263})
         } else if (e.target.value == "Slottet") {
-            setGameMap({map: "Noroff", lat: 59.91761, lng: 10.72530})
+            setGameMap({map: "Slottet", lat: 59.91761, lng: 10.72530})
+        } else {
+            setGameMap({map: "Slottet", lat: 59.91761, lng: 10.72530})
         }
     }
 

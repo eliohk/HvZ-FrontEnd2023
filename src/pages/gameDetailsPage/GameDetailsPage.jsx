@@ -180,7 +180,6 @@ const GameDetailsPage = (props) => {
                 <Popup trigger={<button id="btnEdit" onClick={handleEditGame}><img id="editBtnIcon" src={editIcon} alt="Edit Game Button" />Edit game</button>} modal>
                     {close => (<EditGameComponent game={currentGame} edit={close}></EditGameComponent>)}
                 </Popup>
-
             )
         }
     }

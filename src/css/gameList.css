@@ -125,14 +125,16 @@
     overflow-wrap: break-word;
     margin-top: 0.81rem;
     font-size: 1.2vw;
-    height: 2.1875rem;
     width: 20vw !important;
     min-width: 50% !important;
     max-width: 100% !important;
+    overflow-wrap: break-word;
+    overflow: hidden;
+    min-height: 37.5%;
 }
 
 #gamedtBtn {
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     width: 7.313rem;
     height: 1.875rem;
     font-size: 10px;
@@ -218,6 +220,10 @@
 
     #title {
         font-size: 5vw;
+        overflow-wrap: break-word;
+        white-space: normal;
+        width: fit-content;
+        max-width: 100%;
     }
 
     #gameMode {
@@ -286,6 +292,9 @@
         font-size: 3vw;
         width: 85% !important;
         overflow: hidden;
+        overflow-wrap: break-word;
+        height: 45%;
+        min-height: 45%;
     }
 
     .innerDataContainer {

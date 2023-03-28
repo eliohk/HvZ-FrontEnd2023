@@ -89,25 +89,15 @@ const MapComponent = (props) => {
     })
 
     return (
-        <div style={{
-            height: "28rem",
-            width: "37.56rem",
-            minHeight: "100%",
-            minWidth: "100%",
-            borderRadius: "0.9375rem",
-            position: "relative",    
-            }} >
+        <div className='mainMapDiv' >
             { isPlayer ? mapClicked ? null : <a className="mapToolTip" href="#" title="Zoom in" role="button" aria-label="Zoom in" aria-disabled="false"><span aria-hidden="true">Click on the map to assign location, click on the "check in" button to confirm the check in.</span></a> 
                 : null}
             { isPlayer ? mapClicked ? <a className="mapBtn" href="#" onClick={handleButtonClick} title="Zoom in" role="button" aria-label="Zoom in" aria-disabled="false"><span aria-hidden="true">Check-in</span></a> : null
                 : null}
             {props.device == "phone" ?
-                <MapContainer style={{
-                height: "28rem",
-                width: "37.56rem",
-                minHeight: "100%",
-                minWidth: "100%",
-                
+                <MapContainer style={{  
+                width:"100%",
+                height:"100%",              
                 border: "solid white",
                 borderWidth: "0.0625rem",
                 borderRadius: "0.9375rem",

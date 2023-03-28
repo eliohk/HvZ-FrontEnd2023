@@ -47,17 +47,19 @@ const TopNavbar = () => {
         <BrowserRouter>
             <div className="navigation-no-aut">
                 <div className="navContainer-no-auth">
-                {moveNav ? 
-                    null
-                    :
-                    <NavLink to="/" onClick={handleRet} id="logoTesterCenter" className="remUnderline">
-                        <p className="logo">Human</p>
-                        <p id="vs" className="logo">vs</p>
-                        <p className="logo">Zombies</p>
-                    </NavLink>
-                }
+                {moveNav ?
+                <>
                     <div className="navbar-container-no-auth">
                         <div className="navLinkContainer">
+                            {moveNav ? 
+                                null
+                                :
+                                <NavLink to="/" onClick={handleRet} id="logoTesterCenter" className="remUnderline">
+                                    <p className="logo">Human</p>
+                                    <p id="vs" className="logo">vs</p>
+                                    <p className="logo">Zombies</p>
+                                </NavLink>
+                            }
                             <NavLink to="/" onClick={handleRet} className="element">
                                 <div className="innerContainerNavbar-no-auth">
                                     <span>Home</span>
@@ -94,9 +96,8 @@ const TopNavbar = () => {
                                     )}
                                 </Dropdown.Menu>
                             </Dropdown>
-                        </div>
-                    {moveNav ? 
-                        <div>
+                    </div>
+                    <div>
                             <div className="logo-main-content">
                                 <div className="top-navbar-log">
                                     <NavLink to="/" onClick={handleRet} className="remUnderline">
@@ -110,9 +111,58 @@ const TopNavbar = () => {
                                 Welcome to the thrilling world of Human vs Zombies, the ultimate game of survival! Are you ready to take on the challenge and become a hero in the fight against the apocalypse. Join us and find out!
                             </p>
                         </div>
-                    : 
-                        null
-                    }
+                    </>
+                    :
+                    <div className="navbar-container-no-auth2">
+                        <div className="navLinkContainer">
+                            {moveNav ? 
+                                null
+                                :
+                                <NavLink to="/" onClick={handleRet} id="logoTesterCenter" className="remUnderline">
+                                    <p className="logo">Human</p>
+                                    <p id="vs" className="logo">vs</p>
+                                    <p className="logo">Zombies</p>
+                                </NavLink>
+                            }
+                            <NavLink to="/" onClick={handleRet} className="element">
+                                <div className="innerContainerNavbar-no-auth">
+                                    <span>Home</span>
+                                </div>
+                            </NavLink>
+                            <NavLink to="/about" onClick={handleRet} className="element">
+                                <div className="innerContainerNavbar-no-auth">
+                                    <span>About</span>
+                                </div>
+                            </NavLink>
+                            {!keycloak.authenticated && (
+                                <NavLink onClick={() => keycloak.register()} className="element">
+                                    <div className="innerContainerNavbar-no-auth">
+                                        <span>Sign up</span>
+                                    </div>
+                                </NavLink>
+                            )}
+                            {keycloak.authenticated && (
+                                <NavLink onClick={() => keycloak.logout()} className="element">
+                                    <div className="innerContainerNavbar-no-auth">
+                                        <span>Sign out</span>
+                                    </div>
+                                </NavLink>
+                            )}
+                        </div>
+                            <Dropdown>
+                                <Dropdown.Toggle as={CustomToggle} variant="success" id="dropdown-basic" />
+                                <Dropdown.Menu>
+                                    {keycloak.authenticated && (
+                                        <Dropdown.Item onClick={() => keycloak.logout()}>Sign out</Dropdown.Item>
+                                    )}
+                                    {!keycloak.authenticated && (
+                                        <Dropdown.Item onClick={() => keycloak.login()}>Sign in</Dropdown.Item>
+                                    )}
+                                </Dropdown.Menu>
+                            </Dropdown>
+                    </div>
+                }
+                
                 </div>
             </div>
             <Routes>

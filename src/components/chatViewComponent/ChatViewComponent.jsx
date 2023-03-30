@@ -13,8 +13,7 @@ const ChatViewComponent = (props) => {
 
     useEffect(() => {
         props.pusher.subscribe("hvz-noroff").bind("chat-event", function (data) {
-            const myName = keycloak.tokenParsed.given_name + " " + keycloak.tokenParsed.family_name;
-            if (data.message.split("&")[0] != myName) {
+            if (keycloak.authenticated && data.message.split("&")[0] != keycloak.tokenParsed.given_name + " " + keycloak.tokenParsed.family_name) {
                 console.log("Dispatching message to state")
                 dispatch(setChat(data.message));
             }
@@ -35,8 +34,7 @@ const ChatViewComponent = (props) => {
             const timestamp = arr[1];
             const chat = arr[2];
     
-            const selfName = keycloak.tokenParsed.given_name + " " + keycloak.tokenParsed.family_name;
-            if (name == selfName) {
+            if (keycloak.authenticated && name == keycloak.tokenParsed.given_name + " " + keycloak.tokenParsed.family_name) {
                 return (
                     <p className="selfMsg" key={i}>{chat}</p>
                 )

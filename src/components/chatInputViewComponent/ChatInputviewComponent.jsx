@@ -34,6 +34,7 @@ const ChatInputViewComponent = (props) => {
     const handleEnter = (event) => {
         if (event.key == 'Enter') {
             handleSendMsg();
+            setCurrentMessage("")
         }
     }
 
@@ -84,7 +85,7 @@ const ChatInputViewComponent = (props) => {
                     {chats}
                 </DropdownButton>
                 <div className="actualInput">
-                    <input id="input" type="text" name="name" onKeyDown={handleEnter} onChange={handleCurrentMessage} placeholder='Enter message here ...'/>
+                    <input id="input" type="text" name="name" value={currentMessage} onKeyDown={handleEnter} onChange={handleCurrentMessage} placeholder='Enter message here ...'/>
                     <button className='sendMsgBtn' onClick={handleSendMsg}><img src={sendMsgIcon} alt="Send message button" className="msgIcon"></img></button>
                 </div>
             </>

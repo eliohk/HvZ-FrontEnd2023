@@ -39,9 +39,8 @@ const GameDetailsPage = (props) => {
     const [ loading, setLoading ] = useState("");
     const [userJoined, setUserJoined] = useState(false);
     const [fullGame, setFullGame]  = useState(false);
-
+    const [currentPlayer, setCurrentPlayer] = useState(null);
     let currentGame = allGames.data.currGame;
-    let currentPlayer;
 
     useEffect(() => {
         console.log("NAAAAA")
@@ -58,7 +57,7 @@ const GameDetailsPage = (props) => {
             loop:
             for (let i = 0; i  < currentGame.players.length; i++){
                 if (currentGame.players[i].username === userName){
-                    currentPlayer = currentGame.players[i]
+                    setCurrentPlayer(currentGame.players[i])
                     setUserJoined(true)
                     break loop;
                 }
@@ -171,7 +170,7 @@ const GameDetailsPage = (props) => {
         dispatch(postPlayer(playerObj)).unwrap().then(() => {
             dispatch(fetchGameById(currentGame.id)).unwrap()
         })
-
+        setCurrentPlayer(playerObj)
         setUserJoined(true)
     }
 
@@ -184,6 +183,7 @@ const GameDetailsPage = (props) => {
         }
         dispatch(deletePlayerByToken(deleteObj))
         setUserJoined(false)
+        setCurrentPlayer(null)
     }
 
     const displayEditGameAdmin = () => {
@@ -197,17 +197,21 @@ const GameDetailsPage = (props) => {
     }
 
 
+    console.log(currentPlayer)
     if (currentGame.id) {
         if (window.innerWidth < 1000) {
             return (
                 <div className="centerDetails">
                     <h4 id="removeMargin" className="gameType">"{currentGame.gameType}"</h4>
                     <div className="topInfoHeader">
-                        {keycloak.hasRealmRole("ADMIN") ?
-                            <h5 className="adminHeader">Administrator</h5>
-                            :
-                            <h5 classNAme="adminHeader"></h5>
-                        }
+                            {currentPlayer ? 
+                                currentPlayer.human ?
+                                    <h5 className="adminHeaderHuman">Human</h5>
+                                    :
+                                    <h5 className="adminHeaderZombie">Zombie</h5>
+                                :
+                                null
+                            }  
                         {displayEditGameAdmin()}
                     </div>
                     {keycloak.authenticated ? 
@@ -266,12 +270,14 @@ const GameDetailsPage = (props) => {
                                 :
                                 <button id="joinBtn" onClick={() => keycloak.login()}>Log in</button>
                             }
-                            {keycloak.hasRealmRole("ADMIN") ?
-                                <h5 id="removeMargins">Administrator</h5>
+                            {currentPlayer ? 
+                                currentPlayer.human ?
+                                    <h5 className="adminHeaderHuman">Human</h5>
+                                    :
+                                    <h5 className="adminHeaderZombie">Zombie</h5>
                                 :
-                                <h5 id="removeMargins"></h5>
-                            }
-                            
+                                null
+                            }  
                         </div>
                         <div className="liftToHeader">
                             <h2 id="removeMarginTitle">{currentGame.title}</h2>
@@ -294,7 +300,7 @@ const GameDetailsPage = (props) => {
                                 <div className="buttonContainerTest">
                                     <button className="btns" onClick={handleListView} value="players">List of players</button>
                                     <button className="btns" onClick={handleListView} value="squad">Squad list</button>
-                                    <button className="btns" onClick={handleListView} value="human">Bite code</button>
+                                    {currentPlayer && currentPlayer.human ? <button className="btns" onClick={handleListView} value="human">Bite code</button> : null}
                                     <button className="btns" onClick={handleListView} value="zombie">Kills</button>
                                 </div>
                             </div>

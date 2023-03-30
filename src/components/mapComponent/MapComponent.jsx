@@ -74,7 +74,6 @@ const MapComponent = (props) => {
     }
 
     const playerMarkers = currentGame.players.map((item, i) => {
-        console.log(item);
         if (item.human && item.lat != undefined){
             return <PlayerMarker key={i} player={item}></PlayerMarker> 
         }
